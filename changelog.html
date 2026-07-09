@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Changelog — Sutra</title>
+<meta name="description" content="Every Sutra release, one thread at a time — what's new, what's improved, and what's fixed.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root{
+    --plum-top: #6A4A99;
+    --plum-deep: #43285F;
+    --grape: #7B54B8;
+    --paper: #F4ECDB;
+    --paper-dim: #ECE2CC;
+    --ink: #2B1B46;
+    --ink-soft: #5B4A78;
+    --line: rgba(43,27,70,0.14);
+    --line-on-plum: rgba(244,236,219,0.18);
+    --radius: 6px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3{
+    font-family:'Spectral',serif;
+    font-weight:600;
+    letter-spacing:-0.005em;
+  }
+
+  .mono{ font-family:'JetBrains Mono',monospace; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- header (shared with index.html) ---------- */
+
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(244,236,219,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+  .wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:22px;
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink);
+  }
+  .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
+  .navlinks{ display:flex; gap:28px; align-items:center; }
+  .navlinks a{ text-decoration:none; font-size:14px; color:var(--ink-soft); font-weight:500; }
+  .navlinks a:hover{ color:var(--ink); }
+  .navlinks a.current{ color:var(--ink); }
+  .navlinks .btn-small{
+    background:var(--plum-deep); color:var(--paper);
+    padding:8px 16px; border-radius:var(--radius); font-size:13px; font-weight:600;
+  }
+  .navlinks .btn-small:hover{ background:var(--grape); }
+
+  /* ---------- page intro ---------- */
+
+  .intro{ padding:72px 0 48px; }
+  .eyebrow-dark{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--grape); margin-bottom:12px; display:block;
+  }
+  .intro h1{ font-size:clamp(34px, 5vw, 48px); }
+  .intro p{ margin-top:14px; color:var(--ink-soft); max-width:56ch; font-size:16px; }
+
+  /* ---------- release list (shared visual language with index.html's roadmap) ---------- */
+
+  .releases{ background:var(--plum-deep); color:var(--paper); padding:16px 0 92px; }
+  .version-list{ display:flex; flex-direction:column; }
+  .version{ display:grid; grid-template-columns:120px 1fr; gap:28px; padding:36px 0; border-top:1px solid var(--line-on-plum); }
+  .version:last-child{ border-bottom:1px solid var(--line-on-plum); }
+  .version-num{ font-family:'Spectral',serif; font-size:34px; color:#C9B8E8; line-height:1; }
+  .version-status{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:#B3A2D6;
+    margin-top:8px; text-transform:uppercase; letter-spacing:0.06em;
+  }
+  .version ul{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 28px; }
+  .version li{ font-size:14.5px; color:#E5DBF5; padding-left:16px; position:relative; }
+  .version li::before{ content:"—"; position:absolute; left:0; color:#9E86CC; }
+
+  .version-tagline{ color:#CBB9EA; font-size:15px; max-width:64ch; margin-bottom:22px; }
+  .version-group{ margin-bottom:20px; }
+  .version-group:last-child{ margin-bottom:0; }
+  .group-label{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:0.08em; text-transform:uppercase; color:#9E86CC; margin-bottom:10px;
+  }
+
+  /* ---------- footer (shared with index.html) ---------- */
+
+  footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
+  .foot-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  .foot-row .wordmark{ color:var(--paper); font-size:16px; }
+  .foot-row .wordmark img{ width:26px; height:26px; }
+  .foot-links{ display:flex; gap:22px; }
+  .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
+  .foot-links a:hover{ color:var(--paper); }
+  .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
+
+  /* ---------- responsive ---------- */
+
+  @media (max-width: 880px){
+    .version{ grid-template-columns:1fr; gap:10px; }
+    .version ul{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 560px){
+    .navlinks a:not(.btn-small){ display:none; }
+    .foot-row{ flex-direction:column; align-items:flex-start; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <nav class="navlinks">
+      <a href="index.html#features">Features</a>
+      <a href="index.html#roadmap">Roadmap</a>
+      <a href="changelog.html" class="current">Changelog</a>
+      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
+      <a href="https://apps.apple.com/us/app/sutra-ebook-reader/id6780096864" class="btn-small">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Release notes</span>
+    <h1>Changelog</h1>
+    <p>Every Sutra release, one thread at a time — what's new, what's improved, and what's fixed.</p>
+  </div>
+</section>
+
+<section class="releases">
+  <div class="wrap">
+    <div class="version-list">
+
+      <div class="version">
+        <div><div class="version-num">1.1</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">A big reliability and polish update — better cross-device sync, a real page-curl animation, dark mode, and a wide pass of fixes across search, downloads, and the reader.</p>
+
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li>Authentic page-curl page turns — tap or drag to peel a page like a real book (turn it off for the classic instant/slide turn in Settings → Accessibility)</li>
+              <li>Appearance: Day, Night, or System — a real dark theme for the whole app; book pages keep their own reading theme</li>
+              <li>Left-Handed Page Turns — tap the left edge to go to the next page, right edge to go back</li>
+              <li>Series info and sorting from Kavita libraries — powers the "More in this series" carousel and a proper Series sort</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Improved</span>
+            <ul>
+              <li>Standard Ebooks now connects with your Patrons Circle email, verified against the live feed before the library is added</li>
+              <li>Self-hosted servers on your local network with no TLS now connect automatically</li>
+              <li>Paged vs. continuous scrolling is remembered separately for EPUB and PDF</li>
+              <li>"Recently Read" and Continue Reading now rank by when you actually read, not raw progress</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>Large self-hosted libraries (Kavita, Komga) could silently lose books partway through loading, so those books never turned up in search — big libraries now load completely</li>
+              <li>Kavita reading position now syncs correctly in both directions for EPUBs</li>
+              <li>Cross-device iCloud progress sync now works reliably for every connected library</li>
+              <li>Books no longer get marked "Finished" from a glance at the last page</li>
+              <li>Fixed a case where a server's feed could confuse two different books with each other</li>
+              <li>The library no longer goes blank after a brief server hiccup</li>
+              <li>Hardened how credentials and cover images are handled</li>
+              <li>A range of smaller fixes across search, downloads, and the readers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num">1.0</div><span class="version-status">Shipped</span></div>
+        <ul>
+          <li>Kavita, Calibre, and OPDS server support</li>
+          <li>Project Gutenberg one-tap catalog</li>
+          <li>EPUB + PDF reading: themes, fonts, bookmarks, search</li>
+          <li>Offline downloads and storage manager</li>
+          <li>iCloud sync + page-accurate Kavita sync</li>
+          <li>Free — no IAP, no subscription, no ads</li>
+        </ul>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num">2.0</div><span class="version-status">Upcoming</span></div>
+        <ul>
+          <li>Komga support, with native page-accurate progress sync</li>
+          <li>CBZ comic reading</li>
+          <li>Grimmory support</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="foot-links">
+      <a href="changelog.html">Changelog</a>
+      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
+      <a href="https://github.com/koustavdg/sutra">GitHub</a>
+      <a href="https://apps.apple.com/us/app/sutra-ebook-reader/id6780096864">App Store</a>
+    </div>
+    <span class="copyright">© 2026 Sutra</span>
+  </div>
+</footer>
+
+</body>
+</html>
