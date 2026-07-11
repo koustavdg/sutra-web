@@ -87,6 +87,7 @@
   .version{ display:grid; grid-template-columns:120px 1fr; gap:28px; padding:36px 0; border-top:1px solid var(--line-on-plum); }
   .version:last-child{ border-bottom:1px solid var(--line-on-plum); }
   .version-num{ font-family:'Spectral',serif; font-size:34px; color:#C9B8E8; line-height:1; }
+  .version-num.label{ font-size:22px; }
   .version-status{
     display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:#B3A2D6;
     margin-top:8px; text-transform:uppercase; letter-spacing:0.06em;
@@ -213,6 +214,13 @@
           <li>Komga support, with native page-accurate progress sync</li>
           <li>CBZ comic reading</li>
           <li>Grimmory support</li>
+        </ul>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num label">Android</div><span class="version-status">Upcoming</span></div>
+        <ul>
+          <li>A native Android app, bringing Sutra's OPDS library and reader to more devices</li>
         </ul>
       </div>
 
