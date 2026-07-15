@@ -158,36 +158,35 @@
       <div class="version">
         <div><div class="version-num">1.3</div><span class="version-status">Shipped</span></div>
         <div class="version-body">
-          <p class="version-tagline">Reading features and server compatibility — text highlights with iCloud sync, instant word definitions, series-based organization, plus Calibre-Web-Automated support and improved compatibility for Tailscale, Grimmory, and other OPDS servers.</p>
+          <p class="version-tagline">Reading features and server compatibility — text highlights with iCloud sync, instant word definitions, improved dictionary lookup, plus Calibre-Web-Automated support and enhanced compatibility for Tailscale, Grimmory, and other OPDS servers.</p>
 
           <div class="version-group">
             <span class="group-label">New</span>
             <ul>
-              <li><strong>Text Highlights:</strong> Select text while reading (EPUB or PDF), choose a color, and the passage stays highlighted in the book and automatically saved to Settings → Text Highlights. Tap a highlight to change its color or delete it. Highlights sync via iCloud across your devices, just like reading progress, and can be browsed from the reader's Bookmarks sheet.</li>
-              <li><strong>Dictionary lookup:</strong> Double-tap a word while reading (EPUB or PDF) to see its definition immediately, with one-tap copy — powered by the free Dictionary API (dictionaryapi.dev). Every word you look up is saved to Settings → Dictionary for later reference.</li>
-              <li><strong>Collections by series:</strong> Books now organize by series in the Collections Shelf, based on metadata from your library server — brings series browsing to Calibre, Calibre-Web, and self-hosted OPDS servers.</li>
-              <li>Support for <strong>Calibre-Web-Automated</strong> (CWA), a community fork with automatic ebook ingestion — connect it the same way as Calibre-Web (default port 8084).</li>
+              <li><strong>Text Highlights:</strong> Select text while reading (EPUB or PDF), choose a color, and the passage stays highlighted in the book and automatically saved to Settings → Text Highlights. Tap a highlight to change its color or delete it. Highlights sync via iCloud across your devices, just like reading progress. Also browse all highlights for a book from the reader's Bookmarks sheet.</li>
+              <li><strong>Dictionary lookup:</strong> Double-tap a word while reading (EPUB or PDF) to see its definition immediately, instead of having to open the system's Look Up menu and tap through to Define. Copy is now offered directly in the definition popup. Every word you look up is saved to Settings → Dictionary for browsing and reference.</li>
+              <li>Support for <strong>Calibre-Web-Automated</strong> (CWA), a community fork of Calibre-Web with automatic ebook ingestion — connect it the same way as Calibre-Web (default port 8084), and Sutra handles the setup automatically. Includes a new "How to Connect Each Server" guide in Settings with step-by-step instructions for every supported server.</li>
             </ul>
           </div>
 
           <div class="version-group">
             <span class="group-label">Improved</span>
             <ul>
-              <li>Server detection now rejects non-OPDS responses (e.g., HTML login portals from reverse proxies or single-sign-on) instead of silently accepting an empty library.</li>
-              <li>Grimmory shelves (and Calibre-Web collections) now appear as read-only collections in the Shelf tab under "Server Shelves" — these update automatically when you refresh your library.</li>
-              <li>Tailscale MagicDNS names (e.g., <code>myserver.tailnet-name.ts.net</code>) now connect over plain HTTP like any other self-hosted server.</li>
-              <li>Empty libraries (books all in unsupported formats like MOBI, AZW3, CBZ) now show a clear message with conversion tips instead of appearing as a silent blank shelf.</li>
-              <li>Newly added servers now auto-retry if they report "unavailable" immediately after granting the Local Network permission, instead of requiring manual pull-to-refresh.</li>
-              <li>Cover-image cache increased to 1500 images / 200 MB (up from 200 / 64 MB), with prefetching for Continue Reading.</li>
+              <li>OPDS server detection now rejects non-OPDS responses (e.g., HTML login portals from reverse proxies or single-sign-on) — Sutra shows a clear error message instead of silently accepting an empty library.</li>
+              <li><strong>Grimmory shelves</strong> (and Calibre-Web server collections) now appear as read-only collections in the Shelf tab under "Server Shelves" — these update automatically when you refresh your library and can't be edited in Sutra.</li>
+              <li>Increased the cover-image cache to 1500 images / 200 MB (up from 200 / 64 MB) and added prefetching for the Continue Reading shelf, so covers you've already loaded show up instantly instead of blank for the first several seconds after opening the app.</li>
+              <li>Library screen no longer shows nothing while reconnecting to servers on launch — an in-progress book you've already downloaded now appears in Continue Reading instantly, before your library connections finish loading.</li>
             </ul>
           </div>
 
           <div class="version-group">
             <span class="group-label">Fixed</span>
             <ul>
-              <li>Online search now works against self-hosted OPDS servers that Sutra doesn't specifically recognize (Komga, Grimmory, Booklore, BookOrbit, OPDShelf) when the server advertises search capability.</li>
-              <li>Series information from self-hosted servers tagged like Calibre now reads more reliably instead of occasionally showing a genre as the series name.</li>
-              <li>Library screen no longer shows nothing for several seconds on launch — in-progress books you've downloaded now appear in Continue Reading instantly.</li>
+              <li>Fixed connecting to a Kavita or Calibre server over Tailscale using its MagicDNS name (<code>myserver.tailnet-name.ts.net</code>) — this now works over plain HTTP like any other self-hosted server. (A server reached only by its raw Tailscale IP address still needs HTTPS — that's an OS-level limitation.)</li>
+              <li>Fixed a Calibre or OPDS library whose books are all in unsupported formats (MOBI, AZW3, CBZ, etc.) appearing as a silent, empty library with no explanation — it now shows a clear message with a pointer to converting Kindle-format books to EPUB with Calibre.</li>
+              <li>Fixed a newly added server occasionally reporting "unavailable or not accepting requests" immediately after granting the Local Network permission prompt — Sutra now automatically retries instead of requiring manual pull-to-refresh. The Settings reachability dot also now updates right after adding a server.</li>
+              <li>Online search now works against self-hosted OPDS servers that Sutra doesn't specifically recognize (Komga, Grimmory, Booklore, BookOrbit, OPDShelf) when the server advertises search capability — previously only Kavita, Calibre, and the built-in public catalogs attempted it.</li>
+              <li>Series information from self-hosted servers that tag it the same way Calibre does is now read more reliably, instead of occasionally showing a genre as the series name.</li>
             </ul>
           </div>
         </div>
