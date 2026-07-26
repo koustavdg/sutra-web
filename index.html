@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sutra — A thread that binds your books</title>
-<meta name="description" content="Sutra connects to Kavita, Calibre, or any OPDS server, plus Project Gutenberg's full public-domain catalog. Free EPUB & PDF reader for iOS. No ads, no subscriptions.">
+<title>Sutra — Read everything. Books and comics.</title>
+<meta name="description" content="Sutra is the best way to read your books and comics on iOS. Connect Kavita, Calibre, Komga, or any OPDS server. Panel-aware comics, EPUB auto-scrolling, and sideloading — free.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -195,6 +195,42 @@
   .card h3{ font-size:19px; margin-top:14px; margin-bottom:8px; }
   .card p{ font-size:14.5px; color:var(--ink-soft); }
 
+  /* ---------- pro ---------- */
+
+  .pro{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); }
+  .pro-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; margin-top:0; }
+  .pro-col{ border:1px solid var(--line); border-radius:var(--radius); padding:30px 26px 28px; background:var(--card); }
+  .pro-col.col-pro{ background:var(--plum-deep); border-color:transparent; }
+  .pro-col-head{ margin-bottom:22px; }
+  .pro-col-eyebrow{
+    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:8px;
+  }
+  .col-pro .pro-col-eyebrow{ color:#9E86CC; }
+  .pro-col-title{ font-family:'Spectral',serif; font-size:22px; font-weight:600; color:var(--ink); }
+  .col-pro .pro-col-title{ color:#F8F2E3; }
+  .pro-price{ font-family:'Spectral',serif; font-size:32px; color:#F8F2E3; margin-top:12px; line-height:1; }
+  .pro-price-note{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#9E86CC; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; display:block; }
+  .pro-list{ list-style:none; margin-top:20px; border-top:1px solid var(--line); }
+  .col-pro .pro-list{ border-color:var(--line-on-plum); }
+  .pro-list li{
+    font-size:14px; padding:9px 0 9px 22px; position:relative;
+    border-bottom:1px solid var(--line); color:var(--ink-soft);
+  }
+  .col-pro .pro-list li{ border-color:var(--line-on-plum); color:#DCD1EE; }
+  .pro-list li::before{ content:"✓"; position:absolute; left:0; font-size:12px; font-weight:700; color:var(--grape); }
+  .col-pro .pro-list li::before{ color:#C9B8E8; }
+  .pro-list li:last-child{ border-bottom:none; }
+  .btn-pro{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--paper); color:var(--plum-deep);
+    text-decoration:none; padding:12px 20px; border-radius:var(--radius);
+    font-weight:600; font-size:14px; margin-top:24px;
+    transition:background .15s ease;
+  }
+  .btn-pro:hover{ background:#fff; }
+  .pro-footer-note{ margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-soft); max-width:72ch; }
+
   /* ---------- roadmap ---------- */
 
   .roadmap{ background:var(--plum-deep); color:var(--paper); padding:92px 0; }
@@ -240,6 +276,7 @@
     .phone-stage{ margin-top:20px; }
     .strip-row{ grid-template-columns:repeat(2,1fr); }
     .card-grid{ grid-template-columns:repeat(2,1fr); }
+    .pro-grid{ grid-template-columns:1fr; }
     .version{ grid-template-columns:1fr; gap:10px; }
     .version ul{ grid-template-columns:1fr; }
   }
@@ -262,7 +299,7 @@
       <a href="#roadmap">Roadmap</a>
       <a href="changelog.html">Changelog</a>
       <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
-      <a href="https://apps.apple.com/us/app/sutra-ebook-reader/id6780096864" class="btn-small">Get the app</a>
+      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-small">Get the app</a>
     </nav>
   </div>
 </header>
@@ -271,17 +308,17 @@
   <div class="wrap hero-grid">
     <div>
       <div class="icon-tile"><img src="assets/app-icon.png" alt="Sutra app icon"></div>
-      <div class="eyebrow">OPDS reader for iOS</div>
+      <div class="eyebrow">EPUB · COMICS · OPDS · iOS</div>
       <h1>Sutra</h1>
       <div class="tagline">A thread that binds your books</div>
-      <p class="lede">A bookshelf and reader for OPDS libraries. Connect Kavita, Calibre, or any OPDS server — and open Project Gutenberg's full catalog with one tap. No account, no ads, no subscription.</p>
+      <p class="lede">Connect your <em>Kavita, Calibre, or Komga</em> server, any OPDS catalog, or Project Gutenberg's full public-domain library. Read comics panel by panel, sideload local files, and auto-scroll through long reads. Everything you need to read — in one app.</p>
 
       <div class="cta-row">
-        <a href="https://apps.apple.com/us/app/sutra-ebook-reader/id6780096864" class="btn-store">
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-store">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.014-.1-.04-.31-.04-.52 0-1.14.572-2.35 1.226-3.03.744-.79 2.01-1.42 3.06-1.46.014.13.03.26.03.4zm2.86 15.24c-.056.14-.317.94-1.05 1.94-.628.86-1.284 1.72-2.316 1.74-1.014.02-1.34-.6-2.5-.6-1.16 0-1.52.58-2.48.62-.99.04-1.75-.93-2.386-1.79-1.3-1.79-2.294-5.06-.96-7.27.664-1.1 1.85-1.8 3.14-1.82.978-.02 1.9.66 2.5.66.598 0 1.716-.82 2.894-.7.492.02 1.878.2 2.77 1.5-.072.05-1.654.97-1.636 2.88.018 2.28 2 3.04 2.024 3.05z"/></svg>
           Get Sutra
         </a>
-        <span class="cta-note">Free on the App Store · No IAP, no ads</span>
+        <span class="cta-note">Free on the App Store · Sutra Pro unlocks .cbz, .mobi & Komga</span>
       </div>
 
       <div class="thread-row">
@@ -293,7 +330,7 @@
           <circle cx="474" cy="17" r="4"/>
         </svg>
         <div class="thread-labels">
-          <span>KAVITA</span><span>CALIBRE</span><span>OPDS</span><span>GUTENBERG</span>
+          <span>KAVITA</span><span>CALIBRE</span><span>KOMGA</span><span>GUTENBERG</span>
         </div>
       </div>
     </div>
@@ -311,7 +348,7 @@
 <section class="strip">
   <div class="wrap">
     <div class="strip-head">
-      <h2>See it in your library</h2>
+      <h2>See it in action</h2>
       <span class="tag mono">4 screens</span>
     </div>
     <div class="strip-row">
@@ -324,24 +361,24 @@
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/02-connect.png" alt="Connecting an OPDS server"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>02-connect.png</span>'}))">
+          <img src="assets/screenshots/05-comics.png" alt="Panel-aware comic reading"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>05-comics.png</span>'}))">
         </div>
-        <div class="strip-cap">02 · connect a server</div>
+        <div class="strip-cap">02 · panel comics</div>
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/03-reader.png" alt="Reading view"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>03-reader.png</span>'}))">
+          <img src="assets/screenshots/06-autoscroll.png" alt="Auto-scroll reading settings"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>06-autoscroll.png</span>'}))">
         </div>
-        <div class="strip-cap">03 · reader + themes</div>
+        <div class="strip-cap">03 · auto-scroll</div>
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/04-offline.png" alt="Offline downloads and storage manager"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>04-offline.png</span>'}))">
+          <img src="assets/screenshots/07-pro.png" alt="Sutra Pro unlock screen"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>07-pro.png</span>'}))">
         </div>
-        <div class="strip-cap">04 · offline & storage</div>
+        <div class="strip-cap">04 · Sutra Pro</div>
       </div>
     </div>
   </div>
@@ -354,16 +391,63 @@
       <h2>Nine things, done properly.</h2>
     </div>
     <div class="card-grid">
-      <div class="card" data-code="OPDS·01"><h3>Bring your own server</h3><p>Connect Kavita, Calibre, or any OPDS-compatible server in a few taps.</p></div>
-      <div class="card" data-code="OPDS·02"><h3>Gutenberg & Standard Ebooks</h3><p>Project Gutenberg's public-domain catalog and Standard Ebooks' typeset classics, ready to browse — no server required. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
-      <div class="card" data-code="READ·01"><h3>EPUB & PDF</h3><p>Themes, fonts, bookmarks, and in-book search, tuned for long reading sessions.</p></div>
-      <div class="card" data-code="READ·02"><h3>Turn pages like a book</h3><p>An authentic page-curl animation, or a classic instant turn — plus a left-handed mode for one-handed reading.</p></div>
-      <div class="card" data-code="READ·03"><h3>Dark mode, done right</h3><p>Day, Night, or follow System — book pages keep their own reading theme.</p></div>
-      <div class="card" data-code="READ·04"><h3>Read offline</h3><p>Download books and manage storage right from the library.</p></div>
-      <div class="card" data-code="READ·05"><h3>Highlights & Dictionary</h3><p>Select text to highlight with color, double-tap a word to define instantly — both sync across your devices via iCloud.</p></div>
-      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs progress across devices; Kavita sync is page-accurate, with series info and sorting.</p></div>
-      <div class="card" data-code="SYNC·02"><h3>Browse by series</h3><p>Books organized by series in the Collections Shelf, based on metadata from your library server.</p></div>
+      <div class="card" data-code="OPDS·01"><h3>Bring your own server</h3><p>Connect Kavita, Calibre, Grimmory, or any OPDS-compatible server in a few taps. Works on your local network — no cloud middleman.</p></div>
+      <div class="card" data-code="OPDS·02"><h3>Gutenberg & Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection — no server required. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
+      <div class="card" data-code="READ·01"><h3>EPUB & PDF</h3><p>Authentic page-curl, rich typography controls, four reading themes, bookmarks, in-book search, and color-coded highlights synced via iCloud.</p></div>
+      <div class="card" data-code="READ·02"><h3>Panel-aware comics</h3><p>Sutra detects each comic page's panels and reads them one at a time — tap or flip to advance panel by panel. Works on fixed-layout EPUBs and PDFs. Falls back gracefully to the full page when needed.</p></div>
+      <div class="card" data-code="READ·03"><h3>Auto-scrolling</h3><p>Set your pace and let the page flow — tap to pause, tap again to resume. Speed is adjustable from the reading settings. Perfect for hands-free reading.</p></div>
+      <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB and PDF files directly from your phone — from your Files app, AirDrop, or any share sheet. No server required.</p></div>
+      <div class="card" data-code="READ·05"><h3>Highlights & Dictionary</h3><p>Select text to highlight with color, double-tap a word to define it instantly — both sync across your devices via iCloud and are saved for later.</p></div>
+      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs reading position, bookmarks, and highlights across all your devices. Kavita sync is page-accurate in both directions.</p></div>
+      <div class="card" data-code="SYNC·02"><h3>Browse by series</h3><p>Books organize by series in the Collections Shelf based on metadata from your server — perfect for long fantasy and sci-fi runs.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="pro" id="pro">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow-dark">Sutra Pro</span>
+      <h2>One price. All the extras. Forever.</h2>
+    </div>
+    <div class="pro-grid">
+      <div class="pro-col col-free">
+        <div class="pro-col-head">
+          <span class="pro-col-eyebrow">Free forever</span>
+          <div class="pro-col-title">Everything you need to start reading</div>
+        </div>
+        <ul class="pro-list">
+          <li>All OPDS servers — Kavita, Calibre, Grimmory, and more</li>
+          <li>Project Gutenberg &amp; Standard Ebooks catalogs</li>
+          <li>EPUB &amp; PDF reading with full typography controls</li>
+          <li>Panel-aware comic reading</li>
+          <li>EPUB auto-scrolling</li>
+          <li>Sideload files from your phone</li>
+          <li>Color highlights synced via iCloud</li>
+          <li>Dictionary lookup, bookmarks, and in-book search</li>
+          <li>Series collections and smart sorting</li>
+          <li>Offline downloads and storage manager</li>
+          <li>Dark mode, left-handed page turns, Reduce Motion</li>
+        </ul>
+      </div>
+      <div class="pro-col col-pro">
+        <div class="pro-col-head">
+          <span class="pro-col-eyebrow">Sutra Pro</span>
+          <div class="pro-col-title">Unlock more formats and Komga</div>
+          <div class="pro-price">$6.99</div>
+          <span class="pro-price-note">One-time purchase · No subscription · Yours forever</span>
+        </div>
+        <ul class="pro-list">
+          <li>Native Komga server integration with page-accurate progress sync</li>
+          <li>.cbz comic archives — read comic archives in a fixed-layout, zoomable page reader</li>
+          <li>DRM-free MOBI books — read Kindle-format files you own</li>
+        </ul>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-pro">
+          Unlock Sutra Pro →
+        </a>
+      </div>
+    </div>
+    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. Sutra Pro is a one-time purchase tied to your Apple Account.</p>
   </div>
 </section>
 
@@ -382,48 +466,44 @@
           <li>EPUB + PDF reading: themes, fonts, bookmarks, search</li>
           <li>Offline downloads and storage manager</li>
           <li>iCloud sync + page-accurate Kavita sync</li>
-          <li>Free — no IAP, no subscription, no ads</li>
         </ul>
       </div>
       <div class="version">
         <div><div class="version-num">1.2</div><span class="version-status">Shipped</span></div>
         <ul>
           <li>Standard Ebooks catalog, with Patrons Circle sign-in</li>
-          <li>Authentic page-curl page turns, with a plain-turn option</li>
+          <li>Authentic page-curl page turns</li>
           <li>Dark mode — Day, Night, or follow System</li>
           <li>Left-Handed Page Turns for one-handed reading</li>
           <li>Series info and sorting from your Kavita library</li>
-          <li>Fixed large libraries losing books from search</li>
-          <li>Fixed cross-device sync, iCloud and Kavita alike</li>
           <li>A wide pass of reliability and security fixes</li>
         </ul>
       </div>
       <div class="version">
         <div><div class="version-num">1.3</div><span class="version-status">Shipped</span></div>
         <ul>
-          <li>Text highlights with color — select, save, and sync across devices</li>
-          <li>Instant dictionary — double-tap any word while reading to see its definition</li>
-          <li>Browse books by series in the Collections Shelf based on server metadata</li>
-          <li>Calibre-Web-Automated support for automatic ebook ingestion</li>
-          <li>Improved server compatibility (Tailscale, Grimmory shelves, OPDS detection)</li>
+          <li>Text highlights with color — synced via iCloud</li>
+          <li>Instant dictionary — double-tap any word while reading</li>
+          <li>Browse books by series in the Collections Shelf</li>
+          <li>Calibre-Web-Automated support</li>
+          <li>Server compatibility improvements (Tailscale, Grimmory, OPDS detection)</li>
           <li>Enhanced cover-image caching and library performance</li>
         </ul>
       </div>
       <div class="version">
-        <div><div class="version-num">2.0</div><span class="version-status">Upcoming</span></div>
+        <div><div class="version-num">2.0</div><span class="version-status">Shipped</span></div>
         <ul>
-          <li>Side-loading local files</li>
-          <li>Panel-aware comic reading</li>
-          <li>EPUB/MOBI auto-scrolling</li>
-          <li>.cbz and .mobi format support</li>
-          <li>Native Komga server integration</li>
+          <li>Panel-aware comic reading — one panel at a time</li>
+          <li>EPUB auto-scrolling with adjustable speed</li>
+          <li>Sideload local files from your phone</li>
+          <li>Sutra Pro: .cbz comics, .mobi books, and native Komga integration</li>
         </ul>
       </div>
       <div class="version">
         <div><div class="version-num">2.1</div><span class="version-status">Upcoming</span></div>
         <ul>
           <li>Manga compatibility</li>
-          <li>iOS Files integration — open books from Dropbox, iCloud Drive, and OneDrive</li>
+          <li>iOS Files integration — Dropbox, iCloud Drive, OneDrive</li>
           <li>Reading statistics</li>
           <li>Two-column iPad layout for wide-screen reading</li>
           <li>WebDAV support</li>
@@ -448,7 +528,8 @@
     <div class="foot-links">
       <a href="changelog.html">Changelog</a>
       <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
-      <a href="https://apps.apple.com/us/app/sutra-ebook-reader/id6780096864">App Store</a>
+      <a href="https://github.com/koustavdg/sutra-support/issues">Feedback</a>
+      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
     </div>
     <span class="copyright">© 2026 Sutra</span>
   </div>
