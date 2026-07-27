@@ -167,7 +167,7 @@
               <li><strong>Native Komga integration:</strong> Connect your Komga server as a first-class library with full series/collection browsing and page-accurate reading-progress sync — Sutra writes your position back to Komga in real time, the same way it does for Kavita.</li>
               <li><strong>CBZ comic reading:</strong> Open .cbz archives with a fixed-layout, zoomable page reader. Requires Sutra Pro.</li>
               <li><strong>Comics as Panels:</strong> Read CBZ, scanned/comic PDF, and fixed-layout EPUB/MOBI panel by panel — Sutra auto-detects each page's panels and a tap moves to the next one instead of the whole page. Every comic opens on the full page by default; tap the in-reader toggle (▭ ⟷ ▦) to crop to one panel at a time. Falls back gracefully to the full page where no panels are found.</li>
-              <li><strong>DRM-free MOBI reading:</strong> Open Kindle-format MOBI files you own directly in Sutra — full font, theme, and typography support, same as EPUB. Requires Sutra Pro.</li>
+              <li><strong>DRM-free MOBI reading:</strong> Open DRM-free MOBI files you own directly in Sutra — full font, theme, and typography support, same as EPUB. Requires Sutra Pro.</li>
               <li><strong>Sideloading:</strong> Import EPUB, PDF, CBZ, and MOBI files from the iOS Files app, AirDrop, or any share sheet. They appear in your library alongside server books. Re-importing the same file won't create duplicates; files deleted outside the app are cleaned up automatically with a one-time notice.</li>
               <li><strong>Bookmarks sync via iCloud</strong> across all your devices — previously bookmarks were local to each device. Matches how reading progress and highlights already worked.</li>
               <li>Live download-progress ring on book covers and percentage text in the detail view, download tile, and Downloads tab — plus a sync spinner per library while it's refreshing.</li>
@@ -188,7 +188,7 @@
               <li>Editing a server connection now has an always-visible Name field to rename it without a full reconnect.</li>
               <li>Added setup guidance for Komga and Standard Ebooks to Settings → How to Connect a Server. The Add Library URL footer now shows one bullet per supported server type with its concrete URL shape and credentials.</li>
               <li>Settings now surfaces "Reader Quick Tour" directly instead of burying it inside FAQ &amp; Help. The tour includes a Panel Mode page and shows for comic-shaped books.</li>
-              <li>AZW3 files are no longer shown or offered anywhere — they were almost always Amazon DRM-locked and never actually readable. Any AZW3 left from an older build is removed from the library.</li>
+              <li>AZW3 files are no longer shown or offered anywhere — they were almost always DRM-locked and never actually readable. Any AZW3 left from an older build is removed from the library.</li>
             </ul>
           </div>
 
@@ -243,7 +243,7 @@
             <span class="group-label">Fixed</span>
             <ul>
               <li>Fixed connecting to a Kavita or Calibre server over Tailscale using its MagicDNS name (<code>myserver.tailnet-name.ts.net</code>) — this now works over plain HTTP like any other self-hosted server. (A server reached only by its raw Tailscale IP address still needs HTTPS — that's an OS-level limitation.)</li>
-              <li>Fixed a Calibre or OPDS library whose books are all in unsupported formats (MOBI, AZW3, CBZ, etc.) appearing as a silent, empty library with no explanation — it now shows a clear message with a pointer to converting Kindle-format books to EPUB with Calibre.</li>
+              <li>Fixed a Calibre or OPDS library whose books are all in unsupported formats (MOBI, AZW3, CBZ, etc.) appearing as a silent, empty library with no explanation — it now shows a clear message with a pointer to converting books to EPUB with Calibre.</li>
               <li>Fixed a newly added server occasionally reporting "unavailable or not accepting requests" immediately after granting the Local Network permission prompt — Sutra now automatically retries instead of requiring manual pull-to-refresh. The Settings reachability dot also now updates right after adding a server.</li>
               <li>Online search now works against self-hosted OPDS servers that Sutra doesn't specifically recognize (Komga, Grimmory, Booklore, BookOrbit, OPDShelf) when the server advertises search capability — previously only Kavita, Calibre, and the built-in public catalogs attempted it.</li>
               <li>Series information from self-hosted servers that tag it the same way Calibre does is now read more reliably, instead of occasionally showing a genre as the series name.</li>
