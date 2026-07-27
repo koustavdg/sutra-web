@@ -158,26 +158,57 @@
       <div class="version">
         <div><div class="version-num">2.0</div><span class="version-status">Shipped</span></div>
         <div class="version-body">
-          <p class="version-tagline">The biggest Sutra update yet — panel-aware CBZ comic reading, sideloading from your Files app, EPUB/mobi auto-scrolling, native Komga integration, and Sutra Pro: a $6.99 one-time unlock for premium formats.</p>
+          <p class="version-tagline">The biggest Sutra update yet — native Komga support, panel-by-panel comic reading, sideloading, EPUB auto-scrolling, DRM-free MOBI, Sutra Pro, and a sweeping pass of reliability improvements.</p>
 
           <div class="version-group">
             <span class="group-label">New</span>
             <ul>
-              <li><strong>Side-loading:</strong> Import EPUBs, PDFs, CBZs, and MOBIs directly from the iOS Files app or any accessible local storage — they appear in your library alongside server books and download normally for offline reading.</li>
-              <li><strong>Panel-aware comic reading:</strong> CBZ archives open in a dedicated comic reader with automatic panel detection — tap through individual panels for an immersive reading experience, or pinch to read the full page at once. Remembers your position per-issue.</li>
-              <li><strong>Auto-scrolling:</strong> Continuous hands-free scroll for EPUB and mobi with an adjustable speed slider — tap anywhere to pause and resume. Configured separately from the standard paged reading mode.</li>
-              <li><strong>.cbz and .mobi format support:</strong> Open CBZ comic archives and Kindle-format MOBI files directly in Sutra — no conversion step needed. MOBI renders with full font and theme support like EPUB.</li>
-              <li><strong>Native Komga integration:</strong> Connect your Komga server with full library browsing, series and collection support, and page-accurate reading progress sync — Sutra writes progress back to Komga in real time.</li>
-              <li><strong>Sutra Pro — $6.99 one-time:</strong> A single in-app purchase that permanently unlocks .cbz comic reading, .mobi format support, and native Komga server integration. No subscription, no recurring charges, no expiry.</li>
+              <li><strong>Sutra Pro — $6.99 one-time:</strong> A single in-app purchase that permanently unlocks Komga server integration, .cbz comic reading, and DRM-free MOBI support. No subscription, no recurring charges. EPUB and PDF remain free for everyone.</li>
+              <li><strong>Native Komga integration:</strong> Connect your Komga server as a first-class library with full series/collection browsing and page-accurate reading-progress sync — Sutra writes your position back to Komga in real time, the same way it does for Kavita.</li>
+              <li><strong>CBZ comic reading:</strong> Open .cbz archives with a fixed-layout, zoomable page reader. Requires Sutra Pro.</li>
+              <li><strong>Comics as Panels:</strong> Read CBZ, scanned/comic PDF, and fixed-layout EPUB/MOBI panel by panel — Sutra auto-detects each page's panels and a tap moves to the next one instead of the whole page. Every comic opens on the full page by default; tap the in-reader toggle (▭ ⟷ ▦) to crop to one panel at a time. Falls back gracefully to the full page where no panels are found.</li>
+              <li><strong>DRM-free MOBI reading:</strong> Open Kindle-format MOBI files you own directly in Sutra — full font, theme, and typography support, same as EPUB. Requires Sutra Pro.</li>
+              <li><strong>Sideloading:</strong> Import EPUB, PDF, CBZ, and MOBI files from the iOS Files app, AirDrop, or any share sheet. They appear in your library alongside server books. Re-importing the same file won't create duplicates; files deleted outside the app are cleaned up automatically with a one-time notice.</li>
+              <li><strong>Bookmarks sync via iCloud</strong> across all your devices — previously bookmarks were local to each device. Matches how reading progress and highlights already worked.</li>
+              <li>Live download-progress ring on book covers and percentage text in the detail view, download tile, and Downloads tab — plus a sync spinner per library while it's refreshing.</li>
+              <li>Landscape orientation support in the reader on iPhone — every other screen remains portrait-only.</li>
+              <li>"Remove All Imported Files" in Settings → Downloads — bulk-clears the Local Library catalog (previously only downloaded server books had a bulk-remove; imported files could only be deleted one at a time).</li>
             </ul>
           </div>
 
           <div class="version-group">
             <span class="group-label">Improved</span>
             <ul>
-              <li>Library screen now shows sideloaded books in a dedicated "On Device" shelf alongside server libraries — tap to manage storage or delete individual sideloaded files.</li>
-              <li>Reader settings sheet reorganized: auto-scroll speed, font, theme, margins, and line spacing now grouped into collapsible sections for quicker access.</li>
-              <li>Komga series and collection metadata displayed in the book detail sheet, matching Kavita's existing series carousel.</li>
+              <li>Library crawl budget raised substantially (5,000 → 20,000 feeds, 20,000 → 100,000 books) — large self-hosted Komga, Kavita, and Calibre libraries no longer silently lose books from Browse that were still reachable via Search.</li>
+              <li>Returning from the background now re-syncs every connected library (throttled to once per 5 minutes), not just on cold launch.</li>
+              <li>Comics as Panels now opens on the full page by default with a one-time tooltip pointing at the panel-toggle — the toggle itself is larger, translucent, and brand-tinted.</li>
+              <li>Local file imports show a real extracted cover far more often — EPUBs that don't declare their cover the standard way now fall back to the book's own cover or first image instead of generated gradient art.</li>
+              <li>Importing local files now shows a clear summary of anything skipped (unsupported format or Pro-gated) with an Upgrade prompt where relevant, instead of failing silently.</li>
+              <li>Server reachability dots now appear on the Library home page's server chips, not only in Settings.</li>
+              <li>Editing a server connection now has an always-visible Name field to rename it without a full reconnect.</li>
+              <li>Added setup guidance for Komga and Standard Ebooks to Settings → How to Connect a Server. The Add Library URL footer now shows one bullet per supported server type with its concrete URL shape and credentials.</li>
+              <li>Settings now surfaces "Reader Quick Tour" directly instead of burying it inside FAQ &amp; Help. The tour includes a Panel Mode page and shows for comic-shaped books.</li>
+              <li>AZW3 files are no longer shown or offered anywhere — they were almost always Amazon DRM-locked and never actually readable. Any AZW3 left from an older build is removed from the library.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>Fixed local file import silently doing nothing on the very first tap after opening the app, and fixed a race in the document picker that could discard a perfectly successful pick with no error and no book added.</li>
+              <li>Fixed locally imported files not appearing in the library until a manual pull-to-refresh, background event, or relaunch.</li>
+              <li>Fixed the Library "Couldn't refresh" banner persisting after servers had already recovered — pull-to-refresh now also re-probes and retries, and reachability recovery re-attempts a previously-failed library load.</li>
+              <li>Fixed Komga connections failing to discover the OPDS catalog on a bare server address, CBZ comics silently vanishing from a crawled Komga library while PDFs in the same library loaded fine, and new Komga connections defaulting to the name "Komga OPDS Catalog" instead of "Komga".</li>
+              <li>Fixed the Sutra Pro paywall for Komga — picking "OPDS" instead of "Komga" in the server-type picker (or editing an existing Komga connection) could previously skip the paywall entirely.</li>
+              <li>Fixed panel detection on older or hand-drawn scans (Combat, Grand Prix) falling back to full-page on nearly every page — detection now tolerates a panel border that's mostly, not perfectly, blank.</li>
+              <li>Fixed comics with black gutters on a dark page showing only the full page in Panel Mode — the detector now retries on an inverted image when its normal pass finds no light gutters.</li>
+              <li>Fixed full-bleed splash pages (edge-to-edge art with no gutters) showing a bad sliver crop in Panel Mode — they now open on the whole page.</li>
+              <li>Fixed Panel Mode briefly flashing the whole next page when turning from a page's last panel to the next page's first panel.</li>
+              <li>Fixed two side-by-side panels of different heights merging into one oversized crop instead of splitting correctly, and dense grids dropping small stacked panels.</li>
+              <li>Fixed auto-scroll silently doing nothing in some sessions, and fixed auto-scroll's temporary pause for pagination getting stuck off after closing the reader or backgrounding mid-scroll.</li>
+              <li>Fixed downloaded books whose on-device file had gone missing (cleared externally, iCloud eviction) staying listed as available until you tried to open them — downloads are now pruned at launch with a "Some Books Are No Longer Available" notice.</li>
+              <li>Fixed left/right tap zones still turning pages while in continuous-scroll mode (EPUB) or over an active text selection — a tap there is now inert in scroll mode and just dismisses the selection instead of also navigating.</li>
+              <li>Fixed catalogs silently showing 0 books with no error when the root feed loaded fine but every sub-feed in the crawl failed — now treated as a real failure instead of a legitimately empty library.</li>
             </ul>
           </div>
 

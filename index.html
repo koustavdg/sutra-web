@@ -152,6 +152,7 @@
     position:relative; overflow:hidden;
   }
   .phone img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .phone video{ width:100%; height:100%; object-fit:cover; display:block; }
   .phone .placeholder{
     width:100%; height:100%;
     background:repeating-linear-gradient(135deg, #3A2652, #3A2652 10px, #32204A 10px, #32204A 20px);
@@ -361,15 +362,17 @@
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/05-comics.png" alt="Panel-aware comic reading"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>05-comics.png</span>'}))">
+          <video autoplay muted loop playsinline aria-label="Panel-aware comic reading">
+            <source src="assets/screenshots/05-comics.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="strip-cap">02 · panel comics</div>
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/06-autoscroll.png" alt="Auto-scroll reading settings"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>06-autoscroll.png</span>'}))">
+          <video autoplay muted loop playsinline aria-label="Auto-scroll reading">
+            <source src="assets/screenshots/06-autoscroll.mp4" type="video/mp4">
+          </video>
         </div>
         <div class="strip-cap">03 · auto-scroll</div>
       </div>
