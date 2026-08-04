@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Where to Legally Buy DRM-Free Books — Sutra</title>
+<meta name="description" content="Seven stores and five publishers selling ebooks you actually own — no DRM, no lock-in. Download the file and read it in Sutra forever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root{
+    --plum-top:#6A4A99;
+    --plum-deep:#43285F;
+    --grape:#7B54B8;
+    --paper:#F4ECDB;
+    --paper-dim:#ECE2CC;
+    --ink:#2B1B46;
+    --ink-soft:#5B4A78;
+    --card:#FBF7EC;
+    --line:rgba(43,27,70,0.14);
+    --line-on-plum:rgba(244,236,219,0.18);
+    --radius:6px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Spectral',serif; font-weight:600; letter-spacing:-0.005em; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* ===== hamburger dropdown ===== */
+  .ham-wrap{ position:relative; }
+  .hamburger{
+    background:none; border:none; cursor:pointer;
+    width:40px; height:40px;
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    padding:9px; border-radius:var(--radius); flex-shrink:0;
+  }
+  .hamburger:hover{ background:var(--paper-dim); }
+  .hamburger span{
+    display:block; width:22px; height:2px;
+    background:var(--ink); border-radius:2px;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .ham-menu{
+    display:none; position:absolute; right:0; top:calc(100% + 6px);
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:0 8px 28px rgba(43,27,70,0.15);
+    min-width:240px; padding:6px 0; z-index:100;
+  }
+  .ham-menu.open{ display:block; }
+  .ham-menu a{
+    display:block; padding:10px 20px;
+    font-size:14px; color:var(--ink-soft); text-decoration:none; font-weight:500;
+  }
+  .ham-menu a:hover{ color:var(--ink); background:var(--paper-dim); }
+  .ham-menu a.current{ color:var(--ink); font-weight:600; }
+  .ham-divider{ height:1px; background:var(--line); margin:6px 0; }
+  .ham-cta{ color:var(--grape) !important; font-weight:600 !important; }
+
+  /* ===== header ===== */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(244,236,219,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+  .wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:22px;
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink);
+  }
+  .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
+
+  /* ===== page intro ===== */
+  .intro{ padding:72px 0 48px; }
+  .eyebrow-dark{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--grape); margin-bottom:12px; display:block;
+  }
+  .intro h1{ font-size:clamp(28px,5vw,44px); }
+  .intro p{ margin-top:14px; color:var(--ink-soft); max-width:60ch; font-size:16px; }
+  .drm-disclaimer{
+    margin-top:24px; padding:14px 18px 14px 20px;
+    border-left:3px solid var(--grape);
+    background:var(--card); border-radius:0 var(--radius) var(--radius) 0;
+    font-size:13.5px; color:var(--ink-soft); max-width:64ch; line-height:1.6;
+  }
+
+  /* ===== store listings ===== */
+  .drm-stores{ background:var(--paper-dim); padding:0 0 88px; border-top:1px solid var(--line); }
+  .drm-section-head{
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--grape); font-weight:500;
+    margin:52px 0 18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .drm-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .drm-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px 20px 20px;
+    transition:border-color .15s;
+  }
+  .drm-card:hover{ border-color:var(--grape); }
+  .drm-card h3{ font-size:17px; margin-bottom:8px; }
+  .drm-card h3 a{
+    color:var(--ink); text-decoration:none;
+    border-bottom:1px solid var(--grape);
+    padding-bottom:1px; transition:color .12s;
+  }
+  .drm-card h3 a:hover{ color:var(--grape); }
+  .drm-card p{ font-size:14px; color:var(--ink-soft); line-height:1.55; }
+
+  /* ===== footer ===== */
+  footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
+  .foot-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  .foot-wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:8px;
+    color:var(--paper); text-decoration:none;
+  }
+  .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
+  .foot-links a:hover{ color:var(--paper); }
+  .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
+
+  /* ===== responsive ===== */
+  @media (max-width: 880px){
+    .drm-grid{ grid-template-columns:1fr; }
+  }
+  @media (max-width: 560px){
+    .foot-row{ flex-direction:column; align-items:flex-start; }
+    .foot-links{ gap:14px; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="ham-wrap">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ham-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="ham-menu" id="ham-menu" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pro">Pro</a>
+        <a href="index.html#roadmap">Roadmap</a>
+        <div class="ham-divider"></div>
+        <a href="changelog.html">Changelog</a>
+        <a href="drm-free.html" class="current">Where to Legally Buy DRM-Free Books</a>
+        <div class="ham-divider"></div>
+        <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Where to buy</span>
+    <h1>Where to Legally Buy DRM-Free Books</h1>
+    <p>Every store and publisher below sells ebooks you actually own — no DRM, no lock-in. Download the file, read it in Sutra, and keep it forever.</p>
+    <div class="drm-disclaimer">Sutra does not condone piracy in any form. We're firm supporters of legally purchased, DRM-free content — every store and publisher below sells books the legal way. You're just getting a file you actually own instead of a revocable license.</div>
+  </div>
+</section>
+
+<section class="drm-stores">
+  <div class="wrap">
+
+    <h2 class="drm-section-head">Book-Buying Sites</h2>
+    <div class="drm-grid">
+
+      <div class="drm-card">
+        <h3><a href="https://www.humblebundle.com/books" target="_blank" rel="noopener">Humble Bundle Books</a></h3>
+        <p>Rotating pay-what-you-want bundles of DRM-free EPUB/PDF/MOBI titles, often themed by genre or publisher, with a share of proceeds going to charity. Great for cheap, large batches of titles — inventory changes frequently, so it's more "grab it now" than a searchable catalog.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.ebooks.com/drm-free/" target="_blank" rel="noopener">eBooks.com — DRM-Free Store</a></h3>
+        <p>A dedicated DRM-free storefront with a filterable catalog spanning fiction, nonfiction, and technical titles. Good for one-off purchases when you know exactly what you want.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.fanatical.com/en/bundle/books" target="_blank" rel="noopener">Fanatical Book Bundles</a></h3>
+        <p>Time-limited, deeply discounted DRM-free ebook bundles, similar in spirit to Humble Bundle. Worth checking periodically for genre-specific deals.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://weightlessbooks.com/" target="_blank" rel="noopener">Weightless Books</a></h3>
+        <p>Small indie storefront focused on SFF, comics, and literary magazines — everything DRM-free in EPUB and PDF. Catalog is curated rather than huge; a good source for small-press titles and indie SFF magazines you won't find on the bigger stores.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://panels.store/" target="_blank" rel="noopener">Panels Store</a></h3>
+        <p>A DRM-free digital comics marketplace built by the team behind the Panels reading app. Buy, download, and own comics with no platform lock-in — creators keep 80% of the sale.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://panelsyndicate.com/" target="_blank" rel="noopener">Panel Syndicate</a></h3>
+        <p>Pay-what-you-want DRM-free comics direct from top creators (Brian K. Vaughan and collaborators, among others). No account required — pick a price, download the PDF/CBZ.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.drivethrucomics.com/" target="_blank" rel="noopener">DriveThruComics</a></h3>
+        <p>A large catalog of indie and small-press comics sold DRM-free, alongside its sister sites DriveThruRPG and DriveThruFiction.</p>
+      </div>
+
+    </div>
+
+    <h2 class="drm-section-head">Publishers</h2>
+    <div class="drm-grid">
+
+      <div class="drm-card">
+        <h3><a href="https://torpublishinggroup.com/" target="_blank" rel="noopener">Tor Publishing Group</a></h3>
+        <p>Home to Tor Books, Forge, Bramble, Nightfire, Tor Teen, and Tordotcom Publishing. Tor was the first major SFF publisher to go DRM-free, back in 2012, and its ebooks ship DRM-free at every retailer that carries them. This catalog site links each title out to retailers rather than selling direct.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://nostarch.com/" target="_blank" rel="noopener">No Starch Press</a></h3>
+        <p>Technical publisher covering programming, security, Linux, and hacking. All ebooks are DRM-free, and every print purchase includes a free DRM-free ebook edition.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://pragprog.com/" target="_blank" rel="noopener">The Pragmatic Bookshelf</a></h3>
+        <p>Developer-focused technical books — DRM-free by policy, with free updates within an edition as errata get fixed.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.baen.com/" target="_blank" rel="noopener">Baen Books</a></h3>
+        <p>One of the earliest DRM-free publishers (since the early 2000s), heavy on military SF, space opera, and fantasy. Sells in seven formats and runs a Free Library of complete novels at no cost.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.manning.com/" target="_blank" rel="noopener">Manning Publications</a></h3>
+        <p>Technical/developer books — Manning was the first publisher to sell unprotected PDF ebooks back in 2000 and has stayed DRM-free since. Buying the print book gets you the ebook free too.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html" class="foot-wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="foot-links">
+      <a href="changelog.html">Changelog</a>
+      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
+      <a href="https://github.com/koustavdg/sutra-support/issues">Feedback</a>
+      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+    </div>
+    <span class="copyright">© 2026 Sutra</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('ham-menu');
+  var wrap = btn.parentNode;
+  function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.classList.toggle('open'); btn.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); });
+  document.addEventListener('click', function(e){ if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+
+</body>
+</html>

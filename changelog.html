@@ -60,15 +60,38 @@
     text-decoration:none; color:var(--ink);
   }
   .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
-  .navlinks{ display:flex; gap:28px; align-items:center; }
-  .navlinks a{ text-decoration:none; font-size:14px; color:var(--ink-soft); font-weight:500; }
-  .navlinks a:hover{ color:var(--ink); }
-  .navlinks a.current{ color:var(--ink); }
-  .navlinks .btn-small{
-    background:var(--plum-deep); color:var(--paper);
-    padding:8px 16px; border-radius:var(--radius); font-size:13px; font-weight:600;
+  /* ===== hamburger dropdown ===== */
+  .ham-wrap{ position:relative; }
+  .hamburger{
+    background:none; border:none; cursor:pointer;
+    width:40px; height:40px;
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    padding:9px; border-radius:var(--radius); flex-shrink:0;
   }
-  .navlinks .btn-small:hover{ background:var(--grape); }
+  .hamburger:hover{ background:var(--paper-dim); }
+  .hamburger span{
+    display:block; width:22px; height:2px;
+    background:var(--ink); border-radius:2px;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .ham-menu{
+    display:none; position:absolute; right:0; top:calc(100% + 6px);
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:0 8px 28px rgba(43,27,70,0.15);
+    min-width:240px; padding:6px 0; z-index:100;
+  }
+  .ham-menu.open{ display:block; }
+  .ham-menu a{
+    display:block; padding:10px 20px;
+    font-size:14px; color:var(--ink-soft); text-decoration:none; font-weight:500;
+  }
+  .ham-menu a:hover{ color:var(--ink); background:var(--paper-dim); }
+  .ham-menu a.current{ color:var(--ink); font-weight:600; }
+  .ham-divider{ height:1px; background:var(--line); margin:6px 0; }
+  .ham-cta{ color:var(--grape) !important; font-weight:600 !important; }
 
   /* ---------- page intro ---------- */
 
@@ -122,8 +145,8 @@
     .version ul{ grid-template-columns:1fr; }
   }
   @media (max-width: 560px){
-    .navlinks a:not(.btn-small){ display:none; }
     .foot-row{ flex-direction:column; align-items:flex-start; }
+    .foot-links{ gap:14px; }
   }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 </style>
@@ -133,13 +156,23 @@
 <header>
   <div class="wrap nav">
     <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
-    <nav class="navlinks">
-      <a href="index.html#features">Features</a>
-      <a href="index.html#roadmap">Roadmap</a>
-      <a href="changelog.html" class="current">Changelog</a>
-      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
-      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-small">Get the app</a>
-    </nav>
+    <div class="ham-wrap">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ham-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="ham-menu" id="ham-menu" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pro">Pro</a>
+        <a href="index.html#roadmap">Roadmap</a>
+        <div class="ham-divider"></div>
+        <a href="changelog.html" class="current">Changelog</a>
+        <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
+        <div class="ham-divider"></div>
+        <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+      </nav>
+    </div>
   </div>
 </header>
 
@@ -320,14 +353,26 @@
   <div class="wrap foot-row">
     <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
     <div class="foot-links">
-      <a href="changelog.html">Changelog</a>
+      <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
       <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
-      <a href="https://github.com/koustavdg/sutra">GitHub</a>
+      <a href="https://github.com/koustavdg/sutra-support/issues">Feedback</a>
       <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
     </div>
     <span class="copyright">© 2026 Sutra</span>
   </div>
 </footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('ham-menu');
+  var wrap = btn.parentNode;
+  function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.classList.toggle('open'); btn.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); });
+  document.addEventListener('click', function(e){ if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
 
 </body>
 </html>
