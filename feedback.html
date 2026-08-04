@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feedback — Sutra</title>
+<meta name="description" content="Open bug reports and feature requests for Sutra — tracked publicly on GitHub. See what's being worked on or submit your own.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root{
+    --plum-top:#6A4A99;
+    --plum-deep:#43285F;
+    --grape:#7B54B8;
+    --paper:#F4ECDB;
+    --paper-dim:#ECE2CC;
+    --ink:#2B1B46;
+    --ink-soft:#5B4A78;
+    --card:#FBF7EC;
+    --line:rgba(43,27,70,0.14);
+    --line-on-plum:rgba(244,236,219,0.18);
+    --radius:6px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Spectral',serif; font-weight:600; letter-spacing:-0.005em; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* ===== hamburger dropdown ===== */
+  .ham-wrap{ position:relative; }
+  .hamburger{
+    background:none; border:none; cursor:pointer;
+    width:40px; height:40px;
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    padding:9px; border-radius:var(--radius); flex-shrink:0;
+  }
+  .hamburger:hover{ background:var(--paper-dim); }
+  .hamburger span{
+    display:block; width:22px; height:2px;
+    background:var(--ink); border-radius:2px;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .ham-menu{
+    display:none; position:absolute; right:0; top:calc(100% + 6px);
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:0 8px 28px rgba(43,27,70,0.15);
+    min-width:240px; padding:6px 0; z-index:100;
+  }
+  .ham-menu.open{ display:block; }
+  .ham-menu a{
+    display:block; padding:10px 20px;
+    font-size:14px; color:var(--ink-soft); text-decoration:none; font-weight:500;
+  }
+  .ham-menu a:hover{ color:var(--ink); background:var(--paper-dim); }
+  .ham-menu a.current{ color:var(--ink); font-weight:600; }
+  .ham-divider{ height:1px; background:var(--line); margin:6px 0; }
+  .ham-cta{ color:var(--grape) !important; font-weight:600 !important; }
+
+  /* ===== header ===== */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(244,236,219,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+  .wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:22px;
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink);
+  }
+  .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
+
+  /* ===== intro ===== */
+  .intro{ padding:72px 0 52px; }
+  .eyebrow-dark{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--grape); margin-bottom:12px; display:block;
+  }
+  .intro h1{ font-size:clamp(28px,5vw,44px); }
+  .intro p{ margin-top:14px; color:var(--ink-soft); max-width:58ch; font-size:16px; }
+  .intro-actions{ margin-top:26px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .btn-submit{
+    display:inline-flex; align-items:center; gap:8px;
+    background:var(--ink); color:var(--paper);
+    text-decoration:none; padding:11px 20px; border-radius:var(--radius);
+    font-weight:600; font-size:14px; transition:background .15s;
+  }
+  .btn-submit:hover{ background:var(--grape); }
+  .intro-note{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-soft);
+  }
+
+  /* ===== board ===== */
+  .board{ background:var(--paper-dim); border-top:1px solid var(--line); padding:0 0 88px; }
+  .board-inner{ padding-top:40px; }
+
+  /* filter bar */
+  .filter-bar{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:14px; margin-bottom:28px; flex-wrap:wrap;
+  }
+  .filter-tabs{ display:flex; gap:6px; flex-wrap:wrap; }
+  .filter-tab{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.03em;
+    padding:6px 14px; border-radius:100px;
+    border:1px solid var(--line); background:var(--card);
+    cursor:pointer; color:var(--ink-soft);
+    display:inline-flex; align-items:center; gap:7px;
+    transition:background .12s, border-color .12s, color .12s;
+  }
+  .filter-tab:hover{ color:var(--ink); border-color:rgba(43,27,70,0.3); }
+  .filter-tab.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .f-count{
+    font-size:10.5px; min-width:18px; height:18px;
+    background:rgba(43,27,70,0.1); border-radius:100px;
+    display:inline-flex; align-items:center; justify-content:center; padding:0 4px;
+    font-variant-numeric:tabular-nums;
+  }
+  .filter-tab.active .f-count{ background:rgba(244,236,219,0.22); }
+
+  /* live status */
+  .live-status{
+    display:flex; align-items:center; gap:7px;
+    font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft);
+  }
+  .live-dot{
+    width:7px; height:7px; border-radius:50%;
+    background:#A0C49E; box-shadow:0 0 0 2.5px rgba(160,196,158,0.28);
+    flex-shrink:0; transition:background .3s;
+  }
+  .live-dot.cached{ background:#C4AD80; box-shadow:0 0 0 2.5px rgba(196,173,128,0.28); }
+
+  /* issue list */
+  .issue-list{ display:flex; flex-direction:column; gap:10px; }
+  .issue-card{
+    background:var(--card); border:1px solid var(--line);
+    border-left-width:3px; border-left-color:var(--line);
+    border-radius:var(--radius); padding:18px 20px 16px;
+    transition:box-shadow .12s;
+  }
+  .issue-card[data-type="bug"]{ border-left-color:#C05940; }
+  .issue-card[data-type="feature"]{ border-left-color:var(--grape); }
+  .issue-card:hover{ box-shadow:0 2px 14px rgba(43,27,70,0.1); }
+  .issue-card.hidden{ display:none; }
+
+  .issue-header{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; margin-bottom:8px;
+  }
+  .issue-badge{
+    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em;
+    padding:2px 10px; border-radius:100px; flex-shrink:0;
+  }
+  .issue-badge.bug{ background:#FAE8E3; color:#7D2E1A; border:1px solid #E5B0A0; }
+  .issue-badge.feature{ background:#EDE8F5; color:#3D2470; border:1px solid #C4B2E0; }
+  .issue-num{
+    font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-soft);
+    flex-shrink:0;
+  }
+
+  .issue-title{ font-family:'Spectral',serif; font-size:17px; font-weight:600; color:var(--ink); margin-bottom:7px; }
+  .issue-body{ font-size:13.5px; color:var(--ink-soft); line-height:1.55; }
+
+  .issue-foot{
+    display:flex; align-items:center; justify-content:space-between;
+    margin-top:13px; gap:10px; flex-wrap:wrap;
+  }
+  .issue-date{ font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft); }
+  .issue-link{
+    font-family:'JetBrains Mono',monospace; font-size:11.5px;
+    color:var(--grape); text-decoration:none;
+    display:inline-flex; align-items:center; gap:4px;
+  }
+  .issue-link:hover{ color:var(--ink); }
+
+  /* empty / loading */
+  .board-msg{
+    padding:60px 0; text-align:center;
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--ink-soft);
+  }
+
+  /* ===== footer ===== */
+  footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
+  .foot-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  .foot-wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:8px;
+    color:var(--paper); text-decoration:none;
+  }
+  .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
+  .foot-links a:hover{ color:var(--paper); }
+  .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
+
+  /* ===== responsive ===== */
+  @media (max-width: 560px){
+    .filter-bar{ flex-direction:column; align-items:flex-start; }
+    .foot-row{ flex-direction:column; align-items:flex-start; }
+    .foot-links{ gap:14px; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="ham-wrap">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ham-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="ham-menu" id="ham-menu" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pro">Pro</a>
+        <a href="index.html#roadmap">Roadmap</a>
+        <div class="ham-divider"></div>
+        <a href="changelog.html">Changelog</a>
+        <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
+        <a href="feedback.html" class="current">Feedback</a>
+        <div class="ham-divider"></div>
+        <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Community</span>
+    <h1>Feedback & Feature Requests</h1>
+    <p>Open bug reports and feature requests for Sutra, tracked publicly on GitHub. See what's being worked on, or submit something new.</p>
+    <div class="intro-actions">
+      <a href="https://github.com/koustavdg/sutra-support/issues/new" target="_blank" rel="noopener" class="btn-submit">Submit feedback →</a>
+      <span class="intro-note">Opens GitHub Issues</span>
+    </div>
+  </div>
+</section>
+
+<section class="board">
+  <div class="wrap board-inner">
+
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-tab active" data-filter="all">All <span class="f-count" id="c-all">—</span></button>
+        <button class="filter-tab" data-filter="feature">Feature Requests <span class="f-count" id="c-feature">—</span></button>
+        <button class="filter-tab" data-filter="bug">Bug Reports <span class="f-count" id="c-bug">—</span></button>
+      </div>
+      <div class="live-status">
+        <span class="live-dot cached" id="live-dot"></span>
+        <span id="live-label">Loading…</span>
+      </div>
+    </div>
+
+    <div class="issue-list" id="issue-list">
+      <div class="board-msg">Loading issues…</div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html" class="foot-wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="foot-links">
+      <a href="changelog.html">Changelog</a>
+      <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
+      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
+      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+    </div>
+    <span class="copyright">© 2026 Sutra</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('ham-menu');
+  var wrap = btn.parentNode;
+  function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.classList.toggle('open'); btn.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); });
+  document.addEventListener('click', function(e){ if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+
+(function(){
+  var FALLBACK = [
+    { number:36, title:'CBZs not opening on Pro', body:'CBZ files import successfully but fail to open — the reader spins indefinitely after the import completes on a Pro account.', labels:['bug'], created_at:'2026-08-04T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/36' },
+    { number:35, title:'Endlessly loads (Calibre-Web-Automated)', body:'Library spins endlessly when connected to a Calibre-Web-Automated server. Search still functions, but the full library view never loads.', labels:['bug'], created_at:'2026-07-29T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/35' },
+    { number:33, title:'Add language filters (primarily for Gutenberg)', body:'The Project Gutenberg catalog is large and harder to browse without language filtering. A language filter would help users narrow results significantly.', labels:['enhancement'], created_at:'2026-07-22T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/33' },
+    { number:27, title:'Auto scroll + infinite page length', body:'Hands-free reading mode: auto-scroll at an adjustable speed combined with a continuous (infinite) page layout for EPUBs.', labels:['enhancement'], created_at:'2026-07-12T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/27' },
+    { number:25, title:'Kobo sync integration', body:'Sync reading position and progress with Kobo devices using the Kobo sync protocol, enabling cross-device reading continuity.', labels:['enhancement'], created_at:'2026-07-11T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/25' },
+    { number:15, title:'Look into KOSync for KOReader sync', body:'KOSync is an open protocol used by KOReader for syncing reading progress across devices — worth investigating for cross-reader compatibility.', labels:['enhancement'], created_at:'2026-07-07T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/15' },
+    { number:14, title:'Add Grimmory Support', body:'Support for Grimmory as a reading source — showing read-only collections in the Shelf tab alongside OPDS servers.', labels:['enhancement'], created_at:'2026-07-07T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/14' },
+    { number:8, title:'Dual pane reading for iPads (EPUBs)', body:'Side-by-side two-column EPUB layout optimized for iPad, with a toggle to switch between single and dual pane modes.', labels:['enhancement'], created_at:'2026-07-01T00:00:00Z', html_url:'https://github.com/koustavdg/sutra-support/issues/8' }
+  ];
+
+  var activeFilter = 'all';
+  var listEl = document.getElementById('issue-list');
+  var dot = document.getElementById('live-dot');
+  var lbl = document.getElementById('live-label');
+
+  function labelNames(labels) {
+    return labels.map(function(l){ return typeof l === 'string' ? l : l.name; });
+  }
+
+  function getType(labels) {
+    return labelNames(labels).indexOf('bug') >= 0 ? 'bug' : 'feature';
+  }
+
+  function fmtDate(iso) {
+    var d = new Date(iso);
+    var mo = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return mo[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear();
+  }
+
+  function trunc(s, n) {
+    if (!s) return '';
+    s = s.replace(/\r?\n+/g, ' ').trim();
+    return s.length > n ? s.slice(0, n).trimEnd() + '…' : s;
+  }
+
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function render(issues, live) {
+    var bugs = 0, feats = 0;
+    issues.forEach(function(i){ if (getType(i.labels) === 'bug') bugs++; else feats++; });
+    document.getElementById('c-all').textContent = issues.length;
+    document.getElementById('c-feature').textContent = feats;
+    document.getElementById('c-bug').textContent = bugs;
+
+    dot.className = 'live-dot' + (live ? '' : ' cached');
+    lbl.textContent = live ? 'Live · GitHub Issues' : 'Cached · GitHub Issues';
+
+    if (!issues.length) {
+      listEl.innerHTML = '<div class="board-msg">No open issues right now.</div>';
+      return;
+    }
+
+    listEl.innerHTML = issues.map(function(issue) {
+      var t = getType(issue.labels);
+      var hide = activeFilter !== 'all' && activeFilter !== t ? ' hidden' : '';
+      var bCls = t === 'bug' ? 'bug' : 'feature';
+      var bTxt = t === 'bug' ? 'Bug' : 'Feature';
+      return '<div class="issue-card' + hide + '" data-type="' + t + '">' +
+        '<div class="issue-header"><span class="issue-badge ' + bCls + '">' + bTxt + '</span><span class="issue-num">#' + issue.number + '</span></div>' +
+        '<div class="issue-title">' + esc(issue.title) + '</div>' +
+        '<div class="issue-body">' + esc(trunc(issue.body || '', 220)) + '</div>' +
+        '<div class="issue-foot"><span class="issue-date">' + fmtDate(issue.created_at) + '</span>' +
+        '<a href="' + esc(issue.html_url) + '" target="_blank" rel="noopener" class="issue-link">View on GitHub →</a></div>' +
+        '</div>';
+    }).join('');
+  }
+
+  function applyFilter(f) {
+    activeFilter = f;
+    document.querySelectorAll('.filter-tab').forEach(function(tab) {
+      tab.classList.toggle('active', tab.dataset.filter === f);
+    });
+    document.querySelectorAll('.issue-card').forEach(function(card) {
+      card.classList.toggle('hidden', f !== 'all' && card.dataset.type !== f);
+    });
+  }
+
+  document.querySelectorAll('.filter-tab').forEach(function(tab) {
+    tab.addEventListener('click', function(){ applyFilter(tab.dataset.filter); });
+  });
+
+  render(FALLBACK, false);
+
+  fetch('https://api.github.com/repos/koustavdg/sutra-support/issues?state=open&per_page=50')
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+    .then(function(data){ if (Array.isArray(data)) render(data, true); })
+    .catch(function(){});
+})();
+</script>
+
+</body>
+</html>
