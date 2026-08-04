@@ -10,81 +10,124 @@
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <style>
+  /* ===== tokens ===== */
   :root{
-    --plum-top: #6A4A99;
-    --plum-deep: #43285F;
-    --grape: #7B54B8;
-    --paper: #F4ECDB;
-    --paper-dim: #ECE2CC;
-    --ink: #2B1B46;
-    --ink-soft: #5B4A78;
-    --card: #FBF7EC;
-    --line: rgba(43,27,70,0.14);
-    --line-on-plum: rgba(244,236,219,0.18);
-    --radius: 6px;
+    --plum-top:#6A4A99;
+    --plum-deep:#43285F;
+    --grape:#7B54B8;
+    --paper:#F4ECDB;
+    --paper-dim:#ECE2CC;
+    --ink:#2B1B46;
+    --ink-soft:#5B4A78;
+    --card:#FBF7EC;
+    --line:rgba(43,27,70,0.14);
+    --line-on-plum:rgba(244,236,219,0.18);
+    --radius:6px;
   }
 
+  /* ===== reset ===== */
   *{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
-
   body{
     background:var(--paper);
     color:var(--ink);
     font-family:'Inter',system-ui,sans-serif;
-    font-size:16px;
-    line-height:1.6;
+    font-size:16px; line-height:1.6;
     -webkit-font-smoothing:antialiased;
   }
-
-  h1,h2,h3{
-    font-family:'Spectral',serif;
-    font-weight:600;
-    letter-spacing:-0.005em;
-  }
-
+  h1,h2,h3{ font-family:'Spectral',serif; font-weight:600; letter-spacing:-0.005em; }
   em{ font-style:italic; font-family:'Spectral',serif; }
-
   .mono{ font-family:'JetBrains Mono',monospace; }
-
   a{ color:inherit; }
-
   .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
 
-  /* ---------- header ---------- */
+  /* ===== hamburger ===== */
+  .hamburger{
+    width:40px; height:40px;
+    background:none; border:none; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    padding:9px; border-radius:var(--radius); flex-shrink:0;
+  }
+  .hamburger:hover{ background:var(--paper-dim); }
+  .hamburger span{
+    display:block; width:22px; height:2px;
+    background:var(--ink); border-radius:2px;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; transform:scaleX(0); }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
 
+  /* ===== nav drawer ===== */
+  .nav-drawer{
+    position:fixed; top:0; left:0; bottom:0; z-index:50;
+    width:272px;
+    background:var(--paper);
+    border-right:1px solid var(--line);
+    box-shadow:4px 0 32px rgba(43,27,70,0.14);
+    transform:translateX(-100%);
+    transition:transform .25s ease;
+    overflow-y:auto;
+    padding:72px 0 40px;
+  }
+  .nav-drawer.open{ transform:translateX(0); }
+  .nav-backdrop{
+    position:fixed; inset:0; z-index:45;
+    background:rgba(43,27,70,0.32);
+    opacity:0; pointer-events:none;
+    transition:opacity .25s;
+  }
+  .nav-backdrop.visible{ opacity:1; pointer-events:auto; }
+  .drawer-section-label{
+    display:block;
+    font-family:'JetBrains Mono',monospace; font-size:10px;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--ink-soft);
+    padding:24px 20px 6px;
+  }
+  .drawer-section-label:first-child{ padding-top:8px; }
+  .drawer-item{
+    display:block; width:100%; text-align:left;
+    padding:10px 20px;
+    font-size:15px; font-weight:500; color:var(--ink-soft);
+    text-decoration:none; background:none; border:none; cursor:pointer;
+    transition:background .12s, color .12s;
+  }
+  .drawer-item:hover{ color:var(--ink); background:var(--paper-dim); }
+  .drawer-item.active{ color:var(--grape); font-weight:600; }
+  .drawer-item.sub{ font-size:14px; padding-left:32px; }
+
+  /* ===== header ===== */
   header{
     position:sticky; top:0; z-index:40;
     background:rgba(244,236,219,0.92);
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
-  .nav{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+  .nav-left{ display:flex; align-items:center; gap:10px; }
   .wordmark{
-    font-family:'Spectral',serif;
-    font-weight:600;
-    font-size:22px;
+    font-family:'Spectral',serif; font-weight:600; font-size:22px;
     display:flex; align-items:center; gap:10px;
-    text-decoration:none;
-    color:var(--ink);
+    text-decoration:none; color:var(--ink);
+    background:none; border:none; cursor:pointer;
   }
   .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
-  .navlinks{ display:flex; gap:28px; align-items:center; }
-  .navlinks a{ text-decoration:none; font-size:14px; color:var(--ink-soft); font-weight:500; }
-  .navlinks a:hover{ color:var(--ink); }
-  .navlinks .btn-small{
+  .btn-small{
     background:var(--plum-deep); color:var(--paper);
     padding:8px 16px; border-radius:var(--radius);
-    font-size:13px; font-weight:600;
+    font-size:13px; font-weight:600; text-decoration:none;
+    transition:background .15s;
   }
-  .navlinks .btn-small:hover{ background:var(--grape); }
+  .btn-small:hover{ background:var(--grape); }
 
-  /* ---------- hero ---------- */
+  /* ===== tabs ===== */
+  .tab-pane{ display:none; }
+  .tab-pane.active{ display:block; }
 
+  /* ===== hero ===== */
   .hero{
     background:radial-gradient(120% 140% at 30% 0%, var(--plum-top) 0%, var(--plum-deep) 62%);
-    color:var(--paper);
-    position:relative; overflow:hidden;
-    padding:88px 0 0;
+    color:var(--paper); position:relative; overflow:hidden; padding:88px 0 0;
   }
   .hero::after{
     content:""; position:absolute; inset:auto 0 0 0; height:1px;
@@ -94,56 +137,40 @@
     display:grid; grid-template-columns:1.05fr 0.95fr;
     gap:56px; align-items:center; padding-bottom:68px;
   }
-
   .icon-tile{
     width:88px; height:88px; border-radius:22px;
     background:linear-gradient(160deg, var(--grape), var(--plum-deep));
     box-shadow:0 18px 34px -14px rgba(0,0,0,0.5);
-    margin-bottom:26px;
-    display:flex; align-items:center; justify-content:center;
+    margin-bottom:26px; display:flex; align-items:center; justify-content:center;
   }
   .icon-tile img{ width:100%; height:100%; border-radius:22px; display:block; }
-
   .eyebrow{
     font-family:'JetBrains Mono',monospace; font-size:12px;
-    letter-spacing:0.14em; text-transform:uppercase;
-    color:#C9B8E8; margin-bottom:16px;
+    letter-spacing:0.14em; text-transform:uppercase; color:#C9B8E8; margin-bottom:16px;
   }
-  .hero h1{
-    font-size:clamp(42px, 6vw, 68px);
-    line-height:1.02;
-    color:#F8F2E3;
-  }
+  .hero h1{ font-size:clamp(42px,6vw,68px); line-height:1.02; color:#F8F2E3; }
   .hero .tagline{
-    font-family:'JetBrains Mono',monospace;
-    font-size:12.5px; letter-spacing:0.12em; text-transform:uppercase;
-    color:#C9B8E8; margin-top:20px;
+    font-family:'JetBrains Mono',monospace; font-size:12.5px;
+    letter-spacing:0.12em; text-transform:uppercase; color:#C9B8E8; margin-top:20px;
   }
-  .hero p.lede{
-    margin-top:16px; font-size:17px;
-    color:#DCD1EE; max-width:48ch;
-  }
+  .hero p.lede{ margin-top:16px; font-size:17px; color:#DCD1EE; max-width:48ch; }
   .hero p.lede em{ color:#F1E7FF; }
-
   .cta-row{ margin-top:32px; display:flex; flex-direction:column; align-items:flex-start; gap:12px; }
   .btn-store{
     display:inline-flex; align-items:center; gap:10px;
     background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:14px 22px; border-radius:var(--radius);
-    font-weight:600; font-size:15px;
-    transition:background .15s ease, transform .15s ease;
+    font-weight:600; font-size:15px; transition:background .15s, transform .15s;
   }
   .btn-store:hover{ background:#fff; transform:translateY(-1px); }
   .btn-store svg{ width:18px; height:18px; flex-shrink:0; }
   .cta-note{ font-size:13px; color:#B3A2D6; font-family:'JetBrains Mono',monospace; }
-
   .thread-row{ margin-top:38px; }
   .thread-svg{ width:100%; max-width:480px; height:34px; display:block; }
   .thread-svg path{ fill:none; stroke:#8E72BE; stroke-width:1.4; stroke-dasharray:4 5; opacity:0.9; }
   .thread-svg circle{ fill:#C9B8E8; }
   .thread-labels{ display:flex; justify-content:space-between; max-width:480px; width:100%; margin-top:4px; }
   .thread-labels span{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#B3A2D6; }
-
   .phone-stage{ position:relative; display:flex; justify-content:center; }
   .phone{
     width:250px; height:520px; border-radius:34px;
@@ -155,7 +182,7 @@
   .phone video{ width:100%; height:100%; object-fit:cover; display:block; }
   .phone .placeholder{
     width:100%; height:100%;
-    background:repeating-linear-gradient(135deg, #3A2652, #3A2652 10px, #32204A 10px, #32204A 20px);
+    background:repeating-linear-gradient(135deg,#3A2652,#3A2652 10px,#32204A 10px,#32204A 20px);
     display:flex; align-items:center; justify-content:center; text-align:center; padding:20px;
   }
   .phone .placeholder span{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#C9B8E8; line-height:1.6; }
@@ -164,28 +191,25 @@
     width:120px; height:22px; background:#241536; border-radius:0 0 14px 14px; z-index:2;
   }
 
-  /* ---------- screenshot strip ---------- */
-
+  /* ===== strip ===== */
   .strip{ background:var(--paper); padding:72px 0 88px; }
   .strip-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:10px; }
   .strip-head h2{ font-size:26px; }
   .strip-head .tag{ font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--ink-soft); }
-  .strip-row{ display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; }
+  .strip-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
   .strip-row .phone{ width:100%; height:auto; aspect-ratio:9/18.5; border-radius:22px; border-width:5px; }
   .strip-row .phone .notch{ width:80px; height:16px; border-radius:0 0 10px 10px; }
   .strip-cap{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; }
 
-  /* ---------- features ---------- */
-
+  /* ===== features ===== */
   .features{ background:var(--paper-dim); padding:88px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
   .section-head{ margin-bottom:44px; max-width:60ch; }
-  .section-head .eyebrow-dark{
+  .eyebrow-dark{
     font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
     color:var(--grape); margin-bottom:12px; display:block;
   }
   .section-head h2{ font-size:30px; }
-
-  .card-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; }
+  .card-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
   .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px 22px 24px; position:relative; }
   .card::before{
     content:attr(data-code); position:absolute; top:-1px; left:22px;
@@ -196,10 +220,9 @@
   .card h3{ font-size:19px; margin-top:14px; margin-bottom:8px; }
   .card p{ font-size:14.5px; color:var(--ink-soft); }
 
-  /* ---------- pro ---------- */
-
+  /* ===== pro ===== */
   .pro{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); }
-  .pro-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; margin-top:0; }
+  .pro-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
   .pro-col{ border:1px solid var(--line); border-radius:var(--radius); padding:30px 26px 28px; background:var(--card); }
   .pro-col.col-pro{ background:var(--plum-deep); border-color:transparent; }
   .pro-col-head{ margin-bottom:22px; }
@@ -214,10 +237,7 @@
   .pro-price-note{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#9E86CC; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; display:block; }
   .pro-list{ list-style:none; margin-top:20px; border-top:1px solid var(--line); }
   .col-pro .pro-list{ border-color:var(--line-on-plum); }
-  .pro-list li{
-    font-size:14px; padding:9px 0 9px 22px; position:relative;
-    border-bottom:1px solid var(--line); color:var(--ink-soft);
-  }
+  .pro-list li{ font-size:14px; padding:9px 0 9px 22px; position:relative; border-bottom:1px solid var(--line); color:var(--ink-soft); }
   .col-pro .pro-list li{ border-color:var(--line-on-plum); color:#DCD1EE; }
   .pro-list li::before{ content:"✓"; position:absolute; left:0; font-size:12px; font-weight:700; color:var(--grape); }
   .col-pro .pro-list li::before{ color:#C9B8E8; }
@@ -226,19 +246,20 @@
     display:inline-flex; align-items:center; gap:8px;
     background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:12px 20px; border-radius:var(--radius);
-    font-weight:600; font-size:14px; margin-top:24px;
-    transition:background .15s ease;
+    font-weight:600; font-size:14px; margin-top:24px; transition:background .15s;
   }
   .btn-pro:hover{ background:#fff; }
   .pro-footer-note{ margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-soft); max-width:72ch; }
+  .pro-footer-note .inline-link{
+    background:none; border:none; cursor:pointer; padding:0;
+    font-family:'JetBrains Mono',monospace; font-size:inherit; color:var(--grape);
+    text-decoration:underline; text-underline-offset:2px;
+  }
 
-  /* ---------- roadmap ---------- */
-
+  /* ===== roadmap ===== */
   .roadmap{ background:var(--plum-deep); color:var(--paper); padding:92px 0; }
   .roadmap .section-head h2{ color:#F8F2E3; }
-  .roadmap .section-head .eyebrow-dark{ color:#C9B8E8; }
-  .roadmap .section-head p{ color:#CBB9EA; font-size:15px; margin-top:10px; }
-
+  .roadmap .eyebrow-dark{ color:#C9B8E8; }
   .version-list{ display:flex; flex-direction:column; }
   .version{ display:grid; grid-template-columns:120px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line-on-plum); }
   .version:last-child{ border-bottom:1px solid var(--line-on-plum); }
@@ -251,27 +272,83 @@
   .version ul{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 28px; }
   .version li{ font-size:14.5px; color:#E5DBF5; padding-left:16px; position:relative; }
   .version li::before{ content:"—"; position:absolute; left:0; color:#9E86CC; }
-
   .changelog-link{ margin-top:36px; }
   .changelog-link a{
     font-family:'JetBrains Mono',monospace; font-size:13px; color:#C9B8E8;
-    text-decoration:underline; text-underline-offset:3px;
+    text-decoration:underline; text-underline-offset:3px; cursor:pointer;
   }
   .changelog-link a:hover{ color:var(--paper); }
 
-  /* ---------- footer ---------- */
+  /* ===== changelog tab ===== */
+  .intro{ padding:72px 0 48px; }
+  .intro h1{ font-size:clamp(34px,5vw,48px); }
+  .intro p{ margin-top:14px; color:var(--ink-soft); max-width:56ch; font-size:16px; }
+  .releases{ background:var(--plum-deep); color:var(--paper); padding:16px 0 92px; }
+  .releases .version{ padding:36px 0; }
+  .version-tagline{ color:#CBB9EA; font-size:15px; max-width:64ch; margin-bottom:22px; }
+  .version-group{ margin-bottom:20px; }
+  .version-group:last-child{ margin-bottom:0; }
+  .group-label{
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:0.08em; text-transform:uppercase; color:#9E86CC; margin-bottom:10px;
+  }
 
-  footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
-  .foot-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
-  .foot-row .wordmark{ color:var(--paper); font-size:16px; }
-  .foot-row .wordmark img{ width:26px; height:26px; }
-  .foot-links{ display:flex; gap:22px; }
-  .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
-  .foot-links a:hover{ color:var(--paper); }
+  /* ===== DRM-free tab ===== */
+  .drm-stores{ background:var(--paper-dim); padding:0 0 88px; border-top:1px solid var(--line); }
+  .drm-section-head{
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    text-transform:uppercase; letter-spacing:0.1em; color:var(--grape); font-weight:500;
+    margin:52px 0 18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .drm-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .drm-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px 20px 20px;
+  }
+  .drm-card h3{ font-size:17px; margin-bottom:8px; }
+  .drm-card h3 a{
+    color:var(--ink); text-decoration:none;
+    border-bottom:1px solid var(--grape);
+    padding-bottom:1px; transition:color .12s;
+  }
+  .drm-card h3 a:hover{ color:var(--grape); }
+  .drm-card p{ font-size:14px; color:var(--ink-soft); line-height:1.55; }
+  .drm-disclaimer{
+    margin-top:22px; padding:14px 18px;
+    border-left:3px solid var(--grape);
+    background:var(--card); border-radius:0 var(--radius) var(--radius) 0;
+    font-size:13.5px; color:var(--ink-soft); max-width:64ch;
+  }
+
+  /* ===== footer sitemap ===== */
+  footer{ background:var(--plum-deep); color:var(--paper); }
+  .foot-sitemap{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+    padding:52px 0 40px; border-bottom:1px solid var(--line-on-plum);
+  }
+  .sitemap-head{
+    font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em;
+    text-transform:uppercase; color:#9880BB; margin-bottom:14px; display:block;
+  }
+  .sitemap-col a, .sitemap-col button{
+    display:block; font-size:13.5px; color:#CBB9EA; text-decoration:none;
+    background:none; border:none; cursor:pointer; padding:0; text-align:left;
+    margin-bottom:9px; font-family:inherit;
+  }
+  .sitemap-col a:hover, .sitemap-col button:hover{ color:var(--paper); }
+  .foot-bottom{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:14px; padding:28px 0;
+  }
+  .foot-wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:8px;
+    color:var(--paper); background:none; border:none; cursor:pointer; padding:0;
+  }
+  .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
   .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
 
-  /* ---------- responsive ---------- */
-
+  /* ===== responsive ===== */
   @media (max-width: 880px){
     .hero-grid{ grid-template-columns:1fr; }
     .phone-stage{ margin-top:20px; }
@@ -280,30 +357,51 @@
     .pro-grid{ grid-template-columns:1fr; }
     .version{ grid-template-columns:1fr; gap:10px; }
     .version ul{ grid-template-columns:1fr; }
+    .drm-grid{ grid-template-columns:1fr; }
+    .foot-sitemap{ grid-template-columns:1fr 1fr; }
   }
   @media (max-width: 560px){
-    .navlinks a:not(.btn-small){ display:none; }
     .strip-row{ grid-template-columns:repeat(2,1fr); gap:12px; }
     .card-grid{ grid-template-columns:1fr; }
-    .foot-row{ flex-direction:column; align-items:flex-start; }
+    .drm-grid{ grid-template-columns:1fr; }
+    .foot-sitemap{ grid-template-columns:1fr; }
+    .foot-bottom{ flex-direction:column; align-items:flex-start; }
   }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 </style>
 </head>
 <body>
 
+<!-- ===== nav drawer ===== -->
+<div class="nav-drawer" id="nav-drawer" role="navigation" aria-label="Site navigation">
+  <span class="drawer-section-label">Pages</span>
+  <button class="drawer-item active" data-tab="home">Home</button>
+  <button class="drawer-item" data-tab="changelog">Changelog</button>
+  <button class="drawer-item" data-tab="drm">DRM-Free Books</button>
+  <span class="drawer-section-label">Sections</span>
+  <a class="drawer-item sub js-section" href="#features">Features</a>
+  <a class="drawer-item sub js-section" href="#pro">Pro</a>
+  <a class="drawer-item sub js-section" href="#roadmap">Roadmap</a>
+</div>
+<div class="nav-backdrop" id="nav-backdrop" aria-hidden="true"></div>
+
+<!-- ===== header ===== -->
 <header>
   <div class="wrap nav">
-    <a href="#top" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
-    <nav class="navlinks">
-      <a href="#features">Features</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="changelog.html">Changelog</a>
-      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy</a>
-      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-small">Get the app</a>
-    </nav>
+    <div class="nav-left">
+      <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-drawer">
+        <span></span><span></span><span></span>
+      </button>
+      <button class="wordmark js-tab" data-tab="home">
+        <img src="assets/app-icon.png" alt="">Sutra
+      </button>
+    </div>
+    <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-small">Get the app</a>
   </div>
 </header>
+
+<!-- ===== tab: home ===== -->
+<div class="tab-pane active" id="tab-home">
 
 <section class="hero" id="top">
   <div class="wrap hero-grid">
@@ -313,15 +411,13 @@
       <h1>Sutra</h1>
       <div class="tagline">A thread that binds your books</div>
       <p class="lede">Connect your <em>Kavita, Calibre, or Komga</em> server, any OPDS catalog, or Project Gutenberg's full public-domain library. Read comics panel by panel, sideload local files, and auto-scroll through long reads. Everything you need to read — in one app.</p>
-
       <div class="cta-row">
         <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-store">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.014-.1-.04-.31-.04-.52 0-1.14.572-2.35 1.226-3.03.744-.79 2.01-1.42 3.06-1.46.014.13.03.26.03.4zm2.86 15.24c-.056.14-.317.94-1.05 1.94-.628.86-1.284 1.72-2.316 1.74-1.014.02-1.34-.6-2.5-.6-1.16 0-1.52.58-2.48.62-.99.04-1.75-.93-2.386-1.79-1.3-1.79-2.294-5.06-.96-7.27.664-1.1 1.85-1.8 3.14-1.82.978-.02 1.9.66 2.5.66.598 0 1.716-.82 2.894-.7.492.02 1.878.2 2.77 1.5-.072.05-1.654.97-1.636 2.88.018 2.28 2 3.04 2.024 3.05z"/></svg>
           Get Sutra
         </a>
-        <span class="cta-note">Free on the App Store · Sutra Pro unlocks .cbz, .mobi & Komga</span>
+        <span class="cta-note">Free on the App Store · Sutra Pro unlocks .cbz, .mobi &amp; Komga</span>
       </div>
-
       <div class="thread-row">
         <svg class="thread-svg" viewBox="0 0 480 34" preserveAspectRatio="none">
           <path d="M0,17 L480,17"/>
@@ -335,7 +431,6 @@
         </div>
       </div>
     </div>
-
     <div class="phone-stage">
       <div class="phone">
         <div class="notch"></div>
@@ -395,12 +490,12 @@
     </div>
     <div class="card-grid">
       <div class="card" data-code="OPDS·01"><h3>Bring your own server</h3><p>Connect Kavita, Calibre, Grimmory, or any OPDS-compatible server in a few taps. Works on your local network — no cloud middleman.</p></div>
-      <div class="card" data-code="OPDS·02"><h3>Gutenberg & Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection — no server required. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
-      <div class="card" data-code="READ·01"><h3>EPUB, PDF & mobi</h3><p>Authentic page-curl, rich typography controls, four reading themes, bookmarks, in-book search, and color-coded highlights synced via iCloud.</p></div>
+      <div class="card" data-code="OPDS·02"><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection — no server required. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
+      <div class="card" data-code="READ·01"><h3>EPUB, PDF &amp; mobi</h3><p>Authentic page-curl, rich typography controls, four reading themes, bookmarks, in-book search, and color-coded highlights synced via iCloud.</p></div>
       <div class="card" data-code="READ·02"><h3>Panel-aware comics</h3><p>Sutra detects each comic page's panels and reads them one at a time — tap or flip to advance panel by panel. Works on fixed-layout EPUBs and PDFs. Falls back gracefully to the full page when needed.</p></div>
       <div class="card" data-code="READ·03"><h3>Auto-scrolling</h3><p>Set your pace and let the page flow — tap to pause, tap again to resume. Speed is adjustable from the reading settings. Perfect for hands-free reading.</p></div>
       <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB and PDF files directly from your phone — from your Files app, AirDrop, or any share sheet. No server required.</p></div>
-      <div class="card" data-code="READ·05"><h3>Highlights & Dictionary</h3><p>Select text to highlight with color, double-tap a word to define it instantly — both sync across your devices via iCloud and are saved for later.</p></div>
+      <div class="card" data-code="READ·05"><h3>Highlights &amp; Dictionary</h3><p>Select text to highlight with color, double-tap a word to define it instantly — both sync across your devices via iCloud and are saved for later.</p></div>
       <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs reading position, bookmarks, and highlights across all your devices. Kavita sync is page-accurate in both directions.</p></div>
       <div class="card" data-code="SYNC·02"><h3>Browse by series</h3><p>Books organize by series in the Collections Shelf based on metadata from your server — perfect for long fantasy and sci-fi runs.</p></div>
     </div>
@@ -450,7 +545,7 @@
         </a>
       </div>
     </div>
-    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. Sutra Pro is a one-time purchase tied to your Apple Account.</p>
+    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <button class="inline-link js-tab" data-tab="drm">Find DRM-free sources →</button> Sutra Pro is a one-time purchase tied to your Apple Account.</p>
   </div>
 </section>
 
@@ -520,22 +615,374 @@
         </ul>
       </div>
     </div>
-    <div class="changelog-link"><a href="changelog.html">Read the full changelog →</a></div>
+    <div class="changelog-link"><a class="js-tab" data-tab="changelog">Read the full changelog →</a></div>
   </div>
 </section>
 
-<footer>
-  <div class="wrap foot-row">
-    <a href="#top" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
-    <div class="foot-links">
-      <a href="changelog.html">Changelog</a>
-      <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
-      <a href="https://github.com/koustavdg/sutra-support/issues">Feedback</a>
-      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+</div><!-- /tab-home -->
+
+<!-- ===== tab: changelog ===== -->
+<div class="tab-pane" id="tab-changelog">
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Release notes</span>
+    <h1>Changelog</h1>
+    <p>Every Sutra release, one thread at a time — what's new, what's improved, and what's fixed.</p>
+  </div>
+</section>
+
+<section class="releases">
+  <div class="wrap">
+    <div class="version-list">
+
+      <div class="version">
+        <div><div class="version-num">2.0</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">The biggest Sutra update yet — native Komga support, panel-by-panel comic reading, sideloading, EPUB auto-scrolling, DRM-free MOBI, Sutra Pro, and a sweeping pass of reliability improvements.</p>
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li><strong>Sutra Pro — $6.99 one-time:</strong> A single in-app purchase that permanently unlocks Komga server integration, .cbz comic reading, and DRM-free MOBI support. No subscription, no recurring charges. EPUB and PDF remain free for everyone.</li>
+              <li><strong>Native Komga integration:</strong> Connect your Komga server as a first-class library with full series/collection browsing and page-accurate reading-progress sync — Sutra writes your position back to Komga in real time, the same way it does for Kavita.</li>
+              <li><strong>CBZ comic reading:</strong> Open .cbz archives with a fixed-layout, zoomable page reader. Requires Sutra Pro.</li>
+              <li><strong>Comics as Panels:</strong> Read CBZ, scanned/comic PDF, and fixed-layout EPUB/MOBI panel by panel — Sutra auto-detects each page's panels and a tap moves to the next one instead of the whole page. Every comic opens on the full page by default; tap the in-reader toggle (▭ ⟷ ▦) to crop to one panel at a time. Falls back gracefully to the full page where no panels are found.</li>
+              <li><strong>DRM-free MOBI reading:</strong> Open DRM-free MOBI files you own directly in Sutra — full font, theme, and typography support, same as EPUB. Requires Sutra Pro.</li>
+              <li><strong>Sideloading:</strong> Import EPUB, PDF, CBZ, and MOBI files from the iOS Files app, AirDrop, or any share sheet. They appear in your library alongside server books. Re-importing the same file won't create duplicates; files deleted outside the app are cleaned up automatically with a one-time notice.</li>
+              <li><strong>Bookmarks sync via iCloud</strong> across all your devices — previously bookmarks were local to each device. Matches how reading progress and highlights already worked.</li>
+              <li>Live download-progress ring on book covers and percentage text in the detail view, download tile, and Downloads tab — plus a sync spinner per library while it's refreshing.</li>
+              <li>Landscape orientation support in the reader on iPhone — every other screen remains portrait-only.</li>
+              <li>"Remove All Imported Files" in Settings → Downloads — bulk-clears the Local Library catalog (previously only downloaded server books had a bulk-remove; imported files could only be deleted one at a time).</li>
+            </ul>
+          </div>
+          <div class="version-group">
+            <span class="group-label">Improved</span>
+            <ul>
+              <li>Library crawl budget raised substantially (5,000 → 20,000 feeds, 20,000 → 100,000 books) — large self-hosted Komga, Kavita, and Calibre libraries no longer silently lose books from Browse that were still reachable via Search.</li>
+              <li>Returning from the background now re-syncs every connected library (throttled to once per 5 minutes), not just on cold launch.</li>
+              <li>Comics as Panels now opens on the full page by default with a one-time tooltip pointing at the panel-toggle — the toggle itself is larger, translucent, and brand-tinted.</li>
+              <li>Local file imports show a real extracted cover far more often — EPUBs that don't declare their cover the standard way now fall back to the book's own cover or first image instead of generated gradient art.</li>
+              <li>Importing local files now shows a clear summary of anything skipped (unsupported format or Pro-gated) with an Upgrade prompt where relevant, instead of failing silently.</li>
+              <li>Server reachability dots now appear on the Library home page's server chips, not only in Settings.</li>
+              <li>Editing a server connection now has an always-visible Name field to rename it without a full reconnect.</li>
+              <li>Added setup guidance for Komga and Standard Ebooks to Settings → How to Connect a Server. The Add Library URL footer now shows one bullet per supported server type with its concrete URL shape and credentials.</li>
+              <li>Settings now surfaces "Reader Quick Tour" directly instead of burying it inside FAQ &amp; Help. The tour includes a Panel Mode page and shows for comic-shaped books.</li>
+            </ul>
+          </div>
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>Fixed local file import silently doing nothing on the first tap, or silently discarding a successful pick with no error and no book added.</li>
+              <li>Fixed locally imported files not appearing in the library until a manual pull-to-refresh or relaunch.</li>
+              <li>Fixed the Library "Couldn't refresh" banner persisting after servers had already recovered.</li>
+              <li>Fixed Komga connections failing to discover the library on a bare server address, CBZ comics silently missing from a crawled Komga library, and new Komga connections using a generic name instead of "Komga".</li>
+              <li>Fixed the Sutra Pro paywall for Komga — certain paths through the server-type picker could previously bypass it entirely.</li>
+              <li>Fixed panel detection on older or hand-drawn scans falling back to full-page on nearly every page — detection now tolerates panel borders that are mostly, not perfectly, blank.</li>
+              <li>Fixed comics with black gutters on a dark page not splitting into panels — the detector now retries with an inverted image when its normal pass finds no gutters.</li>
+              <li>Fixed full-bleed splash pages (edge-to-edge art with no gutters) showing a sliver crop in Panel Mode — they now open on the whole page.</li>
+              <li>Fixed Panel Mode flashing the next full page when turning from a page's last panel.</li>
+              <li>Fixed several panel-detection edge cases: staggered panels of different heights, dense grids with small stacked panels, and panels being split at speech bubbles or sound effects instead of real gutters.</li>
+              <li>Fixed auto-scroll silently doing nothing in some sessions, and auto-scroll's pause state getting stuck off after closing the reader mid-scroll.</li>
+              <li>Fixed downloaded books whose on-device file had been deleted (externally or by iCloud) staying listed as available until you tried to open them.</li>
+              <li>Fixed tap zones still turning pages while in continuous-scroll mode or over an active text selection.</li>
+              <li>Fixed catalogs silently showing zero books when their root feed loaded but sub-feeds failed mid-crawl — now surfaced as a real error instead of an empty library.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num">1.3</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">Reading features and server compatibility — text highlights with iCloud sync, instant word definitions, improved dictionary lookup, plus Calibre-Web-Automated support and enhanced compatibility for Tailscale, Grimmory, and other OPDS servers.</p>
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li><strong>Text Highlights:</strong> Select text while reading (EPUB or PDF), choose a color, and the passage stays highlighted in the book and automatically saved to Settings → Text Highlights. Tap a highlight to change its color or delete it. Highlights sync via iCloud across your devices, just like reading progress. Also browse all highlights for a book from the reader's Bookmarks sheet.</li>
+              <li><strong>Dictionary lookup:</strong> Double-tap a word while reading (EPUB or PDF) to see its definition immediately, instead of having to open the system's Look Up menu and tap through to Define. Copy is now offered directly in the definition popup. Every word you look up is saved to Settings → Dictionary for browsing and reference.</li>
+              <li>Support for <strong>Calibre-Web-Automated</strong> (CWA), a community fork of Calibre-Web with automatic ebook ingestion — connect it the same way as Calibre-Web (default port 8084), and Sutra handles the setup automatically. Includes a new "How to Connect Each Server" guide in Settings with step-by-step instructions for every supported server.</li>
+            </ul>
+          </div>
+          <div class="version-group">
+            <span class="group-label">Improved</span>
+            <ul>
+              <li>OPDS server detection now rejects non-OPDS responses (e.g., HTML login portals from reverse proxies or single-sign-on) — Sutra shows a clear error message instead of silently accepting an empty library.</li>
+              <li><strong>Grimmory shelves</strong> (and Calibre-Web server collections) now appear as read-only collections in the Shelf tab under "Server Shelves" — these update automatically when you refresh your library and can't be edited in Sutra.</li>
+              <li>Increased the cover-image cache to 1500 images / 200 MB (up from 200 / 64 MB) and added prefetching for the Continue Reading shelf, so covers you've already loaded show up instantly instead of blank for the first several seconds after opening the app.</li>
+              <li>Library screen no longer shows nothing while reconnecting to servers on launch — an in-progress book you've already downloaded now appears in Continue Reading instantly, before your library connections finish loading.</li>
+            </ul>
+          </div>
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>Fixed connecting to a Kavita or Calibre server over Tailscale using its MagicDNS name (<code>myserver.tailnet-name.ts.net</code>) — this now works over plain HTTP like any other self-hosted server. (A server reached only by its raw Tailscale IP address still needs HTTPS — that's an OS-level limitation.)</li>
+              <li>Fixed a newly added server occasionally reporting "unavailable or not accepting requests" immediately after granting the Local Network permission prompt — Sutra now automatically retries instead of requiring manual pull-to-refresh. The Settings reachability dot also now updates right after adding a server.</li>
+              <li>Online search now works against self-hosted OPDS servers that Sutra doesn't specifically recognize (Komga, Grimmory, Booklore, BookOrbit, OPDShelf) when the server advertises search capability — previously only Kavita, Calibre, and the built-in public catalogs attempted it.</li>
+              <li>Series information from self-hosted servers that tag it the same way Calibre does is now read more reliably, instead of occasionally showing a genre as the series name.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num">1.2</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">A big reliability and polish update — better cross-device sync, a real page-curl animation, dark mode, and a wide pass of fixes across search, downloads, and the reader.</p>
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li>Authentic page-curl page turns — tap or drag to peel a page like a real book (turn it off for the classic instant/slide turn in Settings → Accessibility)</li>
+              <li>Appearance: Day, Night, or System — a real dark theme for the whole app; book pages keep their own reading theme</li>
+              <li>Left-Handed Page Turns — tap the left edge to go to the next page, right edge to go back</li>
+              <li>Series info and sorting from Kavita libraries — powers the "More in this series" carousel and a proper Series sort</li>
+            </ul>
+          </div>
+          <div class="version-group">
+            <span class="group-label">Improved</span>
+            <ul>
+              <li>Standard Ebooks now connects with your Patrons Circle email, verified against the live feed before the library is added</li>
+              <li>Self-hosted servers on your local network with no TLS now connect automatically</li>
+              <li>Paged vs. continuous scrolling is remembered separately for EPUB and PDF</li>
+              <li>"Recently Read" and Continue Reading now rank by when you actually read, not raw progress</li>
+            </ul>
+          </div>
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>Large self-hosted libraries (Kavita, Komga) could silently lose books partway through loading, so those books never turned up in search — big libraries now load completely</li>
+              <li>Kavita reading position now syncs correctly in both directions for EPUBs</li>
+              <li>Cross-device iCloud progress sync now works reliably for every connected library</li>
+              <li>Books no longer get marked "Finished" from a glance at the last page</li>
+              <li>Fixed a case where a server's feed could confuse two different books with each other</li>
+              <li>The library no longer goes blank after a brief server hiccup</li>
+              <li>Hardened how credentials and cover images are handled</li>
+              <li>A range of smaller fixes across search, downloads, and the readers</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num">1.0</div><span class="version-status">Shipped</span></div>
+        <ul>
+          <li>Kavita, Calibre, and OPDS server support</li>
+          <li>Project Gutenberg one-tap catalog</li>
+          <li>EPUB + PDF reading: themes, fonts, bookmarks, search</li>
+          <li>Offline downloads and storage manager</li>
+          <li>iCloud sync + page-accurate Kavita sync</li>
+          <li>Free — no IAP, no subscription, no ads</li>
+        </ul>
+      </div>
+
+      <div class="version">
+        <div><div class="version-num label">Android</div><span class="version-status">Upcoming</span></div>
+        <ul>
+          <li>A native Android app, bringing Sutra's OPDS library and reader to more devices</li>
+        </ul>
+      </div>
+
     </div>
-    <span class="copyright">© 2026 Sutra</span>
+  </div>
+</section>
+
+</div><!-- /tab-changelog -->
+
+<!-- ===== tab: drm-free ===== -->
+<div class="tab-pane" id="tab-drm">
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Where to buy</span>
+    <h1>DRM-Free Books</h1>
+    <p>Every store and publisher below sells ebooks you actually own — no DRM, no lock-in. Download the file, read it in Sutra, and keep it forever.</p>
+    <div class="drm-disclaimer">Sutra does not condone piracy. These are legitimate retailers and publishers — every title sold here is legal, and you get a file you own outright instead of a revocable license.</div>
+  </div>
+</section>
+
+<section class="drm-stores">
+  <div class="wrap">
+
+    <h2 class="drm-section-head">Book-Buying Sites</h2>
+    <div class="drm-grid">
+
+      <div class="drm-card">
+        <h3><a href="https://www.humblebundle.com/books" target="_blank" rel="noopener">Humble Bundle Books</a></h3>
+        <p>Rotating pay-what-you-want bundles of DRM-free EPUB/PDF/MOBI titles, often themed by genre or publisher, with a share of proceeds going to charity. Great for cheap, large batches of titles — inventory changes frequently, so it's more "grab it now" than a searchable catalog.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.ebooks.com/drm-free/" target="_blank" rel="noopener">eBooks.com — DRM-Free Store</a></h3>
+        <p>A dedicated DRM-free storefront with a filterable catalog spanning fiction, nonfiction, and technical titles. Good for one-off purchases when you know exactly what you want.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.fanatical.com/en/bundle/books" target="_blank" rel="noopener">Fanatical Book Bundles</a></h3>
+        <p>Time-limited, deeply discounted DRM-free ebook bundles, similar in spirit to Humble Bundle. Worth checking periodically for genre-specific deals.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://weightlessbooks.com/" target="_blank" rel="noopener">Weightless Books</a></h3>
+        <p>Small indie storefront focused on SFF, comics, and literary magazines — everything DRM-free in EPUB and PDF. Catalog is curated rather than huge; a good source for small-press titles and indie SFF magazines you won't find on the bigger stores.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://panels.store/" target="_blank" rel="noopener">Panels Store</a></h3>
+        <p>A DRM-free digital comics marketplace built by the team behind the Panels reading app. Buy, download, and own comics with no platform lock-in — creators keep 80% of the sale.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://panelsyndicate.com/" target="_blank" rel="noopener">Panel Syndicate</a></h3>
+        <p>Pay-what-you-want DRM-free comics direct from top creators (Brian K. Vaughan and collaborators, among others). No account required — pick a price, download the PDF/CBZ.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.drivethrucomics.com/" target="_blank" rel="noopener">DriveThruComics</a></h3>
+        <p>A large catalog of indie and small-press comics sold DRM-free, alongside its sister sites DriveThruRPG and DriveThruFiction.</p>
+      </div>
+
+    </div>
+
+    <h2 class="drm-section-head">Publishers</h2>
+    <div class="drm-grid">
+
+      <div class="drm-card">
+        <h3><a href="https://torpublishinggroup.com/" target="_blank" rel="noopener">Tor Publishing Group</a></h3>
+        <p>Home to Tor Books, Forge, Bramble, Nightfire, Tor Teen, and Tordotcom Publishing. Tor was the first major SFF publisher to go DRM-free, back in 2012, and its ebooks ship DRM-free at every retailer that carries them. This catalog site links each title out to retailers rather than selling direct.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://nostarch.com/" target="_blank" rel="noopener">No Starch Press</a></h3>
+        <p>Technical publisher covering programming, security, Linux, and hacking. All ebooks are DRM-free, and every print purchase includes a free DRM-free ebook edition.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://pragprog.com/" target="_blank" rel="noopener">The Pragmatic Bookshelf</a></h3>
+        <p>Developer-focused technical books — DRM-free by policy, with free updates within an edition as errata get fixed.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.baen.com/" target="_blank" rel="noopener">Baen Books</a></h3>
+        <p>One of the earliest DRM-free publishers (since the early 2000s), heavy on military SF, space opera, and fantasy. Sells in seven formats and runs a Free Library of complete novels at no cost.</p>
+      </div>
+
+      <div class="drm-card">
+        <h3><a href="https://www.manning.com/" target="_blank" rel="noopener">Manning Publications</a></h3>
+        <p>Technical/developer books — Manning was the first publisher to sell unprotected PDF ebooks back in 2000 and has stayed DRM-free since. Buying the print book gets you the ebook free too.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</div><!-- /tab-drm -->
+
+<!-- ===== footer (persistent) ===== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-sitemap">
+      <div class="sitemap-col">
+        <span class="sitemap-head">Navigate</span>
+        <button class="js-tab" data-tab="home">Home</button>
+        <button class="js-tab" data-tab="changelog">Changelog</button>
+        <button class="js-tab" data-tab="drm">DRM-Free Books</button>
+      </div>
+      <div class="sitemap-col">
+        <span class="sitemap-head">Sections</span>
+        <a class="js-section" href="#features">Features</a>
+        <a class="js-section" href="#pro">Pro</a>
+        <a class="js-section" href="#roadmap">Roadmap</a>
+      </div>
+      <div class="sitemap-col">
+        <span class="sitemap-head">Links</span>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+        <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">Privacy Policy</a>
+        <a href="https://github.com/koustavdg/sutra-support/issues">Feedback</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <button class="foot-wordmark js-tab" data-tab="home">
+        <img src="assets/app-icon.png" alt="">Sutra
+      </button>
+      <span class="copyright">© 2026 Sutra</span>
+    </div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var homeTab = document.getElementById('tab-home');
+  var allPanes = document.querySelectorAll('.tab-pane');
+  var drawerBtns = document.querySelectorAll('.nav-drawer .drawer-item[data-tab]');
+  var hamburger = document.getElementById('hamburger');
+  var drawer = document.getElementById('nav-drawer');
+  var backdrop = document.getElementById('nav-backdrop');
+
+  function switchTab(id, push) {
+    allPanes.forEach(function(p){ p.classList.toggle('active', p.id === 'tab-' + id); });
+    drawerBtns.forEach(function(b){ b.classList.toggle('active', b.dataset.tab === id); });
+    if (push !== false) {
+      history.pushState({tab:id}, '', location.pathname + (id === 'home' ? '' : '#' + id));
+    }
+    window.scrollTo(0,0);
+    closeDrawer();
+  }
+
+  function openDrawer(){
+    drawer.classList.add('open');
+    backdrop.classList.add('visible');
+    hamburger.classList.add('open');
+    hamburger.setAttribute('aria-expanded','true');
+    hamburger.setAttribute('aria-label','Close navigation');
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    backdrop.classList.remove('visible');
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded','false');
+    hamburger.setAttribute('aria-label','Open navigation');
+  }
+
+  hamburger.addEventListener('click', function(){
+    drawer.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+  backdrop.addEventListener('click', closeDrawer);
+
+  drawerBtns.forEach(function(b){
+    b.addEventListener('click', function(){ switchTab(b.dataset.tab); });
+  });
+
+  document.querySelectorAll('.js-tab').forEach(function(el){
+    el.addEventListener('click', function(e){
+      e.preventDefault();
+      switchTab(el.dataset.tab);
+    });
+  });
+
+  document.querySelectorAll('.js-section').forEach(function(el){
+    el.addEventListener('click', function(e){
+      var target = el.getAttribute('href');
+      closeDrawer();
+      if (!homeTab.classList.contains('active')) {
+        e.preventDefault();
+        switchTab('home', true);
+        setTimeout(function(){
+          var anchor = document.querySelector(target);
+          if (anchor) anchor.scrollIntoView({behavior:'smooth'});
+        }, 60);
+      }
+    });
+  });
+
+  window.addEventListener('popstate', function(e){
+    switchTab((e.state && e.state.tab) || 'home', false);
+  });
+
+  var hash = location.hash.slice(1);
+  if (hash === 'changelog') switchTab('changelog', false);
+  else if (hash === 'drm' || hash === 'drm-free') switchTab('drm', false);
+  else switchTab('home', false);
+})();
+</script>
 
 </body>
 </html>
