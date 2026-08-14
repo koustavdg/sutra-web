@@ -190,6 +190,52 @@
     <div class="version-list">
 
       <div class="version">
+        <div><div class="version-num">2.1</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">Manga support, WebDAV servers, reading stats, a free trial before Sutra Pro, two-panel iPad reading, a high-contrast theme, and the most accurate comic panel detection yet — plus a broad pass of reliability and polish improvements.</p>
+
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li><strong>Manga mode:</strong> Switch any comic to right-to-left reading from the reader's Aa menu — the setting is remembered per book. Panel order flows top-right to bottom-left, and dedicated panel tuning improves detection on manga-style pages on top of general improvements for all comics.</li>
+              <li><strong>WebDAV server support:</strong> Browse and download EPUB and PDF files directly from any WebDAV host. Self-signed certificates are accepted via a one-time trust prompt — no extra configuration needed.</li>
+              <li><strong>Reading Statistics:</strong> A dedicated Stats tab tracks time read, your current reading streak, a swipeable activity chart, and progress across every book in your library in one place.</li>
+              <li><strong>Try Before You Buy:</strong> CBZ comics and comic-shaped MOBI books now open with a free 7-page preview — read the first 7 pages of anything in your library before deciding whether to unlock Sutra Pro.</li>
+              <li><strong>Two-Panel Reading on iPad:</strong> EPUB, MOBI, and PDF books show a facing-page spread in landscape — like a real book held open.</li>
+              <li><strong>Pinch-to-zoom on images:</strong> Tap and pinch any embedded image in a book to zoom in and examine it.</li>
+              <li><strong>Contrast reading theme:</strong> A new theme with a pure-black background and full-white text — maximum legibility on top of the existing Night theme. The Dark theme's selection highlight no longer clips at the screen edge.</li>
+              <li><strong>Page-curl animation for comics:</strong> CBZ archives, comic-shaped EPUB/MOBI, and scanned comic PDFs now animate with the same page-curl as text books. Previously the Page Curl Animation setting had no effect in Panel View.</li>
+              <li><strong>Smarter library:</strong> Books are cached on-device so your library opens instantly on relaunch. An unreachable catalog is badged rather than failing silently. Per-library filtering and a Group by Author option are now available in the Library tab. Long-press any cover to enter multi-select and bulk-add or bulk-remove books from collections.</li>
+              <li><strong>Allow HTTP Connections:</strong> A new setting (Settings → Network) enables connections to self-hosted servers without HTTPS — off by default with a clear warning. Includes guidance for VPN setups on why a raw IP address doesn't work and what to use instead.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Improved</span>
+            <ul>
+              <li>Continuous scroll (EPUB) is smoother and more accurate: no longer advances chapters from a stray sideways swipe, stops exactly at the page you actually reached, and no longer stalls partway through a chapter.</li>
+              <li>Comic panel detection is more accurate across the board — better handling of margin variance, dark interior areas (window glass, tire treads), and the dense staggered grids common in manga.</li>
+              <li>FAQ and in-reader help is consolidated in one place; the Sort &amp; Filter sheet now dismisses immediately on making a selection; multi-select checkmark no longer overlaps the book's status badge.</li>
+              <li>Feedback and bug links now point to sutra-reader.com; a "Where to Legally Buy DRM-Free Books" link added to Settings.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>Books occasionally opening to a blank page.</li>
+              <li>Auto-scroll on iPad in Two-Panel landscape mode: tapping the auto-scroll button hid reader chrome but text never moved — extended the layout-reflow wait so scrolling reliably begins.</li>
+              <li>iPad: switching to scroll mode no longer resets the Margins reader setting.</li>
+              <li>PDF auto-scroll: a crash when text was selected while scrolling was active.</li>
+              <li>Page-curl animation briefly stretching or zooming the page at the start of a flip, and the panel tooltip staying visible through a turn instead of dismissing when the flip began.</li>
+              <li>Panel cropping edge cases: a narrow outer margin that merged several panels into one, and a dark interior area that shredded a single panel into several overlapping crops.</li>
+              <li>A load-error toast that reappeared after being dismissed; stale icons in the Panel Mode quick tour.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
         <div><div class="version-num">2.0</div><span class="version-status">Shipped</span></div>
         <div class="version-body">
           <p class="version-tagline">The biggest Sutra update yet — native Komga support, panel-by-panel comic reading, sideloading, EPUB auto-scrolling, DRM-free MOBI, Sutra Pro, and a sweeping pass of reliability improvements.</p>
@@ -340,8 +386,12 @@
       </div>
 
       <div class="version">
-        <div><div class="version-num label">Android</div><span class="version-status">Upcoming</span></div>
+        <div><div class="version-num label">Next</div><span class="version-status">Upcoming</span></div>
         <ul>
+          <li>Library smart-sync: large catalogs will no longer re-scan on every launch — what's already known opens instantly, and background scans load new additions progressively without blocking the app</li>
+          <li>Auto reader theme that follows your device's light/dark appearance, alongside the existing manual theme choices</li>
+          <li>Continuous auto-scroll stop-position accuracy improvements and fixes to the Stats screen session averaging</li>
+          <li>iOS Files integration — connect cloud storage directly as a book source</li>
           <li>A native Android app, bringing Sutra's OPDS library and reader to more devices</li>
         </ul>
       </div>
