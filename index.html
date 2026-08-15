@@ -264,6 +264,12 @@
 
   /* ===== footer ===== */
   footer{ background:var(--plum-deep); color:var(--paper); border-top:1px solid var(--line-on-plum); }
+  .foot-pride{
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    padding:28px 0 24px; border-bottom:1px solid var(--line-on-plum);
+    font-family:'JetBrains Mono',monospace; font-size:11px;
+    letter-spacing:0.12em; text-transform:uppercase; color:#C9B8E8;
+  }
   .foot-sitemap{
     display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
     padding:52px 0 40px; border-bottom:1px solid var(--line-on-plum);
@@ -584,6 +590,12 @@
 <!-- ===== footer ===== -->
 <footer>
   <div class="wrap">
+    <div class="foot-pride">
+      <svg viewBox="0 0 100 94" width="22" height="21" aria-hidden="true" focusable="false">
+        <path fill="#D52B1E" d="M50,6 L54,22 L68,14 L62,30 L82,22 L74,40 L94,44 L76,56 L82,68 L60,62 L58,88 L42,88 L40,62 L18,68 L24,56 L6,44 L26,40 L18,22 L38,30 L32,14 L46,22 Z"/>
+      </svg>
+      Proudly made in Canada
+    </div>
     <div class="foot-sitemap">
       <div class="sitemap-col">
         <span class="sitemap-head">Navigate</span>
