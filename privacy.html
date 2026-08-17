@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Sutra</title>
+<meta name="description" content="Sutra's privacy policy. Short version: we collect nothing, track nothing, and sell nothing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root{
+    --plum-top:#6A4A99;
+    --plum-deep:#43285F;
+    --grape:#7B54B8;
+    --paper:#F4ECDB;
+    --paper-dim:#ECE2CC;
+    --ink:#2B1B46;
+    --ink-soft:#5B4A78;
+    --card:#FBF7EC;
+    --line:rgba(43,27,70,0.14);
+    --line-on-plum:rgba(244,236,219,0.18);
+    --radius:6px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Spectral',serif; font-weight:600; letter-spacing:-0.005em; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* ===== hamburger dropdown ===== */
+  .ham-wrap{ position:relative; }
+  .hamburger{
+    background:none; border:none; cursor:pointer;
+    width:40px; height:40px;
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    padding:9px; border-radius:var(--radius); flex-shrink:0;
+  }
+  .hamburger:hover{ background:var(--paper-dim); }
+  .hamburger span{
+    display:block; width:22px; height:2px;
+    background:var(--ink); border-radius:2px;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .ham-menu{
+    display:none; position:absolute; right:0; top:calc(100% + 6px);
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:0 8px 28px rgba(43,27,70,0.15);
+    min-width:240px; padding:6px 0; z-index:100;
+  }
+  .ham-menu.open{ display:block; }
+  .ham-menu a{
+    display:block; padding:10px 20px;
+    font-size:14px; color:var(--ink-soft); text-decoration:none; font-weight:500;
+  }
+  .ham-menu a:hover{ color:var(--ink); background:var(--paper-dim); }
+  .ham-menu a.current{ color:var(--ink); font-weight:600; }
+  .ham-divider{ height:1px; background:var(--line); margin:6px 0; }
+  .ham-cta{ color:var(--grape) !important; font-weight:600 !important; }
+
+  /* ===== header ===== */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(244,236,219,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+  .wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:22px;
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink); margin-left:8px;
+  }
+  .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
+
+  /* ===== page intro ===== */
+  .intro{ padding:64px 0 0; }
+  .eyebrow-dark{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--grape); margin-bottom:12px; display:block;
+  }
+  .intro h1{ font-size:clamp(28px,5vw,42px); }
+  .intro-meta{
+    margin-top:10px; font-family:'JetBrains Mono',monospace;
+    font-size:12px; color:var(--ink-soft);
+  }
+
+  /* ===== prose ===== */
+  .prose-wrap{
+    padding:44px 0 96px;
+  }
+  .prose{
+    max-width:68ch;
+  }
+  .prose h1{
+    font-size:clamp(22px,3vw,28px); margin-bottom:18px; margin-top:36px;
+    color:var(--ink);
+  }
+  .prose h1:first-child{ margin-top:0; }
+  .prose h2{
+    font-size:clamp(17px,2.5vw,21px); margin-top:44px; margin-bottom:12px;
+    padding-bottom:8px; border-bottom:1px solid var(--line);
+    color:var(--ink);
+  }
+  .prose p{
+    font-size:16px; line-height:1.75; color:var(--ink-soft);
+    margin-bottom:16px;
+  }
+  .prose p:last-child{ margin-bottom:0; }
+  .prose ul{
+    margin:0 0 16px 0; padding-left:20px;
+    display:flex; flex-direction:column; gap:8px;
+  }
+  .prose li{
+    font-size:16px; line-height:1.7; color:var(--ink-soft);
+  }
+  .prose strong{ color:var(--ink); font-weight:600; }
+  .prose a{
+    color:var(--grape); text-decoration:underline; text-underline-offset:2px;
+  }
+  .prose a:hover{ color:var(--ink); }
+  .prose hr{
+    border:none; border-top:1px solid var(--line); margin:40px 0;
+  }
+  .prose code{
+    font-family:'JetBrains Mono',monospace; font-size:13.5px;
+    background:var(--paper-dim); padding:1px 6px; border-radius:3px;
+  }
+
+  /* loading state */
+  .prose-loading{
+    font-family:'JetBrains Mono',monospace; font-size:13px;
+    color:var(--ink-soft); padding:40px 0;
+  }
+
+  /* ===== footer ===== */
+  footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
+  .foot-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  .foot-wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:8px;
+    color:var(--paper); text-decoration:none;
+  }
+  .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
+  .foot-links a:hover{ color:var(--paper); }
+  .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
+
+  /* ===== responsive ===== */
+  @media (max-width: 560px){
+    .foot-row{ flex-direction:column; align-items:flex-start; }
+    .foot-links{ gap:14px; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="ham-wrap">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ham-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="ham-menu" id="ham-menu" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pro">Sutra Pro</a>
+        <a href="index.html#roadmap">Roadmap</a>
+        <div class="ham-divider"></div>
+        <a href="changelog.html">Changelog</a>
+        <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
+        <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
+        <div class="ham-divider"></div>
+        <a href="privacy.html" class="current">Privacy</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Legal</span>
+    <h1>Privacy Policy</h1>
+    <p class="intro-meta" id="effective-date">Effective June 2026</p>
+  </div>
+</section>
+
+<section class="prose-wrap">
+  <div class="wrap">
+    <div class="prose" id="prose">
+      <p class="prose-loading">Loading…</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html" class="foot-wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="foot-links">
+      <a href="changelog.html">Changelog</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+    </div>
+    <span class="copyright">© 2026 Sutra</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('ham-menu');
+  var wrap = btn.parentNode;
+  function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.classList.toggle('open'); btn.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); });
+  document.addEventListener('click', function(e){ if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+
+(function(){
+  var FALLBACK = [
+    '# Privacy Policy',
+    '',
+    'Effective June 2026',
+    '',
+    'Sutra is built to respect your privacy. In short: we don\'t collect your data,',
+    'we don\'t track you, and we don\'t run analytics.',
+    '',
+    '## What We Collect',
+    '',
+    'Nothing. Sutra has no backend account system and no analytics. We do not',
+    'collect, transmit, or sell personal information.',
+    '',
+    '## What Stays on Your Device',
+    '',
+    '- **Library & reading data** — your connected servers, favorites, collections, bookmarks, and reading progress are stored locally on your device.',
+    '- **Server credentials** — usernames, passwords, and API keys you enter are stored securely in the iOS Keychain and are sent only to the server you connect to, to authenticate your requests.',
+    '- **Downloaded books** — stored on your device for offline reading.',
+    '',
+    '## iCloud Sync (Optional)',
+    '',
+    'If you enable iCloud progress sync, your reading position is synced through',
+    '**your own** Apple iCloud account so you can resume across your devices. This',
+    'data lives in your iCloud account; we have no access to it. You can turn this',
+    'off in Settings.',
+    '',
+    '## Third-Party Servers',
+    '',
+    'When you connect to a server or catalog (e.g., your Kavita/Calibre server, or',
+    'Project Gutenberg), the App communicates directly with it. Those services',
+    'have their own privacy practices, which we do not control.',
+    '',
+    '## Children',
+    '',
+    'Sutra is not directed at children under 13 and does not knowingly collect',
+    'information from them.',
+    '',
+    '## Changes',
+    '',
+    'We may update this Policy; material changes will be reflected here with a new',
+    'effective date.',
+    '',
+    '## Contact',
+    '',
+    'Questions? [Open an issue](https://github.com/koustavdg/sutra-support/issues)',
+    'on this repo.'
+  ].join('\n');
+
+  function esc(s){
+    return String(s)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;');
+  }
+
+  function inline(s){
+    return esc(s)
+      .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g,'<em>$1</em>')
+      .replace(/`(.+?)`/g,'<code>$1</code>')
+      .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>');
+  }
+
+  function render(md){
+    // Join continuation lines (2+ spaces indent) with the previous line
+    md = md.replace(/\n {2,}/g, ' ');
+
+    var blocks = md.trim().split(/\n\n+/);
+    var html = '';
+
+    blocks.forEach(function(block){
+      var lines = block.split('\n');
+      var first = lines[0];
+
+      if (first.startsWith('# ')){
+        html += '<h1>' + inline(first.slice(2)) + '</h1>';
+      } else if (first.startsWith('## ')){
+        html += '<h2>' + inline(first.slice(3)) + '</h2>';
+      } else if (first.startsWith('### ')){
+        html += '<h3>' + inline(first.slice(4)) + '</h3>';
+      } else if (first.trim() === '---'){
+        html += '<hr>';
+      } else if (lines.every(function(l){ return l.startsWith('- '); })){
+        html += '<ul>';
+        lines.forEach(function(l){ html += '<li>' + inline(l.slice(2)) + '</li>'; });
+        html += '</ul>';
+      } else if (first.startsWith('- ')){
+        // Mixed block — treat list items individually, rest as p
+        var inList = false;
+        lines.forEach(function(l){
+          if (l.startsWith('- ')){
+            if (!inList){ html += '<ul>'; inList = true; }
+            html += '<li>' + inline(l.slice(2)) + '</li>';
+          } else {
+            if (inList){ html += '</ul>'; inList = false; }
+            html += '<p>' + inline(l) + '</p>';
+          }
+        });
+        if (inList) html += '</ul>';
+      } else {
+        // Paragraph — skip the h1 title line (we render it in the intro)
+        var text = lines.join(' ').trim();
+        if (text && !text.startsWith('# ')) {
+          html += '<p>' + inline(text) + '</p>';
+        }
+      }
+    });
+
+    return html;
+  }
+
+  function extractEffectiveDate(md){
+    var m = md.match(/^Effective (.+)$/m);
+    return m ? 'Effective ' + m[1] : null;
+  }
+
+  function applyContent(md){
+    var date = extractEffectiveDate(md);
+    if (date){
+      var el = document.getElementById('effective-date');
+      if (el) el.textContent = date;
+    }
+    // Remove h1 and effective date line from prose since we show them in the intro
+    var prose = md.replace(/^# .+\n?/m, '').replace(/^Effective .+\n?/m, '').trim();
+    document.getElementById('prose').innerHTML = render(prose);
+  }
+
+  applyContent(FALLBACK);
+
+  fetch('https://raw.githubusercontent.com/koustavdg/sutra-support/main/PRIVACY.md')
+    .then(function(r){ return r.ok ? r.text() : Promise.reject(); })
+    .then(function(md){ applyContent(md); })
+    .catch(function(){});
+})();
+</script>
+
+</body>
+</html>
