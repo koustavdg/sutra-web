@@ -166,6 +166,15 @@
   .strip-row .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .strip-cap{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; }
 
+  /* ===== newsletter ===== */
+  .newsletter{ background:var(--ink); padding:72px 0; }
+  .newsletter-wrap{ display:flex; align-items:center; gap:60px; }
+  .newsletter-text{ flex:0 0 auto; max-width:360px; }
+  .newsletter-text .eyebrow-dark{ color:var(--grape); }
+  .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
+  .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
+  .newsletter-form{ flex:1 1 auto; min-width:0; }
+
   /* ===== features ===== */
   .features{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
   .section-head{ margin-bottom:44px; max-width:60ch; }
@@ -415,6 +424,20 @@
         </div>
         <div class="strip-cap">04 · Sutra Pro</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== newsletter ===== -->
+<section class="newsletter">
+  <div class="wrap newsletter-wrap">
+    <div class="newsletter-text">
+      <span class="eyebrow-dark">Stay in the loop</span>
+      <h2>Follow Sutra news</h2>
+      <p>Get updates on new features, Android progress, and everything happening with Sutra — straight to your inbox.</p>
+    </div>
+    <div class="newsletter-form">
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589"></script>
     </div>
   </div>
 </section>
