@@ -190,6 +190,39 @@
     <div class="version-list">
 
       <div class="version">
+        <div><div class="version-num">2.1.10</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">Swipe-to-adjust PDF auto-scroll speed, search results that respect your view preference, better Project Gutenberg discovery, and targeted reliability fixes for iPad navigation and reading-position accuracy.</p>
+
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li><strong>Live PDF auto-scroll speed control:</strong> Swipe up to speed up and down to slow down while PDF auto-scroll is running — replaces the previous tap-to-pause model with direct, continuous speed adjustment.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Improved</span>
+            <ul>
+              <li>Search results now respect your library's grid/list view toggle, and book titles properly wrap across multiple lines in list mode.</li>
+              <li>Project Gutenberg library now defaults to all language filters checked — speeds up initial discovery instead of showing an empty catalog until you manually enable languages.</li>
+              <li>Library crawl performance improved by lowering task priority and eliminating O(N) regroup operations in large libraries.</li>
+              <li>Stats screen now filters out sub-minute reading sessions for more accurate time-read totals.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Fixed</span>
+            <ul>
+              <li>EPUB reading position is now preserved when rotating between portrait and landscape — the portrait-only reader became landscape-capable in 2.0, but orientation changes weren't pinning your position.</li>
+              <li>iPad library navigation: a high-priority gesture recognizer was competing with tap-to-navigate, causing taps in the library to be missed.</li>
+              <li>iPad page navigation in the reader: the same gesture recognizer conflict was causing taps on page-turn zones to be swallowed.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
         <div><div class="version-num">2.1</div><span class="version-status">Shipped</span></div>
         <div class="version-body">
           <p class="version-tagline">Manga support, WebDAV servers, reading stats, a free trial before Sutra Pro, two-panel iPad reading, a high-contrast theme, and the most accurate comic panel detection yet — plus a broad pass of reliability and polish improvements.</p>
