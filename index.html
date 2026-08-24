@@ -123,6 +123,7 @@
   .badge-store{ display:inline-block; text-decoration:none; transition:opacity .15s, transform .15s; }
   .badge-store:hover{ opacity:0.82; transform:translateY(-1px); }
   .badge-store img{ display:block; height:52px; width:auto; }
+  .badge-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   .cta-note{ font-size:13px; color:#B3A2D6; font-family:'JetBrains Mono',monospace; }
   .cta-drm-link{
     font-family:'JetBrains Mono',monospace; font-size:12px;
@@ -298,6 +299,7 @@
   }
   .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
   .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
+  .foot-right{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
 
   /* ===== responsive ===== */
   @media (max-width: 880px){
@@ -356,9 +358,14 @@
       <div class="tagline">A thread that binds your books</div>
       <p class="lede">Sutra — the app to read all your DRM-free content. Connect your <em>Kavita, Calibre, Komga, or WebDAV</em> server, any OPDS catalog, or Project Gutenberg's full public-domain library. Load local files, read manga and comics panel by panel, track your reading stats, and auto-scroll through long reads.</p>
       <div class="cta-row">
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="badge-store">
-          <img src="assets/badge-appstore-white.svg" alt="Download on the App Store">
-        </a>
+        <div class="badge-row">
+          <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="badge-store">
+            <img src="assets/badge-appstore-white.svg" alt="Download on the App Store">
+          </a>
+          <a href="#newsletter" class="badge-store">
+            <img src="assets/coming_soon_android.png" alt="Coming Soon on Android">
+          </a>
+        </div>
         <span class="cta-note">Free on the App Store · Preview any comic or MOBI free · Sutra Pro unlocks .cbz, .mobi &amp; Komga</span>
         <a href="drm-free.html" class="cta-drm-link">Where to legally buy DRM-free books →</a>
       </div>
@@ -429,7 +436,7 @@
 </section>
 
 <!-- ===== newsletter ===== -->
-<section class="newsletter">
+<section class="newsletter" id="newsletter">
   <div class="wrap newsletter-wrap">
     <div class="newsletter-text">
       <span class="eyebrow-dark">Stay in the loop</span>
@@ -643,7 +650,10 @@
     </div>
     <div class="foot-bottom">
       <a href="index.html" class="foot-wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
-      <span class="copyright">© 2026 Sutra</span>
+      <div class="foot-right">
+        <span class="copyright">Android is a trademark of Google LLC.</span>
+        <span class="copyright">© 2026 Sutra</span>
+      </div>
     </div>
   </div>
 </footer>
