@@ -190,6 +190,69 @@
     <div class="version-list">
 
       <div class="version">
+        <div><div class="version-num">2.2.1</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">Streaming comic pages from Komga and Kavita, automatic series stacks in your library, a richer book details page, smarter progress tracking, and a sweeping pass of reader, library, and metadata improvements.</p>
+
+          <div class="version-group">
+            <span class="group-label">Reader improvements</span>
+            <ul>
+              <li>Added streaming comic-page support for Komga and Kavita — start reading CBZ files without waiting for a full download.</li>
+              <li>Improved remote-server authentication and progress synchronization.</li>
+              <li>Corrected Kavita EPUB progress calculations, including structural EPUB pages.</li>
+              <li>Restored and stabilized tactile drag-to-turn page animation; preserved the previous page for backward page curls.</li>
+              <li>Suppressed reader overlays during page transitions; improved transitions between the Aa menu and full-screen reader.</li>
+              <li>Added per-format reading-speed estimates for more accurate remaining-time calculations; speed data persisted in iCloud.</li>
+              <li>Improved auto-scroll and reader performance.</li>
+              <li>Added automatic completion when the reader reaches the final two pages; Finished state updates immediately on the book detail page.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Library and browsing</span>
+            <ul>
+              <li>Books from the same series are now grouped automatically into stacks, with a count badge showing how many books you have.</li>
+              <li>Standardized book-cover sizes across grids, stacks, and carousels; added consistent horizontal and vertical gutter spacing.</li>
+              <li>Improved current-book highlighting in series carousels with a distinct, thicker purple border.</li>
+              <li>Removed series labels from stacks; prevented standalone books from displaying fabricated series names.</li>
+              <li>Fixed duplicate titles such as "The Pothunters – The Pothunters."</li>
+              <li>Added and corrected CBZ format filtering; improved collection sorting and filtering.</li>
+              <li>Fixed table-of-contents chapter highlighting; improved imported and locally cached cover loading.</li>
+              <li>Improved library navigation, scrolling, and cached loading behavior.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Book detail pages</span>
+            <ul>
+              <li>Standardized cover and title sizing; improved metadata layout and metric alignment.</li>
+              <li>Added server-provided book descriptions; long descriptions are truncated with an ellipsis.</li>
+              <li>Added a flip-through series carousel with one-tap access to any book in the series.</li>
+              <li>Corrected title, author, series, and server metadata handling.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Settings and usability</span>
+            <ul>
+              <li>Removed the Status Overlay setting — overlay behavior is now automatic.</li>
+              <li>Moved Panel Mode to global Reading settings; removed the per-book Panel Mode control.</li>
+              <li>Removed the "Open books directly in Reader" setting; books remain closed to the reader by default.</li>
+              <li>Restored the Disable Flip Animation setting in Reading; streamlined the Settings layout.</li>
+              <li>Added improved reader typography controls.</li>
+            </ul>
+          </div>
+
+          <div class="version-group">
+            <span class="group-label">Platform</span>
+            <ul>
+              <li>Substantial native Android alpha groundwork: onboarding, secure connections, OPDS/library handling, EPUB import/download, reader foundations, settings, and parity documentation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
         <div><div class="version-num">2.1.10</div><span class="version-status">Shipped</span></div>
         <div class="version-body">
           <p class="version-tagline">Swipe-to-adjust PDF auto-scroll speed, search results that respect your view preference, better Project Gutenberg discovery, and targeted reliability fixes for iPad navigation and reading-position accuracy.</p>
