@@ -390,7 +390,7 @@
 
   fetch('https://api.github.com/repos/koustavdg/sutra-support/issues?state=open&per_page=50')
     .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
-    .then(function(data){ if (Array.isArray(data)) render(data, true); })
+    .then(function(data){ if (Array.isArray(data)) render(data.filter(function(i){ return !i.pull_request; }), true); })
     .catch(function(){});
 })();
 </script>
