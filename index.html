@@ -177,6 +177,9 @@
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
   .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
   .newsletter-form{ flex:1 1 auto; min-width:0; }
+  .newsletter-alt{ margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:12px; color:#B3A2D6; }
+  .newsletter-alt a{ color:#C9B8E8; text-decoration:underline; text-underline-offset:3px; }
+  .newsletter-alt a:hover{ color:var(--paper); }
 
   /* ===== features ===== */
   .features{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
@@ -447,6 +450,7 @@
     </div>
     <div class="newsletter-form">
       <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589"></script>
+      <p class="newsletter-alt">Form not loading? <a href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe on our sign-up page →</a></p>
     </div>
   </div>
 </section>
@@ -459,17 +463,17 @@
       <h2>Twelve things, done properly.</h2>
     </div>
     <div class="card-grid">
-      <div class="card" data-code="OPDS·01"><h3>Bring your own server</h3><p>Connect Kavita, Calibre, Grimmory, or any OPDS-compatible server in a few taps. Works on your local network — no cloud middleman. WebDAV hosts like Synology are supported too.</p></div>
-      <div class="card" data-code="OPDS·02"><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection — no server required. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
-      <div class="card" data-code="READ·01"><h3>EPUB, PDF &amp; mobi</h3><p>Authentic page-curl, rich typography controls, five reading themes (including high-contrast Contrast), bookmarks, in-book search, and color-coded highlights synced via iCloud. Two-panel facing-page spread on iPad.</p></div>
-      <div class="card" data-code="READ·02"><h3>Panel-aware comics &amp; manga</h3><p>Sutra detects panels and reads them one at a time. Full manga mode reads right-to-left with panel order that flows top-right to bottom-left. Page-curl animation and dedicated manga panel tuning. Switch any book between Regular and Manga from the reader's Aa menu — remembered per book.</p></div>
-      <div class="card" data-code="READ·03"><h3>Auto-scrolling</h3><p>Set your pace and let the page flow — tap to pause, tap again to resume. Speed is adjustable from the reading settings. Perfect for hands-free reading.</p></div>
-      <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB and PDF files directly from your phone — from your Files app, AirDrop, or any share sheet. No server required.</p></div>
-      <div class="card" data-code="READ·05"><h3>Highlights &amp; Dictionary</h3><p>Select text to highlight with color, double-tap a word to define it instantly — both sync across your devices via iCloud and are saved for later.</p></div>
-      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs reading position, bookmarks, and highlights across all your devices. Kavita sync is page-accurate in both directions.</p></div>
-      <div class="card" data-code="SYNC·02"><h3>Browse by series</h3><p>Books organize by series in the Collections Shelf based on metadata from your server — perfect for long fantasy and sci-fi runs.</p></div>
-      <div class="card" data-code="OPDS·03"><h3>WebDAV Servers</h3><p>Browse and download EPUB and PDF files straight from any WebDAV host — Synology, or any server you run. Self-signed certificates are supported via a one-time trust prompt, no HTTPS workarounds needed.</p></div>
-      <div class="card" data-code="STAT·01"><h3>Reading Statistics</h3><p>A dedicated Stats tab tracks time read, your current streak, a swipeable activity chart, and reading progress across every book in your library — all in one place.</p></div>
+      <div class="card" data-code="OPDS·01"><h3>Bring your own server</h3><p>Connect Kavita, Calibre, Komga, Grimmory, or any OPDS server, plus WebDAV hosts like Synology. Everything works on your local network with no cloud middleman, and self-signed certificates need only a one-time trust prompt.</p></div>
+      <div class="card" data-code="OPDS·02"><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection, no server required. Gutenberg is offered right in first-run setup, and search is more reliable, with duplicates removed. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
+      <div class="card" data-code="LIB·01"><h3>A library that sorts your way</h3><p>Sort by Recently Read, Title, Author, or Date Added. Books with no artwork get a clean title-and-author cover instead of a blank tile.</p></div>
+      <div class="card" data-code="LIB·02"><h3>Series, Collections &amp; Favorites</h3><p>Series appear as grid tiles, and books from the same series stack with a count. Collections open in a consistent grid, and you can rename your own. Favorites is built in, always first, with its own heart-marked card.</p></div>
+      <div class="card" data-code="READ·01"><h3>EPUB, PDF &amp; MOBI</h3><p>Authentic page-curl, rich typography controls, five reading themes including high-contrast Contrast, and in-book search. There's a two-panel facing-page spread on iPad, and you can dim just the reader from the Aa menu without touching system brightness.</p></div>
+      <div class="card" data-code="READ·02"><h3>Panel-aware CBZ comics &amp; manga</h3><p>Sutra reads panels one at a time, with full right-to-left manga mode. CBZ streams straight from Komga and Kavita, and upcoming pages are prepared ahead of time, so page turns feel instant. Switch any book between Regular and Manga from the Aa menu.</p></div>
+      <div class="card" data-code="READ·03"><h3>Auto-scrolling</h3><p>Set your pace and let the page flow. Swipe up or down to adjust speed on the fly, or tap to pause and resume. Perfect for hands-free reading.</p></div>
+      <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB, PDF, CBZ, and MOBI files from your Files app, AirDrop, or any share sheet. No server required.</p></div>
+      <div class="card" data-code="READ·05"><h3>Highlights, Dictionary &amp; Footnotes</h3><p>Highlight in color and double-tap a word to define it. Tap a footnote and it opens in a sheet, so you never lose your place. Highlights and lookups sync via iCloud.</p></div>
+      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs position, bookmarks, and highlights across your devices. Kavita and Komga sync is page-accurate, and finishing a book syncs back to your server too.</p></div>
+      <div class="card" data-code="STAT·01"><h3>Reading Statistics</h3><p>A Stats tab tracks time read, your streak, a swipeable activity chart, and progress across your library. Time-remaining estimates learn your reading speed for each format.</p></div>
       <div class="card" data-code="PRO·01"><h3>Try Before You Buy</h3><p>Every CBZ comic and comic-shaped MOBI book opens with a free 7-page preview — read the first 7 pages of anything in your library before deciding whether to unlock Sutra Pro.</p></div>
     </div>
   </div>
@@ -503,15 +507,16 @@
           <li>EPUB &amp; PDF reading with full typography controls</li>
           <li>Panel-aware comic and manga reading</li>
           <li>7-page free preview of any CBZ or MOBI book</li>
-          <li>EPUB auto-scrolling</li>
+          <li>Auto-scrolling with swipe-to-adjust speed</li>
           <li>Sideload files from your phone</li>
           <li>Color highlights synced via iCloud</li>
-          <li>Dictionary lookup, bookmarks, and in-book search</li>
-          <li>Series collections and smart sorting</li>
+          <li>Dictionary, inline footnotes, bookmarks, and in-book search</li>
+          <li>Library sorting, series stacks, Collections &amp; Favorites</li>
           <li>WebDAV server browsing and downloads</li>
           <li>Reading statistics — time read, streak, activity chart</li>
           <li>Offline downloads and storage manager</li>
-          <li>Dark mode, left-handed page turns, Reduce Motion</li>
+          <li>Streaming CBZ pages from Kavita</li>
+          <li>Dark mode, reader brightness, left-handed page turns, Reduce Motion</li>
         </ul>
       </div>
       <div class="pro-col col-pro">
