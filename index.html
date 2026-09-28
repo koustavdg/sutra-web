@@ -183,6 +183,7 @@
     font-weight:600; font-size:15px; transition:background .15s;
   }
   .newsletter-btn:hover{ background:#fff; }
+  .newsletter-btn[hidden]{ display:none; }
 
   /* ===== features ===== */
   .features{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
@@ -452,8 +453,8 @@
       <p>Get updates on new features, Android progress, and everything happening with Sutra — straight to your inbox.</p>
     </div>
     <div class="newsletter-form">
-      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589" onerror="document.getElementById('newsletter-fallback').hidden=false"></script>
-      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener" hidden>Subscribe</a>
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589"></script>
+      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
     </div>
   </div>
 </section>
@@ -707,7 +708,7 @@ window.addEventListener('load', function(){
     var box = document.querySelector('.newsletter-form');
     var fb = document.getElementById('newsletter-fallback');
     var rendered = Array.prototype.some.call(box.children, function(el){ return el !== fb && el.tagName !== 'SCRIPT'; });
-    if (!rendered) fb.hidden = false;
+    if (rendered) fb.hidden = true;
   }, 2500);
 });
 </script>
