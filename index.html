@@ -177,9 +177,12 @@
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
   .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
   .newsletter-form{ flex:1 1 auto; min-width:0; }
-  .newsletter-alt{ margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:12px; color:#B3A2D6; }
-  .newsletter-alt a{ color:#C9B8E8; text-decoration:underline; text-underline-offset:3px; }
-  .newsletter-alt a:hover{ color:var(--paper); }
+  .newsletter-btn{
+    display:inline-block; background:var(--paper); color:var(--plum-deep);
+    text-decoration:none; padding:12px 28px; border-radius:var(--radius);
+    font-weight:600; font-size:15px; transition:background .15s;
+  }
+  .newsletter-btn:hover{ background:#fff; }
 
   /* ===== features ===== */
   .features{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
@@ -449,8 +452,8 @@
       <p>Get updates on new features, Android progress, and everything happening with Sutra — straight to your inbox.</p>
     </div>
     <div class="newsletter-form">
-      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589"></script>
-      <p class="newsletter-alt">Form not loading? <a href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe on our sign-up page →</a></p>
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589" onerror="document.getElementById('newsletter-fallback').hidden=false"></script>
+      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener" hidden>Subscribe</a>
     </div>
   </div>
 </section>
@@ -698,6 +701,16 @@
   </div>
 </footer>
 
+<script>
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var box = document.querySelector('.newsletter-form');
+    var fb = document.getElementById('newsletter-fallback');
+    var rendered = Array.prototype.some.call(box.children, function(el){ return el !== fb && el.tagName !== 'SCRIPT'; });
+    if (!rendered) fb.hidden = false;
+  }, 2500);
+});
+</script>
 <script>
 (function(){
   var btn = document.getElementById('hamburger');
