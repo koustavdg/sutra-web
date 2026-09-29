@@ -176,7 +176,8 @@
   .newsletter-text .eyebrow-dark{ color:var(--grape); }
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
   .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
-  .newsletter-form{ flex:1 1 auto; min-width:0; }
+  .newsletter-form{ flex:1 1 auto; min-width:0; max-height:320px; overflow:hidden; }
+  .newsletter-form iframe{ max-width:100%; max-height:320px; }
   .newsletter-btn{
     display:inline-block; margin-top:22px; background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:12px 28px; border-radius:var(--radius);
@@ -312,6 +313,8 @@
 
   /* ===== responsive ===== */
   @media (max-width: 880px){
+    .newsletter-wrap{ flex-direction:column; align-items:flex-start; gap:28px; }
+    .newsletter-form{ width:100%; }
     .hero-grid{ grid-template-columns:1fr; }
     .phone-stage{ margin-top:20px; }
     .strip-row{ grid-template-columns:repeat(2,1fr); }
@@ -702,16 +705,6 @@
   </div>
 </footer>
 
-<script>
-window.addEventListener('load', function(){
-  setTimeout(function(){
-    var box = document.querySelector('.newsletter-form');
-    var fb = document.getElementById('newsletter-fallback');
-    var rendered = Array.prototype.some.call(box.children, function(el){ return el !== fb && el.tagName !== 'SCRIPT' && el.getBoundingClientRect().height > 40; });
-    if (rendered) fb.hidden = true;
-  }, 2500);
-});
-</script>
 <script>
 (function(){
   var btn = document.getElementById('hamburger');
