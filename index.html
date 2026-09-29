@@ -176,8 +176,8 @@
   .newsletter-text .eyebrow-dark{ color:var(--grape); }
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
   .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
-  .newsletter-form{ flex:1 1 auto; min-width:0; max-height:320px; overflow:hidden; }
-  .newsletter-form iframe{ max-width:100%; max-height:320px; }
+  .newsletter-form{ flex:1 1 auto; min-width:0; max-height:480px; overflow:hidden; }
+  .newsletter-form iframe{ max-width:100%; max-height:480px; }
   .newsletter-btn{
     display:inline-block; margin-top:22px; background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:12px 28px; border-radius:var(--radius);
@@ -454,10 +454,10 @@
       <span class="eyebrow-dark">Stay in the loop</span>
       <h2>Follow Sutra news</h2>
       <p>Get updates on new features, Android progress, and everything happening with Sutra — straight to your inbox.</p>
-      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener" hidden>Subscribe</a>
     </div>
     <div class="newsletter-form">
-      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589"></script>
+      <script async src="https://subscribe-forms.beehiiv.com/v3/loader.js" data-beehiiv-form="ff8a7d7b-0a94-4bfe-8c21-9bb1cad5f589" onerror="document.getElementById('newsletter-fallback').hidden=false"></script>
     </div>
   </div>
 </section>
@@ -705,6 +705,15 @@
   </div>
 </footer>
 
+<script>
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    var fb = document.getElementById('newsletter-fallback');
+    var box = document.querySelector('.newsletter-form');
+    if (box.getBoundingClientRect().height < 60) fb.hidden = false;
+  }, 3000);
+});
+</script>
 <script>
 (function(){
   var btn = document.getElementById('hamburger');
