@@ -125,7 +125,11 @@
   .badge-store img{ display:block; height:52px; width:auto; }
   .badge-android img{ height:67px; }
   .badge-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  @media (max-width:600px){ .badge-row{ flex-direction:column; align-items:flex-start; } }
+  @media (max-width:600px){
+    .badge-row{ width:100%; max-width:360px; flex-direction:column; align-items:stretch; }
+    .badge-store{ width:100%; }
+    .badge-store img{ width:100%; height:auto; }
+  }
   .cta-note{ font-size:13px; color:#B3A2D6; font-family:'JetBrains Mono',monospace; }
   .cta-drm-link{
     font-family:'JetBrains Mono',monospace; font-size:12px;
@@ -323,6 +327,8 @@
     .foot-sitemap{ grid-template-columns:1fr 1fr; }
   }
   @media (max-width: 560px){
+    .newsletter-actions{ width:100%; max-width:360px; flex-direction:column; align-items:stretch; }
+    .newsletter-btn{ width:100%; text-align:center; }
     .strip-row{ grid-template-columns:repeat(2,1fr); gap:12px; }
     .card-grid{ grid-template-columns:1fr; }
     .foot-sitemap{ grid-template-columns:1fr; }
