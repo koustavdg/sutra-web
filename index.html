@@ -126,9 +126,10 @@
   .badge-android img{ height:67px; }
   .badge-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   @media (max-width:600px){
-    .badge-row{ width:100%; max-width:360px; flex-direction:column; align-items:stretch; }
-    .badge-store{ width:100%; }
-    .badge-store img{ width:100%; height:auto; }
+    .badge-row{ flex-direction:column; align-items:flex-start; }
+    .badge-store{ width:auto; }
+    .badge-store img{ width:auto; height:52px; }
+    .badge-android img{ height:67px; }
   }
   .cta-note{ font-size:13px; color:#B3A2D6; font-family:'JetBrains Mono',monospace; }
   .cta-drm-link{
