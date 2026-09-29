@@ -176,6 +176,7 @@
   .newsletter-text .eyebrow-dark{ color:var(--grape); }
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
   .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
+  .newsletter-actions{ display:flex; gap:12px; flex-wrap:wrap; }
   .newsletter-btn{
     display:inline-block; margin-top:22px; background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:17px 44px; border-radius:var(--radius);
@@ -451,7 +452,10 @@
       <span class="eyebrow-dark">Stay in the loop</span>
       <h2>Follow Sutra news</h2>
       <p>Get updates on new features, Android progress, and everything happening with Sutra — straight to your inbox.</p>
-      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      <div class="newsletter-actions">
+        <a class="newsletter-btn" href="https://newsletter.sutra-reader.com/" target="_blank" rel="noopener">Newsletter</a>
+        <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      </div>
     </div>
   </div>
 </section>
