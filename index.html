@@ -707,7 +707,7 @@ window.addEventListener('load', function(){
   setTimeout(function(){
     var box = document.querySelector('.newsletter-form');
     var fb = document.getElementById('newsletter-fallback');
-    var rendered = Array.prototype.some.call(box.children, function(el){ return el !== fb && el.tagName !== 'SCRIPT'; });
+    var rendered = Array.prototype.some.call(box.children, function(el){ return el !== fb && el.tagName !== 'SCRIPT' && el.getBoundingClientRect().height > 40; });
     if (rendered) fb.hidden = true;
   }, 2500);
 });
