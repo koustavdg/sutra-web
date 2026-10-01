@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Help and FAQ — Sutra</title>
+<meta name="description" content="Connect Sutra to your server and find answers about libraries, reading, catalogs, file formats, and troubleshooting.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<style>
+  :root{
+    --plum-top:#6A4A99;
+    --plum-deep:#43285F;
+    --grape:#7B54B8;
+    --paper:#F4ECDB;
+    --paper-dim:#ECE2CC;
+    --ink:#2B1B46;
+    --ink-soft:#5B4A78;
+    --card:#FBF7EC;
+    --line:rgba(43,27,70,0.14);
+    --line-on-plum:rgba(244,236,219,0.18);
+    --radius:6px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{ font-family:'Spectral',serif; font-weight:600; letter-spacing:-0.005em; }
+  a{ color:inherit; }
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 28px; }
+
+  /* ===== hamburger dropdown ===== */
+  .ham-wrap{ position:relative; }
+  .hamburger{
+    background:none; border:none; cursor:pointer;
+    width:40px; height:40px;
+    display:flex; flex-direction:column; justify-content:center; gap:5px;
+    padding:9px; border-radius:var(--radius); flex-shrink:0;
+  }
+  .hamburger:hover{ background:var(--paper-dim); }
+  .hamburger span{
+    display:block; width:22px; height:2px;
+    background:var(--ink); border-radius:2px;
+    transition:transform .18s ease, opacity .18s ease;
+  }
+  .hamburger.open span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2){ opacity:0; }
+  .hamburger.open span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+  .ham-menu{
+    display:none; position:absolute; right:0; top:calc(100% + 6px);
+    background:var(--paper); border:1px solid var(--line);
+    border-radius:var(--radius); box-shadow:0 8px 28px rgba(43,27,70,0.15);
+    min-width:240px; padding:6px 0; z-index:100;
+  }
+  .ham-menu.open{ display:block; }
+  .ham-menu a{
+    display:block; padding:10px 20px;
+    font-size:14px; color:var(--ink-soft); text-decoration:none; font-weight:500;
+  }
+  .ham-menu a:hover{ color:var(--ink); background:var(--paper-dim); }
+  .ham-menu a.current{ color:var(--ink); font-weight:600; }
+  .ham-divider{ height:1px; background:var(--line); margin:6px 0; }
+  .ham-cta{ color:var(--grape) !important; font-weight:600 !important; }
+
+  /* ===== header ===== */
+  header{
+    position:sticky; top:0; z-index:40;
+    background:rgba(244,236,219,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{ display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+  .wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:22px;
+    display:flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--ink); margin-left:8px;
+  }
+  .wordmark img{ width:30px; height:30px; border-radius:8px; display:block; }
+
+  /* ===== intro ===== */
+  .intro{ padding:72px 0 48px; }
+  .eyebrow-dark{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+    color:var(--grape); margin-bottom:12px; display:block;
+  }
+  .intro h1{ font-size:clamp(30px,5vw,46px); }
+  .intro p{ margin-top:14px; color:var(--ink-soft); max-width:66ch; font-size:16px; }
+
+  /* ===== help content ===== */
+  .help-content{ background:var(--paper-dim); border-top:1px solid var(--line); padding:0 0 88px; }
+  .help-section{ padding-top:48px; }
+  .help-section + .help-section{ margin-top:12px; }
+  .help-section-head{
+    font-family:'JetBrains Mono',monospace; font-size:clamp(15px,1.8vw,18px);
+    text-transform:uppercase; letter-spacing:0.08em; color:var(--grape); font-weight:600;
+    margin-bottom:18px; padding-bottom:10px; border-bottom:1px solid var(--line);
+  }
+  .help-section-intro{ color:var(--ink-soft); margin:-4px 0 18px; max-width:70ch; font-size:14px; }
+  .help-list{ display:grid; gap:10px; }
+  .help-card{
+    background:var(--card); border:1px solid var(--line); border-radius:var(--radius);
+    transition:border-color .15s, box-shadow .15s;
+  }
+  .help-card[open]{ border-color:var(--grape); box-shadow:0 6px 18px rgba(43,27,70,0.06); }
+  .help-card summary{
+    cursor:pointer; list-style:none; padding:18px 48px 18px 20px;
+    font-family:'Spectral',serif; font-size:18px; font-weight:600; position:relative;
+  }
+  .help-card summary::-webkit-details-marker{ display:none; }
+  .help-card summary::after{
+    content:'+'; position:absolute; right:20px; top:14px;
+    color:var(--grape); font-family:'Inter',sans-serif; font-size:24px; font-weight:400;
+  }
+  .help-card[open] summary::after{ content:'−'; }
+  .help-card summary:hover{ color:var(--grape); }
+  .help-answer{ padding:0 20px 20px; color:var(--ink-soft); font-size:14px; line-height:1.65; }
+  .help-answer p + p{ margin-top:12px; }
+  .help-answer ol{ margin:0 0 0 22px; padding-left:14px; }
+  .help-answer li + li{ margin-top:8px; }
+  .help-answer strong{ color:var(--ink); font-weight:600; }
+  .help-answer code{
+    font-family:'JetBrains Mono',monospace; font-size:0.9em;
+    color:var(--ink); background:var(--paper-dim); padding:2px 5px; border-radius:3px;
+  }
+  .help-answer a{ color:var(--grape); text-decoration:underline; text-underline-offset:3px; }
+  .help-answer a:hover{ color:var(--plum-deep); }
+  .help-tip{
+    margin-top:18px; padding:14px 18px 14px 20px;
+    border-left:3px solid var(--grape); background:var(--card);
+    border-radius:0 var(--radius) var(--radius) 0; color:var(--ink-soft); font-size:13.5px;
+  }
+  .resource-list{ display:grid; grid-template-columns:repeat(2,1fr); gap:10px; }
+  .resource-list a{
+    display:block; padding:12px 16px; background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); color:var(--ink); text-decoration:none; font-size:14px;
+  }
+  .resource-list a:hover{ border-color:var(--grape); color:var(--grape); }
+  .resource-list span{ display:block; color:var(--ink-soft); font-size:12px; margin-top:2px; }
+
+  /* ===== footer ===== */
+  footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
+  .foot-row{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:14px; }
+  .foot-wordmark{
+    font-family:'Spectral',serif; font-weight:600; font-size:16px;
+    display:flex; align-items:center; gap:8px;
+    color:var(--paper); text-decoration:none;
+  }
+  .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
+  .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
+  .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
+  .foot-links a:hover{ color:var(--paper); }
+  .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
+
+  /* ===== responsive ===== */
+  @media (max-width:560px){
+    .intro{ padding:54px 0 36px; }
+    .help-card summary{ font-size:17px; padding-left:16px; padding-right:42px; }
+    .help-answer{ padding-left:16px; padding-right:16px; }
+    .resource-list{ grid-template-columns:1fr; }
+    .foot-row{ flex-direction:column; align-items:flex-start; }
+    .foot-links{ gap:14px; }
+  }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="ham-wrap">
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ham-menu">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="ham-menu" id="ham-menu" role="navigation">
+        <a href="index.html">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#pro">Sutra Pro</a>
+        <a href="index.html#roadmap">Roadmap</a>
+        <a href="https://newsletter.sutra-reader.com/">Newsletter</a>
+        <a href="help.html" class="current">Help and FAQ</a>
+        <div class="ham-divider"></div>
+        <a href="changelog.html">Changelog</a>
+        <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
+        <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
+        <div class="ham-divider"></div>
+        <a href="privacy.html">Privacy</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="intro">
+  <div class="wrap">
+    <span class="eyebrow-dark">Support</span>
+    <h1>Help and FAQ</h1>
+    <p>Connect Sutra to your libraries and servers, find answers about reading and catalogs, and troubleshoot the most common connection and sync issues.</p>
+  </div>
+</section>
+
+<main class="help-content">
+  <div class="wrap">
+    <section class="help-section" id="connect-a-server">
+      <h2 class="help-section-head">Connect a Server</h2>
+      <p class="help-section-intro">Choose the server or catalog you use, then expand its guide for the steps. Sutra reads EPUB, PDF, DRM-free MOBI, and CBZ comic archives. CBR is not supported.</p>
+      <div class="help-list">
+        <details class="help-card">
+          <summary>Calibre (desktop app)</summary>
+          <div class="help-answer"><ol>
+            <li>Open Calibre and open your library.</li>
+            <li>Click <strong>Connect/share → Start Content server</strong> (or go to <strong>Preferences → Sharing → Sharing over the net</strong>).</li>
+            <li>Turn on <strong>Require username and password</strong> and set credentials — otherwise anyone on your network can browse your library.</li>
+            <li>Note your computer's IP address and the port shown (default <strong>8080</strong>).</li>
+            <li>In Sutra, tap <strong>Add Library</strong>, enter <code>http://&lt;your-computer's-IP&gt;:8080</code>, and enter the username/password if you set one. Sutra detects Calibre automatically.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Calibre-Web</summary>
+          <div class="help-answer"><ol>
+            <li>Install Calibre-Web (the <strong>linuxserver/calibre-web</strong> Docker image is the most common route) and point it at your Calibre library folder.</li>
+            <li>Sign in with the default admin account (<strong>admin</strong> / <strong>admin123</strong>) and change the password immediately.</li>
+            <li>In <strong>Admin → Basic Configuration</strong>, you can require login for all access if you want the OPDS feed protected.</li>
+            <li>The default port is <strong>8083</strong>.</li>
+            <li>In Sutra, tap <strong>Add Library</strong>, enter <code>http://&lt;server-ip&gt;:8083</code>, and sign in with your Calibre-Web username/password.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Calibre-Web-Automated</summary>
+          <div class="help-answer"><ol>
+            <li>In CWA's admin settings, make sure <strong>Enable OPDS</strong> is on, and that your user has the <strong>Allow OPDS</strong> permission.</li>
+            <li>The default port is <strong>8084</strong> (Calibre-Web's is 8083).</li>
+            <li>In Sutra, tap <strong>Add Library</strong>, enter an address such as <code>http://&lt;server-ip&gt;:8084</code> — adding <code>/opds</code> yourself also works — and sign in with that account's credentials.</li>
+            <li><strong>Behind a login page?</strong> If you reach CWA through a separate sign-in portal (Authelia, Authentik, Cloudflare Access, and the like), Sutra can't authenticate through it. Point Sutra at the server directly, or allow the OPDS path through the portal.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Kavita</summary>
+          <div class="help-answer"><ol>
+            <li>In Kavita, open <strong>Settings → 3rd Party Clients (OPDS)</strong> and copy your personal OPDS URL — it ends in <code>/api/opds/&lt;your-key&gt;</code>.</li>
+            <li>In Sutra, tap <strong>Add Library</strong> and paste that URL.</li>
+            <li>Sutra detects Kavita automatically and turns on page-accurate reading-progress sync with your server — no separate username/password is needed, since your API key is embedded in the URL.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Komga (Pro)</summary>
+          <div class="help-answer"><ol>
+            <li>In Komga, go to <strong>Settings → Users</strong> and note (or create) an account with access to the libraries you want in Sutra.</li>
+            <li>In Sutra, tap <strong>Add Library</strong> and enter just the server's bare address — for example <code>http://192.168.1.50:25600</code>, with no <code>/opds</code> path after it — then sign in with that account's email and password.</li>
+            <li>Sutra finds Komga's OPDS catalog automatically from there.</li>
+            <li><strong>Don't paste a full OPDS URL you copied from elsewhere</strong> (one ending in <code>/opds/v2/catalog</code> or similar). Sutra's address-completion expects to add the catalog path itself, and handing it an already-complete path can produce a “not found” error. If you've hit that, delete the library and re-add it with just the bare address.</li>
+            <li>Komga libraries (and their CBZ comics) require <strong>Sutra Pro</strong>.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>WebDAV (Synology, Nextcloud, and others)</summary>
+          <div class="help-answer"><ol>
+            <li>Tap <strong>Add Library → WebDAV Server</strong>.</li>
+            <li>Enter the server's address, username, and password. <strong>HTTPS is required by default</strong> — turn on <strong>Allow HTTP Connections</strong> in Settings → Network first if your server only supports plain <code>http://</code>.</li>
+            <li>If the server uses a self-signed HTTPS certificate, Sutra shows its fingerprint the first time and asks you to confirm you trust it — a one-time check per server.</li>
+            <li>Sutra lists every EPUB, PDF, CBZ, and MOBI file it finds in the folder tree. WebDAV is <strong>read-only</strong> in Sutra: books can be browsed and read, but not uploaded, renamed, or deleted.</li>
+            <li><strong>Synology DSM:</strong> enable the WebDAV package first — it commonly runs on a non-standard port (<strong>5006</strong> by default), e.g. <code>https://&lt;host&gt;:5006</code>.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Grimmory</summary>
+          <div class="help-answer"><ol>
+            <li>In Grimmory, go to <strong>Settings → OPDS</strong> and turn it on if it isn't already.</li>
+            <li>Create a dedicated OPDS account (username + password) — this is separate from your normal Grimmory login, so you can revoke it later without affecting your main account.</li>
+            <li>Note the OPDS endpoint shown (typically ending in <code>/api/v1/opds</code>).</li>
+            <li>In Sutra, tap <strong>Add Library</strong>, enter your Grimmory server's URL, and sign in with the <strong>OPDS account's</strong> username and password — not your regular Grimmory login.</li>
+            <li>Your Grimmory <strong>shelves</strong> appear automatically under Library's <strong>Collections</strong> sort — one entry per shelf, kept in sync with your server (read-only here).</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Booklore</summary>
+          <div class="help-answer"><p>Grimmory is a community fork of Booklore, so the setup is nearly identical.</p><ol>
+            <li>In Booklore, go to <strong>Settings → OPDS</strong> and turn it on.</li>
+            <li>Create a dedicated OPDS account, separate from your main login.</li>
+            <li>In Sutra, tap <strong>Add Library</strong>, enter your Booklore server's URL, and sign in with the OPDS account's credentials.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>OPDShelf</summary>
+          <div class="help-answer"><ol>
+            <li>If you're prompted for a username/password, ask whoever runs the server. It is set once, via <code>ADMIN_USERNAME</code>/<code>ADMIN_PASSWORD</code>, when the server was started — many setups run with no login at all.</li>
+            <li>In Sutra, tap <strong>Add Library</strong> and enter the server's address and port (default <strong>3000</strong>), e.g. <code>http://192.168.1.50:3000</code>.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>BookOrbit</summary>
+          <div class="help-answer"><ol>
+            <li>In BookOrbit, go to <strong>Settings → OPDS</strong>, and turn on <strong>OPDS Catalog Server</strong> if it's off.</li>
+            <li>Create an OPDS account (username, password, and a default sort order) — separate from your normal BookOrbit login.</li>
+            <li>Give that account the <strong>OPDS access</strong> permission.</li>
+            <li>Copy the endpoint URL shown on that screen.</li>
+            <li>In Sutra, tap <strong>Add Library</strong>, paste that URL, and sign in with the OPDS account's credentials.</li>
+          </ol></div>
+        </details>
+
+        <details class="help-card">
+          <summary>Audiobookshelf</summary>
+          <div class="help-answer"><p>Audiobookshelf doesn't have a built-in OPDS feed, so Sutra can't connect to it directly — and Sutra can only ever read <strong>ebooks</strong> from it (EPUB, PDF, MOBI), never play audiobooks. You'll need a small, separate, community-maintained bridge (not affiliated with Sutra or Audiobookshelf) that turns your Audiobookshelf library into an OPDS feed — one option is <a href="https://github.com/vito0912/abs-opds" target="_blank" rel="noopener">abs-opds</a>.</p><ol>
+            <li>Set up the bridge (commonly via Docker Compose) alongside your Audiobookshelf server, pointing it at your Audiobookshelf server's URL.</li>
+            <li>It serves its own OPDS feed, by default at <code>http://&lt;bridge-ip&gt;:3010/opds</code>.</li>
+            <li>Depending on how it's configured, sign in with either your normal Audiobookshelf username/password, or separate credentials the bridge's admin set up for it.</li>
+            <li>In Sutra, tap <strong>Add Library</strong> and enter the <strong>bridge's</strong> URL — not Audiobookshelf's own address.</li>
+          </ol></div>
+        </details>
+      </div>
+      <div class="help-tip"><strong>Tip:</strong> whatever server you use, Sutra reads EPUB, PDF, DRM-free MOBI, and CBZ comic archives. CBR isn't supported.</div>
+    </section>
+
+    <section class="help-section" id="getting-started">
+      <h2 class="help-section-head">Getting Started</h2>
+      <div class="help-list">
+        <details class="help-card"><summary>How do I connect to a Kavita server?</summary><div class="help-answer"><p>In Kavita, open <strong>Settings → 3rd Party Clients (OPDS)</strong> and copy your personal OPDS URL — it ends in <code>/api/opds/&lt;your-key&gt;</code>. In Sutra, tap <strong>Add Library</strong>, paste that URL, and tap <strong>Connect</strong>. Sutra detects Kavita automatically and turns on page-accurate progress sync with your server.</p></div></details>
+        <details class="help-card"><summary>How do I connect to a Calibre server?</summary><div class="help-answer"><p>Sutra works with the <strong>Calibre Content Server</strong> and <strong>calibre-web</strong> over OPDS. Start your server, then in Sutra tap <strong>Add Library</strong> and enter its address (for example <code>http://192.168.1.5:8080</code>). If it asks for a username and password, add them. Sutra finds the <code>/opds</code> feed automatically — you don't need the full path.</p></div></details>
+        <details class="help-card"><summary>How do I add free books from Project Gutenberg?</summary><div class="help-answer"><p>Tap <strong>Add Library → Project Gutenberg</strong> — no account needed. The most popular titles appear in your Library, and Search reaches the whole 75,000-book catalog. Downloads are standard EPUBs you can read offline.</p></div></details>
+        <details class="help-card"><summary>How do I add Standard Ebooks?</summary><div class="help-answer"><p>Tap <strong>Add Library → Standard Ebooks</strong>. No server address is needed — it's a built-in preset, like Gutenberg. Leave the email field blank for the free public catalog, or enter the email you used to become a <strong>Patrons Circle</strong> member to unlock the full collection.</p></div></details>
+        <details class="help-card"><summary>How are CBZ files from Kavita and Komga streamed?</summary><div class="help-answer"><p>CBZ comics from <strong>Kavita</strong> and <strong>Komga</strong> are streamed page by page by default when you open them, so Sutra doesn't download the entire comic before you can start reading. To download the complete CBZ for offline reading, open the book's detail page and tap the <strong>Download</strong> button.</p></div></details>
+        <details class="help-card"><summary>How do I enable CBZ streaming in Komga?</summary><div class="help-answer"><p>The Komga account you use in Sutra must have the <strong>Page Streaming</strong> permission enabled. In Komga, open <strong>Settings → Users</strong>, edit that account, and turn on <strong>Page Streaming</strong>. The account must also be allowed to access the library containing the comics. Without this permission, Sutra cannot request individual pages and will offer the complete CBZ download instead.</p></div></details>
+        <details class="help-card"><summary>How do I refresh my libraries?</summary><div class="help-answer"><p>Pull down from the top of the Library screen and release. Sutra re-syncs every connected library at once — watch each server's green status dot on the <strong>Settings</strong> screen turn into a spinner while it's refreshing.</p></div></details>
+        <details class="help-card"><summary>How do I connect to a WebDAV server?</summary><div class="help-answer"><p>Tap <strong>Add Library → WebDAV Server</strong> and enter the server's address, username, and password (for example, a Synology NAS's WebDAV share or Nextcloud). Sutra browses the folder tree and lists EPUB, PDF, CBZ, and MOBI files it finds. If the server uses a self-signed HTTPS certificate, Sutra shows its fingerprint the first time and asks you to confirm you trust it before connecting — this is a one-time check per server. WebDAV is read-only in Sutra: books can be browsed and read, but not uploaded, renamed, or deleted.</p></div></details>
+        <details class="help-card"><summary>Which file formats are supported?</summary><div class="help-answer"><p>Sutra reads <strong>EPUB</strong> and <strong>PDF</strong> for free. <strong>CBZ</strong> comic archives and DRM-free <strong>MOBI</strong> need <strong>Sutra Pro</strong> (a one-time purchase — see below). DRM-protected files can't be opened — only files you're free to read without restriction. Sutra doesn't endorse piracy: it's built for content you already own or have the legal right to read, and takes no responsibility for the files you load. CBR isn't supported.</p></div></details>
+        <details class="help-card"><summary>What does Sutra Pro unlock?</summary><div class="help-answer"><p><strong>Sutra Pro</strong> is a one-time <strong>$6.99</strong> purchase — no subscription. It unlocks <strong>Komga</strong> libraries, <strong>CBZ</strong> comic archives, and DRM-free <strong>MOBI</strong> books. Everything else — Calibre, Kavita, Project Gutenberg, Standard Ebooks, and EPUB/PDF reading — stays free forever. Tap <strong>Upgrade to Sutra Pro</strong> in Settings, or <strong>Restore Purchase</strong> if you've already bought it on another device.</p></div></details>
+        <details class="help-card"><summary>How does Panel Mode work?</summary><div class="help-answer"><p>CBZ comics, scanned PDF comics, and fixed-layout comic EPUB/MOBI files always open on the full page — Sutra detects each page's panel layout automatically. Tap the toggle button (▦ ⟷ ▭) to jump to a cropped, one-panel-at-a-time view, and tap it again anytime to zoom back out. Pages where no panels are detected just show as full pages, so nothing is ever hidden.</p></div></details>
+        <details class="help-card"><summary>Why can't I select text spanning more than one page?</summary><div class="help-answer"><p>In Paginated mode, a drag can either extend a text selection or turn the page — Sutra locks page-turning while you're actively selecting so the two don't fight each other, but that also means a selection can't be dragged past the edge of the current page. If you need to select a longer passage that crosses a page break, open the reader's display options and turn off <strong>Paginated</strong> (EPUB) or <strong>Paged</strong> (PDF) to switch to scroll mode, select across as much text as you like, then switch back.</p></div></details>
+        <details class="help-card"><summary>Why does my library appear instantly now, even before it's done syncing?</summary><div class="help-answer"><p>Sutra now remembers each library's books on your device, so reopening the app shows your shelf immediately instead of waiting on a fresh crawl — especially noticeable on large self-hosted libraries. It still syncs with your server in the background right away; anything that changed (new books, removed ones) updates automatically once that finishes.</p></div></details>
+        <details class="help-card"><summary>How do I browse by author, series, collection, or favorites?</summary><div class="help-answer"><p>Tap the <strong>sort icon</strong> on the Library tab (next to the search bar) and choose <strong>Author</strong>, <strong>Series</strong>, or <strong>Collections</strong> — each shows a tappable list of groups (with a book count) instead of the usual grid; tap one to see its books. <strong>Favorites</strong> shows your hearted books directly, as a flat grid, since there's only ever one Favorites group. This replaces the old separate Shelf tab — everything it had (your collections, Favorites, series grouping, and any server-provided shelves) now lives under Library's sort menu instead.</p></div></details>
+        <details class="help-card"><summary>Can I hide certain libraries from a server, without disconnecting it?</summary><div class="help-answer"><p>Yes — in <strong>Settings → Libraries</strong>, tap the server, then check the <strong>Libraries</strong> section on its detail screen. Every library that server exposes appears there with a checkbox; unchecking one hides just its books from Sutra without disconnecting the server or affecting anyone else who uses it. Selection syncs across your devices via iCloud, the same as reading progress.</p></div></details>
+      </div>
+    </section>
+
+    <section class="help-section" id="troubleshooting">
+      <h2 class="help-section-head">Troubleshooting</h2>
+      <div class="help-list">
+        <details class="help-card"><summary>Sutra can't reach my server.</summary><div class="help-answer"><p>Make sure your device is on the same network as the server (or connected via VPN / Tailscale for remote access), and double-check the address, port, and any username/password. Opening the same URL in Safari is a quick way to confirm the server is reachable.</p><p><strong>Using Tailscale?</strong> Enter your server's MagicDNS name (something like <code>myserver.tailnet-name.ts.net</code>) instead of its raw <code>100.x.x.x</code> address. Sutra can only connect over plain HTTP using that hostname — the numeric Tailscale address needs HTTPS configured on your server to work. This is an iOS restriction (App Transport Security), not a Sutra setting — turning on Allow HTTP Connections in Settings → Network doesn't change it.</p><p><strong>Using Headscale, NetBird, ZeroTier, or another mesh VPN?</strong> Same rule: a hostname works over plain HTTP if the VPN gives you one (Headscale's MagicDNS, if you've set up your own base domain), but a raw IP from any of these needs HTTPS on your server.</p></div></details>
+        <details class="help-card"><summary>No books show up after connecting.</summary><div class="help-answer"><p>Sutra syncs every connected library automatically each time you open the app — if you don't want to wait, pull down in the Library to resync all of them, or go to <strong>Settings → Libraries</strong>, tap the server, and tap <strong>Sync</strong> to refresh just that one. Confirm the server actually has books Sutra can read — <strong>EPUB, PDF, DRM-free MOBI, or CBZ</strong>. A library that's entirely CBR comics will show a “not in a format Sutra supports” message. Very large catalogs load in the background — give it a moment.</p></div></details>
+        <details class="help-card"><summary>Online search returns nothing.</summary><div class="help-answer"><p>Some servers don't support server-side search; Sutra still filters the books it has loaded. Searching Gutenberg or other online catalogs requires an internet connection. If a source fails, the reason now appears under <strong>Online Catalogs</strong> in the results.</p></div></details>
+        <details class="help-card"><summary>Project Gutenberg books aren't loading.</summary><div class="help-answer"><p>Gutenberg's free catalog is served by community services (the Gutendex API and gutenberg.org) that sometimes go down for maintenance or get slow. Sutra automatically falls back between them, but if both are unavailable you'll see a “couldn't reach” message — just try again later and pull down to refresh. Your own Kavita/Calibre libraries and any downloaded books are unaffected.</p></div></details>
+        <details class="help-card"><summary>Why am I only seeing a small number of books in the grid when I add Gutenberg?</summary><div class="help-answer"><p>That's expected — Sutra's Gutenberg Library grid only shows an initial pull of its most popular titles (around 30), not the whole catalog. The rest of Gutenberg's roughly 75,000 books are there — use <strong>Search</strong> to reach the full catalog by title or author, and download anything you find from the results.</p></div></details>
+        <details class="help-card"><summary>My reading position isn't syncing.</summary><div class="help-answer"><p><strong>Kavita</strong> syncs page-accurate progress with its own server automatically. For every other library, turn on <strong>iCloud Progress Sync</strong> in Settings and make sure you're signed into iCloud on each device. Reflowable EPUBs sync your overall position; PDFs sync the exact page.</p></div></details>
+        <details class="help-card"><summary>Some covers show a warning triangle and won't open.</summary><div class="help-answer"><p>That means Sutra couldn't reach that book's library on the most recent sync — the cover still shows (from what was loaded last time) so you know it exists, but there's nothing to actually read until the connection recovers. Tap the book for the option to sync again right away. If a library stays unreachable across two app opens in a row, its books are hidden from the Library grid entirely (already-downloaded books stay available regardless) — nothing is deleted, and they reappear automatically the next time that library syncs successfully.</p></div></details>
+      </div>
+    </section>
+
+    <section class="help-section" id="resources">
+      <h2 class="help-section-head">Resources</h2>
+      <div class="resource-list">
+        <a href="https://www.kavitareader.com" target="_blank" rel="noopener">Kavita<span>kavitareader.com</span></a>
+        <a href="https://github.com/Kareadita/Kavita" target="_blank" rel="noopener">Kavita on GitHub<span>github.com/Kareadita/Kavita</span></a>
+        <a href="https://calibre-ebook.com" target="_blank" rel="noopener">Calibre<span>calibre-ebook.com</span></a>
+        <a href="https://github.com/janeczku/calibre-web" target="_blank" rel="noopener">calibre-web<span>github.com/janeczku/calibre-web</span></a>
+        <a href="https://grimmory.org" target="_blank" rel="noopener">Grimmory<span>grimmory.org</span></a>
+        <a href="https://booklore.org" target="_blank" rel="noopener">Booklore<span>booklore.org</span></a>
+        <a href="https://github.com/DanielPereod/opdshelf" target="_blank" rel="noopener">OPDShelf<span>github.com/DanielPereod/opdshelf</span></a>
+        <a href="https://bookorbit.app" target="_blank" rel="noopener">BookOrbit<span>bookorbit.app</span></a>
+        <a href="https://www.audiobookshelf.org" target="_blank" rel="noopener">Audiobookshelf<span>audiobookshelf.org</span></a>
+        <a href="https://github.com/vito0912/abs-opds" target="_blank" rel="noopener">abs-opds (OPDS bridge)<span>github.com/vito0912/abs-opds</span></a>
+        <a href="https://www.gutenberg.org" target="_blank" rel="noopener">Project Gutenberg<span>gutenberg.org</span></a>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <a href="index.html" class="foot-wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="foot-links">
+      <a href="changelog.html">Changelog</a>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
+      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+    </div>
+    <span class="copyright">© 2026 Sutra</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.getElementById('hamburger');
+  var menu = document.getElementById('ham-menu');
+  var wrap = btn.parentNode;
+  function close(){ menu.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); var open = menu.classList.toggle('open'); btn.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); });
+  document.addEventListener('click', function(e){ if (!wrap.contains(e.target)) close(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+})();
+</script>
+
+</body>
+</html>
