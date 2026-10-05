@@ -97,6 +97,17 @@
     font-size:12px; color:var(--ink-soft);
   }
 
+  /* ===== platform tabs ===== */
+  .policy-tabs{ margin-top:22px; display:flex; gap:6px; }
+  .policy-tab{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.03em;
+    padding:7px 18px; border-radius:100px; cursor:pointer;
+    border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
+    transition:background .12s, border-color .12s, color .12s;
+  }
+  .policy-tab:hover{ color:var(--ink); border-color:rgba(43,27,70,0.3); }
+  .policy-tab.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+
   /* ===== prose ===== */
   .prose-wrap{
     padding:44px 0 96px;
@@ -202,6 +213,10 @@
     <span class="eyebrow-dark">Legal</span>
     <h1>Privacy Policy</h1>
     <p class="intro-meta" id="effective-date">Effective June 2026</p>
+    <div class="policy-tabs" role="tablist" aria-label="Choose platform">
+      <button class="policy-tab" id="tab-ios" role="tab" data-platform="ios" type="button">iOS</button>
+      <button class="policy-tab" id="tab-android" role="tab" data-platform="android" type="button">Android</button>
+    </div>
   </div>
 </section>
 
@@ -297,6 +312,71 @@
     'on this repo.'
   ].join('\n');
 
+  var ANDROID_FALLBACK = [
+    "# Privacy Policy",
+    "",
+    "Effective October 2026",
+    "",
+    "This policy covers the Sutra app for Android. (The iOS app has its own policy in",
+    "[PRIVACY.md](PRIVACY.md).) In short: Sutra does not collect your data, track",
+    "you, or run analytics.",
+    "",
+    "## What We Collect",
+    "",
+    "Nothing. Sutra has no account system and no backend of ours. It has no",
+    "analytics, crash reporting, advertising, or telemetry, and it does not upload",
+    "diagnostics. We do not collect, transmit, or sell personal information.",
+    "",
+    "## What Stays on Your Device",
+    "",
+    "- **Library and reading data** — your connected servers, cached catalog,",
+    "  favorites, collections, bookmarks, highlights, notes, reading progress, and",
+    "  reading statistics are stored locally in the app's private storage.",
+    "- **Server credentials** — usernames, passwords, and API keys you enter are",
+    "  encrypted with the Android Keystore and are sent only to the server you",
+    "  connect to, to authenticate your requests.",
+    "- **Downloaded and imported books** — stored on your device for offline",
+    "  reading.",
+    "- **No cloud backup** — Sutra opts out of Android's automatic backup and",
+    "  device-to-device transfer, so this data does not leave your device unless you",
+    "  export it yourself.",
+    "",
+    "## Exporting Your Data",
+    "",
+    "Settings includes an \"Export My Data\" option that writes your reading data to a",
+    "JSON file you choose where to save. Sutra does not send that file anywhere; what",
+    "you do with it is up to you.",
+    "",
+    "## Third-Party Servers",
+    "",
+    "When you connect a server or catalog (for example your Kavita, Komga, Calibre,",
+    "or WebDAV server, another OPDS catalog, Project Gutenberg, or Standard Ebooks),",
+    "the app communicates directly with it. For Kavita and Komga, reading progress is",
+    "sent to your own server. Those services have their own privacy practices, which",
+    "we do not control.",
+    "",
+    "## Purchases",
+    "",
+    "Sutra Pro and tips are processed by Google Play Billing. Google handles your",
+    "payment information; Sutra receives only whether a purchase is active, and we do",
+    "not see your payment details.",
+    "",
+    "## Children",
+    "",
+    "Sutra is not directed at children under 13 and does not knowingly collect",
+    "information from them.",
+    "",
+    "## Changes",
+    "",
+    "We may update this policy; material changes will be reflected here with a new",
+    "effective date.",
+    "",
+    "## Contact",
+    "",
+    "Questions? [Open an issue](https://github.com/koustavdg/sutra-support/issues)",
+    "on the support repo."
+  ].join('\n');
+
   function esc(s){
     return String(s)
       .replace(/&/g,'&amp;')
@@ -320,7 +400,11 @@
     var html = '';
 
     blocks.forEach(function(block){
-      var lines = block.split('\n');
+      var lines = block.split('\n').reduce(function(acc, l){
+        if (acc.length && /^\s+\S/.test(l)) acc[acc.length - 1] += ' ' + l.trim();
+        else acc.push(l);
+        return acc;
+      }, []);
       var first = lines[0];
 
       if (first.startsWith('# ')){
@@ -365,23 +449,53 @@
     return m ? 'Effective ' + m[1] : null;
   }
 
-  function applyContent(md){
+  function applyContent(md, platform){
     var date = extractEffectiveDate(md);
-    if (date){
-      var el = document.getElementById('effective-date');
-      if (el) el.textContent = date;
-    }
-    // Remove h1 and effective date line from prose since we show them in the intro
+    var el = document.getElementById('effective-date');
+    if (date && el) el.textContent = date;
     var prose = md.replace(/^# .+\n?/m, '').replace(/^Effective .+\n?/m, '').trim();
+    if (platform === 'android') prose = prose.replace('](PRIVACY.md)', '](#ios)');
     document.getElementById('prose').innerHTML = render(prose);
   }
 
-  applyContent(FALLBACK);
+  var base = 'https://raw.githubusercontent.com/koustavdg/sutra-support/main/';
+  var policies = {
+    ios: { md: FALLBACK, url: base + 'PRIVACY.md' },
+    android: { md: ANDROID_FALLBACK, url: base + 'PRIVACY-ANDROID.md' }
+  };
+  var current = null;
 
-  fetch('https://raw.githubusercontent.com/koustavdg/sutra-support/main/PRIVACY.md')
-    .then(function(r){ return r.ok ? r.text() : Promise.reject(); })
-    .then(function(md){ applyContent(md); })
-    .catch(function(){});
+  function show(platform){
+    current = platform;
+    ['ios', 'android'].forEach(function(p){
+      var tab = document.getElementById('tab-' + p);
+      tab.classList.toggle('active', p === platform);
+      tab.setAttribute('aria-selected', String(p === platform));
+    });
+    applyContent(policies[platform].md, platform);
+  }
+
+  document.querySelectorAll('.policy-tab').forEach(function(tab){
+    tab.addEventListener('click', function(){
+      show(tab.dataset.platform);
+      history.replaceState(null, '', '#' + tab.dataset.platform);
+    });
+  });
+
+  document.getElementById('prose').addEventListener('click', function(e){
+    var a = e.target.closest('a[href="#ios"]');
+    if (a){ e.preventDefault(); show('ios'); history.replaceState(null, '', '#ios'); window.scrollTo(0, 0); }
+  });
+
+  var hash = location.hash.replace('#', '');
+  show(hash === 'android' || hash === 'ios' ? hash : (document.documentElement.classList.contains('is-android') ? 'android' : 'ios'));
+
+  Object.keys(policies).forEach(function(p){
+    fetch(policies[p].url)
+      .then(function(r){ return r.ok ? r.text() : Promise.reject(); })
+      .then(function(md){ policies[p].md = md; if (current === p) applyContent(md, p); })
+      .catch(function(){});
+  });
 })();
 </script>
 
