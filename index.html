@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sutra — Read everything. Books and comics.</title>
-<meta name="description" content="Sutra is the best way to read your books and comics on iOS. Connect Kavita, Calibre, Komga, or any OPDS server. Panel-aware comics, EPUB auto-scrolling, and sideloading — free.">
+<meta name="description" content="Sutra is the best way to read your books and comics on iOS and Android. Connect Kavita, Calibre, Komga, or any OPDS server. Panel-aware comics, EPUB auto-scrolling, and sideloading — free.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -124,6 +124,9 @@
   .badge-store:hover{ opacity:0.82; transform:translateY(-1px); }
   .badge-store img{ display:block; height:52px; width:auto; }
   .badge-android img{ height:67px; }
+  .is-android .badge-android{ order:-1; }
+  .store-links{ display:flex; flex-direction:column; }
+  .is-android .foot-play{ order:-1; }
   .badge-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
   @media (max-width:600px){ .badge-row{ flex-direction:column; align-items:flex-start; } }
   .cta-note{ font-size:13px; color:#B3A2D6; font-family:'JetBrains Mono',monospace; }
@@ -329,6 +332,9 @@
   }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 </style>
+<script>
+(function(){ if (/Android/i.test(navigator.userAgent || '')) document.documentElement.classList.add('is-android'); })();
+</script>
 </head>
 <body>
 
@@ -350,7 +356,7 @@
         <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
         <div class="ham-divider"></div>
         <a href="privacy.html">Privacy</a>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta" data-store>Get the app →</a>
       </nav>
     </div>
   </div>
@@ -361,7 +367,7 @@
   <div class="wrap hero-grid">
     <div>
       <div class="icon-tile"><img src="assets/app-icon.png" alt="Sutra app icon"></div>
-      <div class="eyebrow">EPUB · COMICS · OPDS · WEBDAV · iOS</div>
+      <div class="eyebrow">EPUB · COMICS · OPDS · WEBDAV · iOS · ANDROID</div>
       <h1>Sutra</h1>
       <div class="tagline">A thread that binds your books</div>
       <p class="lede">Sutra — the app to read all your DRM-free content. Connect your <em>Kavita, Calibre, Komga, or WebDAV</em> server, any OPDS catalog, or Project Gutenberg's full public-domain library. Load local files, read manga and comics panel by panel, track your reading stats, and auto-scroll through long reads.</p>
@@ -370,11 +376,11 @@
           <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="badge-store">
             <img src="assets/badge-appstore-white.svg" alt="Download on the App Store">
           </a>
-          <a href="#newsletter" class="badge-store badge-android">
+          <a href="#newsletter" class="badge-store badge-android" data-play>
             <img src="assets/coming_soon_android.png" alt="Coming Soon on Android">
           </a>
         </div>
-        <span class="cta-note">Free on the App Store · Preview any comic or MOBI free · Sutra Pro unlocks .cbz, .mobi &amp; Komga</span>
+        <span class="cta-note">Free on the App Store and Google Play · Preview any comic or MOBI free · Sutra Pro unlocks .cbz, .mobi &amp; Komga</span>
         <a href="drm-free.html" class="cta-drm-link">Where to legally buy DRM-free books →</a>
       </div>
       <div class="thread-row">
@@ -467,12 +473,12 @@
       <div class="card" data-code="OPDS·02"><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection, no server required. Gutenberg is offered right in first-run setup, and search is more reliable, with duplicates removed. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
       <div class="card" data-code="LIB·01"><h3>A library that sorts your way</h3><p>Sort by Recently Read, Title, Author, or Date Added. Books with no artwork get a clean title-and-author cover instead of a blank tile.</p></div>
       <div class="card" data-code="LIB·02"><h3>Series, Collections &amp; Favorites</h3><p>Series appear as grid tiles, and books from the same series stack with a count. Collections open in a consistent grid, and you can rename your own. Favorites is built in, always first, with its own heart-marked card.</p></div>
-      <div class="card" data-code="READ·01"><h3>EPUB, PDF &amp; MOBI</h3><p>Authentic page-curl, rich typography controls, five reading themes including high-contrast Contrast, and in-book search. There's a two-panel facing-page spread on iPad, and you can dim just the reader from the Aa menu without touching system brightness.</p></div>
+      <div class="card" data-code="READ·01"><h3>EPUB, PDF &amp; MOBI</h3><p>Authentic page-curl, rich typography controls, five reading themes including high-contrast Contrast, and in-book search. There's a two-panel facing-page spread on iPad and Android tablets, and you can dim just the reader from the Aa menu without touching system brightness.</p></div>
       <div class="card" data-code="READ·02"><h3>Panel-aware CBZ comics &amp; manga</h3><p>Sutra reads panels one at a time, with full right-to-left manga mode. CBZ streams straight from Komga and Kavita, and upcoming pages are prepared ahead of time, so page turns feel instant. Switch any book between Regular and Manga from the Aa menu.</p></div>
       <div class="card" data-code="READ·03"><h3>Auto-scrolling</h3><p>Set your pace and let the page flow. Swipe up or down to adjust speed on the fly, or tap to pause and resume. Perfect for hands-free reading.</p></div>
-      <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB, PDF, CBZ, and MOBI files from your Files app, AirDrop, or any share sheet. No server required.</p></div>
-      <div class="card" data-code="READ·05"><h3>Highlights, Dictionary &amp; Footnotes</h3><p>Highlight in color and double-tap a word to define it. Tap a footnote and it opens in a sheet, so you never lose your place. Highlights and lookups sync via iCloud.</p></div>
-      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs position, bookmarks, and highlights across your devices. Kavita and Komga sync is page-accurate, and finishing a book syncs back to your server too.</p></div>
+      <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB, PDF, CBZ, and MOBI files from your device's file manager or any share sheet, plus AirDrop on iOS. No server required.</p></div>
+      <div class="card" data-code="READ·05"><h3>Highlights, Dictionary &amp; Footnotes</h3><p>Highlight in color and double-tap a word to define it. Tap a footnote and it opens in a sheet, so you never lose your place. Highlights and lookups sync via iCloud on iOS, with Export on Android.</p></div>
+      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs position, bookmarks, and highlights across your iOS devices, and Android has Export. Kavita and Komga sync is page-accurate, and finishing a book syncs back to your server too.</p></div>
       <div class="card" data-code="STAT·01"><h3>Reading Statistics</h3><p>A Stats tab tracks time read, your streak, a swipeable activity chart, and progress across your library. Time-remaining estimates learn your reading speed for each format.</p></div>
       <div class="card" data-code="PRO·01"><h3>Try Before You Buy</h3><p>Every CBZ comic and comic-shaped MOBI book opens with a free 7-page preview — read the first 7 pages of anything in your library before deciding whether to unlock Sutra Pro.</p></div>
     </div>
@@ -509,7 +515,7 @@
           <li>7-page free preview of any CBZ or MOBI book</li>
           <li>Auto-scrolling with swipe-to-adjust speed</li>
           <li>Sideload files from your phone</li>
-          <li>Color highlights synced via iCloud</li>
+          <li>Color highlights — iCloud sync on iOS, Export on Android</li>
           <li>Dictionary, inline footnotes, bookmarks, and in-book search</li>
           <li>Library sorting, series stacks, Collections &amp; Favorites</li>
           <li>WebDAV server browsing and downloads</li>
@@ -531,12 +537,12 @@
           <li>.cbz comic archives — read comic archives in a fixed-layout, zoomable page reader</li>
           <li>DRM-free MOBI books — read .mobi files you own</li>
         </ul>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-pro">
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-pro" data-store>
           Unlock Sutra Pro →
         </a>
       </div>
     </div>
-    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a> Sutra Pro is a one-time purchase tied to your Apple Account.</p>
+    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a> Sutra Pro is a one-time purchase tied to your Apple Account or Google Play account.</p>
   </div>
 </section>
 
@@ -684,7 +690,10 @@
       </div>
       <div class="sitemap-col">
         <span class="sitemap-head">Links</span>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+        <div class="store-links">
+          <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+          <a href="#newsletter" class="foot-play" data-play>Google Play</a>
+        </div>
         <a href="privacy.html">Privacy Policy</a>
       </div>
     </div>
@@ -698,6 +707,16 @@
   </div>
 </footer>
 
+<script>
+(function(){
+  var PLAY_URL = '';
+  if (!PLAY_URL) return;
+  document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
+  if (document.documentElement.classList.contains('is-android')) {
+    document.querySelectorAll('a[data-store]').forEach(function(a){ a.href = PLAY_URL; });
+  }
+})();
+</script>
 <script>
 (function(){
   var btn = document.getElementById('hamburger');
