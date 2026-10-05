@@ -156,6 +156,7 @@
   .foot-wordmark img{ width:26px; height:26px; border-radius:7px; display:block; }
   .foot-links{ display:flex; gap:22px; flex-wrap:wrap; }
   .foot-links a{ font-size:13px; color:#CBB9EA; text-decoration:none; }
+  .is-android .foot-play{ order:-1; }
   .foot-links a:hover{ color:var(--paper); }
   .copyright{ font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#9880BB; }
 
@@ -166,6 +167,9 @@
   }
   @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } }
 </style>
+<script>
+(function(){ if (/Android/i.test(navigator.userAgent || '')) document.documentElement.classList.add('is-android'); })();
+</script>
 </head>
 <body>
 
@@ -187,7 +191,7 @@
         <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
         <div class="ham-divider"></div>
         <a href="privacy.html" class="current">Privacy</a>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta">Get the app →</a>
+        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta" data-store>Get the app →</a>
       </nav>
     </div>
   </div>
@@ -217,11 +221,22 @@
       <a href="feedback.html">Feedback</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
+      <a href="index.html#newsletter" class="foot-play" data-play>Google Play</a>
     </div>
     <span class="copyright">© 2026 Sutra</span>
   </div>
 </footer>
 
+<script>
+(function(){
+  var PLAY_URL = '';
+  if (!PLAY_URL) return;
+  document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
+  if (document.documentElement.classList.contains('is-android')) {
+    document.querySelectorAll('a[data-store]').forEach(function(a){ a.href = PLAY_URL; });
+  }
+})();
+</script>
 <script>
 (function(){
   var btn = document.getElementById('hamburger');
