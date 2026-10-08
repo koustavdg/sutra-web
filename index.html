@@ -206,12 +206,12 @@
   .strip-cap{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; }
 
   /* ===== newsletter ===== */
-  .newsletter{ background:var(--ink); padding:72px 0; }
+  .newsletter{ background:var(--plum-deep); padding:72px 0; }
   .newsletter-wrap{ display:flex; align-items:center; gap:60px; }
   .newsletter-text{ flex:0 1 auto; max-width:520px; }
-  .newsletter-text .eyebrow-dark{ color:var(--grape); }
+  .newsletter-text .eyebrow-dark{ color:#C9B8E8; }
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
-  .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.6); line-height:1.6; }
+  .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.72); line-height:1.6; }
   .newsletter-btn{
     display:inline-block; margin-top:22px; background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:17px 44px; border-radius:var(--radius);
@@ -273,45 +273,47 @@
   .pro-footer-note .inline-link{ color:#E5DBF5; text-decoration:underline; text-underline-offset:2px; }
 
   /* ===== roadmap ===== */
-  .roadmap{ background:var(--plum-deep); color:var(--paper); padding:92px 0; }
-  .roadmap .section-head h2{ color:#F8F2E3; }
-  .roadmap .eyebrow-dark{ color:#C9B8E8; }
+  .roadmap{ background:var(--paper); color:var(--ink); padding:92px 0; border-top:1px solid var(--line); }
+  .roadmap .section-head h2{ color:var(--ink); }
+  .roadmap .eyebrow-dark{ color:var(--grape); }
   .version-list{ display:flex; flex-direction:column; }
-  .version{ display:grid; grid-template-columns:120px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line-on-plum); }
-  .version:last-child{ border-bottom:1px solid var(--line-on-plum); }
-  .version-num{ font-family:'Spectral',serif; font-size:34px; color:#C9B8E8; line-height:1; }
+  .version{ display:grid; grid-template-columns:120px 1fr; gap:28px; padding:28px 0; border-top:1px solid var(--line); }
+  .version:last-child{ border-bottom:1px solid var(--line); }
+  .version-num{ font-family:'Spectral',serif; font-size:34px; color:var(--ink); line-height:1; }
   .version-num.label{ font-size:22px; }
   .version-status{
-    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:#B3A2D6;
+    display:block; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--ink-soft);
     margin-top:8px; text-transform:uppercase; letter-spacing:0.06em;
   }
   .version ul{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 28px; }
-  .version li{ font-size:14.5px; color:#E5DBF5; padding-left:16px; position:relative; }
-  .version li::before{ content:"—"; position:absolute; left:0; color:#9E86CC; }
+  .version li{ font-size:14.5px; color:var(--ink-soft); padding-left:16px; position:relative; }
+  .version li::before{ content:"—"; position:absolute; left:0; color:var(--grape); }
   .changelog-link{ margin-top:36px; }
   .changelog-link a{
-    font-family:'JetBrains Mono',monospace; font-size:13px; color:#C9B8E8;
+    font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--grape);
     text-decoration:underline; text-underline-offset:3px;
   }
-  .changelog-link a:hover{ color:var(--paper); }
+  .changelog-link a:hover{ color:var(--ink); }
 
   /* ===== compare ===== */
-  .compare{ background:var(--paper-dim); padding:88px 0; border-top:1px solid var(--line); }
-  .tbl-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); }
+  .compare{ background:var(--plum-deep); color:var(--paper); padding:88px 0; }
+  .compare .section-head h2{ color:#F8F2E3; }
+  .compare .eyebrow-dark{ color:#C9B8E8; }
+  .tbl-wrap{ overflow-x:auto; border:1px solid rgba(244,236,219,0.22); border-radius:var(--radius); background:rgba(244,236,219,0.07); }
   .compare table{ border-collapse:collapse; width:100%; min-width:560px; font-size:15px; }
-  .compare th, .compare td{ padding:13px 18px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  .compare th, .compare td{ padding:13px 18px; text-align:left; border-bottom:1px solid var(--line-on-plum); vertical-align:top; color:#E5DBF5; }
   .compare tr:last-child td, .compare tr:last-child th{ border-bottom:0; }
   .compare thead th{
     font:500 12px 'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase;
-    color:var(--ink-soft); background:var(--paper-dim);
+    color:#C9B8E8; background:rgba(244,236,219,0.1);
   }
   .compare tbody th{ font-weight:600; width:48%; }
-  .compare tbody th small{ display:block; font-weight:400; color:var(--ink-soft); font-size:13.5px; margin-top:2px; }
-  .compare td .y{ color:var(--and); font-weight:600; }
-  .compare td .n{ color:var(--ink-soft); }
+  .compare tbody th small{ display:block; font-weight:400; color:#B3A2D6; font-size:13.5px; margin-top:2px; }
+  .compare td .y{ color:#8FD9B0; font-weight:600; }
+  .compare td .n{ color:#B3A2D6; }
   .compare tr.group td{
-    background:var(--paper-dim); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
-    text-transform:uppercase; color:var(--ink-soft); padding:8px 18px;
+    background:rgba(244,236,219,0.06); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
+    text-transform:uppercase; color:#B3A2D6; padding:8px 18px;
   }
 
   /* ===== roadmap lanes ===== */
@@ -621,7 +623,7 @@
         <span class="eyebrow-dark">Where it's headed</span>
         <h2>Built in the open, one version at a time.</h2>
       </div>
-      <div class="seg on-plum" role="group" aria-label="Roadmap platform">
+      <div class="seg" role="group" aria-label="Roadmap platform">
         <button type="button" data-plat="ios" aria-pressed="true">iOS</button>
         <button type="button" data-plat="android" aria-pressed="false">Android</button>
       </div>
