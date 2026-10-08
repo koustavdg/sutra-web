@@ -123,7 +123,6 @@
   .badge-store{ display:inline-block; text-decoration:none; transition:opacity .15s, transform .15s; }
   .badge-store:hover{ opacity:0.82; transform:translateY(-1px); }
   .badge-store img{ display:block; height:52px; width:auto; }
-  .badge-android img{ height:67px; }
   .is-android .badge-android{ order:-1; }
   .store-links{ display:flex; flex-direction:column; }
   .is-android .foot-play{ order:-1; }
@@ -376,8 +375,8 @@
           <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="badge-store">
             <img src="assets/badge-appstore-white.svg" alt="Download on the App Store">
           </a>
-          <a href="#newsletter" class="badge-store badge-android" data-play>
-            <img src="assets/coming_soon_android.png" alt="Coming Soon on Android">
+          <a href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra" class="badge-store badge-android">
+            <img src="assets/badge-googleplay.png" alt="Get it on Google Play">
           </a>
         </div>
         <span class="cta-note">Free on the App Store and Google Play · Preview any comic or MOBI free · Sutra Pro unlocks .cbz, .mobi &amp; Komga</span>
@@ -455,7 +454,7 @@
     <div class="newsletter-text">
       <span class="eyebrow-dark">Stay in the loop</span>
       <h2>Follow Sutra news</h2>
-      <p>Get updates on new features, Android progress, and everything happening with Sutra — straight to your inbox.</p>
+      <p>Get updates on new features and everything happening with Sutra — straight to your inbox.</p>
       <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
     </div>
   </div>
@@ -554,6 +553,18 @@
       <h2>Built in the open, one version at a time.</h2>
     </div>
     <div class="version-list">
+      <div class="version">
+        <div><div class="version-num label">Android</div><span class="version-status">Shipped</span></div>
+        <ul>
+          <li>Sutra is now on Google Play — read EPUB, PDF, CBZ comics, and DRM-free MOBI</li>
+          <li>Connect your own library: OPDS, Kavita, Komga, Calibre, WebDAV, Project Gutenberg, and Standard Ebooks</li>
+          <li>Offline-first library with resume and server progress sync</li>
+          <li>Themes, fonts, bookmarks, highlights, notes, and a dictionary</li>
+          <li>Panel Mode for comics and right-to-left manga</li>
+          <li>E-ink display mode</li>
+          <li>No analytics or tracking</li>
+        </ul>
+      </div>
       <div class="version">
         <div><div class="version-num">2.3.5</div><span class="version-status">Shipped</span></div>
         <ul>
@@ -657,12 +668,6 @@
           <li>iCloud sync + page-accurate Kavita sync</li>
         </ul>
       </div>
-      <div class="version">
-        <div><div class="version-num label">Android</div><span class="version-status">Upcoming</span></div>
-        <ul>
-          <li>A native Android app, bringing Sutra's OPDS library and reader to more devices</li>
-        </ul>
-      </div>
     </div>
     <div class="changelog-link"><a href="changelog.html">Read the full changelog →</a></div>
   </div>
@@ -692,7 +697,7 @@
         <span class="sitemap-head">Links</span>
         <div class="store-links">
           <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
-          <a href="#newsletter" class="foot-play" data-play>Google Play</a>
+          <a href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra" class="foot-play" data-play>Google Play</a>
         </div>
         <a href="privacy.html">Privacy Policy</a>
       </div>
@@ -700,7 +705,7 @@
     <div class="foot-bottom">
       <a href="index.html" class="foot-wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
       <div class="foot-right">
-        <span class="copyright">Android is a trademark of Google LLC.</span>
+        <span class="copyright">Android, Google Play and the Google Play logo are trademarks of Google LLC.</span>
         <span class="copyright">© 2026 Sutra</span>
       </div>
     </div>
@@ -709,7 +714,7 @@
 
 <script>
 (function(){
-  var PLAY_URL = '';
+  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {

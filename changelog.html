@@ -194,6 +194,26 @@
     <div class="version-list">
 
       <div class="version">
+        <div><div class="version-num label">Android</div><span class="version-status">Shipped</span></div>
+        <div class="version-body">
+          <p class="version-tagline">Sutra is now on Android — your books and comics, your own servers, an offline-first library, and no analytics or tracking.</p>
+
+          <div class="version-group">
+            <span class="group-label">New</span>
+            <ul>
+              <li><strong>Read your way:</strong> EPUB, PDF, CBZ comics, and DRM-free MOBI.</li>
+              <li><strong>Connect your own library:</strong> OPDS, Kavita, Komga, Calibre, WebDAV, Project Gutenberg, and Standard Ebooks.</li>
+              <li><strong>Offline-first library:</strong> Resume where you left off, with reading progress synced to your server.</li>
+              <li><strong>Reader essentials:</strong> Themes, fonts, bookmarks, highlights, notes, and a dictionary.</li>
+              <li><strong>Panel Mode and manga:</strong> Read comics panel by panel, including right-to-left manga.</li>
+              <li><strong>E-ink display mode:</strong> A display mode made for e-ink screens.</li>
+              <li><strong>No analytics or tracking.</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="version">
         <div><div class="version-num">2.3.5</div><span class="version-status">Shipped</span></div>
         <div class="version-body">
           <p class="version-tagline">A refreshed Library with sorting, dedicated Series and Collections views, and a built-in Favorites collection — plus reader brightness control, smoother comic reading, and more reliable server sync and metadata.</p>
@@ -559,7 +579,6 @@
           <li>Auto reader theme that follows your device's light/dark appearance, alongside the existing manual theme choices</li>
           <li>Continuous auto-scroll stop-position accuracy improvements and fixes to the Stats screen session averaging</li>
           <li>iOS Files integration — connect cloud storage directly as a book source</li>
-          <li>A native Android app, bringing Sutra's OPDS library and reader to more devices</li>
         </ul>
       </div>
 
@@ -575,7 +594,7 @@
       <a href="privacy.html">Privacy Policy</a>
       <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
       <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
-      <a href="index.html#newsletter" class="foot-play" data-play>Google Play</a>
+      <a href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra" class="foot-play" data-play>Google Play</a>
     </div>
     <span class="copyright">© 2026 Sutra</span>
   </div>
@@ -583,7 +602,7 @@
 
 <script>
 (function(){
-  var PLAY_URL = '';
+  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
