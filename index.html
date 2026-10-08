@@ -795,7 +795,7 @@
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
   var MEDIA = {
     ios: { front: 'assets/screenshots/hero.png', back: 'assets/screenshots/03-reader.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
-    android: { front: 'assets/screenshots/android/01-library.webp', back: 'assets/screenshots/android/07-pro.webp', lib: 'assets/screenshots/android/01-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
+    android: { front: 'assets/screenshots/android/01-library.webp', back: null, lib: 'assets/screenshots/android/01-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
   };
   var plat = null;
   function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
@@ -809,7 +809,10 @@
     if (p === plat) return;
     plat = p;
     var m = MEDIA[p];
-    setImg('hero-front', m.front); setImg('hero-back', m.back);
+    setImg('hero-front', m.front);
+    var back = document.querySelector('.stage .phone.back');
+    back.hidden = !m.back;
+    if (m.back) setImg('hero-back', m.back);
     setImg('shot-lib', m.lib); setImg('shot-pro', m.pro);
     setVideo('shot-comics', m.comics); setVideo('shot-scroll', m.scroll);
     document.getElementById('shots-cap').innerHTML = m.cap;
