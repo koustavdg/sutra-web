@@ -160,6 +160,18 @@
     width:120px; height:22px; background:#241536; border-radius:0 0 14px 14px; z-index:2;
   }
 
+  .phone-stage.dual{ gap:18px; align-items:flex-start; }
+  .phone-col{ margin:0; }
+  .phone-col.staggered{ margin-top:44px; }
+  .phone-col figcaption{
+    margin-top:12px; text-align:center;
+    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em;
+    text-transform:uppercase; color:#B3A2D6;
+  }
+  .dual .phone{ width:clamp(138px,21vw,214px); height:auto; aspect-ratio:9/18.7; border-radius:28px; border-width:5px; }
+  .dual .phone .notch{ width:clamp(58px,9vw,92px); height:16px; border-radius:0 0 10px 10px; }
+  .dual .phone.android .notch{ display:none; }
+
   /* ===== strip ===== */
   .strip{ background:var(--paper); padding:72px 0 88px; }
   .strip-head{ display:flex; align-items:baseline; justify-content:space-between; margin-bottom:36px; flex-wrap:wrap; gap:10px; }
@@ -169,6 +181,15 @@
   .strip-row .phone{ width:100%; height:auto; aspect-ratio:9/18.5; border-radius:22px; border-width:5px; }
   .strip-row .phone .notch{ width:80px; height:16px; border-radius:0 0 10px 10px; }
   .strip-row .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .platform-toggle{ display:flex; gap:6px; }
+  .pt-btn{
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.03em;
+    padding:7px 18px; border-radius:100px; cursor:pointer;
+    border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
+    transition:background .12s, border-color .12s, color .12s;
+  }
+  .pt-btn:hover{ color:var(--ink); border-color:rgba(43,27,70,0.3); }
+  .pt-btn.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
   .strip-cap{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; }
 
   /* ===== newsletter ===== */
@@ -396,12 +417,21 @@
         </div>
       </div>
     </div>
-    <div class="phone-stage">
-      <div class="phone">
-        <div class="notch"></div>
-        <img src="assets/screenshots/hero.png" data-android-src="assets/screenshots/android/01-library.webp" alt="Sutra library screen"
-             onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>assets/screenshots/<br>hero.png</span>'}))">
-      </div>
+    <div class="phone-stage dual">
+      <figure class="phone-col">
+        <div class="phone">
+          <div class="notch"></div>
+          <img src="assets/screenshots/hero.png" alt="Sutra library screen on iPhone"
+               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>assets/screenshots/<br>hero.png</span>'}))">
+        </div>
+        <figcaption>iOS</figcaption>
+      </figure>
+      <figure class="phone-col staggered">
+        <div class="phone android">
+          <img src="assets/screenshots/android/01-library.webp" alt="Sutra library screen on Android">
+        </div>
+        <figcaption>Android</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -411,7 +441,10 @@
   <div class="wrap">
     <div class="strip-head">
       <h2>See it in action</h2>
-      <span class="tag mono">4 screens</span>
+      <div class="platform-toggle" role="group" aria-label="Screenshot platform">
+        <button type="button" class="pt-btn active" data-platform="ios" aria-pressed="true">iOS</button>
+        <button type="button" class="pt-btn" data-platform="android" aria-pressed="false">Android</button>
+      </div>
     </div>
     <div class="strip-row">
       <div>
@@ -715,13 +748,31 @@
 <script>
 (function(){
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
-  if (document.documentElement.classList.contains('is-android')) {
-    document.querySelectorAll('img[data-android-src]').forEach(function(img){ img.src = img.dataset.androidSrc; });
-    document.querySelectorAll('video').forEach(function(v){
-      var src = v.querySelector('source[data-android-src]');
-      if (src) { src.src = src.dataset.androidSrc; v.load(); v.play().catch(function(){}); }
+  var shown = 'ios';
+  function showPlatform(p){
+    if (p === shown) return;
+    shown = p;
+    document.querySelectorAll('.strip img[data-android-src]').forEach(function(img){
+      if (!img.dataset.iosSrc) img.dataset.iosSrc = img.getAttribute('src');
+      img.src = p === 'android' ? img.dataset.androidSrc : img.dataset.iosSrc;
+    });
+    document.querySelectorAll('.strip video').forEach(function(v){
+      var s = v.querySelector('source[data-android-src]');
+      if (!s) return;
+      if (!s.dataset.iosSrc) s.dataset.iosSrc = s.getAttribute('src');
+      s.src = p === 'android' ? s.dataset.androidSrc : s.dataset.iosSrc;
+      v.load(); v.play().catch(function(){});
+    });
+    document.querySelectorAll('.pt-btn').forEach(function(b){
+      var on = b.dataset.platform === p;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
     });
   }
+  document.querySelectorAll('.pt-btn').forEach(function(b){
+    b.addEventListener('click', function(){ showPlatform(b.dataset.platform); });
+  });
+  if (document.documentElement.classList.contains('is-android')) showPlatform('android');
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
