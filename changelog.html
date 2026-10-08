@@ -127,6 +127,22 @@
     letter-spacing:0.08em; text-transform:uppercase; color:#9E86CC; margin-bottom:10px;
   }
 
+  .seg{ display:inline-flex; padding:3px; border-radius:99px; background:rgba(43,27,70,0.09); gap:2px; margin-top:22px; }
+  .seg button{
+    font:500 13px 'Inter',system-ui,sans-serif; border:0; background:none; color:var(--ink-soft);
+    padding:7px 16px; border-radius:99px; cursor:pointer;
+  }
+  .seg button[aria-pressed="true"]{ background:#FBF7EC; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.18); }
+  .chip{
+    display:inline-flex; align-items:center; gap:5px; margin-top:10px;
+    font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;
+    padding:2px 8px; border-radius:99px;
+  }
+  .chip::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
+  .chip.ios{ background:rgba(244,236,219,0.12); color:#E5DBF5; }
+  .chip.and{ background:rgba(111,197,155,0.16); color:#8FD9B0; }
+  .version[hidden]{ display:none; }
+
   /* ---------- footer (shared with index.html) ---------- */
 
   footer{ background:var(--plum-deep); border-top:1px solid var(--line-on-plum); padding:34px 0; }
@@ -186,6 +202,11 @@
     <span class="eyebrow-dark">Release notes</span>
     <h1>Changelog</h1>
     <p>Every Sutra release, one thread at a time — what's new, what's improved, and what's fixed.</p>
+    <div class="seg" role="group" aria-label="Filter by platform">
+      <button type="button" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" data-filter="ios" aria-pressed="false">iOS</button>
+      <button type="button" data-filter="android" aria-pressed="false">Android</button>
+    </div>
   </div>
 </section>
 
@@ -193,8 +214,8 @@
   <div class="wrap">
     <div class="version-list">
 
-      <div class="version">
-        <div><div class="version-num">1.0.0</div><span class="version-status">Android · Shipped</span></div>
+      <div class="version" data-p="android">
+        <div><div class="version-num">1.0.0</div><span class="version-status">Shipped</span><span class="chip and">Android</span></div>
         <div class="version-body">
           <p class="version-tagline">Sutra is now on Android — your books and comics, your own servers, an offline-first library, and no analytics or tracking.</p>
 
@@ -213,8 +234,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">2.3.5</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">2.3.5</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">A refreshed Library with sorting, dedicated Series and Collections views, and a built-in Favorites collection — plus reader brightness control, smoother comic reading, and more reliable server sync and metadata.</p>
 
@@ -248,8 +269,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">2.2.5</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">2.2.5</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">iOS 27 and iPadOS 27 readiness, inline EPUB footnotes that slide open without losing your place, display stays awake during reading, and a focused pass of reader, streaming, and stability improvements.</p>
 
@@ -280,8 +301,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">2.2.1</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">2.2.1</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">Streaming comic pages from Komga and Kavita, automatic series stacks in your library, a richer book details page, smarter progress tracking, and a sweeping pass of reader, library, and metadata improvements.</p>
 
@@ -343,8 +364,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">2.1.10</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">2.1.10</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">Swipe-to-adjust PDF auto-scroll speed, search results that respect your view preference, better Project Gutenberg discovery, and targeted reliability fixes for iPad navigation and reading-position accuracy.</p>
 
@@ -376,8 +397,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">2.1</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">2.1</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">Manga support, WebDAV servers, reading stats, a free trial before Sutra Pro, two-panel iPad reading, a high-contrast theme, and the most accurate comic panel detection yet — plus a broad pass of reliability and polish improvements.</p>
 
@@ -422,8 +443,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">2.0</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">2.0</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">The biggest Sutra update yet — native Komga support, panel-by-panel comic reading, sideloading, EPUB auto-scrolling, DRM-free MOBI, Sutra Pro, and a sweeping pass of reliability improvements.</p>
 
@@ -482,8 +503,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">1.3</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">1.3</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">Reading features and server compatibility — text highlights with iCloud sync, instant word definitions, improved dictionary lookup, plus Calibre-Web-Automated support and enhanced compatibility for Tailscale, Grimmory, and other OPDS servers.</p>
 
@@ -519,8 +540,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">1.2</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">1.2</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <div class="version-body">
           <p class="version-tagline">A big reliability and polish update — better cross-device sync, a real page-curl animation, dark mode, and a wide pass of fixes across search, downloads, and the reader.</p>
 
@@ -560,8 +581,8 @@
         </div>
       </div>
 
-      <div class="version">
-        <div><div class="version-num">1.0</div><span class="version-status">Shipped</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num">1.0</div><span class="version-status">Shipped</span><span class="chip ios">iOS</span></div>
         <ul>
           <li>Kavita, Calibre, and OPDS server support</li>
           <li>Project Gutenberg one-tap catalog</li>
@@ -572,8 +593,8 @@
         </ul>
       </div>
 
-      <div class="version">
-        <div><div class="version-num label">Next</div><span class="version-status">Upcoming</span></div>
+      <div class="version" data-p="ios">
+        <div><div class="version-num label">Next</div><span class="version-status">Upcoming</span><span class="chip ios">iOS</span></div>
         <ul>
           <li>Library smart-sync: large catalogs will no longer re-scan on every launch — what's already known opens instantly, and background scans load new additions progressively without blocking the app</li>
           <li>Auto reader theme that follows your device's light/dark appearance, alongside the existing manual theme choices</li>
@@ -607,6 +628,21 @@
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
     document.querySelectorAll('a[data-store]').forEach(function(a){ a.href = PLAY_URL; });
+  }
+})();
+</script>
+<script>
+(function(){
+  var entries = document.querySelectorAll('.version[data-p]');
+  document.querySelectorAll('[data-filter]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.dataset.filter;
+      document.querySelectorAll('[data-filter]').forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
+      entries.forEach(function(e){ e.hidden = f !== 'all' && e.dataset.p !== f; });
+    });
+  });
+  if (document.documentElement.classList.contains('is-android')) {
+    var a = document.querySelector('[data-filter="android"]'); if (a) a.click();
   }
 })();
 </script>

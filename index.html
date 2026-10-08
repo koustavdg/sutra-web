@@ -23,6 +23,8 @@
     --line:rgba(43,27,70,0.14);
     --line-on-plum:rgba(244,236,219,0.18);
     --radius:6px;
+    --ios-soft:rgba(43,27,70,0.09);
+    --and:#2F6B4F;
   }
 
   /* ===== reset ===== */
@@ -160,17 +162,17 @@
     width:120px; height:22px; background:#241536; border-radius:0 0 14px 14px; z-index:2;
   }
 
-  .phone-stage.dual{ gap:18px; align-items:flex-start; }
-  .phone-col{ margin:0; }
-  .phone-col.staggered{ margin-top:44px; }
-  .phone-col figcaption{
-    margin-top:12px; text-align:center;
-    font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.08em;
-    text-transform:uppercase; color:#B3A2D6;
+  .stage{ align-items:flex-end; gap:18px; }
+  .stage .phone{ width:clamp(150px,19vw,214px); height:auto; aspect-ratio:9/18.7; border-radius:30px; border-width:5px; }
+  .stage .phone .notch{ width:clamp(58px,8vw,86px); height:16px; border-radius:0 0 10px 10px; }
+  .phone.android .notch{ display:none; }
+  .stage .phone.back{ transform:translateY(26px) scale(.92); opacity:.88; }
+  @media (max-width:560px){ .stage .phone.back{ display:none; } .stage .phone{ width:min(62vw,230px); } }
+  .switch-row{
+    margin-top:26px; display:flex; align-items:center; gap:12px; flex-wrap:wrap;
+    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em;
+    text-transform:uppercase; color:#C9B8E8;
   }
-  .dual .phone{ width:clamp(138px,21vw,214px); height:auto; aspect-ratio:9/18.7; border-radius:28px; border-width:5px; }
-  .dual .phone .notch{ width:clamp(58px,9vw,92px); height:16px; border-radius:0 0 10px 10px; }
-  .dual .phone.android .notch{ display:none; }
 
   /* ===== strip ===== */
   .strip{ background:var(--paper); padding:72px 0 88px; }
@@ -181,15 +183,25 @@
   .strip-row .phone{ width:100%; height:auto; aspect-ratio:9/18.5; border-radius:22px; border-width:5px; }
   .strip-row .phone .notch{ width:80px; height:16px; border-radius:0 0 10px 10px; }
   .strip-row .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
-  .platform-toggle{ display:flex; gap:6px; }
-  .pt-btn{
-    font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.03em;
-    padding:7px 18px; border-radius:100px; cursor:pointer;
-    border:1px solid var(--line); background:var(--card); color:var(--ink-soft);
-    transition:background .12s, border-color .12s, color .12s;
+  .seg{ display:inline-flex; padding:3px; border-radius:99px; background:var(--ios-soft); gap:2px; }
+  .seg button{
+    font:500 13px 'Inter',system-ui,sans-serif; border:0; background:none; color:var(--ink-soft);
+    padding:7px 16px; border-radius:99px; cursor:pointer;
   }
-  .pt-btn:hover{ color:var(--ink); border-color:rgba(43,27,70,0.3); }
-  .pt-btn.active{ background:var(--ink); color:var(--paper); border-color:var(--ink); }
+  .seg button[aria-pressed="true"]{ background:var(--card); color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.18); }
+  .seg.on-plum{ background:rgba(244,236,219,0.14); }
+  .seg.on-plum button{ color:#DCD1EE; }
+  .seg.on-plum button[aria-pressed="true"]{ background:var(--paper); color:#2B1B46; }
+  .nav-right{ display:flex; align-items:center; gap:12px; }
+  .nav-right .seg button{ padding:6px 12px; font-size:12.5px; }
+  .chip{
+    display:inline-flex; align-items:center; gap:5px; font:500 11px 'JetBrains Mono',monospace;
+    letter-spacing:0.06em; text-transform:uppercase; padding:2px 8px; border-radius:99px;
+  }
+  .chip.ios{ background:var(--ios-soft); color:var(--ink); }
+  .chip.and{ background:rgba(47,107,79,0.12); color:var(--and); }
+  .chip .dot{ width:7px; height:7px; border-radius:50%; background:currentColor; display:inline-block; }
+  .shots-cap{ margin-top:6px; display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; font-size:14px; color:var(--ink-soft); text-align:center; }
   .strip-cap{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; }
 
   /* ===== newsletter ===== */
@@ -297,6 +309,30 @@
   }
   .changelog-link a:hover{ color:var(--paper); }
 
+  /* ===== compare ===== */
+  .compare{ background:var(--paper-dim); padding:88px 0; border-top:1px solid var(--line); }
+  .tbl-wrap{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); }
+  .compare table{ border-collapse:collapse; width:100%; min-width:560px; font-size:15px; }
+  .compare th, .compare td{ padding:13px 18px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top; }
+  .compare tr:last-child td, .compare tr:last-child th{ border-bottom:0; }
+  .compare thead th{
+    font:500 12px 'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--ink-soft); background:var(--paper-dim);
+  }
+  .compare tbody th{ font-weight:600; width:48%; }
+  .compare tbody th small{ display:block; font-weight:400; color:var(--ink-soft); font-size:13.5px; margin-top:2px; }
+  .compare td .y{ color:var(--and); font-weight:600; }
+  .compare td .n{ color:var(--ink-soft); }
+  .compare tr.group td{
+    background:var(--paper-dim); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--ink-soft); padding:8px 18px;
+  }
+
+  /* ===== roadmap lanes ===== */
+  .roadmap-head{ display:flex; justify-content:space-between; align-items:flex-end; gap:16px 28px; flex-wrap:wrap; max-width:none; }
+  .lane{ display:none; }
+  .lane.show{ display:flex; }
+
   /* ===== footer ===== */
   footer{ background:var(--plum-deep); color:var(--paper); border-top:1px solid var(--line-on-plum); }
   .foot-pride{
@@ -362,6 +398,11 @@
 <header>
   <div class="wrap nav">
     <a href="index.html" class="wordmark"><img src="assets/app-icon.png" alt="">Sutra</a>
+    <div class="nav-right">
+    <div class="seg" role="group" aria-label="Platform">
+      <button type="button" data-plat="ios" aria-pressed="true">iOS</button>
+      <button type="button" data-plat="android" aria-pressed="false">Android</button>
+    </div>
     <div class="ham-wrap">
       <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="ham-menu">
         <span></span><span></span><span></span>
@@ -378,6 +419,7 @@
         <a href="privacy.html">Privacy</a>
         <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta" data-store>Get the app →</a>
       </nav>
+    </div>
     </div>
   </div>
 </header>
@@ -403,6 +445,12 @@
         <span class="cta-note">Free on the App Store and Google Play · Preview any comic or MOBI free · Sutra Pro unlocks .cbz, .mobi &amp; Komga</span>
         <a href="drm-free.html" class="cta-drm-link">Where to legally buy DRM-free books →</a>
       </div>
+      <div class="switch-row"><span>Showing</span>
+        <div class="seg on-plum" role="group" aria-label="Platform (hero)">
+          <button type="button" data-plat="ios" aria-pressed="true">iOS</button>
+          <button type="button" data-plat="android" aria-pressed="false">Android</button>
+        </div>
+      </div>
       <div class="thread-row">
         <svg class="thread-svg" viewBox="0 0 480 34" preserveAspectRatio="none">
           <path d="M0,17 L480,17"/>
@@ -417,21 +465,16 @@
         </div>
       </div>
     </div>
-    <div class="phone-stage dual">
-      <figure class="phone-col">
-        <div class="phone">
-          <div class="notch"></div>
-          <img src="assets/screenshots/hero.png" alt="Sutra library screen on iPhone"
-               onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>assets/screenshots/<br>hero.png</span>'}))">
-        </div>
-        <figcaption>iOS</figcaption>
-      </figure>
-      <figure class="phone-col staggered">
-        <div class="phone android">
-          <img src="assets/screenshots/android/01-library.webp" alt="Sutra library screen on Android">
-        </div>
-        <figcaption>Android</figcaption>
-      </figure>
+    <div class="phone-stage stage" id="hero-stage">
+      <div class="phone back">
+        <div class="notch"></div>
+        <img id="hero-back" src="assets/screenshots/03-reader.png" alt="Sutra reader screen">
+      </div>
+      <div class="phone front">
+        <div class="notch"></div>
+        <img id="hero-front" src="assets/screenshots/hero.png" alt="Sutra library screen"
+             onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>assets/screenshots/<br>hero.png</span>'}))">
+      </div>
     </div>
   </div>
 </section>
@@ -441,15 +484,15 @@
   <div class="wrap">
     <div class="strip-head">
       <h2>See it in action</h2>
-      <div class="platform-toggle" role="group" aria-label="Screenshot platform">
-        <button type="button" class="pt-btn active" data-platform="ios" aria-pressed="true">iOS</button>
-        <button type="button" class="pt-btn" data-platform="android" aria-pressed="false">Android</button>
+      <div class="seg" role="group" aria-label="Screenshot platform">
+        <button type="button" data-plat="ios" aria-pressed="true">iOS</button>
+        <button type="button" data-plat="android" aria-pressed="false">Android</button>
       </div>
     </div>
     <div class="strip-row">
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/01-library.png" data-android-src="assets/screenshots/android/01-library.webp" alt="Library view"
+          <img id="shot-lib" src="assets/screenshots/01-library.png" alt="Library view"
                onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>01-library.png</span>'}))">
         </div>
         <div class="strip-cap">01 · library</div>
@@ -457,7 +500,7 @@
       <div>
         <div class="phone"><div class="notch"></div>
           <video autoplay muted loop playsinline aria-label="Panel-aware comic reading">
-            <source src="assets/screenshots/05-comics.mp4" data-android-src="assets/screenshots/android/05-comics.mp4" type="video/mp4">
+            <source id="shot-comics" src="assets/screenshots/05-comics.mp4" type="video/mp4">
           </video>
         </div>
         <div class="strip-cap">02 · panel comics</div>
@@ -465,19 +508,20 @@
       <div>
         <div class="phone"><div class="notch"></div>
           <video autoplay muted loop playsinline aria-label="Auto-scroll reading">
-            <source src="assets/screenshots/06-autoscroll.mp4" data-android-src="assets/screenshots/android/06-autoscroll.mp4" type="video/mp4">
+            <source id="shot-scroll" src="assets/screenshots/06-autoscroll.mp4" type="video/mp4">
           </video>
         </div>
         <div class="strip-cap">03 · auto-scroll</div>
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/07-pro.png" data-android-src="assets/screenshots/android/07-pro.webp" alt="Sutra Pro unlock screen"
+          <img id="shot-pro" src="assets/screenshots/07-pro.png" alt="Sutra Pro unlock screen"
                onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>07-pro.png</span>'}))">
         </div>
         <div class="strip-cap">04 · Sutra Pro</div>
       </div>
     </div>
+    <div class="shots-cap" id="shots-cap"><span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad</div>
   </div>
 </section>
 
@@ -513,6 +557,36 @@
       <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs position, bookmarks, and highlights across your iOS devices, and Android has Export. Kavita and Komga sync is page-accurate, and finishing a book syncs back to your server too.</p></div>
       <div class="card" data-code="STAT·01"><h3>Reading Statistics</h3><p>A Stats tab tracks time read, your streak, a swipeable activity chart, and progress across your library. Time-remaining estimates learn your reading speed for each format.</p></div>
       <div class="card" data-code="PRO·01"><h3>Try Before You Buy</h3><p>Every CBZ comic and comic-shaped MOBI book opens with a free 7-page preview — read the first 7 pages of anything in your library before deciding whether to unlock Sutra Pro.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== compare ===== -->
+<section class="compare" id="compare">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow-dark">On both platforms</span>
+      <h2>One reader. Two platforms.</h2>
+    </div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th scope="col">Feature</th><th scope="col">iOS</th><th scope="col">Android</th></tr></thead>
+        <tbody>
+        <tr class="group"><td colspan="3">Reading</td></tr>
+        <tr><th scope="row">EPUB &amp; PDF<small>Free on both</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">CBZ comics &amp; MOBI<small>Free preview, full with Sutra Pro</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">Panel Mode &amp; right-to-left manga</th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">Two-panel reading<small>iPad and Android tablets</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">E-ink display mode<small>Android only</small></th><td><span class="n">—</span></td><td><span class="y">Yes</span></td></tr>
+        <tr class="group"><td colspan="3">Libraries &amp; sync</td></tr>
+        <tr><th scope="row">OPDS, Kavita, Komga, Calibre, WebDAV<small>Plus Project Gutenberg and Standard Ebooks</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">Reading progress sync to your server<small>Kavita and Komga</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">Library backup<small>iCloud sync on iOS, Export on Android</small></th><td><span class="y">iCloud</span></td><td><span class="y">Export</span></td></tr>
+        <tr><th scope="row">No analytics or tracking</th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr class="group"><td colspan="3">Purchase</td></tr>
+        <tr><th scope="row">Sutra Pro<small>One-time, no subscription</small></th><td><span class="y">$6.99</span></td><td><span class="y">$6.99</span></td></tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </section>
@@ -574,30 +648,24 @@
         </a>
       </div>
     </div>
-    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a> Sutra Pro is a one-time purchase tied to your Apple Account or Google Play account.</p>
+    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a> Sutra Pro is a one-time purchase tied to your Apple Account or Google Play account. Purchases are per platform — Apple and Google bill separately, so Sutra Pro on iOS doesn't carry over to Android.</p>
   </div>
 </section>
 
 <!-- ===== roadmap ===== -->
 <section class="roadmap" id="roadmap">
   <div class="wrap">
-    <div class="section-head">
-      <span class="eyebrow-dark">Where it's headed</span>
-      <h2>Built in the open, one version at a time.</h2>
-    </div>
-    <div class="version-list">
-      <div class="version">
-        <div><div class="version-num">1.0.0</div><span class="version-status">Android · Shipped</span></div>
-        <ul>
-          <li>Sutra is now on Google Play — read EPUB, PDF, CBZ comics, and DRM-free MOBI</li>
-          <li>Connect your own library: OPDS, Kavita, Komga, Calibre, WebDAV, Project Gutenberg, and Standard Ebooks</li>
-          <li>Offline-first library with resume and server progress sync</li>
-          <li>Themes, fonts, bookmarks, highlights, notes, and a dictionary</li>
-          <li>Panel Mode for comics and right-to-left manga</li>
-          <li>E-ink display mode</li>
-          <li>No analytics or tracking</li>
-        </ul>
+    <div class="section-head roadmap-head">
+      <div>
+        <span class="eyebrow-dark">Where it's headed</span>
+        <h2>Built in the open, one version at a time.</h2>
       </div>
+      <div class="seg on-plum" role="group" aria-label="Roadmap platform">
+        <button type="button" data-plat="ios" aria-pressed="true">iOS</button>
+        <button type="button" data-plat="android" aria-pressed="false">Android</button>
+      </div>
+    </div>
+    <div class="version-list lane show" id="lane-ios">
       <div class="version">
         <div><div class="version-num">2.3.5</div><span class="version-status">Shipped</span></div>
         <ul>
@@ -702,6 +770,20 @@
         </ul>
       </div>
     </div>
+    <div class="version-list lane" id="lane-android">
+      <div class="version">
+        <div><div class="version-num">1.0.0</div><span class="version-status">Shipped</span></div>
+        <ul>
+          <li>Sutra is now on Google Play — read EPUB, PDF, CBZ comics, and DRM-free MOBI</li>
+          <li>Connect your own library: OPDS, Kavita, Komga, Calibre, WebDAV, Project Gutenberg, and Standard Ebooks</li>
+          <li>Offline-first library with resume and server progress sync</li>
+          <li>Themes, fonts, bookmarks, highlights, notes, and a dictionary</li>
+          <li>Panel Mode for comics and right-to-left manga</li>
+          <li>E-ink display mode</li>
+          <li>No analytics or tracking</li>
+        </ul>
+      </div>
+    </div>
     <div class="changelog-link"><a href="changelog.html">Read the full changelog →</a></div>
   </div>
 </section>
@@ -748,31 +830,38 @@
 <script>
 (function(){
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
-  var shown = 'ios';
-  function showPlatform(p){
-    if (p === shown) return;
-    shown = p;
-    document.querySelectorAll('.strip img[data-android-src]').forEach(function(img){
-      if (!img.dataset.iosSrc) img.dataset.iosSrc = img.getAttribute('src');
-      img.src = p === 'android' ? img.dataset.androidSrc : img.dataset.iosSrc;
-    });
-    document.querySelectorAll('.strip video').forEach(function(v){
-      var s = v.querySelector('source[data-android-src]');
-      if (!s) return;
-      if (!s.dataset.iosSrc) s.dataset.iosSrc = s.getAttribute('src');
-      s.src = p === 'android' ? s.dataset.androidSrc : s.dataset.iosSrc;
-      v.load(); v.play().catch(function(){});
-    });
-    document.querySelectorAll('.pt-btn').forEach(function(b){
-      var on = b.dataset.platform === p;
-      b.classList.toggle('active', on);
-      b.setAttribute('aria-pressed', String(on));
-    });
+  var MEDIA = {
+    ios: { front: 'assets/screenshots/hero.png', back: 'assets/screenshots/03-reader.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
+    android: { front: 'assets/screenshots/android/01-library.webp', back: 'assets/screenshots/android/07-pro.webp', lib: 'assets/screenshots/android/01-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
+  };
+  var plat = null;
+  function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
+  function setVideo(id, url){
+    var src = document.getElementById(id);
+    if (!src || src.getAttribute('src') === url) return;
+    src.src = url;
+    var v = src.parentNode; v.load(); v.play().catch(function(){});
   }
-  document.querySelectorAll('.pt-btn').forEach(function(b){
-    b.addEventListener('click', function(){ showPlatform(b.dataset.platform); });
+  function applyPlatform(p, remember){
+    if (p === plat) return;
+    plat = p;
+    var m = MEDIA[p];
+    setImg('hero-front', m.front); setImg('hero-back', m.back);
+    setImg('shot-lib', m.lib); setImg('shot-pro', m.pro);
+    setVideo('shot-comics', m.comics); setVideo('shot-scroll', m.scroll);
+    document.getElementById('shots-cap').innerHTML = m.cap;
+    document.querySelectorAll('.phone').forEach(function(ph){ ph.classList.toggle('android', p === 'android'); });
+    document.querySelectorAll('[data-plat]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.plat === p)); });
+    document.getElementById('lane-ios').classList.toggle('show', p === 'ios');
+    document.getElementById('lane-android').classList.toggle('show', p === 'android');
+    if (remember) { try { localStorage.setItem('sutra-plat', p); } catch (e) {} }
+  }
+  document.querySelectorAll('[data-plat]').forEach(function(b){
+    b.addEventListener('click', function(){ applyPlatform(b.dataset.plat, true); });
   });
-  if (document.documentElement.classList.contains('is-android')) showPlatform('android');
+  var saved = null;
+  try { saved = localStorage.getItem('sutra-plat'); } catch (e) {}
+  applyPlatform(saved === 'android' || saved === 'ios' ? saved : (document.documentElement.classList.contains('is-android') ? 'android' : 'ios'), false);
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
