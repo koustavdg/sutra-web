@@ -200,6 +200,7 @@
   }
   .chip.ios{ background:var(--ios-soft); color:var(--ink); }
   .chip.and{ background:rgba(47,107,79,0.12); color:var(--and); }
+  .chip.both{ background:transparent; border:1px solid var(--line); color:var(--ink-soft); }
   .chip .dot{ width:7px; height:7px; border-radius:50%; background:currentColor; display:inline-block; }
   .shots-cap{ margin-top:6px; display:flex; gap:10px; align-items:center; justify-content:center; flex-wrap:wrap; font-size:14px; color:var(--ink-soft); text-align:center; }
   .strip-cap{ margin-top:10px; font-size:12.5px; color:var(--ink-soft); font-family:'JetBrains Mono',monospace; }
@@ -227,14 +228,8 @@
   }
   .section-head h2{ font-size:30px; }
   .card-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-  .card{ background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:26px 22px 24px; position:relative; }
-  .card::before{
-    content:attr(data-code); position:absolute; top:-1px; left:22px;
-    background:var(--ink); color:var(--paper);
-    font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.05em;
-    padding:3px 8px; border-radius:0 0 4px 4px;
-  }
-  .card h3{ font-size:19px; margin-top:14px; margin-bottom:8px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:8px; padding:20px; display:flex; flex-direction:column; gap:8px; }
+  .card h3{ font-size:19px; margin-top:4px; }
   .card p{ font-size:14.5px; color:var(--ink-soft); }
 
   /* ===== drm-callout ===== */
@@ -255,36 +250,27 @@
   .drm-callout-link:hover{ background:var(--grape); }
 
   /* ===== pro ===== */
-  .pro{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); }
-  .pro-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; align-items:start; }
-  .pro-col{ border:1px solid var(--line); border-radius:var(--radius); padding:30px 26px 28px; background:var(--card); }
-  .pro-col.col-pro{ background:var(--plum-deep); border-color:transparent; }
-  .pro-col-head{ margin-bottom:22px; }
-  .pro-col-eyebrow{
-    font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.1em;
-    text-transform:uppercase; color:var(--ink-soft); display:block; margin-bottom:8px;
+  .pro{ background:linear-gradient(160deg, var(--plum-top), var(--plum-deep)); color:var(--paper); padding:88px 0; }
+  .pro-wrap{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
+  .pro-wrap > *{ min-width:0; }
+  .pro .eyebrow-dark{ color:#C9B8E8; }
+  .pro h2{ font-size:clamp(28px,4vw,40px); line-height:1.1; color:#F8F2E3; }
+  .pro-lede{ margin-top:12px; color:#DCD1EE; max-width:46ch; }
+  .pro-points{ margin-top:18px; padding-left:18px; color:#DCD1EE; display:grid; gap:4px; }
+  .price{ background:rgba(244,236,219,0.1); border:1px solid rgba(244,236,219,0.22); border-radius:10px; padding:24px; }
+  .price .amt{ font:600 52px/1 'Spectral',serif; color:#fff; }
+  .price .amt small{ font:400 14px 'Inter',system-ui,sans-serif; color:#DCD1EE; margin-left:6px; }
+  .price .rows{ margin-top:18px; display:grid; gap:10px; }
+  .price .r{
+    display:flex; justify-content:space-between; gap:12px; align-items:center;
+    padding-top:10px; border-top:1px solid rgba(244,236,219,0.2);
+    font-size:14.5px; color:#F8F2E3; text-decoration:none;
   }
-  .col-pro .pro-col-eyebrow{ color:#9E86CC; }
-  .pro-col-title{ font-family:'Spectral',serif; font-size:22px; font-weight:600; color:var(--ink); }
-  .col-pro .pro-col-title{ color:#F8F2E3; }
-  .pro-price{ font-family:'Spectral',serif; font-size:32px; color:#F8F2E3; margin-top:12px; line-height:1; }
-  .pro-price-note{ font-family:'JetBrains Mono',monospace; font-size:11px; color:#9E86CC; text-transform:uppercase; letter-spacing:0.06em; margin-top:4px; display:block; }
-  .pro-list{ list-style:none; margin-top:20px; border-top:1px solid var(--line); }
-  .col-pro .pro-list{ border-color:var(--line-on-plum); }
-  .pro-list li{ font-size:14px; padding:9px 0 9px 22px; position:relative; border-bottom:1px solid var(--line); color:var(--ink-soft); }
-  .col-pro .pro-list li{ border-color:var(--line-on-plum); color:#DCD1EE; }
-  .pro-list li::before{ content:"✓"; position:absolute; left:0; font-size:12px; font-weight:700; color:var(--grape); }
-  .col-pro .pro-list li::before{ color:#C9B8E8; }
-  .pro-list li:last-child{ border-bottom:none; }
-  .btn-pro{
-    display:inline-flex; align-items:center; gap:8px;
-    background:var(--paper); color:var(--plum-deep);
-    text-decoration:none; padding:12px 20px; border-radius:var(--radius);
-    font-weight:600; font-size:14px; margin-top:24px; transition:background .15s;
-  }
-  .btn-pro:hover{ background:#fff; }
-  .pro-footer-note{ margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-soft); max-width:72ch; }
-  .inline-link{ color:var(--grape); text-decoration:underline; text-underline-offset:2px; }
+  .price .r span:last-child{ font-family:'JetBrains Mono',monospace; font-size:13px; }
+  .price a.r:hover span:last-child{ text-decoration:underline; text-underline-offset:3px; }
+  .price .fine{ margin-top:14px; font-size:13px; color:#DCD1EE; }
+  .pro-footer-note{ margin-top:44px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#CBB9EA; max-width:72ch; }
+  .pro-footer-note .inline-link{ color:#E5DBF5; text-decoration:underline; text-underline-offset:2px; }
 
   /* ===== roadmap ===== */
   .roadmap{ background:var(--plum-deep); color:var(--paper); padding:92px 0; }
@@ -375,7 +361,7 @@
     .strip-row{ grid-template-columns:repeat(2,1fr); }
     .res-grid{ grid-template-columns:1fr; }
     .card-grid{ grid-template-columns:repeat(2,1fr); }
-    .pro-grid{ grid-template-columns:1fr; }
+    .pro-wrap{ grid-template-columns:1fr; }
     .version{ grid-template-columns:1fr; gap:10px; }
     .version ul{ grid-template-columns:1fr; }
     .foot-sitemap{ grid-template-columns:1fr 1fr; }
@@ -545,18 +531,18 @@
       <h2>Twelve things, done properly.</h2>
     </div>
     <div class="card-grid">
-      <div class="card" data-code="OPDS·01"><h3>Bring your own server</h3><p>Connect Kavita, Calibre, Komga, Grimmory, or any OPDS server, plus WebDAV hosts like Synology. Everything works on your local network with no cloud middleman, and self-signed certificates need only a one-time trust prompt.</p></div>
-      <div class="card" data-code="OPDS·02"><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection, no server required. Gutenberg is offered right in first-run setup, and search is more reliable, with duplicates removed. Patrons Circle sign-in unlocks the full Standard Ebooks catalog.</p></div>
-      <div class="card" data-code="LIB·01"><h3>A library that sorts your way</h3><p>Sort by Recently Read, Title, Author, or Date Added. Books with no artwork get a clean title-and-author cover instead of a blank tile.</p></div>
-      <div class="card" data-code="LIB·02"><h3>Series, Collections &amp; Favorites</h3><p>Series appear as grid tiles, and books from the same series stack with a count. Collections open in a consistent grid, and you can rename your own. Favorites is built in, always first, with its own heart-marked card.</p></div>
-      <div class="card" data-code="READ·01"><h3>EPUB, PDF &amp; MOBI</h3><p>Authentic page-curl, rich typography controls, five reading themes including high-contrast Contrast, and in-book search. There's a two-panel facing-page spread on iPad and Android tablets, and you can dim just the reader from the Aa menu without touching system brightness.</p></div>
-      <div class="card" data-code="READ·02"><h3>Panel-aware CBZ comics &amp; manga</h3><p>Sutra reads panels one at a time, with full right-to-left manga mode. CBZ streams straight from Komga and Kavita, and upcoming pages are prepared ahead of time, so page turns feel instant. Switch any book between Regular and Manga from the Aa menu.</p></div>
-      <div class="card" data-code="READ·03"><h3>Auto-scrolling</h3><p>Set your pace and let the page flow. Swipe up or down to adjust speed on the fly, or tap to pause and resume. Perfect for hands-free reading.</p></div>
-      <div class="card" data-code="READ·04"><h3>Sideload local files</h3><p>Open EPUB, PDF, CBZ, and MOBI files from your device's file manager or any share sheet. No server required.</p></div>
-      <div class="card" data-code="READ·05"><h3>Highlights, Dictionary &amp; Footnotes</h3><p>Highlight in color and double-tap a word to define it. Tap a footnote and it opens in a sheet, so you never lose your place. Highlights and lookups sync via iCloud on iOS, with Export on Android.</p></div>
-      <div class="card" data-code="SYNC·01"><h3>Pick up where you left off</h3><p>iCloud syncs position, bookmarks, and highlights across your iOS devices, and Android has Export. Kavita and Komga sync is page-accurate, and finishing a book syncs back to your server too.</p></div>
-      <div class="card" data-code="STAT·01"><h3>Reading Statistics</h3><p>A Stats tab tracks time read, your streak, a swipeable activity chart, and progress across your library. Time-remaining estimates learn your reading speed for each format.</p></div>
-      <div class="card" data-code="PRO·01"><h3>Try Before You Buy</h3><p>Every CBZ comic and comic-shaped MOBI book opens with a free 7-page preview — read the first 7 pages of anything in your library before deciding whether to unlock Sutra Pro.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Bring your own server</h3><p>Connect Kavita, Calibre, Komga, or any OPDS server, plus WebDAV hosts like Synology. Everything works on your local network, with no cloud middleman.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection, no server required.</p></div>
+      <div class="card"><span class="chip ios"><i class="dot"></i>iOS</span><h3>A library that sorts your way</h3><p>Sort by Recently Read, Title, Author, or Date Added. Books with no artwork get a clean title-and-author cover instead of a blank tile.</p></div>
+      <div class="card"><span class="chip ios"><i class="dot"></i>iOS</span><h3>Series, Collections &amp; Favorites</h3><p>Series appear as grid tiles, and books from the same series stack with a count. Collections open in a consistent grid, and you can rename your own. Favorites is built in, always first, with its own heart-marked card.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>EPUB, PDF, CBZ &amp; MOBI</h3><p>Themes, fonts, bookmarks, and in-book search. Open files from your device's file manager or any share sheet, no server required. Landscape on iPad and Android tablets shows a two-panel facing-page spread, and iOS adds authentic page-curl turns.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Panel-aware CBZ comics &amp; manga</h3><p>Sutra reads panels one at a time, with full right-to-left manga mode. On iOS, CBZ pages also stream straight from Komga and Kavita, and upcoming pages are prepared ahead of time.</p></div>
+      <div class="card"><span class="chip ios"><i class="dot"></i>iOS</span><h3>Auto-scrolling</h3><p>Set your pace and let the page flow. Swipe up or down to adjust speed on the fly, or tap to pause and resume. Perfect for hands-free reading.</p></div>
+      <div class="card"><span class="chip and"><i class="dot"></i>Android</span><h3>Made for e-ink</h3><p>A dedicated e-ink display mode keeps reading crisp on e-ink screens.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Highlights, Notes &amp; Dictionary</h3><p>Highlight in color, add notes, and look up words in the built-in dictionary. On iOS, double-tap a word to define it, and footnotes open in a sheet so you never lose your place.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Pick up where you left off</h3><p>Reading progress syncs back to your Kavita and Komga servers. On iOS, iCloud also keeps position, bookmarks, and highlights in step across your devices, and on Android, Export keeps your data portable.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Reading Statistics</h3><p>A Stats tab tracks your reading time and progress across your library. On iOS you also get a streak, a swipeable activity chart, and time-remaining estimates that learn your speed for each format.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>Try Before You Buy</h3><p>Every CBZ comic and comic-shaped MOBI book opens with a free 7-page preview, so you can read before deciding on Sutra Pro.</p></div>
     </div>
   </div>
 </section>
@@ -602,53 +588,28 @@
 
 <!-- ===== pro ===== -->
 <section class="pro" id="pro">
-  <div class="wrap">
-    <div class="section-head">
+  <div class="wrap pro-wrap">
+    <div>
       <span class="eyebrow-dark">Sutra Pro</span>
-      <h2>One price. All the extras. Forever.</h2>
+      <h2>One price. All the extras. <em>Forever.</em></h2>
+      <p class="pro-lede">Reading EPUB and PDF stays free. Pro is a single payment with no subscription, so buy it on the platform you read on.</p>
+      <ul class="pro-points">
+        <li>Full .cbz comics beyond the free preview</li>
+        <li>DRM-free .mobi books</li>
+        <li>Komga server connections</li>
+      </ul>
     </div>
-    <div class="pro-grid">
-      <div class="pro-col col-free">
-        <div class="pro-col-head">
-          <span class="pro-col-eyebrow">Free forever</span>
-          <div class="pro-col-title">Everything you need to start reading</div>
-        </div>
-        <ul class="pro-list">
-          <li>All OPDS servers — Kavita, Calibre, Grimmory, and more</li>
-          <li>Project Gutenberg &amp; Standard Ebooks catalogs</li>
-          <li>EPUB &amp; PDF reading with full typography controls</li>
-          <li>Panel-aware comic and manga reading</li>
-          <li>7-page free preview of any CBZ or MOBI book</li>
-          <li>Auto-scrolling with swipe-to-adjust speed</li>
-          <li>Sideload files from your phone</li>
-          <li>Color highlights — iCloud sync on iOS, Export on Android</li>
-          <li>Dictionary, inline footnotes, bookmarks, and in-book search</li>
-          <li>Library sorting, series stacks, Collections &amp; Favorites</li>
-          <li>WebDAV server browsing and downloads</li>
-          <li>Reading statistics — time read, streak, activity chart</li>
-          <li>Offline downloads and storage manager</li>
-          <li>Streaming CBZ pages from Kavita</li>
-          <li>Dark mode, reader brightness, left-handed page turns, Reduce Motion</li>
-        </ul>
+    <div class="price">
+      <div class="amt">$6.99<small>one-time</small></div>
+      <div class="rows">
+        <a class="r" href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864"><span>iPhone &amp; iPad</span><span>App Store</span></a>
+        <a class="r" href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra"><span>Android phones &amp; tablets</span><span>Google Play</span></a>
       </div>
-      <div class="pro-col col-pro">
-        <div class="pro-col-head">
-          <span class="pro-col-eyebrow">Sutra Pro</span>
-          <div class="pro-col-title">Unlock more formats and Komga</div>
-          <div class="pro-price">$6.99</div>
-          <span class="pro-price-note">One-time purchase · No subscription · Yours forever</span>
-        </div>
-        <ul class="pro-list">
-          <li>Native Komga server integration with page-accurate progress sync</li>
-          <li>.cbz comic archives — read comic archives in a fixed-layout, zoomable page reader</li>
-          <li>DRM-free MOBI books — read .mobi files you own</li>
-        </ul>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="btn-pro" data-store>
-          Unlock Sutra Pro →
-        </a>
-      </div>
+      <p class="fine">Purchases are per platform. Apple and Google handle billing separately, so Pro on iOS does not carry over to Android.</p>
     </div>
-    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a> Sutra Pro is a one-time purchase tied to your Apple Account or Google Play account. Purchases are per platform — Apple and Google bill separately, so Sutra Pro on iOS doesn't carry over to Android.</p>
+  </div>
+  <div class="wrap">
+    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a></p>
   </div>
 </section>
 
