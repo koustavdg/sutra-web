@@ -399,7 +399,7 @@
     <div class="phone-stage">
       <div class="phone">
         <div class="notch"></div>
-        <img src="assets/screenshots/hero.png" alt="Sutra library screen"
+        <img src="assets/screenshots/hero.png" data-android-src="assets/screenshots/android/01-library.webp" alt="Sutra library screen"
              onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>assets/screenshots/<br>hero.png</span>'}))">
       </div>
     </div>
@@ -416,7 +416,7 @@
     <div class="strip-row">
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/01-library.png" alt="Library view"
+          <img src="assets/screenshots/01-library.png" data-android-src="assets/screenshots/android/01-library.webp" alt="Library view"
                onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>01-library.png</span>'}))">
         </div>
         <div class="strip-cap">01 · library</div>
@@ -424,7 +424,7 @@
       <div>
         <div class="phone"><div class="notch"></div>
           <video autoplay muted loop playsinline aria-label="Panel-aware comic reading">
-            <source src="assets/screenshots/05-comics.mp4" type="video/mp4">
+            <source src="assets/screenshots/05-comics.mp4" data-android-src="assets/screenshots/android/05-comics.mp4" type="video/mp4">
           </video>
         </div>
         <div class="strip-cap">02 · panel comics</div>
@@ -432,14 +432,14 @@
       <div>
         <div class="phone"><div class="notch"></div>
           <video autoplay muted loop playsinline aria-label="Auto-scroll reading">
-            <source src="assets/screenshots/06-autoscroll.mp4" type="video/mp4">
+            <source src="assets/screenshots/06-autoscroll.mp4" data-android-src="assets/screenshots/android/06-autoscroll.mp4" type="video/mp4">
           </video>
         </div>
         <div class="strip-cap">03 · auto-scroll</div>
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img src="assets/screenshots/07-pro.png" alt="Sutra Pro unlock screen"
+          <img src="assets/screenshots/07-pro.png" data-android-src="assets/screenshots/android/07-pro.webp" alt="Sutra Pro unlock screen"
                onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>07-pro.png</span>'}))">
         </div>
         <div class="strip-cap">04 · Sutra Pro</div>
@@ -554,7 +554,7 @@
     </div>
     <div class="version-list">
       <div class="version">
-        <div><div class="version-num label">Android</div><span class="version-status">Shipped</span></div>
+        <div><div class="version-num">1.0.0</div><span class="version-status">Android · Shipped</span></div>
         <ul>
           <li>Sutra is now on Google Play — read EPUB, PDF, CBZ comics, and DRM-free MOBI</li>
           <li>Connect your own library: OPDS, Kavita, Komga, Calibre, WebDAV, Project Gutenberg, and Standard Ebooks</li>
@@ -715,6 +715,13 @@
 <script>
 (function(){
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
+  if (document.documentElement.classList.contains('is-android')) {
+    document.querySelectorAll('img[data-android-src]').forEach(function(img){ img.src = img.dataset.androidSrc; });
+    document.querySelectorAll('video').forEach(function(v){
+      var src = v.querySelector('source[data-android-src]');
+      if (src) { src.src = src.dataset.androidSrc; v.load(); v.play().catch(function(){}); }
+    });
+  }
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
