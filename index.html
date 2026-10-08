@@ -129,7 +129,11 @@
   .store-links{ display:flex; flex-direction:column; }
   .is-android .foot-play{ order:-1; }
   .badge-row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
-  @media (max-width:600px){ .badge-row{ flex-direction:column; align-items:flex-start; } }
+  @media (max-width:600px){
+    .badge-row{ flex-direction:column; align-items:flex-start; }
+    .badge-store{ width:auto; }
+    .badge-store img{ width:auto; height:52px; }
+  }
   .cta-note{ font-size:13px; color:#B3A2D6; font-family:'JetBrains Mono',monospace; }
   .cta-drm-link{
     font-family:'JetBrains Mono',monospace; font-size:12px;
@@ -212,6 +216,7 @@
   .newsletter-text .eyebrow-dark{ color:#C9B8E8; }
   .newsletter-text h2{ font-size:28px; color:var(--paper); margin-bottom:12px; }
   .newsletter-text p{ font-size:15px; color:rgba(255,255,255,0.72); line-height:1.6; }
+  .newsletter-actions{ display:flex; gap:12px; flex-wrap:wrap; }
   .newsletter-btn{
     display:inline-block; margin-top:22px; background:var(--paper); color:var(--plum-deep);
     text-decoration:none; padding:17px 44px; border-radius:var(--radius);
@@ -369,6 +374,8 @@
     .foot-sitemap{ grid-template-columns:1fr 1fr; }
   }
   @media (max-width: 560px){
+    .newsletter-actions{ width:100%; max-width:360px; flex-direction:column; align-items:stretch; }
+    .newsletter-btn{ width:100%; text-align:center; }
     .strip-row{ grid-template-columns:repeat(2,1fr); gap:12px; }
     .card-grid{ grid-template-columns:1fr; }
     .foot-sitemap{ grid-template-columns:1fr; }
@@ -399,6 +406,8 @@
         <a href="#features">Features</a>
         <a href="#pro">Sutra Pro</a>
         <a href="#roadmap">Roadmap</a>
+        <a href="https://newsletter.sutra-reader.com/">Newsletter</a>
+        <a href="help.html">Help and FAQ</a>
         <div class="ham-divider"></div>
         <a href="changelog.html">Changelog</a>
         <a href="drm-free.html">Where to Legally Buy DRM-Free Books</a>
@@ -520,7 +529,10 @@
       <span class="eyebrow-dark">Stay in the loop</span>
       <h2>Follow Sutra news</h2>
       <p>Get updates on new features and everything happening with Sutra — straight to your inbox.</p>
-      <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      <div class="newsletter-actions">
+        <a class="newsletter-btn" href="https://newsletter.sutra-reader.com/" target="_blank" rel="noopener">Newsletter</a>
+        <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
+      </div>
     </div>
   </div>
 </section>
