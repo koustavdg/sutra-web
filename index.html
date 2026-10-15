@@ -644,20 +644,15 @@
       <div class="version">
         <div><div class="version-num">2.4.0</div><span class="version-status">Shipped</span></div>
         <ul>
-          <li>Panel-by-panel reading now uses a single panel detector for all comics and manga, ported to Swift (replaces the separate manga path); credit line for the old extractor removed from in-app acknowledgements</li>
-          <li>Manga-style reading as a library and series setting; ComicInfo direction is respected, and a FAQ entry explains it (#335)</li>
-          <li>Manga: the setting is on the library's Settings page under Sync; page curl direction follows reading direction (#398); PDFs get the Reading Direction switch with right-to-left paging (#400); next-page prefetch no longer reads index - 1 for right-to-left books, which made every forward turn a cache miss (#399)</li>
-          <li>Fixed-format books open on the full page the first time with a one-time panel-button tooltip, then reopen in the mode last used for that book (per book, local only) (#402)</li>
-          <li>Library grid: a caption's reserved height is a real size now, so one-line and two-line tiles in a row line up (#397)</li>
-          <li>Reader fonts: Atkinson Hyperlegible, OpenDyslexic, EB Garamond and Libre Baskerville bundled under the SIL OFL, with licences in Acknowledgements (#391)</li>
-          <li>Author sort groups books into author stacks; tiles are uniform with captions; Sort &amp; Filter shows an active state; two-line collection names are centred on the accent rule (#386, #389, #387)</li>
-          <li>"Series as Collections" setting removed; series always on (#390)</li>
-          <li>Downloads and imports are size-capped (2 GiB) and validated before they join the library; staged in <code>.part</code> files (#323)</li>
-          <li>ZIP/EPUB reader enforces entry-count, per-entry, total-size and ratio limits matching Android (#345)</li>
-          <li>Import results sheet with per-file outcomes, duplicate detection by SHA-256 digest and a cancel button (#324)</li>
-          <li>Covers, WebDAV extraction and downloads use the per-server trusted client (#325)</li>
-          <li>Reading-time estimates floor at 30 s per flowing page and 20 s per fixed page (#377)</li>
-          <li>Library search: the keyboard no longer re-appears each time you return from a book while the search row is open (focus was re-requested on every appear); Search key and dragging the list now dismiss it (#396)</li>
+          <li>Panel-by-panel reading uses one improved detector for all comics and manga</li>
+          <li>Manga-style reading as a library and series setting that respects ComicInfo direction, with right-to-left paging for PDFs and page curl that follows reading direction</li>
+          <li>Comics open on the full page the first time, then remember the mode you last used for each book</li>
+          <li>Four new reader fonts: Atkinson Hyperlegible, OpenDyslexic, EB Garamond, and Libre Baskerville</li>
+          <li>Sorting by author groups books into author stacks, and Sort &amp; Filter shows what's active</li>
+          <li>Library grid tiles line up whether titles run one line or two</li>
+          <li>Series are always on — the Series as Collections setting is gone</li>
+          <li>Safer downloads and imports: size limits and checks before files join your library, a per-file results sheet, duplicate detection, and a cancel button</li>
+          <li>More accurate reading-time estimates, and library search no longer brings the keyboard back after you return from a book</li>
         </ul>
       </div>
       <div class="version">
