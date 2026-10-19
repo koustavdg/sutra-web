@@ -228,31 +228,8 @@
   .card h3{ font-size:19px; margin-top:4px; }
   .card p{ font-size:14.5px; color:var(--ink-soft); }
 
-  /* ===== drm-callout ===== */
-  .drm-callout{
-    background:var(--paper-dim);
-    border-top:3px solid var(--grape);
-    padding:64px 0 68px;
-    text-align:center;
-  }
-  .drm-callout h2{ font-size:clamp(22px,3.5vw,30px); max-width:34ch; margin:0 auto; text-wrap:balance; }
-  .drm-callout p{ max-width:62ch; margin:16px auto 0; color:var(--ink-soft); font-size:16px; }
-  .drm-callout-link{
-    display:inline-block; margin-top:26px;
-    background:var(--plum-deep); color:var(--paper);
-    text-decoration:none; padding:12px 26px; border-radius:var(--radius);
-    font-weight:600; font-size:15px; transition:background .15s;
-  }
-  .drm-callout-link:hover{ background:var(--grape); }
-
-  /* ===== pro ===== */
-  .pro{ background:linear-gradient(160deg, var(--plum-top), var(--plum-deep)); color:var(--paper); padding:88px 0; }
-  .pro-wrap{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
-  .pro-wrap > *{ min-width:0; }
-  .pro .eyebrow-dark{ color:#C9B8E8; }
-  .pro h2{ font-size:clamp(28px,4vw,40px); line-height:1.1; color:#F8F2E3; }
-  .pro-lede{ margin-top:12px; color:#DCD1EE; max-width:46ch; }
-  .pro-points{ margin-top:18px; padding-left:18px; color:#DCD1EE; display:grid; gap:4px; }
+  /* ===== price card ===== */
+  .compare-foot{ margin-top:36px; max-width:520px; }
   .price{ background:rgba(244,236,219,0.1); border:1px solid rgba(244,236,219,0.22); border-radius:10px; padding:24px; }
   .price .amt{ font:600 52px/1 'Spectral',serif; color:#fff; }
   .price .amt small{ font:400 14px 'Inter',system-ui,sans-serif; color:#DCD1EE; margin-left:6px; }
@@ -265,7 +242,7 @@
   .price .r span:last-child{ font-family:'JetBrains Mono',monospace; font-size:13px; }
   .price a.r:hover span:last-child{ text-decoration:underline; text-underline-offset:3px; }
   .price .fine{ margin-top:14px; font-size:13px; color:#DCD1EE; }
-  .pro-footer-note{ margin-top:44px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#CBB9EA; max-width:72ch; }
+  .pro-footer-note{ margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#CBB9EA; max-width:72ch; }
   .pro-footer-note .inline-link{ color:#E5DBF5; text-decoration:underline; text-underline-offset:2px; }
 
   /* ===== roadmap ===== */
@@ -447,7 +424,6 @@
     .strip-row{ grid-template-columns:repeat(2,1fr); }
     .res-grid{ grid-template-columns:1fr; }
     .card-grid{ grid-template-columns:repeat(2,1fr); }
-    .pro-wrap{ grid-template-columns:1fr; }
     .version{ grid-template-columns:1fr; gap:10px; }
     .version ul{ grid-template-columns:1fr; }
     .foot-sitemap{ grid-template-columns:1fr 1fr; }
@@ -663,42 +639,17 @@
         </tbody>
       </table>
     </div>
-  </div>
-</section>
-
-<!-- ===== drm callout ===== -->
-<section class="drm-callout">
-  <div class="wrap">
-    <h2>Where can I legally buy DRM-free books?</h2>
-    <p>Sutra works with files you own outright — no DRM, no lock-in. We've put together a curated list of stores and publishers that sell ebooks the right way: you pay, you download, you keep the file forever.</p>
-    <a href="drm-free.html" class="drm-callout-link">Browse our curated list →</a>
-  </div>
-</section>
-
-<!-- ===== pro ===== -->
-<section class="pro" id="pro">
-  <div class="wrap pro-wrap">
-    <div>
-      <span class="eyebrow-dark">Sutra Pro</span>
-      <h2>One price. All the extras. <em>Forever.</em></h2>
-      <p class="pro-lede">Reading EPUB and PDF stays free. Pro is a single payment with no subscription, so buy it on the platform you read on.</p>
-      <ul class="pro-points">
-        <li>Full .cbz comics beyond the free preview</li>
-        <li>DRM-free .mobi books</li>
-        <li>Komga server connections</li>
-      </ul>
-    </div>
-    <div class="price">
-      <div class="amt">$6.99<small>one-time</small></div>
-      <div class="rows">
-        <a class="r" href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864"><span>iPhone &amp; iPad</span><span>App Store</span></a>
-        <a class="r" href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra"><span>Android phones &amp; tablets</span><span>Google Play</span></a>
+    <div class="compare-foot" id="pro">
+      <div class="price">
+        <div class="amt">$6.99<small>one-time</small></div>
+        <div class="rows">
+          <a class="r" href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864"><span>iPhone &amp; iPad</span><span>App Store</span></a>
+          <a class="r" href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra"><span>Android phones &amp; tablets</span><span>Google Play</span></a>
+        </div>
+        <p class="fine">Purchases are per platform. Apple and Google handle billing separately, so Pro on iOS does not carry over to Android.</p>
       </div>
-      <p class="fine">Purchases are per platform. Apple and Google handle billing separately, so Pro on iOS does not carry over to Android.</p>
+      <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a></p>
     </div>
-  </div>
-  <div class="wrap">
-    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a></p>
   </div>
 </section>
 
@@ -745,7 +696,7 @@
           <li>More accurate reading-time estimates, and library search no longer brings the keyboard back after you return from a book</li>
         </ul>
       </div>
-      <div class="version" data-top="What's New after updates|5x faster library sorting|Fixed page-turn lag">
+      <div class="version" data-top="5x faster library sorting|Fixed page-turn lag">
         <div><div class="version-num">2.3.10</div><span class="version-status">Oct 6, 2026</span></div>
         <ul>
           <li>What's New — a short list of changes after each update, also available from Settings</li>
@@ -766,7 +717,7 @@
           <li>More reliable Calibre series metadata, server completion sync, and cleaner Kavita titles</li>
         </ul>
       </div>
-      <div class="version" data-top="iOS 27 readiness|Inline EPUB footnotes|Display stays awake">
+      <div class="version" data-top="iOS 27 readiness|Inline EPUB footnotes">
         <div><div class="version-num">2.2.5</div><span class="version-status">Sep 22, 2026</span></div>
         <ul>
           <li>iOS 27 and iPadOS 27 readiness improvements, including safer library removal and multi-window/layout handling</li>
@@ -774,7 +725,7 @@
           <li>Keeps the display awake during active reading</li>
         </ul>
       </div>
-      <div class="version" data-top="Stream comics from servers|Series stacks in Library|Richer book details page">
+      <div class="version" data-top="Stream comics from servers|Series stacks in Library">
         <div><div class="version-num">2.2.1</div><span class="version-status">Sep 15, 2026</span></div>
         <ul>
           <li>Streaming comic-page support for Komga and Kavita — start reading CBZ files without waiting for a full download</li>
@@ -786,7 +737,7 @@
           <li>Substantial native Android alpha groundwork</li>
         </ul>
       </div>
-      <div class="version" data-top="Live PDF auto-scroll speed|Search respects list view|Rotation keeps your place">
+      <div class="version" data-top="Live PDF auto-scroll speed">
         <div><div class="version-num">2.1.10</div><span class="version-status">Aug 26, 2026</span></div>
         <ul>
           <li>Fixed EPUB reading position lost when rotating between portrait and landscape</li>
@@ -871,7 +822,7 @@
           <li>A compact shared top row across Library, Stats, Downloads, and Settings, plus updated Material 3 theming</li>
         </ul>
       </div>
-      <div class="version" data-top="Series stacks in Library|Series sorted as grid|Time left in reader">
+      <div class="version" data-top="Series stacks in Library|Time left in reader">
         <div><div class="version-num">1.1.1</div><span class="version-status">Oct 11, 2026</span></div>
         <ul>
           <li><strong>Series stack in the Library.</strong> Books from the same series now appear as one stacked tile with a count, and tapping it opens the book you were last reading in that series, or its first book. You can turn this off with Stack series in grid in Settings.</li>
@@ -882,7 +833,7 @@
           <li><strong>Cleaner reader bar.</strong> The extra previous and next arrows under the progress slider are gone from PDF and comic readers. Swipe or tap to turn pages.</li>
         </ul>
       </div>
-      <div class="version" data-top="What's New after updates|Tablet bottom tab bar|Faster Komga refreshes">
+      <div class="version" data-top="Faster Komga refreshes|What's New after updates">
         <div><div class="version-num">1.0.2</div><span class="version-status">Oct 10, 2026</span></div>
         <ul>
           <li>What's New after each update, reopenable from Settings</li>
