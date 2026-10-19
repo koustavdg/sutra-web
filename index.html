@@ -300,6 +300,16 @@
   .compare table{ border-collapse:collapse; width:100%; min-width:560px; font-size:15px; }
   .compare th, .compare td{ padding:13px 18px; text-align:left; border-bottom:1px solid var(--line-on-plum); vertical-align:top; color:#E5DBF5; }
   .compare tr:last-child td, .compare tr:last-child th{ border-bottom:0; }
+  @media (max-width:640px){
+    .compare table{ min-width:0; table-layout:fixed; font-size:14px; }
+    .compare th, .compare td{ padding:12px 8px; }
+    .compare tbody th{ width:auto; padding-left:14px; font-size:14px; }
+    .compare tbody th small{ font-size:12.5px; }
+    .compare thead th{ font-size:9.5px; letter-spacing:0.02em; padding:10px 2px; white-space:nowrap; }
+    .compare thead th:nth-child(n+2), .compare tbody td{ width:26%; text-align:center; }
+    .compare tr.group td{ text-align:left; padding-left:14px; }
+    .compare td .y{ font-size:13px; }
+  }
   .compare thead th{
     font:500 12px 'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase;
     color:#C9B8E8; background:rgba(244,236,219,0.1);
@@ -324,6 +334,13 @@
   .rm-legend .lg.and{ background:var(--and); }
   .rm-legend .lg.next{ border:2px dashed var(--grape); }
   .rm-hint{ margin-left:auto; text-transform:none; letter-spacing:0; }
+  .rm-wrap{ position:relative; }
+  .rm-arrow{ position:absolute; top:50%; z-index:2; width:38px; height:38px; margin-top:-19px; padding:0; border:0; border-radius:50%; background:var(--ink); color:var(--paper); cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(43,27,70,0.3); transition:opacity .15s; }
+  .rm-arrow.left{ left:10px; } .rm-arrow.right{ right:10px; }
+  .rm-arrow svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+  .rm-arrow:hover{ background:var(--grape); }
+  .rm-arrow:focus-visible{ outline:2px solid var(--grape); outline-offset:2px; }
+  .rm-arrow[disabled]{ opacity:0; pointer-events:none; }
   .rm-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); padding:0 8px; scroll-snap-type:x proximity; }
   .rm-track{ position:relative; height:470px; }
   .rm-track svg{ position:absolute; inset:0; overflow:visible; }
@@ -348,6 +365,8 @@
   .rm-card.next .t{ color:var(--grape); }
   .rm-card .d{ display:block; margin-bottom:7px; font:400 10.5px 'JetBrains Mono',monospace; color:var(--ink-soft); }
   .rm-card ul{ list-style:none; display:grid; gap:5px; }
+  .rm-card.up ul{ margin-bottom:9px; }
+  .rm-card.up .d{ margin-bottom:0; }
   .rm-card li{ font-size:11.5px; line-height:1.3; color:var(--ink-soft); }
   .rm-lane-name{ position:absolute; font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em; text-transform:uppercase; }
   .rm-detail{ margin-top:18px; padding:26px 28px; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); }
@@ -379,7 +398,7 @@
   .rm-vall li::before{ content:"—"; position:absolute; left:0; color:var(--grape); }
   @media (max-width:880px){ .rm-detail ul{ grid-template-columns:1fr; } .rm-hint{ margin-left:0; } .rm-detail{ padding:20px; } }
   @media (max-width:700px){
-    .rm-scroll, .rm-detail{ display:none; }
+    .rm-wrap, .rm-detail{ display:none; }
     .rm-vlist{ display:block; }
     .rm-hint{ display:none; }
   }
@@ -623,19 +642,20 @@
         <tbody>
         <tr class="group"><td colspan="3">Reading</td></tr>
         <tr><th scope="row">EPUB &amp; PDF<small>Themes, fonts, bookmarks, search</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">CBZ comics<small>Free 7-page preview of any comic</small></th><td><span class="y">Preview</span></td><td><span class="y">Full</span></td></tr>
-        <tr><th scope="row">MOBI books<small>DRM-free. Sutra Pro only</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">Panel Mode &amp; right-to-left manga<small>Free for everyone</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">E-ink display mode<small>Free. Android only</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Stream CBZ from Komga and Kavita<small>Read without downloading the file first</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">Highlights, notes &amp; dictionary</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">Reading statistics</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr class="group"><td colspan="3">Libraries &amp; sync</td></tr>
         <tr><th scope="row">OPDS, Kavita, Calibre, WebDAV<small>Plus Project Gutenberg and Standard Ebooks</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Komga server connection</th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">Reading progress sync to your server<small>Kavita, plus Komga with Pro</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">Library backup<small>iCloud on iOS, Export on Android</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">No analytics or tracking</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr class="group"><td colspan="3">Sutra Pro</td></tr>
+        <tr><th scope="row">CBZ comics<small>Free 7-page preview of any comic</small></th><td><span class="y">Preview</span></td><td><span class="y">Full</span></td></tr>
+        <tr><th scope="row">MOBI books<small>DRM-free. Sutra Pro only</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Stream CBZ from Komga and Kavita<small>Read without downloading the file first</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Komga server connection</th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr class="group"><td colspan="3">Price</td></tr>
         <tr><th scope="row">Cost<small>One-time, no subscription. Bought separately on each platform</small></th><td><span class="y">Free</span></td><td><span class="y">$6.99</span></td></tr>
         </tbody>
@@ -902,9 +922,9 @@
     <div class="rm-tl" id="rm-tl" hidden>
       <div class="rm-legend">
         <span><i class="lg ios"></i>iOS</span><span><i class="lg and"></i>Android</span><span><i class="lg next"></i>Upcoming, on both</span>
-        <span class="rm-hint">Hover or tap a release to see everything in it</span>
+        <span class="rm-hint">Hover or tap a release to see everything in it. Scroll or use the arrows for older releases</span>
       </div>
-      <div class="rm-scroll" id="rm-scroll"><div class="rm-track" id="rm-track"></div></div>
+      <div class="rm-wrap"><button type="button" class="rm-arrow left" id="rm-left" aria-label="Scroll timeline left"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button><div class="rm-scroll" id="rm-scroll"><div class="rm-track" id="rm-track"></div></div><button type="button" class="rm-arrow right" id="rm-right" aria-label="Scroll timeline right"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button></div>
       <div class="rm-detail" id="rm-detail" aria-live="polite"></div>
       <ol class="rm-vlist" id="rm-vlist"></ol>
     </div>
@@ -1024,10 +1044,11 @@
   function node(d, x, y, cls, below){
     var n = all.length; all.push(d);
     var sub = d.kind==='next' ? 'Upcoming' : d.date;
+    var head = '<span class="t">'+title(d).replace(' / ','<br>')+'</span><span class="d">'+sub+'</span>';
+    var feats = '<ul>'+d.top.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul>';
     var pos = below ? 'top:'+(y+28)+'px' : 'bottom:'+(H-y+28)+'px';
     html += '<button type="button" class="rm-node '+cls+'" data-i="'+n+'" style="left:'+x+'px;top:'+y+'px" aria-pressed="false" aria-label="'+title(d)+', '+d.date+'"><i></i></button>'+
-            '<div class="rm-card '+cls+'" data-i="'+n+'" style="left:'+x+'px;'+pos+'"><span class="t">'+title(d).replace(' / ','<br>')+'</span><span class="d">'+sub+'</span><ul>'+
-            d.top.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul></div>';
+            '<div class="rm-card '+cls+(below?'':' up')+'" data-i="'+n+'" style="left:'+x+'px;'+pos+'">'+(below?head+feats:feats+head)+'</div>';
   }
   ios.forEach(function(d,i){ node(d, xi(i), YI, 'ios', false); });
   and.forEach(function(d,i){ node(d, xi(andStart+i), YA, 'and', true); });
@@ -1068,11 +1089,11 @@
   var order = [parity].concat(shipped, next);
   vlist.innerHTML = order.map(function(d,k){
     var cls = d.kind==='merge' ? 'merge' : d.kind==='next' ? 'next' : d.plat;
-    return '<li class="rm-vitem '+cls+(k===0?' open':'')+'"><button type="button" class="rm-vbtn" aria-expanded="'+(k===0)+'">'+
+    return '<li class="rm-vitem '+cls+'"><button type="button" class="rm-vbtn" aria-expanded="false">'+
       '<span class="rm-vtitle">'+title(d)+'</span><span class="rm-vdate">'+(d.kind==='next'?'Upcoming':d.date)+'</span>'+
       '<ul class="rm-vtop">'+d.top.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul>'+
       '<span class="rm-vmore">All features</span></button>'+
-      '<div class="rm-vall"'+(k===0?'':' hidden')+'><ul>'+d.items.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul></div></li>';
+      '<div class="rm-vall" hidden><ul>'+d.items.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul></div></li>';
   }).join('');
   [].forEach.call(vlist.querySelectorAll('.rm-vbtn'), function(b){
     b.addEventListener('click', function(){
@@ -1085,8 +1106,13 @@
 
   document.documentElement.classList.add('js'); tl.hidden = false;
   show(latest, false);
-  var sc = document.getElementById('rm-scroll');
+  var sc = document.getElementById('rm-scroll'), aL = document.getElementById('rm-left'), aR = document.getElementById('rm-right');
+  function arrows(){ aL.disabled = sc.scrollLeft < 4; aR.disabled = sc.scrollLeft + sc.clientWidth > sc.scrollWidth - 4; }
+  aL.addEventListener('click', function(){ sc.scrollBy({left:-CW*3, behavior:'smooth'}); });
+  aR.addEventListener('click', function(){ sc.scrollBy({left:CW*3, behavior:'smooth'}); });
+  sc.addEventListener('scroll', arrows);
   sc.scrollLeft = sc.scrollWidth;
+  arrows();
 })();
 </script>
 <script>
