@@ -350,7 +350,6 @@
     display:flex; align-items:center; justify-content:center; border-radius:50%;
   }
   .rm-node i{ display:block; width:16px; height:16px; border-radius:50%; background:var(--c); border:3px solid var(--card); box-shadow:0 0 0 2px var(--c); transition:transform .15s ease; }
-  .rm-node:hover i{ transform:scale(1.2); }
   .rm-node:focus-visible{ outline:2px solid var(--grape); outline-offset:1px; }
   .rm-node[aria-pressed="true"] i{ transform:scale(1.5); background:var(--card); border-width:4px; border-color:var(--c); box-shadow:0 0 0 4px rgba(123,84,184,0.25); }
   .rm-node.ios{ --c:var(--ink); } .rm-node.and{ --c:var(--and); }
@@ -359,7 +358,7 @@
   .rm-node.merge i{ width:22px; height:22px; background:linear-gradient(90deg,var(--ink) 50%,var(--and) 50%); }
   .rm-node.merge[aria-pressed="true"] i{ background:var(--card); }
   .rm-card{ position:absolute; width:140px; transform:translateX(-50%); text-align:center; cursor:pointer; padding:6px 4px 8px; border-radius:6px; scroll-snap-align:center; transition:background .12s; }
-  .rm-card:hover, .rm-card.on{ background:rgba(123,84,184,0.09); }
+  .rm-card.on{ background:rgba(123,84,184,0.09); }
   .rm-card .t{ display:block; font:600 12.5px/1.3 'JetBrains Mono',monospace; color:var(--ink); }
   .rm-card.and .t{ color:var(--and); }
   .rm-card.next .t{ color:var(--grape); }
@@ -380,6 +379,7 @@
   .rm-vitem{ position:relative; padding:0 0 22px; --c:var(--ink); }
   .rm-vitem.and{ --c:var(--and); } .rm-vitem.next{ --c:var(--grape); }
   .rm-vitem::before{ content:""; position:absolute; left:-30px; top:3px; width:14px; height:14px; border-radius:50%; background:var(--c); border:3px solid var(--paper); box-shadow:0 0 0 2px var(--c); }
+  .rm-vitem.next::after{ content:""; position:absolute; left:-22px; top:0; bottom:0; width:2px; background:repeating-linear-gradient(to bottom, var(--grape) 0 2px, var(--paper) 2px 8px); }
   .rm-vitem.merge::before{ background:linear-gradient(90deg,var(--ink) 50%,var(--and) 50%); }
   .rm-vitem.next::before{ background:var(--paper); border:3px dashed var(--grape); box-shadow:none; }
   .rm-vbtn{ display:block; width:100%; padding:0; margin:0; border:0; background:none; font:inherit; color:inherit; text-align:left; cursor:pointer; }
@@ -922,7 +922,7 @@
     <div class="rm-tl" id="rm-tl" hidden>
       <div class="rm-legend">
         <span><i class="lg ios"></i>iOS</span><span><i class="lg and"></i>Android</span><span><i class="lg next"></i>Upcoming, on both</span>
-        <span class="rm-hint">Hover or tap a release to see everything in it. Scroll or use the arrows for older releases</span>
+        <span class="rm-hint">Click a release to see everything in it. Scroll or use the arrows for older releases</span>
       </div>
       <div class="rm-wrap"><button type="button" class="rm-arrow left" id="rm-left" aria-label="Scroll timeline left"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button><div class="rm-scroll" id="rm-scroll"><div class="rm-track" id="rm-track"></div></div><button type="button" class="rm-arrow right" id="rm-right" aria-label="Scroll timeline right"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button></div>
       <div class="rm-detail" id="rm-detail" aria-live="polite"></div>
@@ -1075,18 +1075,15 @@
     if (scroll) nodes[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
   }
   [].forEach.call(nodes, function(b){
-    b.addEventListener('mouseenter', function(){ show(+b.dataset.i, false); });
-    b.addEventListener('focus', function(){ show(+b.dataset.i, false); });
     b.addEventListener('click', function(){ show(+b.dataset.i, true); });
   });
   [].forEach.call(cards, function(c){
-    c.addEventListener('mouseenter', function(){ show(+c.dataset.i, false); });
     c.addEventListener('click', function(){ show(+c.dataset.i, true); });
   });
 
   var vlist = document.getElementById('rm-vlist');
   var shipped = ios.concat(and).sort(function(a,b){ return Date.parse(b.date) - Date.parse(a.date); });
-  var order = [parity].concat(shipped, next);
+  var order = next.slice().reverse().concat([parity], shipped);
   vlist.innerHTML = order.map(function(d,k){
     var cls = d.kind==='merge' ? 'merge' : d.kind==='next' ? 'next' : d.plat;
     return '<li class="rm-vitem '+cls+'"><button type="button" class="rm-vbtn" aria-expanded="false">'+
