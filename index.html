@@ -335,14 +335,14 @@
   .rm-legend .lg.next{ border:2px dashed var(--grape); }
   .rm-hint{ margin-left:auto; text-transform:none; letter-spacing:0; }
   .rm-wrap{ position:relative; }
-  .rm-arrow{ position:absolute; top:50%; z-index:2; width:38px; height:38px; margin-top:-19px; padding:0; border:0; border-radius:50%; background:var(--ink); color:var(--paper); cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(43,27,70,0.3); transition:opacity .15s; }
+  .rm-arrow{ position:absolute; top:14px; z-index:2; width:38px; height:38px; padding:0; border:0; border-radius:50%; background:var(--ink); color:var(--paper); cursor:pointer; display:flex; align-items:center; justify-content:center; box-shadow:0 2px 8px rgba(43,27,70,0.3); transition:opacity .15s; }
   .rm-arrow.left{ left:10px; } .rm-arrow.right{ right:10px; }
   .rm-arrow svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
   .rm-arrow:hover{ background:var(--grape); }
   .rm-arrow:focus-visible{ outline:2px solid var(--grape); outline-offset:2px; }
   .rm-arrow[disabled]{ opacity:0; pointer-events:none; }
   .rm-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); padding:0 8px; scroll-snap-type:x proximity; }
-  .rm-track{ position:relative; height:470px; }
+  .rm-track{ position:relative; height:530px; }
   .rm-track svg{ position:absolute; inset:0; overflow:visible; }
   .rm-track svg path{ fill:none; stroke-width:3; stroke-linecap:round; }
   .rm-node{
@@ -350,6 +350,7 @@
     display:flex; align-items:center; justify-content:center; border-radius:50%;
   }
   .rm-node i{ display:block; width:16px; height:16px; border-radius:50%; background:var(--c); border:3px solid var(--card); box-shadow:0 0 0 2px var(--c); transition:transform .15s ease; }
+  .rm-node:hover i{ transform:scale(1.2); }
   .rm-node:focus-visible{ outline:2px solid var(--grape); outline-offset:1px; }
   .rm-node[aria-pressed="true"] i{ transform:scale(1.5); background:var(--card); border-width:4px; border-color:var(--c); box-shadow:0 0 0 4px rgba(123,84,184,0.25); }
   .rm-node.ios{ --c:var(--ink); } .rm-node.and{ --c:var(--and); }
@@ -357,8 +358,8 @@
   .rm-node.next i{ background:var(--card); box-shadow:none; border:3px dashed var(--grape); }
   .rm-node.merge i{ width:22px; height:22px; background:linear-gradient(90deg,var(--ink) 50%,var(--and) 50%); }
   .rm-node.merge[aria-pressed="true"] i{ background:var(--card); }
-  .rm-card{ position:absolute; width:140px; transform:translateX(-50%); text-align:center; cursor:pointer; padding:6px 4px 8px; border-radius:6px; scroll-snap-align:center; transition:background .12s; }
-  .rm-card.on{ background:rgba(123,84,184,0.09); }
+  .rm-card{ position:absolute; width:138px; transform:translateX(-16px); text-align:left; cursor:pointer; padding:6px 6px 8px 8px; border-radius:6px; scroll-snap-align:center; transition:background .12s; }
+  .rm-card:hover, .rm-card.on{ background:rgba(123,84,184,0.09); }
   .rm-card .t{ display:block; font:600 12.5px/1.3 'JetBrains Mono',monospace; color:var(--ink); }
   .rm-card.and .t{ color:var(--and); }
   .rm-card.next .t{ color:var(--grape); }
@@ -366,7 +367,8 @@
   .rm-card ul{ list-style:none; display:grid; gap:5px; }
   .rm-card.up ul{ margin-bottom:9px; }
   .rm-card.up .d{ margin-bottom:0; }
-  .rm-card li{ font-size:11.5px; line-height:1.3; color:var(--ink-soft); }
+  .rm-card li{ position:relative; padding-left:12px; font-size:11.5px; line-height:1.3; color:var(--ink-soft); }
+  .rm-card li::before{ content:"—"; position:absolute; left:0; color:var(--grape); }
   .rm-lane-name{ position:absolute; font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em; text-transform:uppercase; }
   .rm-detail{ margin-top:18px; padding:26px 28px; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); }
   .rm-detail-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px; margin-bottom:16px; }
@@ -922,7 +924,7 @@
     <div class="rm-tl" id="rm-tl" hidden>
       <div class="rm-legend">
         <span><i class="lg ios"></i>iOS</span><span><i class="lg and"></i>Android</span><span><i class="lg next"></i>Upcoming, on both</span>
-        <span class="rm-hint">Click a release to see everything in it. Scroll or use the arrows for older releases</span>
+        <span class="rm-hint">Hover or tap a release to see everything in it. Scroll or use the arrows for older releases</span>
       </div>
       <div class="rm-wrap"><button type="button" class="rm-arrow left" id="rm-left" aria-label="Scroll timeline left"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg></button><div class="rm-scroll" id="rm-scroll"><div class="rm-track" id="rm-track"></div></div><button type="button" class="rm-arrow right" id="rm-right" aria-label="Scroll timeline right"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button></div>
       <div class="rm-detail" id="rm-detail" aria-live="polite"></div>
@@ -1026,10 +1028,10 @@
   }
   var ios = read('lane-ios','ios'), and = read('lane-android','and'),
       parity = read('lane-parity','merge','merge')[0], next = read('lane-next','next','next').reverse();
-  var CW = 150, X0 = 90, YI = 190, YA = 282, H = 470;
+  var CW = 150, X0 = 90, YI = 250, YA = 342, H = 530;
   var xi = function(i){ return X0 + i*CW; };
   var mergeCol = ios.length, andStart = mergeCol - and.length;
-  var W = xi(mergeCol + next.length) + 90;
+  var W = xi(mergeCol + next.length) + 140;
   var track = document.getElementById('rm-track'); track.style.width = W + 'px';
   var xm = xi(mergeCol), xa0 = xi(andStart) - 30;
   var svg = '<svg width="'+W+'" height="'+H+'" aria-hidden="true">'+
@@ -1075,9 +1077,12 @@
     if (scroll) nodes[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
   }
   [].forEach.call(nodes, function(b){
+    b.addEventListener('mouseenter', function(){ show(+b.dataset.i, false); });
+    b.addEventListener('focus', function(){ show(+b.dataset.i, false); });
     b.addEventListener('click', function(){ show(+b.dataset.i, true); });
   });
   [].forEach.call(cards, function(c){
+    c.addEventListener('mouseenter', function(){ show(+c.dataset.i, false); });
     c.addEventListener('click', function(){ show(+c.dataset.i, true); });
   });
 
