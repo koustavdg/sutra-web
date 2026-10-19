@@ -228,22 +228,30 @@
   .card h3{ font-size:19px; margin-top:4px; }
   .card p{ font-size:14.5px; color:var(--ink-soft); }
 
-  /* ===== price card ===== */
-  .compare-foot{ margin-top:36px; max-width:520px; }
-  .price{ background:rgba(244,236,219,0.1); border:1px solid rgba(244,236,219,0.22); border-radius:10px; padding:24px; }
-  .price .amt{ font:600 52px/1 'Spectral',serif; color:#fff; }
-  .price .amt small{ font:400 14px 'Inter',system-ui,sans-serif; color:#DCD1EE; margin-left:6px; }
+  /* ===== price + drm callout ===== */
+  .price-band{ background:var(--paper); padding:56px 0 64px; }
+  .price{ max-width:520px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:24px; }
+  .price .amt{ font:600 52px/1 'Spectral',serif; color:var(--ink); }
+  .price .amt small{ font:400 14px 'Inter',system-ui,sans-serif; color:var(--ink-soft); margin-left:6px; }
   .price .rows{ margin-top:18px; display:grid; gap:10px; }
   .price .r{
     display:flex; justify-content:space-between; gap:12px; align-items:center;
-    padding-top:10px; border-top:1px solid rgba(244,236,219,0.2);
-    font-size:14.5px; color:#F8F2E3; text-decoration:none;
+    padding-top:10px; border-top:1px solid var(--line);
+    font-size:14.5px; color:var(--ink); text-decoration:none;
   }
-  .price .r span:last-child{ font-family:'JetBrains Mono',monospace; font-size:13px; }
-  .price a.r:hover span:last-child{ text-decoration:underline; text-underline-offset:3px; }
-  .price .fine{ margin-top:14px; font-size:13px; color:#DCD1EE; }
-  .pro-footer-note{ margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:#CBB9EA; max-width:72ch; }
-  .pro-footer-note .inline-link{ color:#E5DBF5; text-decoration:underline; text-underline-offset:2px; }
+  .price .r span:last-child{ font-family:'JetBrains Mono',monospace; font-size:13px; color:var(--ink-soft); }
+  .price a.r:hover span:last-child{ color:var(--grape); text-decoration:underline; text-underline-offset:3px; }
+  .price .fine{ margin-top:14px; font-size:13px; color:var(--ink-soft); }
+  .pro-footer-note{ margin-top:24px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--ink-soft); max-width:72ch; }
+  .drm-callout{ background:var(--plum-deep); color:var(--paper); padding:64px 0 68px; text-align:center; }
+  .drm-callout h2{ font-size:clamp(22px,3.5vw,30px); max-width:34ch; margin:0 auto; text-wrap:balance; color:#F8F2E3; }
+  .drm-callout p{ max-width:62ch; margin:16px auto 0; color:#DCD1EE; font-size:16px; }
+  .drm-callout-link{
+    display:inline-block; margin-top:26px; background:var(--paper); color:var(--plum-deep);
+    text-decoration:none; padding:12px 26px; border-radius:var(--radius);
+    font-weight:600; font-size:15px; transition:background .15s;
+  }
+  .drm-callout-link:hover{ background:#fff; }
 
   /* ===== roadmap ===== */
   .roadmap{ background:var(--paper); color:var(--ink); padding:92px 0; border-top:1px solid var(--line); }
@@ -639,17 +647,30 @@
         </tbody>
       </table>
     </div>
-    <div class="compare-foot" id="pro">
-      <div class="price">
-        <div class="amt">$6.99<small>one-time</small></div>
-        <div class="rows">
-          <a class="r" href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864"><span>iPhone &amp; iPad</span><span>App Store</span></a>
-          <a class="r" href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra"><span>Android phones &amp; tablets</span><span>Google Play</span></a>
-        </div>
-        <p class="fine">Purchases are per platform. Apple and Google handle billing separately, so Pro on iOS does not carry over to Android.</p>
+  </div>
+</section>
+
+<!-- ===== price ===== -->
+<section class="price-band" id="pro">
+  <div class="wrap">
+    <div class="price">
+      <div class="amt">$6.99<small>one-time</small></div>
+      <div class="rows">
+        <a class="r" href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864"><span>iPhone &amp; iPad</span><span>App Store</span></a>
+        <a class="r" href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra"><span>Android phones &amp; tablets</span><span>Google Play</span></a>
       </div>
-      <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy. <a href="drm-free.html" class="inline-link">Where to legally buy DRM-free books →</a></p>
+      <p class="fine">Purchases are per platform. Apple and Google handle billing separately, so Pro on iOS does not carry over to Android.</p>
     </div>
+    <p class="pro-footer-note">Only DRM-free files are supported. Sutra is for content you're legally entitled to read and doesn't endorse piracy.</p>
+  </div>
+</section>
+
+<!-- ===== drm callout ===== -->
+<section class="drm-callout">
+  <div class="wrap">
+    <h2>Where can I legally buy DRM-free books?</h2>
+    <p>Sutra works with files you own outright — no DRM, no lock-in. We've put together a curated list of stores and publishers that sell ebooks the right way: you pay, you download, you keep the file forever.</p>
+    <a href="drm-free.html" class="drm-callout-link">Browse our curated list →</a>
   </div>
 </section>
 
