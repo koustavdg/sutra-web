@@ -307,6 +307,7 @@
   .compare tbody th{ font-weight:600; width:48%; }
   .compare tbody th small{ display:block; font-weight:400; color:#B3A2D6; font-size:13.5px; margin-top:2px; }
   .compare td .y{ color:#8FD9B0; font-weight:600; }
+  .compare .ck{ width:20px; height:20px; vertical-align:-4px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
   .compare td .n{ color:#B3A2D6; }
   .compare tr.group td{
     background:rgba(244,236,219,0.06); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
@@ -323,8 +324,8 @@
   .rm-legend .lg.and{ background:var(--and); }
   .rm-legend .lg.next{ border:2px dashed var(--grape); }
   .rm-hint{ margin-left:auto; text-transform:none; letter-spacing:0; }
-  .rm-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); padding:0 8px; }
-  .rm-track{ position:relative; height:250px; }
+  .rm-scroll{ overflow-x:auto; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); padding:0 8px; scroll-snap-type:x proximity; }
+  .rm-track{ position:relative; height:470px; }
   .rm-track svg{ position:absolute; inset:0; overflow:visible; }
   .rm-track svg path{ fill:none; stroke-width:3; stroke-linecap:round; }
   .rm-node{
@@ -340,10 +341,14 @@
   .rm-node.next i{ background:var(--card); box-shadow:none; border:3px dashed var(--grape); }
   .rm-node.merge i{ width:22px; height:22px; background:linear-gradient(90deg,var(--ink) 50%,var(--and) 50%); }
   .rm-node.merge[aria-pressed="true"] i{ background:var(--card); }
-  .rm-lbl{ position:absolute; transform:translateX(-50%); text-align:center; white-space:nowrap; pointer-events:none; font:600 12.5px 'JetBrains Mono',monospace; color:var(--ink); line-height:1.3; }
-  .rm-lbl small{ display:block; font-weight:400; font-size:10.5px; color:var(--ink-soft); }
-  .rm-lbl.and{ color:var(--and); }
-  .rm-lbl.next{ color:var(--grape); }
+  .rm-card{ position:absolute; width:140px; transform:translateX(-50%); text-align:center; cursor:pointer; padding:6px 4px 8px; border-radius:6px; scroll-snap-align:center; transition:background .12s; }
+  .rm-card:hover, .rm-card.on{ background:rgba(123,84,184,0.09); }
+  .rm-card .t{ display:block; font:600 12.5px/1.3 'JetBrains Mono',monospace; color:var(--ink); }
+  .rm-card.and .t{ color:var(--and); }
+  .rm-card.next .t{ color:var(--grape); }
+  .rm-card .d{ display:block; margin-bottom:7px; font:400 10.5px 'JetBrains Mono',monospace; color:var(--ink-soft); }
+  .rm-card ul{ list-style:none; display:grid; gap:5px; }
+  .rm-card li{ font-size:11.5px; line-height:1.3; color:var(--ink-soft); }
   .rm-lane-name{ position:absolute; font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em; text-transform:uppercase; }
   .rm-detail{ margin-top:18px; padding:26px 28px; border:1px solid var(--line); border-radius:var(--radius); background:var(--card); }
   .rm-detail-head{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 16px; margin-bottom:16px; }
@@ -351,7 +356,33 @@
   .rm-detail ul{ list-style:none; display:grid; grid-template-columns:1fr 1fr; gap:8px 28px; }
   .rm-detail li{ font-size:14.5px; color:var(--ink-soft); padding-left:16px; position:relative; }
   .rm-detail li::before{ content:"—"; position:absolute; left:0; color:var(--grape); }
+
+  .rm-vlist{ display:none; list-style:none; margin:8px 0 0 7px; padding:0 0 0 20px; border-left:2px solid var(--line); }
+  .rm-vitem{ position:relative; padding:0 0 22px; --c:var(--ink); }
+  .rm-vitem.and{ --c:var(--and); } .rm-vitem.next{ --c:var(--grape); }
+  .rm-vitem::before{ content:""; position:absolute; left:-30px; top:3px; width:14px; height:14px; border-radius:50%; background:var(--c); border:3px solid var(--paper); box-shadow:0 0 0 2px var(--c); }
+  .rm-vitem.merge::before{ background:linear-gradient(90deg,var(--ink) 50%,var(--and) 50%); }
+  .rm-vitem.next::before{ background:var(--paper); border:3px dashed var(--grape); box-shadow:none; }
+  .rm-vbtn{ display:block; width:100%; padding:0; margin:0; border:0; background:none; font:inherit; color:inherit; text-align:left; cursor:pointer; }
+  .rm-vbtn:focus-visible{ outline:2px solid var(--grape); outline-offset:3px; border-radius:4px; }
+  .rm-vtitle{ display:block; font:600 13.5px/1.35 'JetBrains Mono',monospace; color:var(--c); }
+  .rm-vdate{ display:block; margin-bottom:6px; font:400 11px 'JetBrains Mono',monospace; color:var(--ink-soft); }
+  .rm-vtop{ list-style:none; display:grid; gap:3px; }
+  .rm-vtop li{ font-size:14px; color:var(--ink); padding-left:14px; position:relative; }
+  .rm-vtop li::before{ content:"—"; position:absolute; left:0; color:var(--grape); }
+  .rm-vmore{ display:inline-block; margin-top:8px; font:500 12px 'JetBrains Mono',monospace; color:var(--grape); }
+  .rm-vmore::after{ content:" +"; }
+  .rm-vitem.open .rm-vmore::after{ content:" \2212"; }
+  .rm-vall{ margin-top:10px; padding:14px 16px; border-radius:6px; background:var(--card); border:1px solid var(--line); }
+  .rm-vall ul{ list-style:none; display:grid; gap:8px; }
+  .rm-vall li{ font-size:13.5px; color:var(--ink-soft); padding-left:14px; position:relative; }
+  .rm-vall li::before{ content:"—"; position:absolute; left:0; color:var(--grape); }
   @media (max-width:880px){ .rm-detail ul{ grid-template-columns:1fr; } .rm-hint{ margin-left:0; } .rm-detail{ padding:20px; } }
+  @media (max-width:700px){
+    .rm-scroll, .rm-detail{ display:none; }
+    .rm-vlist{ display:block; }
+    .rm-hint{ display:none; }
+  }
 
   /* ===== footer ===== */
   footer{ background:var(--plum-deep); color:var(--paper); border-top:1px solid var(--line-on-plum); }
@@ -591,19 +622,20 @@
         <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Sutra Pro</th></tr></thead>
         <tbody>
         <tr class="group"><td colspan="3">Reading</td></tr>
-        <tr><th scope="row">EPUB &amp; PDF<small>Themes, fonts, bookmarks, search</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">EPUB &amp; PDF<small>Themes, fonts, bookmarks, search</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr><th scope="row">CBZ comics<small>Free 7-page preview of any comic</small></th><td><span class="y">Preview</span></td><td><span class="y">Full</span></td></tr>
-        <tr><th scope="row">MOBI books<small>DRM-free; free 7-page preview</small></th><td><span class="y">Preview</span></td><td><span class="y">Full</span></td></tr>
-        <tr><th scope="row">Panel Mode &amp; right-to-left manga<small>On comics you can open</small></th><td><span class="y">Preview</span></td><td><span class="y">Full</span></td></tr>
-        <tr><th scope="row">Stream CBZ from Komga and Kavita<small>Read without downloading the file first</small></th><td><span class="n">—</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><th scope="row">Highlights, notes &amp; dictionary</th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><th scope="row">Reading statistics</th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">MOBI books<small>DRM-free. Sutra Pro only</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Panel Mode &amp; right-to-left manga<small>Free for everyone</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">E-ink display mode<small>Free. Android only</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Stream CBZ from Komga and Kavita<small>Read without downloading the file first</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Highlights, notes &amp; dictionary</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Reading statistics</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr class="group"><td colspan="3">Libraries &amp; sync</td></tr>
-        <tr><th scope="row">OPDS, Kavita, Calibre, WebDAV<small>Plus Project Gutenberg and Standard Ebooks</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><th scope="row">Komga server connection</th><td><span class="n">—</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><th scope="row">Reading progress sync to your server<small>Kavita, plus Komga with Pro</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><th scope="row">Library backup<small>iCloud on iOS, Export on Android</small></th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
-        <tr><th scope="row">No analytics or tracking</th><td><span class="y">Yes</span></td><td><span class="y">Yes</span></td></tr>
+        <tr><th scope="row">OPDS, Kavita, Calibre, WebDAV<small>Plus Project Gutenberg and Standard Ebooks</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Komga server connection</th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Reading progress sync to your server<small>Kavita, plus Komga with Pro</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">Library backup<small>iCloud on iOS, Export on Android</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
+        <tr><th scope="row">No analytics or tracking</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
         <tr class="group"><td colspan="3">Price</td></tr>
         <tr><th scope="row">Cost<small>One-time, no subscription. Bought separately on each platform</small></th><td><span class="y">Free</span></td><td><span class="y">$6.99</span></td></tr>
         </tbody>
@@ -659,16 +691,25 @@
     </div>
     <div class="rm-src" id="rm-src">
     <div class="version-list" id="lane-parity">
-      <div class="version">
-        <div><div class="version-num">Android 1.3.0</div><span class="version-status">Releasing now</span></div>
+      <div class="version" data-top="Improved panel detection|Manga reading setting|Four new reader fonts">
+        <div><div class="version-num">iOS 2.4.1 / Android 1.3.0</div><span class="version-status">Releasing now</span></div>
         <ul>
           <li>Android catches up with iOS 2.4.0, so both platforms have the same set of features</li>
+          <li>Panel-by-panel reading uses one improved detector for all comics and manga</li>
+          <li>Manga-style reading as a library and series setting that respects ComicInfo direction, with right-to-left paging for PDFs and page curl that follows reading direction</li>
+          <li>Comics open on the full page the first time, then remember the mode you last used for each book</li>
+          <li>Four new reader fonts: Atkinson Hyperlegible, OpenDyslexic, EB Garamond, and Libre Baskerville</li>
+          <li>Sorting by author groups books into author stacks, and Sort &amp; Filter shows what's active</li>
+          <li>Library grid tiles line up whether titles run one line or two</li>
+          <li>Series are always on — the Series as Collections setting is gone</li>
+          <li>Safer downloads and imports: size limits and checks before files join your library, a per-file results sheet, duplicate detection, and a cancel button</li>
+          <li>More accurate reading-time estimates, and library search no longer brings the keyboard back after you return from a book</li>
           <li>From here on, every feature ships on iOS and Android together, under each platform's own version number</li>
         </ul>
       </div>
     </div>
     <div class="version-list" id="lane-ios">
-      <div class="version">
+      <div class="version" data-top="Improved panel detection|Manga reading setting|Four new reader fonts">
         <div><div class="version-num">2.4.0</div><span class="version-status">Oct 15, 2026</span></div>
         <ul>
           <li>Panel-by-panel reading uses one improved detector for all comics and manga</li>
@@ -682,7 +723,7 @@
           <li>More accurate reading-time estimates, and library search no longer brings the keyboard back after you return from a book</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="What's New after updates|5x faster library sorting|Fixed page-turn lag">
         <div><div class="version-num">2.3.10</div><span class="version-status">Oct 6, 2026</span></div>
         <ul>
           <li>What's New — a short list of changes after each update, also available from Settings</li>
@@ -690,7 +731,7 @@
           <li>Fixed lag and freezes when turning pages in books, PDFs, and comics — now about 1 ms with 3,000 books</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Refreshed Library sorting|Series and Collections views|Reader brightness control">
         <div><div class="version-num">2.3.5</div><span class="version-status">Sep 29, 2026</span></div>
         <ul>
           <li>Refreshed Library — sort by Recently Read, Title, Author, or Date Added</li>
@@ -703,7 +744,7 @@
           <li>More reliable Calibre series metadata, server completion sync, and cleaner Kavita titles</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="iOS 27 readiness|Inline EPUB footnotes|Display stays awake">
         <div><div class="version-num">2.2.5</div><span class="version-status">Sep 22, 2026</span></div>
         <ul>
           <li>iOS 27 and iPadOS 27 readiness improvements, including safer library removal and multi-window/layout handling</li>
@@ -711,7 +752,7 @@
           <li>Keeps the display awake during active reading</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Stream comics from servers|Series stacks in Library|Richer book details page">
         <div><div class="version-num">2.2.1</div><span class="version-status">Sep 15, 2026</span></div>
         <ul>
           <li>Streaming comic-page support for Komga and Kavita — start reading CBZ files without waiting for a full download</li>
@@ -723,7 +764,7 @@
           <li>Substantial native Android alpha groundwork</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Live PDF auto-scroll speed|Search respects list view|Rotation keeps your place">
         <div><div class="version-num">2.1.10</div><span class="version-status">Aug 26, 2026</span></div>
         <ul>
           <li>Fixed EPUB reading position lost when rotating between portrait and landscape</li>
@@ -734,7 +775,7 @@
           <li>Library crawl performance improved; Stats screen filters out sub-minute sessions</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Manga mode|WebDAV servers|Reading statistics">
         <div><div class="version-num">2.1</div><span class="version-status">Aug 17, 2026</span></div>
         <ul>
           <li>Manga mode — right-to-left reading, top-right to bottom-left panel order, dedicated panel tuning</li>
@@ -752,7 +793,7 @@
           <li>Fix for books occasionally opening to a blank page</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Panel-by-panel comic reading|EPUB auto-scrolling|Sideloading and Sutra Pro">
         <div><div class="version-num">2.0</div><span class="version-status">Aug 3, 2026</span></div>
         <ul>
           <li>Panel-aware comic reading — one panel at a time</li>
@@ -761,7 +802,7 @@
           <li>Sutra Pro: .cbz comics, .mobi books, and native Komga integration</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Text highlights with color|Instant word dictionary|Calibre-Web-Automated support">
         <div><div class="version-num">1.3</div><span class="version-status">Jul 16, 2026</span></div>
         <ul>
           <li>Text highlights with color — synced via iCloud</li>
@@ -772,7 +813,7 @@
           <li>Enhanced cover-image caching and library performance</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Standard Ebooks catalog|Authentic page-curl turns|Dark mode">
         <div><div class="version-num">1.2</div><span class="version-status">Jul 10, 2026</span></div>
         <ul>
           <li>Standard Ebooks catalog, with Patrons Circle sign-in</li>
@@ -783,7 +824,7 @@
           <li>A wide pass of reliability and security fixes</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Kavita, Calibre, OPDS servers|Project Gutenberg catalog|EPUB and PDF reading">
         <div><div class="version-num">1.0</div><span class="version-status">Jul 7, 2026</span></div>
         <ul>
           <li>Kavita, Calibre, and OPDS server support</li>
@@ -795,7 +836,7 @@
       </div>
     </div>
     <div class="version-list" id="lane-android">
-      <div class="version">
+      <div class="version" data-top="Stream Komga and Kavita comics|Sort by and Show|Collections as a grid">
         <div><div class="version-num">1.2.0</div><span class="version-status">Oct 17, 2026</span></div>
         <ul>
           <li>Stream Komga and Kavita comics page by page, with no download needed (Sutra Pro)</li>
@@ -808,7 +849,7 @@
           <li>A compact shared top row across Library, Stats, Downloads, and Settings, plus updated Material 3 theming</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Series stacks in Library|Series sorted as grid|Time left in reader">
         <div><div class="version-num">1.1.1</div><span class="version-status">Oct 11, 2026</span></div>
         <ul>
           <li><strong>Series stack in the Library.</strong> Books from the same series now appear as one stacked tile with a count, and tapping it opens the book you were last reading in that series, or its first book. You can turn this off with Stack series in grid in Settings.</li>
@@ -819,7 +860,7 @@
           <li><strong>Cleaner reader bar.</strong> The extra previous and next arrows under the progress slider are gone from PDF and comic readers. Swipe or tap to turn pages.</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="What's New after updates|Tablet bottom tab bar|Faster Komga refreshes">
         <div><div class="version-num">1.0.2</div><span class="version-status">Oct 10, 2026</span></div>
         <ul>
           <li>What's New after each update, reopenable from Settings</li>
@@ -830,7 +871,7 @@
           <li>Fixes for Project Gutenberg search results, long URLs in EPUBs, and Kavita completion sync</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Read EPUB, PDF, CBZ, MOBI|Connect your own library|E-ink display mode">
         <div><div class="version-num">1.0.0</div><span class="version-status">Oct 7, 2026</span></div>
         <ul>
           <li>Sutra is now on Google Play — read EPUB, PDF, CBZ comics, and DRM-free MOBI</li>
@@ -844,13 +885,13 @@
       </div>
     </div>
     <div class="version-list" id="lane-next">
-      <div class="version">
+      <div class="version" data-top="KOReader support">
         <div><div class="version-num label">KOReader</div><span class="version-status">Upcoming</span></div>
         <ul>
           <li>KOReader support, on iOS and Android together</li>
         </ul>
       </div>
-      <div class="version">
+      <div class="version" data-top="Panel improvements, comics and manga">
         <div><div class="version-num label">Panels</div><span class="version-status">Upcoming</span></div>
         <ul>
           <li>Panel improvements for comics and manga, on iOS and Android together</li>
@@ -861,10 +902,11 @@
     <div class="rm-tl" id="rm-tl" hidden>
       <div class="rm-legend">
         <span><i class="lg ios"></i>iOS</span><span><i class="lg and"></i>Android</span><span><i class="lg next"></i>Upcoming, on both</span>
-        <span class="rm-hint">Tap a release to see what shipped</span>
+        <span class="rm-hint">Hover or tap a release to see everything in it</span>
       </div>
       <div class="rm-scroll" id="rm-scroll"><div class="rm-track" id="rm-track"></div></div>
       <div class="rm-detail" id="rm-detail" aria-live="polite"></div>
+      <ol class="rm-vlist" id="rm-vlist"></ol>
     </div>
     <div class="changelog-link"><a href="changelog.html">Read the full changelog →</a></div>
   </div>
@@ -956,53 +998,93 @@
 (function(){
   var src = document.getElementById('rm-src'), tl = document.getElementById('rm-tl');
   if (!src || !tl) return;
-  function read(id, plat, extra){
+  function read(id, plat, kind){
     return [].map.call(document.querySelectorAll('#'+id+' .version'), function(v){
-      return { plat:plat, ver:v.querySelector('.version-num').textContent, date:v.querySelector('.version-status').textContent,
-               items:[].map.call(v.querySelectorAll('li'), function(li){ return li.innerHTML; }), kind:extra };
+      return { plat:plat, kind:kind, ver:v.querySelector('.version-num').textContent, date:v.querySelector('.version-status').textContent,
+               top:(v.dataset.top||'').split('|'), items:[].map.call(v.querySelectorAll('li'), function(li){ return li.innerHTML; }) };
     }).reverse();
   }
   var ios = read('lane-ios','ios'), and = read('lane-android','and'),
-      parity = read('lane-parity','merge','merge')[0], next = read('lane-next','next').reverse();
-  var CW = 104, X0 = 70, YI = 96, YA = 190, H = 250;
+      parity = read('lane-parity','merge','merge')[0], next = read('lane-next','next','next').reverse();
+  var CW = 150, X0 = 90, YI = 190, YA = 282, H = 470;
   var xi = function(i){ return X0 + i*CW; };
   var mergeCol = ios.length, andStart = mergeCol - and.length;
-  var W = xi(mergeCol + next.length) + 70;
+  var W = xi(mergeCol + next.length) + 90;
   var track = document.getElementById('rm-track'); track.style.width = W + 'px';
-  var xm = xi(mergeCol), xa0 = xi(andStart) - 30, xl = xi(mergeCol-1);
+  var xm = xi(mergeCol), xa0 = xi(andStart) - 30;
   var svg = '<svg width="'+W+'" height="'+H+'" aria-hidden="true">'+
     '<path d="M'+(xi(0)-30)+','+YI+' L'+xm+','+YI+'" stroke="#2B1B46"/>'+
     '<path d="M'+xm+','+YI+' L'+(xi(mergeCol+next.length)+30)+','+YI+'" stroke="#7B54B8" stroke-dasharray="1 9"/>'+
     '<path d="M'+xa0+','+YA+' L'+xi(mergeCol-1)+','+YA+' C'+(xi(mergeCol-1)+CW*0.55)+','+YA+' '+(xm-CW*0.5)+','+YI+' '+xm+','+YI+'" stroke="#2F6B4F"/></svg>';
   var all = [], html = svg;
+  function title(d){
+    if (d.kind==='merge' || d.kind==='next') return d.ver;
+    return (d.plat==='and' ? 'Android ' : 'iOS ') + d.ver;
+  }
   function node(d, x, y, cls, below){
     var n = all.length; all.push(d);
-    var lbl = d.kind==='next' ? d.ver : d.ver.replace('Android ','');
-    var sub = d.kind==='next' ? 'Upcoming' : d.date.replace(/, 2026$/,'').replace('Releasing now','Releasing');
-    var ly = below ? y+20 : y-52;
-    html += '<button type="button" class="rm-node '+cls+'" data-i="'+n+'" style="left:'+x+'px;top:'+y+'px" aria-pressed="false" aria-label="'+(d.plat==='and'?'Android ':d.plat==='ios'?'iOS ':'')+d.ver+', '+d.date+'"><i></i></button>'+
-            '<div class="rm-lbl '+(cls==='and'?'and':cls==='next'?'next':'')+'" style="left:'+x+'px;top:'+ly+'px">'+lbl+'<small>'+sub+'</small></div>';
+    var sub = d.kind==='next' ? 'Upcoming' : d.date;
+    var pos = below ? 'top:'+(y+28)+'px' : 'bottom:'+(H-y+28)+'px';
+    html += '<button type="button" class="rm-node '+cls+'" data-i="'+n+'" style="left:'+x+'px;top:'+y+'px" aria-pressed="false" aria-label="'+title(d)+', '+d.date+'"><i></i></button>'+
+            '<div class="rm-card '+cls+'" data-i="'+n+'" style="left:'+x+'px;'+pos+'"><span class="t">'+title(d).replace(' / ','<br>')+'</span><span class="d">'+sub+'</span><ul>'+
+            d.top.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul></div>';
   }
   ios.forEach(function(d,i){ node(d, xi(i), YI, 'ios', false); });
   and.forEach(function(d,i){ node(d, xi(andStart+i), YA, 'and', true); });
   node(parity, xm, YI, 'merge', false);
-  next.forEach(function(d,i){ node(d, xi(mergeCol+1+i-1+1)-0, YI, 'next', false); });
+  next.forEach(function(d,i){ node(d, xi(mergeCol+1+i), YI, 'next', false); });
   html += '<span class="rm-lane-name" style="left:'+(xi(0)-30)+'px;top:'+(YI+26)+'px;color:#2B1B46">iOS</span>'+
           '<span class="rm-lane-name" style="left:'+xa0+'px;top:'+(YA-34)+'px;color:#2F6B4F">Android</span>';
   track.innerHTML = html;
-  var detail = document.getElementById('rm-detail'), nodes = track.querySelectorAll('.rm-node');
+
+  var latest = all.indexOf(parity);
+  var detail = document.getElementById('rm-detail'), nodes = track.querySelectorAll('.rm-node'), cards = track.querySelectorAll('.rm-card');
+  function chips(d){
+    if (d.kind==='merge') return '<span class="chip ios"><i class="dot"></i>iOS</span><span class="chip and"><i class="dot"></i>Android</span>';
+    if (d.kind==='next') return '<span class="chip both">iOS + Android</span>';
+    return d.plat==='ios' ? '<span class="chip ios"><i class="dot"></i>iOS</span>' : '<span class="chip and"><i class="dot"></i>Android</span>';
+  }
   function show(i, scroll){
     var d = all[i];
     [].forEach.call(nodes, function(b){ b.setAttribute('aria-pressed', String(+b.dataset.i === i)); });
-    var chip = d.kind==='merge' ? '<span class="chip both">Parity</span>' : d.kind==='next' ? '<span class="chip both">iOS + Android</span>'
-             : d.plat==='ios' ? '<span class="chip ios"><i class="dot"></i>iOS</span>' : '<span class="chip and"><i class="dot"></i>Android</span>';
-    detail.innerHTML = '<div class="rm-detail-head">'+chip+'<span class="version-num'+(d.kind==='next'?' label':'')+'">'+d.ver+'</span><span class="version-status">'+d.date+'</span></div><ul>'+
+    [].forEach.call(cards, function(c){ c.classList.toggle('on', +c.dataset.i === i); });
+    detail.innerHTML = '<div class="rm-detail-head">'+chips(d)+(i===latest?'<span class="chip both">Latest</span>':'')+
+      '<span class="version-num'+(d.kind==='next'?' label':'')+'">'+title(d)+'</span><span class="version-status">'+(d.kind==='next'?'Upcoming':d.date)+'</span></div><ul>'+
       d.items.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul>';
     if (scroll) nodes[i].scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'});
   }
-  [].forEach.call(nodes, function(b){ b.addEventListener('click', function(){ show(+b.dataset.i, true); }); });
+  [].forEach.call(nodes, function(b){
+    b.addEventListener('mouseenter', function(){ show(+b.dataset.i, false); });
+    b.addEventListener('focus', function(){ show(+b.dataset.i, false); });
+    b.addEventListener('click', function(){ show(+b.dataset.i, true); });
+  });
+  [].forEach.call(cards, function(c){
+    c.addEventListener('mouseenter', function(){ show(+c.dataset.i, false); });
+    c.addEventListener('click', function(){ show(+c.dataset.i, true); });
+  });
+
+  var vlist = document.getElementById('rm-vlist');
+  var shipped = ios.concat(and).sort(function(a,b){ return Date.parse(b.date) - Date.parse(a.date); });
+  var order = [parity].concat(shipped, next);
+  vlist.innerHTML = order.map(function(d,k){
+    var cls = d.kind==='merge' ? 'merge' : d.kind==='next' ? 'next' : d.plat;
+    return '<li class="rm-vitem '+cls+(k===0?' open':'')+'"><button type="button" class="rm-vbtn" aria-expanded="'+(k===0)+'">'+
+      '<span class="rm-vtitle">'+title(d)+'</span><span class="rm-vdate">'+(d.kind==='next'?'Upcoming':d.date)+'</span>'+
+      '<ul class="rm-vtop">'+d.top.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul>'+
+      '<span class="rm-vmore">All features</span></button>'+
+      '<div class="rm-vall"'+(k===0?'':' hidden')+'><ul>'+d.items.map(function(t){ return '<li>'+t+'</li>'; }).join('')+'</ul></div></li>';
+  }).join('');
+  [].forEach.call(vlist.querySelectorAll('.rm-vbtn'), function(b){
+    b.addEventListener('click', function(){
+      var li = b.parentNode, open = !li.classList.contains('open');
+      li.classList.toggle('open', open);
+      b.setAttribute('aria-expanded', String(open));
+      li.querySelector('.rm-vall').hidden = !open;
+    });
+  });
+
   document.documentElement.classList.add('js'); tl.hidden = false;
-  show(ios.length + and.length, false);
+  show(latest, false);
   var sc = document.getElementById('rm-scroll');
   sc.scrollLeft = sc.scrollWidth;
 })();
