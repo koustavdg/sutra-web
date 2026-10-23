@@ -1002,7 +1002,7 @@
     src.src = url;
     var v = src.parentNode; v.load(); v.play().catch(function(){});
   }
-  function applyPlatform(p, remember){
+  function applyPlatform(p){
     if (p === plat) return;
     plat = p;
     var m = MEDIA[p];
@@ -1015,14 +1015,11 @@
     document.getElementById('shots-cap').innerHTML = m.cap;
     document.querySelectorAll('.phone').forEach(function(ph){ ph.classList.toggle('android', p === 'android'); });
     document.querySelectorAll('[data-plat]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.plat === p)); });
-    if (remember) { try { localStorage.setItem('sutra-plat', p); } catch (e) {} }
   }
   document.querySelectorAll('[data-plat]').forEach(function(b){
-    b.addEventListener('click', function(){ applyPlatform(b.dataset.plat, true); });
+    b.addEventListener('click', function(){ applyPlatform(b.dataset.plat); });
   });
-  var saved = null;
-  try { saved = localStorage.getItem('sutra-plat'); } catch (e) {}
-  applyPlatform(saved === 'android' || saved === 'ios' ? saved : (document.documentElement.classList.contains('is-android') ? 'android' : 'ios'), false);
+  applyPlatform(document.documentElement.classList.contains('is-android') ? 'android' : 'ios', false);
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
