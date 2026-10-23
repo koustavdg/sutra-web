@@ -170,6 +170,9 @@
   .stage .phone{ width:clamp(150px,19vw,214px); height:auto; aspect-ratio:9/18.7; border-radius:30px; border-width:5px; }
   .stage .phone .notch{ width:clamp(58px,8vw,86px); height:16px; border-radius:0 0 10px 10px; }
   .phone.android .notch{ display:none; }
+  .hero-right{ min-width:0; }
+  .hero-tog{ display:flex; justify-content:flex-end; margin-bottom:22px; }
+  .stage .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
   .stage .phone.back{ transform:translateY(26px) scale(.92); opacity:.88; }
   @media (max-width:560px){ .stage .phone.back{ display:none; } .stage .phone{ width:min(62vw,230px); } }
 
@@ -531,15 +534,24 @@
         </div>
       </div>
     </div>
-    <div class="phone-stage stage" id="hero-stage">
-      <div class="phone back">
-        <div class="notch"></div>
-        <img id="hero-back" src="assets/screenshots/03-reader.png" alt="Sutra reader screen">
+    <div class="hero-right">
+      <div class="hero-tog">
+        <div class="seg on-plum" role="group" aria-label="Platform (hero)">
+          <button type="button" data-plat="ios" aria-pressed="true">iOS</button>
+          <button type="button" data-plat="android" aria-pressed="false">Android</button>
+        </div>
       </div>
-      <div class="phone front">
-        <div class="notch"></div>
-        <img id="hero-front" src="assets/screenshots/hero.png" alt="Sutra library screen"
-             onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>assets/screenshots/<br>hero.png</span>'}))">
+      <div class="phone-stage stage" id="hero-stage">
+        <div class="phone back">
+          <div class="notch"></div>
+          <img id="hero-back" src="assets/screenshots/03-reader.png" alt="Sutra reader screen">
+        </div>
+        <div class="phone front">
+          <div class="notch"></div>
+          <video id="hero-video" muted loop playsinline autoplay preload="auto" aria-label="Sutra app preview">
+            <source id="hero-video-src" src="assets/sutra-preview-ios.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
     </div>
   </div>
@@ -979,8 +991,8 @@
 (function(){
   var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
   var MEDIA = {
-    ios: { front: 'assets/screenshots/hero.png', back: 'assets/screenshots/03-reader.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
-    android: { front: 'assets/screenshots/android/01-library.webp', back: 'assets/screenshots/android/03-reader.webp', lib: 'assets/screenshots/android/01-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
+    ios: { front: 'assets/screenshots/hero.png', video: 'assets/sutra-preview-ios.mp4', back: 'assets/screenshots/03-reader.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
+    android: { front: 'assets/screenshots/android/01-library.webp', video: 'assets/sutra-preview-android.mp4', back: 'assets/screenshots/android/03-reader.webp', lib: 'assets/screenshots/android/01-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
   };
   var plat = null;
   function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
@@ -994,7 +1006,7 @@
     if (p === plat) return;
     plat = p;
     var m = MEDIA[p];
-    setImg('hero-front', m.front);
+    setVideo('hero-video-src', m.video);
     var back = document.querySelector('.stage .phone.back');
     back.hidden = !m.back;
     if (m.back) setImg('hero-back', m.back);
