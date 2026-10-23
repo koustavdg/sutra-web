@@ -172,6 +172,9 @@
   .phone.android .notch{ display:none; }
   .hero-right{ min-width:0; }
   .hero-tog{ display:flex; justify-content:flex-end; margin-bottom:22px; }
+  .hero-tog .seg{ background:rgba(244,236,219,0.12); border:1px solid rgba(244,236,219,0.4); }
+  .hero-tog .seg button{ color:#DCD1EE; }
+  .hero-tog .seg button[aria-pressed="true"]{ background:var(--paper); color:#2B1B46; box-shadow:none; }
   .stage .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
   .stage .phone.back{ transform:translateY(26px) scale(.92); opacity:.88; }
   @media (max-width:560px){ .stage .phone.back{ display:none; } .stage .phone{ width:min(62vw,230px); } }
