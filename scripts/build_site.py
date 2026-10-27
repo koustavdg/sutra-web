@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
 PUBLIC_FILES = [
     "index.html", "help.html", "changelog.html", "feedback.html",
-    "privacy.html", "drm-free.html", "CNAME",
+    "privacy.html", "drm-free.html", "CNAME", "BingSiteAuth.xml",
 ]
 PUBLIC_ASSETS = [
     "assets/app-icon.png", "assets/badge-appstore.svg", "assets/badge-googleplay.png",
@@ -24,6 +24,8 @@ PUBLIC_ASSETS = [
     "assets/screenshots/hero.png", "assets/screenshots/android/05-comics.mp4",
     "assets/screenshots/android/06-autoscroll.mp4", "assets/screenshots/android/07-pro.webp",
     "assets/screenshots/android/hero-library.webp", "assets/captions/panel-reading-en.vtt",
+    "assets/demos/reading-demo-ios.mp4", "assets/demos/reading-demo-ios.jpg",
+    "assets/demos/reading-demo-ios.vtt",
 ]
 STORE_IOS = ""
 STORE_ANDROID = ""

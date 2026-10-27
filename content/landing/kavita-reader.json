@@ -35,8 +35,12 @@
     {"q": "Is Kavita support free in Sutra?", "a": "Kavita library connection is free on iOS and Android. Full CBZ and DRM-free MOBI reading require Sutra Pro; EPUB and PDF reading are free."},
     {"q": "Can I use Kavita over Tailscale?", "a": "Sutra can connect when the Kavita server is reachable from the device over your network or VPN. Follow the setup guidance for your server and keep its OPDS key private."}
   ],
-  "image": "assets/screenshots/02-connect-landing.jpg",
-  "image_alt": "Sutra's add-library screen for connecting a self-hosted catalog",
+  "image": "assets/demos/reading-demo-ios.mp4",
+  "poster": "assets/demos/reading-demo-ios.jpg",
+  "captions": "assets/demos/reading-demo-ios.vtt",
+  "image_alt": "A comic opened and read in Sutra on an iPhone",
+  "proof_intro": "See Sutra stream a comic on iPhone: reading starts without downloading the whole book first. The demonstration does not identify the server; streaming requires a supported server setup and Sutra Pro.",
+  "transcript": "On an iPhone, a comic's details screen appears. The reader opens the comic without first downloading the full book, dismisses introductory navigation tips, and moves from the cover through several streamed pages. The server is not identified in the recording.",
   "help_url": "help.html#kavita",
   "related": ["komga-reader", "opds-reader", "calibre-reader"],
   "claim_ids": ["kavita-catalog-ios", "kavita-catalog-android", "kavita-sync-ios", "kavita-sync-android", "kavita-stream-ios", "kavita-stream-android", "epub-pdf-ios", "epub-pdf-android", "cbz-full-ios", "cbz-full-android", "mobi-full-ios", "mobi-full-android", "drm-ios", "drm-android"]

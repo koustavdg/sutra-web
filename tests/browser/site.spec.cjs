@@ -48,6 +48,25 @@ test('landing pages pass axe and overflow checks at mobile, 200%-zoom width, and
   }
 });
 
+test('shared streaming demo plays and provides captions and a transcript', async ({ page }) => {
+  for (const path of ['kavita-reader.html', 'komga-reader.html']) {
+    await page.goto(path);
+    const video = page.locator('video');
+    await expect(video).toHaveAttribute('controls', '');
+    await expect(video.locator('track[kind="captions"]')).toHaveCount(1);
+    await expect(page.locator('details').filter({ hasText: 'Video transcript' })).toContainText('without first downloading the full book');
+    await video.evaluate(async element => {
+      element.muted = true;
+      await element.play();
+    });
+    await expect.poll(() => video.evaluate(element => element.currentTime)).toBeGreaterThan(0);
+    await video.evaluate(element => element.pause());
+    const captions = await page.request.get('/assets/demos/reading-demo-ios.vtt');
+    expect(captions.ok()).toBeTruthy();
+    expect(await captions.text()).toContain('without downloading the full book first');
+  }
+});
+
 test('existing navigation, Help deep links and privacy tabs still work', async ({ page }) => {
   await page.route('https://raw.githubusercontent.com/**', route => route.abort());
   await page.goto('/');

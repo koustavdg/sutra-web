@@ -35,8 +35,12 @@
     {"q": "Is Komga support included in the free version?", "a": "No. Komga access and full CBZ reading require Sutra Pro. A limited CBZ preview may be available before purchase."},
     {"q": "Does Pro transfer between iOS and Android?", "a": "No. Apple and Google purchases are separate; a Pro purchase on one platform does not carry over to the other."}
   ],
-  "image": "assets/screenshots/02-connect-landing.jpg",
-  "image_alt": "Sutra's add-library screen for entering a self-hosted server",
+  "image": "assets/demos/reading-demo-ios.mp4",
+  "poster": "assets/demos/reading-demo-ios.jpg",
+  "captions": "assets/demos/reading-demo-ios.vtt",
+  "image_alt": "A comic opened and read in Sutra on an iPhone",
+  "proof_intro": "See Sutra stream a comic on iPhone: reading starts without downloading the whole book first. The demonstration does not identify the server; Komga streaming requires Sutra Pro and Page Streaming permission.",
+  "transcript": "On an iPhone, a comic's details screen appears. The reader opens the comic without first downloading the full book, dismisses introductory navigation tips, and moves from the cover through several streamed pages. The server is not identified in the recording.",
   "help_url": "help.html#komga",
   "related": ["kavita-reader", "comic-panel-reader", "opds-reader"],
   "claim_ids": ["komga-catalog-ios", "komga-catalog-android", "komga-sync-ios", "komga-sync-android", "komga-stream-ios", "komga-stream-android", "cbz-full-ios", "cbz-full-android", "cbz-preview-ios", "cbz-preview-android", "pro-purchase-ios", "pro-purchase-android", "cbr-ios", "cbr-android"]
