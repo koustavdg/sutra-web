@@ -36,6 +36,9 @@ jobs:
       - name: Validate public site artifact
         run: python scripts/check_site.py --dir _site
 
+      - name: Verify quality gate catches a broken page
+        run: python scripts/test_quality_gate.py
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
