@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{title}}</title>
+  <meta name="description" content="{{description}}">
+  <link rel="canonical" href="{{canonical}}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Sutra">
+  <meta property="og:title" content="{{title}}">
+  <meta property="og:description" content="{{description}}">
+  <meta property="og:url" content="{{canonical}}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#f4ecdb">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <style>
+    :root{--plum:#43285f;--grape:#6a4a99;--paper:#f4ecdb;--card:#fbf7ec;--ink:#2b1b46;--soft:#5b4a78;--line:rgba(43,27,70,.16);--measure:70rem}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:inherit}a:focus-visible,summary:focus-visible{outline:3px solid #8b65bd;outline-offset:3px;border-radius:3px}.wrap{width:min(var(--measure),calc(100% - 2rem));margin:auto}header{border-bottom:1px solid var(--line);background:rgba(244,236,219,.96)}.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:.6rem;font:600 1.35rem Spectral,Georgia,serif;text-decoration:none}.brand img{width:34px;height:34px;border-radius:9px}.nav-links{display:flex;align-items:center;gap:1.15rem;font-size:.94rem}.nav-links a{text-decoration:none}.nav-links a:hover,.related a:hover{text-decoration:underline}.nav-cta,.store-cta{background:var(--plum);color:var(--paper);padding:.65rem 1rem;border-radius:5px;text-decoration:none;font-weight:600}.hero{padding:clamp(3.5rem,8vw,6rem) 0 2.5rem;background:linear-gradient(130deg,#6a4a99,#43285f);color:var(--paper)}.eyebrow{font:500 .78rem/1.4 ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase;opacity:.82}.hero h1{font:600 clamp(2.2rem,5vw,4rem)/1.12 Spectral,Georgia,serif;max-width:19ch;margin:.8rem 0 1rem;letter-spacing:-.02em}.hero p{max-width:68ch;font-size:clamp(1.05rem,1.7vw,1.25rem);color:rgba(244,236,219,.9);margin:0}.crumbs{padding:1rem 0;color:var(--soft);font-size:.9rem}.crumbs a{color:var(--soft)}main{padding-bottom:4rem}.section{padding:2.3rem 0}.section h2{font:600 clamp(1.65rem,3vw,2.35rem)/1.18 Spectral,Georgia,serif;margin:0 0 1rem}.benefits{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;list-style:none;padding:0}.benefits li{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:1.1rem}.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--card)}table{border-collapse:collapse;width:100%;min-width:36rem}th,td{text-align:left;padding:.85rem 1rem;border-bottom:1px solid var(--line);vertical-align:top}thead{background:#ece2cc}tbody tr:last-child th,tbody tr:last-child td{border-bottom:0}.steps{padding-left:1.3rem}.steps li{padding:.3rem 0}.limitations{padding:1rem 1.2rem;background:#ece2cc;border-left:4px solid var(--grape);border-radius:4px}.faq{display:grid;gap:.65rem}.faq details{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:.85rem 1rem}.faq summary{font-weight:600;cursor:pointer}.faq details p{margin:.75rem 0 .1rem;color:var(--soft)}.proof{display:grid;grid-template-columns:minmax(0,1fr) minmax(15rem,.8fr);gap:2rem;align-items:center}.proof img,.proof video{display:block;width:100%;max-height:36rem;object-fit:contain;border-radius:10px;background:#e5ddce}.stores{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:1rem}.store-cta.secondary{background:transparent;color:var(--plum);border:1px solid var(--plum)}.related{border-top:1px solid var(--line);padding-top:1.5rem}.related ul{display:flex;gap:.6rem 1.2rem;flex-wrap:wrap;padding-left:1.1rem}footer{background:#2b1b46;color:var(--paper);padding:2rem 0}.footer-row{display:flex;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}.footer-links{display:flex;gap:1rem;flex-wrap:wrap}.footer-links a{color:var(--paper)}@media(max-width:650px){.nav-links a:not(.nav-cta){display:none}.proof{grid-template-columns:1fr}.hero{padding-top:3.2rem}th,td{padding:.7rem}}
+  </style>
+</head>
+<body>
+<header><div class="wrap nav"><a class="brand" href="/"><img src="assets/app-icon.png" alt="">Sutra</a><nav class="nav-links" aria-label="Main navigation"><a href="/">Home</a><a href="help.html">Help</a><a href="changelog.html">Changelog</a><a class="nav-cta" href="{{ios_store}}">Get Sutra</a></nav></div></header>
+<section class="hero"><div class="wrap"><div class="eyebrow">Sutra · {{eyebrow}}</div><h1>{{h1}}</h1><p>{{intro}}</p></div></section>
+<div class="wrap"><nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> › {{crumb}}</nav></div>
+<main class="wrap">
+  <section class="section"><h2>Why read with Sutra?</h2><ul class="benefits">{{benefits}}</ul></section>
+  <section class="section"><h2>Compatibility and access</h2><div class="table-wrap"><table><thead><tr><th scope="col">Capability</th><th scope="col">iOS</th><th scope="col">Android</th></tr></thead><tbody>{{compatibility}}</tbody></table></div><p>Pro is a one-time purchase through the store for the platform you use. Prices vary by storefront; check the current listing. No subscription is required.</p></section>
+  <section class="section"><h2>How to get started</h2><ol class="steps">{{steps}}</ol><p><a href="{{help_url}}">See the step-by-step Sutra Help guide →</a></p></section>
+  <section class="section"><h2>Important limitations</h2><ul class="limitations">{{limitations}}</ul></section>
+  <section class="section proof"><div><h2>See Sutra in action</h2><p>{{proof_intro}}</p><div class="stores"><a class="store-cta" href="{{ios_store}}">Sutra for iPhone &amp; iPad</a><a class="store-cta secondary" href="{{android_store}}">Sutra for Android</a></div></div><figure>{{proof_media}}<figcaption>{{image_alt}}</figcaption>{{transcript}}</figure></section>
+  <section class="section"><h2>Frequently asked questions</h2><div class="faq">{{faq}}</div></section>
+  <section class="section related"><h2>Related guides</h2><ul>{{related}}</ul></section>
+</main>
+<footer><div class="wrap footer-row"><a class="brand" href="/"><img src="assets/app-icon.png" alt="">Sutra</a><nav class="footer-links" aria-label="Footer"><a href="help.html">Help &amp; FAQ</a><a href="drm-free.html">DRM-free books</a><a href="privacy.html">Privacy</a><a href="feedback.html">Feedback</a></nav></div></footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+const { test, expect } = require('@playwright/test');
+const AxeBuilder = require('@axe-core/playwright').default;
+
+const pages = [
+  'kavita-reader.html',
+  'komga-reader.html',
+  'comic-panel-reader.html',
+  'opds-reader.html',
+  'calibre-reader.html',
+];
+
+for (const width of [390, 1440]) {
+  test.describe(`${width}px viewport`, () => {
+    test.use({ viewport: { width, height: 900 } });
+
+    for (const path of pages) {
+      test(`${path}: readable without JavaScript and no horizontal overflow`, async ({ browser }) => {
+        const context = await browser.newContext({
+          viewport: { width, height: 900 },
+          javaScriptEnabled: false,
+        });
+        const page = await context.newPage();
+        const response = await page.goto(path);
+        expect(response.status()).toBe(200);
+        await expect(page.locator('h1')).toHaveCount(1);
+        await expect(page.locator('main')).toContainText('Frequently asked questions');
+        expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+        const firstFaq = page.locator('.faq details').first();
+        await firstFaq.locator('summary').focus();
+        await page.keyboard.press('Enter');
+        await expect(firstFaq).toHaveAttribute('open', '');
+        await context.close();
+      });
+    }
+  });
+}
+
+test('landing pages pass axe and overflow checks at mobile, 200%-zoom width, and desktop', async ({ page }) => {
+  for (const width of [390, 720, 1440]) {
+    for (const path of pages) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto(path);
+      const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
+      const serious = results.violations.filter(v => ['serious', 'critical'].includes(v.impact));
+      expect(serious, `${path} at ${width}px: ${JSON.stringify(serious.map(v => ({ id: v.id, nodes: v.nodes.length })))}`).toEqual([]);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+    }
+  }
+});

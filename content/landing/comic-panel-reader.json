@@ -1,0 +1,47 @@
+{
+  "slug": "comic-panel-reader",
+  "link_name": "Comic & manga reader",
+  "eyebrow": "Panel-by-panel reading",
+  "title": "Panel-by-Panel Comic & Manga Reader | Sutra",
+  "description": "Read comics and manga panel by panel with Sutra on iPhone and Android. Learn about formats, free previews, Pro access, and reading limitations.",
+  "h1": "Read comics and manga one panel at a time",
+  "intro": "Sutra is an iOS and Android reader for your own supported DRM-free books and comics. Panel Mode can move through detected panels one at a time, with right-to-left manga reading on supported content.",
+  "benefits": [
+    "Switch between a full-page view and panel-by-panel reading when supported panels are detected.",
+    "Use right-to-left reading order for manga on supported content.",
+    "Read EPUB and PDF for free; full CBZ and DRM-free MOBI require Pro."
+  ],
+  "compatibility": [
+    ["Panel Mode and right-to-left reading", "iOS · Free", "Android · Free"],
+    ["EPUB and PDF", "iOS · Free", "Android · Free"],
+    ["CBZ", "Limited preview may be available; full reading · Pro", "Limited preview may be available; full reading · Pro"],
+    ["Comic-shaped DRM-free MOBI", "Preview details vary; full reading · Pro", "Preview details vary; full reading · Pro"],
+    ["CBR archives", "Not supported", "Not supported"]
+  ],
+  "steps": [
+    "Open a supported comic or manga file from a connected catalog or import a file you are entitled to read.",
+    "The reader opens on the full page. Use the Panel Mode control to switch to panel-by-panel reading.",
+    "Choose right-to-left manga reading when appropriate for the work.",
+    "For CBZ and comic-shaped MOBI files, try the available preview; full reading requires Sutra Pro."
+  ],
+  "limitations": [
+    "Panel detection is not guaranteed to identify every panel or every page correctly. Pages without detected panels remain readable as full pages.",
+    "Full CBZ and DRM-free MOBI reading require Pro; the limited preview does not make the full format free.",
+    "CBR archives and DRM-protected purchases are not supported."
+  ],
+  "faq": [
+    {"q": "Does Sutra automatically detect comic panels?", "a": "Sutra detects panel layouts on supported comic pages, but no detector is perfect for every artwork. Pages without detected panels remain available in full-page reading."},
+    {"q": "Is panel-by-panel reading free?", "a": "Panel Mode is available without a Pro purchase. File-format entitlements still apply: full CBZ and DRM-free MOBI reading require Pro, while EPUB and PDF reading are free."},
+    {"q": "Can Sutra read manga right to left?", "a": "Yes, Sutra offers right-to-left reading for supported content on iOS and Android."},
+    {"q": "Can I read CBR comics or DRM-protected Kindle purchases?", "a": "No. CBR archives and DRM-protected Kindle purchases are not supported. Sutra is for files you have the right to read without DRM."},
+    {"q": "Can I try CBZ before buying Pro?", "a": "A limited CBZ preview may be available. Full CBZ reading requires Sutra Pro; see the current app for its preview scope."}
+  ],
+  "image": "assets/screenshots/05-comics-muted.mp4",
+  "poster": "assets/screenshots/05-comics-poster.jpg",
+  "captions": "assets/captions/panel-reading-en.vtt",
+  "transcript": "The video first shows a full comic page in Sutra. It then shows successive cropped comic panels one at a time, with the panel control visible near the lower-right corner. This clip has no audio.",
+  "image_alt": "Muted video showing a full comic page, followed by successive panels in Sutra",
+  "help_url": "help.html#panel-mode",
+  "related": ["komga-reader", "kavita-reader", "opds-reader"],
+  "claim_ids": ["panel-mode-ios", "panel-mode-android", "rtl-ios", "rtl-android", "cbz-full-ios", "cbz-full-android", "mobi-full-ios", "mobi-full-android", "cbz-preview-ios", "cbz-preview-android", "mobi-preview-ios", "mobi-preview-android", "cbr-ios", "cbr-android", "drm-ios", "drm-android"]
+}

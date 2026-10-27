@@ -1,0 +1,38 @@
+name: Site quality
+
+on:
+  push:
+    branches: [aeo]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '23 9 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build public site artifact
+        run: python scripts/build_site.py
+      - name: Validate public site artifact
+        run: python scripts/check_site.py --dir _site
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install pinned browser-test dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run mobile and desktop browser checks
+        run: npm run check:browser

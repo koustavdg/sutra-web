@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Where to Legally Buy DRM-Free Books — Sutra</title>
 <meta name="description" content="Seven stores and five publishers selling ebooks you actually own — no DRM, no lock-in. Download the file and read it in Sutra forever.">
+<link rel="canonical" href="https://sutra-reader.com/drm-free.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sutra"><meta property="og:title" content="Where to Legally Buy DRM-Free Books — Sutra"><meta property="og:description" content="Find stores and publishers offering downloadable DRM-free ebooks that you can read in Sutra."><meta property="og:url" content="https://sutra-reader.com/drm-free.html"><meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -174,7 +176,7 @@
         <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
         <div class="ham-divider"></div>
         <a href="privacy.html">Privacy</a>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta" data-store>Get the app →</a>
+        <a href="{{ios_store}}" class="ham-cta" data-store>Get the app →</a>
       </nav>
     </div>
   </div>
@@ -271,8 +273,8 @@
       <a href="changelog.html">Changelog</a>
       <a href="privacy.html">Privacy Policy</a>
       <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
-      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra" class="foot-play" data-play>Google Play</a>
+      <a href="{{ios_store}}">App Store</a>
+      <a href="{{android_store}}" class="foot-play" data-play>Google Play</a>
     </div>
     <span class="copyright">© 2026 Sutra</span>
   </div>
@@ -280,7 +282,7 @@
 
 <script>
 (function(){
-  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
+  var PLAY_URL = '{{android_store}}';
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {

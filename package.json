@@ -1,0 +1,11 @@
+{
+  "name": "sutra-web-quality",
+  "private": true,
+  "scripts": {
+    "check:browser": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.64.1"
+  }
+}

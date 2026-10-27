@@ -1,0 +1,44 @@
+{
+  "slug": "calibre-reader",
+  "link_name": "Calibre reader",
+  "eyebrow": "Calibre integration",
+  "title": "Calibre & Calibre-Web Reader for Mobile | Sutra",
+  "description": "Connect Sutra to a reachable Calibre, Calibre-Web, or Calibre-Web-Automated catalog on iPhone and Android. Learn setup and format limits.",
+  "h1": "Read your Calibre library on iPhone and Android",
+  "intro": "Sutra can connect to reachable Calibre Content Server, Calibre-Web, and Calibre-Web-Automated OPDS catalogs on iOS and Android. Setup and authentication depend on the server configuration; supported DRM-free EPUB and PDF reading is free.",
+  "benefits": [
+    "Browse a reachable Calibre-family catalog using its server address and any required credentials.",
+    "Open compatible EPUB and PDF files for free; full CBZ and DRM-free MOBI require Pro.",
+    "Download books for offline reading after they are available to Sutra."
+  ],
+  "compatibility": [
+    ["Calibre Content Server", "iOS · Free", "Android · Free"],
+    ["Calibre-Web", "iOS · Free", "Android · Free"],
+    ["Calibre-Web-Automated with OPDS enabled", "iOS · Free", "Android · Free"],
+    ["Generic catalog progress sync", "Not promised", "Not promised"]
+  ],
+  "steps": [
+    "Start the relevant Calibre server or enable OPDS in the Calibre-Web variant you use.",
+    "Make sure the server is reachable from your device and protect it with authentication as appropriate.",
+    "In Sutra, choose Add Library and enter the server's base or feed URL shown by that installation. Add credentials if requested.",
+    "Browse the library and open a supported book. Download it if you need offline access."
+  ],
+  "limitations": [
+    "URL shape, authentication, OPDS availability, and behavior depend on the server variant and its configuration.",
+    "Generic Calibre-family catalog access does not imply bidirectional reading-progress synchronization.",
+    "Do not expose an unauthenticated server directly to the public internet. Use a secure, reachable server or VPN configuration.",
+    "Full CBZ and DRM-free MOBI require Pro. CBR and DRM-protected files are not supported."
+  ],
+  "faq": [
+    {"q": "Which Calibre servers can I connect to?", "a": "Sutra supports reachable Calibre Content Server, Calibre-Web, and Calibre-Web-Automated catalogs where OPDS or a compatible catalog endpoint is enabled."},
+    {"q": "Should I enter a base URL or a full OPDS feed URL?", "a": "It depends on the server variant and configuration. Use the address and endpoint shown in that server's settings or the Sutra Help guide for that specific variant."},
+    {"q": "Does Sutra sync reading progress back to Calibre?", "a": "Do not assume generic Calibre or OPDS access provides reading-progress synchronization. Server-specific integrations may differ."},
+    {"q": "Can I use Calibre-Web-Automated behind a separate login portal?", "a": "The catalog must be reachable by Sutra. A separate authentication portal may block the OPDS request; configure a secure route that allows the OPDS endpoint rather than sharing credentials publicly."},
+    {"q": "Which formats and tiers are supported?", "a": "EPUB and PDF reading are free. Full CBZ and DRM-free MOBI reading require Sutra Pro. Only compatible file links exposed by the server can be opened."}
+  ],
+  "image": "assets/screenshots/02-connect-landing.jpg",
+  "image_alt": "Sutra's add-library screen for connecting a Calibre-family server",
+  "help_url": "help.html#calibre",
+  "related": ["opds-reader", "kavita-reader", "komga-reader"],
+  "claim_ids": ["calibre-ios", "calibre-android", "calibre-web-ios", "calibre-web-android", "calibre-web-automated-ios", "calibre-web-automated-android", "epub-pdf-ios", "epub-pdf-android", "cbz-full-ios", "cbz-full-android", "mobi-full-ios", "mobi-full-android", "drm-ios", "drm-android", "cbr-ios", "cbr-android"]
+}

@@ -1,0 +1,43 @@
+{
+  "slug": "kavita-reader",
+  "link_name": "Kavita reader",
+  "eyebrow": "Kavita integration",
+  "title": "Kavita Reader for iPhone & Android | Sutra",
+  "description": "Read your Kavita library on iPhone and Android with Sutra. Connect using your personal OPDS URL, then browse DRM-free books and comics.",
+  "h1": "Read your Kavita library on iPhone and Android",
+  "intro": "Sutra connects to your self-hosted Kavita library on iOS and Android. Browse and read supported DRM-free EPUB, PDF, CBZ, and MOBI files; free and Pro access depends on format, as described below.",
+  "benefits": [
+    "Connect with Kavita's personal OPDS URL; the URL contains a private API key.",
+    "Browse a Kavita catalog and open supported books in Sutra.",
+    "Reading progress syncs with Kavita. The exact progress representation can vary by format."
+  ],
+  "compatibility": [
+    ["Kavita library connection", "iOS · Free", "Android · Free"],
+    ["EPUB and PDF reading", "iOS · Free", "Android · Free"],
+    ["Full CBZ and DRM-free MOBI", "iOS · Pro", "Android · Pro"],
+    ["CBZ page streaming", "Pro · supported server endpoint required", "Pro · supported server endpoint required"]
+  ],
+  "steps": [
+    "In Kavita, open Settings → 3rd Party Clients (OPDS) and copy your personal OPDS URL.",
+    "Keep the URL private: it contains your API key. Do not post it publicly or include it in screenshots.",
+    "In Sutra, choose Add Library, paste the URL, and connect.",
+    "Open a book from the connected library. Full CBZ and DRM-free MOBI reading require Sutra Pro; EPUB and PDF reading are free."
+  ],
+  "limitations": [
+    "Only DRM-free files are supported. CBR archives and DRM-protected Kindle purchases are not supported.",
+    "CBZ streaming depends on supported server endpoints and network access; downloading the file is an alternative.",
+    "Generic OPDS catalog access should not be confused with Kavita-specific progress synchronization."
+  ],
+  "faq": [
+    {"q": "How do I connect Sutra to Kavita?", "a": "Copy your personal OPDS URL from Kavita's 3rd Party Clients (OPDS) settings. In Sutra, choose Add Library and paste the URL. Treat it like a password because it contains your API key."},
+    {"q": "Does Sutra sync reading progress with Kavita?", "a": "Yes. Sutra supports Kavita reading-progress sync. EPUB position is reflowable; page-based formats use their own page progress. Exact behavior can depend on the format."},
+    {"q": "Does Kavita CBZ streaming work on every server?", "a": "No. Streaming depends on supported server endpoints and network access. If streaming is unavailable, use the download option."},
+    {"q": "Is Kavita support free in Sutra?", "a": "Kavita library connection is free on iOS and Android. Full CBZ and DRM-free MOBI reading require Sutra Pro; EPUB and PDF reading are free."},
+    {"q": "Can I use Kavita over Tailscale?", "a": "Sutra can connect when the Kavita server is reachable from the device over your network or VPN. Follow the setup guidance for your server and keep its OPDS key private."}
+  ],
+  "image": "assets/screenshots/02-connect-landing.jpg",
+  "image_alt": "Sutra's add-library screen for connecting a self-hosted catalog",
+  "help_url": "help.html#kavita",
+  "related": ["komga-reader", "opds-reader", "calibre-reader"],
+  "claim_ids": ["kavita-catalog-ios", "kavita-catalog-android", "kavita-sync-ios", "kavita-sync-android", "kavita-stream-ios", "kavita-stream-android", "epub-pdf-ios", "epub-pdf-android", "cbz-full-ios", "cbz-full-android", "mobi-full-ios", "mobi-full-android", "drm-ios", "drm-android"]
+}

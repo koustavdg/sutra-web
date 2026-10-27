@@ -1,0 +1,43 @@
+{
+  "slug": "opds-reader",
+  "link_name": "OPDS reader",
+  "eyebrow": "OPDS catalogs",
+  "title": "OPDS Reader for iPhone & Android | Sutra",
+  "description": "Browse supported OPDS catalogs with Sutra on iPhone or Android. See supported formats, setup steps, free and Pro limits, and sync boundaries.",
+  "h1": "Read your OPDS library on iPhone and Android",
+  "intro": "Sutra connects to supported OPDS catalogs on iOS and Android so you can browse and open compatible DRM-free books. OPDS provides catalog access; it does not by itself guarantee reading-progress synchronization or support for every server and feed.",
+  "benefits": [
+    "Add a catalog using its OPDS feed or server address and credentials when required.",
+    "Browse compatible EPUB, PDF, CBZ, and MOBI books; the file's format determines its Sutra tier.",
+    "Download supported books to read offline after acquisition."
+  ],
+  "compatibility": [
+    ["Generic OPDS catalog access", "iOS · Free", "Android · Free"],
+    ["EPUB and PDF reading", "iOS · Free", "Android · Free"],
+    ["Full CBZ and DRM-free MOBI", "iOS · Pro", "Android · Pro"],
+    ["Generic OPDS progress sync", "Not promised", "Not promised"]
+  ],
+  "steps": [
+    "Get the OPDS feed or server address from the catalog provider or administrator.",
+    "In Sutra, choose Add Library and enter the address. Supply credentials if the catalog requires them.",
+    "Browse the catalog and open a compatible book. Follow any download or acquisition action shown by the catalog.",
+    "Download a supported file for offline reading when you need access without a network connection."
+  ],
+  "limitations": [
+    "OPDS implementations vary. Feed versions, authentication methods, file links, and server features may differ.",
+    "Generic OPDS access does not imply server-specific sync or streaming. Kavita and Komga have separate integration behavior.",
+    "Full CBZ and DRM-free MOBI require Pro; CBR and DRM-protected files are not supported."
+  ],
+  "faq": [
+    {"q": "What OPDS URL should I enter?", "a": "Use the OPDS feed address supplied by the server or catalog administrator. Some servers require a server-specific endpoint and credentials."},
+    {"q": "Does Sutra support every OPDS server?", "a": "OPDS servers vary in feed format, authentication, and acquisition links. Compatibility depends on what the server exposes; consult its documentation and test the feed."},
+    {"q": "Does generic OPDS sync my reading progress?", "a": "Generic OPDS catalog access does not guarantee reading-progress synchronization. Sutra's server-specific sync integrations are separate from generic OPDS."},
+    {"q": "Which formats can I read from OPDS?", "a": "Sutra supports EPUB, PDF, CBZ, and DRM-free MOBI files where the catalog exposes compatible file links. EPUB and PDF are free; full CBZ and DRM-free MOBI require Pro."},
+    {"q": "Can I read OPDS books offline?", "a": "A compatible book can be read offline after it has been downloaded or acquired to the device."}
+  ],
+  "image": "assets/screenshots/02-connect-landing.jpg",
+  "image_alt": "Sutra's add-library screen for connecting a catalog",
+  "help_url": "help.html#opds",
+  "related": ["kavita-reader", "calibre-reader", "komga-reader"],
+  "claim_ids": ["opds-ios", "opds-android", "epub-pdf-ios", "epub-pdf-android", "cbz-full-ios", "cbz-full-android", "mobi-full-ios", "mobi-full-android", "cbr-ios", "cbr-android", "drm-ios", "drm-android"]
+}

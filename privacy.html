@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy — Sutra</title>
-<meta name="description" content="Sutra's privacy policy. Short version: we collect nothing, track nothing, and sell nothing.">
+<meta name="description" content="Sutra's privacy policy explains app data, connected library servers, network requests, and the app's no-analytics approach.">
+<link rel="canonical" href="https://sutra-reader.com/privacy.html">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Sutra"><meta property="og:title" content="Privacy Policy — Sutra"><meta property="og:description" content="How Sutra handles app data, connected libraries, network requests, and analytics."><meta property="og:url" content="https://sutra-reader.com/privacy.html"><meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -204,7 +206,7 @@
         <a href="feedback.html">Feedback — Feature Requests &amp; Bugs</a>
         <div class="ham-divider"></div>
         <a href="privacy.html" class="current">Privacy</a>
-        <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864" class="ham-cta" data-store>Get the app →</a>
+        <a href="{{ios_store}}" class="ham-cta" data-store>Get the app →</a>
       </nav>
     </div>
   </div>
@@ -227,6 +229,10 @@
     <div class="prose" id="prose">
       <p class="prose-loading">Loading…</p>
     </div>
+    <noscript>
+      <style>.prose-loading{display:none}</style>
+      <p>The current policies are available here: <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY.md">iOS privacy policy</a> and <a href="https://github.com/koustavdg/sutra-support/blob/main/PRIVACY-ANDROID.md">Android privacy policy</a>.</p>
+    </noscript>
   </div>
 </section>
 
@@ -237,8 +243,8 @@
       <a href="changelog.html">Changelog</a>
       <a href="feedback.html">Feedback</a>
       <a href="privacy.html">Privacy Policy</a>
-      <a href="https://apps.apple.com/ca/app/sutra-ebook-reader/id6780096864">App Store</a>
-      <a href="https://play.google.com/store/apps/details?id=com.koustavdg.sutra" class="foot-play" data-play>Google Play</a>
+      <a href="{{ios_store}}">App Store</a>
+      <a href="{{android_store}}" class="foot-play" data-play>Google Play</a>
     </div>
     <span class="copyright">© 2026 Sutra</span>
   </div>
@@ -246,7 +252,7 @@
 
 <script>
 (function(){
-  var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.koustavdg.sutra';
+  var PLAY_URL = '{{android_store}}';
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {
