@@ -47,3 +47,22 @@ test('landing pages pass axe and overflow checks at mobile, 200%-zoom width, and
     }
   }
 });
+
+test('existing navigation, Help deep links and privacy tabs still work', async ({ page }) => {
+  await page.route('https://raw.githubusercontent.com/**', route => route.abort());
+  await page.goto('/');
+  await page.locator('#hamburger').click();
+  await expect(page.locator('#hamburger')).toHaveAttribute('aria-expanded', 'true');
+  await expect(page.locator('#ham-menu a[href="help.html"]')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(page.locator('#hamburger')).toHaveAttribute('aria-expanded', 'false');
+
+  await page.goto('/help.html#kavita');
+  await expect(page.locator('details#kavita')).toHaveAttribute('open', '');
+  await expect(page.locator('details#kavita')).toContainText('OPDS');
+
+  await page.goto('/privacy.html');
+  await page.locator('#tab-android').click();
+  await expect(page.locator('#tab-android')).toHaveAttribute('aria-selected', 'true');
+  await expect(page.locator('#prose')).toContainText('Android');
+});
