@@ -53,6 +53,14 @@ jobs:
       - name: Run mobile and desktop browser checks
         run: npm run check:browser
 
+      - name: Measure mobile Lighthouse medians
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory _site &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          export CHROME_PATH="$(node -e "process.stdout.write(require('@playwright/test').chromium.executablePath())")"
+          node scripts/lighthouse-audit.cjs
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
