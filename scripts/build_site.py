@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
 PUBLIC_FILES = [
     "index.html", "help.html", "changelog.html", "feedback.html",
-    "privacy.html", "drm-free.html", "about.html", "llms.txt", "CNAME", "BingSiteAuth.xml",
+    "privacy.html", "drm-free.html", "about.html", "llms.txt", "llms-full.txt", "CNAME", "BingSiteAuth.xml",
 ]
 PUBLIC_ASSETS = [
     "assets/app-icon.png", "assets/badge-appstore.svg", "assets/badge-googleplay.png",

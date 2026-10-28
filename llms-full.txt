@@ -1,0 +1,124 @@
+# Sutra -- Technical Documentation & Context
+
+> Sutra is an offline-first iOS and Android reader for DRM-free ebooks, manga, and comics. It can connect to supported self-hosted libraries and OPDS catalogs. Features, server behavior, and availability can vary by platform, format, and server configuration.
+
+This document summarizes the published Sutra site and changelog. For current setup instructions and release details, consult the links at the end. It is not a guarantee that every server, format, or feature behaves identically on both platforms.
+
+## 1. Product overview
+
+### Formats and access
+
+- EPUB and PDF reading are free.
+- Full CBZ and DRM-free MOBI reading require Sutra Pro. Limited previews may be available for CBZ and comic-shaped MOBI; preview availability and scope can vary. The iOS changelog documents a seven-page preview, but this should not be assumed for every file and platform.
+- CBR archives and DRM-protected files, including DRM-protected Kindle purchases, are not supported.
+- Sutra Pro is a one-time purchase through each platform's store. Apple and Google purchases are separate and do not transfer between stores. Check each store for current local pricing.
+
+### Reading and library features
+
+- Read supported local files, browse compatible connected catalogs, organize a library, and use supported themes, highlights, dictionary lookup, and reading statistics. Specific features can vary by platform and format.
+- Panel Mode presents supported comics one panel at a time. Right-to-left reading is available for manga; results depend on the artwork and page layout. A full-page view remains available.
+- The iOS changelog documents panel-detection improvements for dense and staggered layouts, margin variation, and some black-gutter cases. Detection is not guaranteed for every page.
+- Auto-scrolling is available for supported reading modes. The iOS changelog documents swipe-to-adjust PDF auto-scroll speed; do not assume identical controls for every platform and format.
+- Android has a dedicated e-ink display mode. The Android 1.3.0 changelog states that page-curl animation stays off in that mode.
+- The iOS 2.4.0 changelog lists Atkinson Hyperlegible, OpenDyslexic, EB Garamond, and Libre Baskerville as bundled reader fonts. The Android 1.3.0 changelog lists text sizes up to 48 pt. These release notes do not establish that every font or size is identical across platforms.
+- Inline EPUB footnote sheets and a display-awake reading behavior are documented in the iOS 2.2.5 changelog. The Android 1.3.0 changelog describes footnote cards.
+
+### Privacy, local storage, and sync
+
+- Sutra is described on the site as having no analytics or tracking. Local files and downloaded content can be used offline; connected libraries require access to the relevant server.
+- Self-hosted server connections exchange the information needed for catalog access and supported synchronization. Built-in online catalogs use external services, and iOS iCloud features use Apple's iCloud. Do not interpret offline-first as a claim that data never leaves the device or that no external service is involved.
+- Kavita and Komga support reading-progress synchronization subject to server configuration and book format. The changelog also documents Kavita completion-sync improvements. Do not assume generic OPDS or Calibre access provides bidirectional progress synchronization.
+- On supported iOS devices, iCloud can synchronize reading position, bookmarks, and highlights. Android does not support iCloud sync; Android data export provides manual data portability, not automatic cross-device synchronization.
+- Privacy information: https://sutra-reader.com/privacy.html
+
+## 2. Supported libraries and connection guidance
+
+### Calibre Content Server
+
+1. In desktop Calibre, open the library and choose Connect/share -> Start Content server, or use Preferences -> Sharing -> Sharing over the net.
+2. Configure authentication to protect the server. The Help guide lists port 8080 as the default; check your installation.
+3. In Sutra, choose Add Library, enter the server address, and provide credentials if required. Sutra can detect the Calibre catalog.
+4. Do not assume that generic catalog access includes progress write-back to Calibre.
+
+### Calibre-Web and Calibre-Web-Automated
+
+1. Set up the server and its catalog and authentication according to its documentation. Sutra's Help guide lists typical ports of 8083 for Calibre-Web and 8084 for Calibre-Web-Automated; actual ports depend on configuration.
+2. For Calibre-Web-Automated, enable OPDS and the user's Allow OPDS permission. Enter the server address and credentials in Sutra; the Help guide notes that an /opds path can also work.
+3. Separate interactive login portals can prevent Sutra from reaching the catalog. Use an appropriately secured route that permits the required access; do not expose an unauthenticated server to the public internet.
+
+### Kavita
+
+1. In Kavita, open Settings -> 3rd Party Clients (OPDS) and copy the personal OPDS URL.
+2. In Sutra, choose Add Library and paste the URL. It includes a private API key; treat the entire URL like a password.
+3. Sutra supports reading-progress sync with Kavita; details can vary by format. CBZ streaming requires Sutra Pro and a supported, reachable server endpoint.
+
+### Komga
+
+1. Komga library access requires Sutra Pro. Create or select a Komga account with permission to access the library.
+2. In Sutra, enter the bare server address, without a trailing OPDS catalog path, and sign in with the account's email and password.
+3. For page-by-page streaming, enable Page Streaming permission for that Komga account and ensure the server is reachable. If streaming is unavailable, use the full-download path where available.
+
+### WebDAV
+
+1. Choose Add Library -> WebDAV Server and enter the address and credentials. HTTPS is required by default; the app's Allow HTTP Connections setting can enable plain HTTP where appropriate.
+2. For a self-signed HTTPS certificate, Sutra displays its fingerprint and asks whether to trust it. Verify the fingerprint before accepting.
+3. WebDAV access in Sutra is read-only: supported books can be browsed and read, but not uploaded, renamed, or deleted. Synology's WebDAV service commonly uses HTTPS port 5006; confirm the configured port.
+
+### Other OPDS catalogs
+
+The Help page includes setup information for Grimmory, Booklore, BookOrbit, and OPDShelf. Feed formats, credentials, endpoints, acquisition links, and compatibility vary by server. Generic OPDS access does not guarantee server-specific progress sync or streaming.
+
+### Remote access and VPNs
+
+A server must be reachable from the device, whether over a local network or an appropriately configured VPN. The Sutra Help page describes iOS-specific Tailscale/MagicDNS and App Transport Security considerations. Check the current Help guidance and secure your network; do not assume the same network restrictions apply to Android.
+
+## 3. Platform-specific release highlights
+
+These are selected historical highlights, not a claim of complete feature parity or a substitute for the full changelog.
+
+### iOS 2.4.1 -- October 23, 2026
+
+- Added Recently Added sorting and improved Komga series metadata.
+- Fixed footnote popups for books using separate endnotes pages.
+
+### Android 1.3.0 -- October 22, 2026
+
+- Added an optional page-curl animation, disabled in e-ink mode.
+- Added Sutra-only reader brightness control, footnote cards, and text sizes up to 48 pt.
+- Added manga reading settings and other reading improvements.
+
+### iOS 2.4.0 -- October 15, 2026
+
+- Unified comic and manga panel detection and improved manga reading settings.
+- Added four reader fonts, author stacks, and more consistent grid captions.
+- Added a 2 GiB cap and staged .part files for downloads and imports, plus SHA-256 duplicate detection for imports.
+
+### Android 1.2.0 -- October 17, 2026
+
+- Added page-by-page streaming for supported Kavita and Komga comics with Pro, with download still available for offline use.
+- Added author stacks, collection-grid improvements, and two-panel reading for supported formats on landscape tablets.
+
+### iOS 2.3.10 -- October 6, 2026; Android 1.1.1 -- October 11, 2026
+
+- iOS release notes describe faster large-library sorting and reduced page-turn lag; measured performance depends on device and workload.
+- Android 1.1.1 added series stacks, support for decimal series numbering, and reading-time estimates.
+
+### iOS 2.2.5 -- September 22, 2026; Android 1.0.0 -- October 7, 2026
+
+- iOS release notes cover iOS 27 readiness, inline footnotes, and keeping the display awake during reading.
+- Android 1.0.0 introduced Sutra on Android with supported reading formats, server connections, and an e-ink display mode. Platform-specific capabilities remain distinct.
+
+## 4. Authoritative pages
+
+- About: https://sutra-reader.com/about.html
+- Features and Free/Pro comparison: https://sutra-reader.com/
+- Help and server setup: https://sutra-reader.com/help.html
+- Privacy information: https://sutra-reader.com/privacy.html
+- Complete changelog: https://sutra-reader.com/changelog.html
+- Kavita: https://sutra-reader.com/kavita-reader.html
+- Komga: https://sutra-reader.com/komga-reader.html
+- Panel reading: https://sutra-reader.com/comic-panel-reader.html
+- OPDS: https://sutra-reader.com/opds-reader.html
+- Calibre: https://sutra-reader.com/calibre-reader.html
+- Newsletter: https://newsletter.sutra-reader.com/
+- Feedback: https://sutra-reader.com/feedback.html

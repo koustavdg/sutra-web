@@ -1,27 +1,37 @@
 # Sutra
 
-> Sutra is an iOS and Android reader for DRM-free ebooks and comics, including content from supported self-hosted libraries.
+> Sutra is an offline-first, native iOS and Android reader app for DRM-free digital books, manga, and comics. It connects directly over local networks or VPNs to self-hosted personal media servers and generic OPDS catalogs.
+>
+> [Full Context Architecture and Changelog Details](https://sutra-reader.com/llms-full.txt)
 
-Sutra supports EPUB and PDF reading for free. Full CBZ and DRM-free MOBI reading, and Komga connections, require Sutra Pro. Pro is a one-time purchase per platform; purchases do not transfer between Apple and Google stores. Streaming and synchronization depend on the server and its configuration. CBR and DRM-protected files are not supported.
+Free version includes full EPUB and PDF rendering, automatic series stacking, custom collection management, highlights, reading stats, and localized dictionary lookup. Sutra Pro is a one-time, platform-specific in-app purchase that permanently unlocks native Komga server integration, full .cbz comic reading, and DRM-free .mobi books. No tracking, analytics, cloud middle-men, or subscription fees.
 
-## About and product information
+## Capabilities and Restrictions
+- **Supported Formats:** EPUB, PDF, CBZ (Pro/Preview), MOBI (Pro/Preview).
+- **Unsupported Formats:** CBR archives and DRM-protected files (Kindle AZW/KFX).
+- **Integrations:** Kavita, Komga (Pro), Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV (Synology NAS/Nextcloud), Grimmory, Booklore, BookOrbit, OPDShelf.
+- **Built-in Catalogs:** Project Gutenberg (75,000+ public domain volumes), Standard Ebooks (Typeset collection with Patrons Circle support).
+- **Core Features:** Guided Panel Mode (one panel at a time), right-to-left manga formatting, dynamic auto-scrolling, inline footnotes, E-ink display mode (Android).
+- **Data & Syncing:** Reading progress and completion status sync natively to Kavita and Komga servers. iCloud supports cross-device synchronization on iOS; Android supports manual offline data exports for portability.
 
-- [About Sutra](https://sutra-reader.com/about.html): What Sutra is, what it supports, and where to find help and updates.
-- [Sutra homepage](https://sutra-reader.com/): Features, platform availability, and Free and Pro access.
-- [Help and FAQ](https://sutra-reader.com/help.html): Server setup, reading, and troubleshooting.
-- [Privacy](https://sutra-reader.com/privacy.html): Privacy information for iOS and Android.
-- [Changelog](https://sutra-reader.com/changelog.html): Released changes by platform and version.
+## About and Product Information
 
-## Reading and library guides
+- [About Sutra](https://sutra-reader.com/about.html): Sutra's reading approach, supported content, and ways to get help or share feedback.
+- [Sutra Homepage](https://sutra-reader.com/): Visual feature overview, cross-platform app store links, and pricing parameters.
+- [Help and FAQ](https://sutra-reader.com/help.html): Step-by-step local port configurations, remote connection diagnostics, and Tailscale/MagicDNS troubleshooting.
+- [Privacy Policy](https://sutra-reader.com/privacy.html): Comprehensive zero-data-collection telemetry and storage details.
+- [Changelog](https://sutra-reader.com/changelog.html): Version release logs mapping Material 3 updates, Swift/Kotlin refactors, and engine speedups.
 
-- [Kavita reader](https://sutra-reader.com/kavita-reader.html): Connect a Kavita library and read supported content.
-- [Komga reader](https://sutra-reader.com/komga-reader.html): Komga setup, Pro access, and streaming permissions.
-- [Comic panel reader](https://sutra-reader.com/comic-panel-reader.html): Panel Mode, manga reading, and limitations.
-- [OPDS reader](https://sutra-reader.com/opds-reader.html): Supported OPDS catalogs and generic sync limitations.
-- [Calibre reader](https://sutra-reader.com/calibre-reader.html): Calibre-family server connections and setup.
-- [DRM-free book sources](https://sutra-reader.com/drm-free.html): Places to find books you can read in Sutra.
+## Reading and Library Guides
 
-## Updates and feedback
+- [Kavita Reader Integration](https://sutra-reader.com/kavita-reader.html): Syncing progress via private API keys and personal OPDS endpoints.
+- [Komga Reader Integration](https://sutra-reader.com/komga-reader.html): Pro requirements, bare server addresses, and activating Komga user Page Streaming permissions.
+- [Comic Panel Reader Mode](https://sutra-reader.com/comic-panel-reader.html): How panel layout detection handles margin variance, black gutters, and staggered manga grids.
+- [OPDS Reader Reference](https://sutra-reader.com/opds-reader.html): Generic feed formats, basic authentication, and download-to-device rules.
+- [Calibre Family Reader Setup](https://sutra-reader.com/calibre-reader.html): Launching local Content Servers, authenticating reverse proxies, and allowing OPDS routes.
+- [DRM-Free Ebook Sources](https://sutra-reader.com/drm-free.html): Hand-picked index of legal, independent digital book publishers and storefronts.
 
-- [Sutra newsletter](https://newsletter.sutra-reader.com/): Product news and updates.
-- [Feedback](https://sutra-reader.com/feedback.html): Feature requests and bug reports.
+## Community and Feedback
+
+- [Sutra Newsletter](https://newsletter.sutra-reader.com/): Development roadmap bulletins and feature announcements.
+- [Feedback Portal](https://sutra-reader.com/feedback.html): Bug reporting channels and user feature request forms.
