@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
 PUBLIC_FILES = [
     "index.html", "help.html", "changelog.html", "feedback.html",
-    "privacy.html", "drm-free.html", "CNAME", "BingSiteAuth.xml",
+    "privacy.html", "drm-free.html", "about.html", "llms.txt", "CNAME", "BingSiteAuth.xml",
 ]
 PUBLIC_ASSETS = [
     "assets/app-icon.png", "assets/badge-appstore.svg", "assets/badge-googleplay.png",
@@ -117,7 +117,7 @@ def main() -> None:
     robots = "\n\n".join(f"User-agent: {agent}\nAllow: /" for agent in agents)
     (OUT / "robots.txt").write_text(robots + f"\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 
-    urls = ["/", "/help.html", "/changelog.html", "/feedback.html", "/privacy.html", "/drm-free.html"]
+    urls = ["/", "/help.html", "/changelog.html", "/feedback.html", "/privacy.html", "/drm-free.html", "/about.html"]
     urls.extend(f"/{slug}.html" for slug in page_data)
     entries = "\n".join(f"  <url><loc>{SITE_URL}{path}</loc></url>" for path in urls)
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' + \

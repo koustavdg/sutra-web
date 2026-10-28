@@ -1,0 +1,27 @@
+# Sutra
+
+> Sutra is an iOS and Android reader for DRM-free ebooks and comics, including content from supported self-hosted libraries.
+
+Sutra supports EPUB and PDF reading for free. Full CBZ and DRM-free MOBI reading, and Komga connections, require Sutra Pro. Pro is a one-time purchase per platform; purchases do not transfer between Apple and Google stores. Streaming and synchronization depend on the server and its configuration. CBR and DRM-protected files are not supported.
+
+## About and product information
+
+- [About Sutra](https://sutra-reader.com/about.html): What Sutra is, what it supports, and where to find help and updates.
+- [Sutra homepage](https://sutra-reader.com/): Features, platform availability, and Free and Pro access.
+- [Help and FAQ](https://sutra-reader.com/help.html): Server setup, reading, and troubleshooting.
+- [Privacy](https://sutra-reader.com/privacy.html): Privacy information for iOS and Android.
+- [Changelog](https://sutra-reader.com/changelog.html): Released changes by platform and version.
+
+## Reading and library guides
+
+- [Kavita reader](https://sutra-reader.com/kavita-reader.html): Connect a Kavita library and read supported content.
+- [Komga reader](https://sutra-reader.com/komga-reader.html): Komga setup, Pro access, and streaming permissions.
+- [Comic panel reader](https://sutra-reader.com/comic-panel-reader.html): Panel Mode, manga reading, and limitations.
+- [OPDS reader](https://sutra-reader.com/opds-reader.html): Supported OPDS catalogs and generic sync limitations.
+- [Calibre reader](https://sutra-reader.com/calibre-reader.html): Calibre-family server connections and setup.
+- [DRM-free book sources](https://sutra-reader.com/drm-free.html): Places to find books you can read in Sutra.
+
+## Updates and feedback
+
+- [Sutra newsletter](https://newsletter.sutra-reader.com/): Product news and updates.
+- [Feedback](https://sutra-reader.com/feedback.html): Feature requests and bug reports.
