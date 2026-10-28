@@ -16,12 +16,12 @@
     --plum-top: #6A4A99;
     --plum-deep: #43285F;
     --grape: #7B54B8;
-    --paper: #F4ECDB;
-    --paper-dim: #ECE2CC;
+    --paper: #FFFFFF;
+    --paper-dim: #F8F6F3;
     --ink: #2B1B46;
     --ink-soft: #5B4A78;
-    --line: rgba(43,27,70,0.14);
-    --line-on-plum: rgba(244,236,219,0.18);
+    --line: #E8E3DC;
+    --line-on-plum: rgba(255,255,255,0.18);
     --radius: 6px;
   }
 
@@ -51,7 +51,7 @@
 
   header{
     position:sticky; top:0; z-index:40;
-    background:rgba(244,236,219,0.92);
+    background:rgba(255,255,255,0.92);
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
@@ -134,14 +134,14 @@
     font:500 13px 'Inter',system-ui,sans-serif; border:0; background:none; color:var(--ink-soft);
     padding:7px 16px; border-radius:99px; cursor:pointer;
   }
-  .seg button[aria-pressed="true"]{ background:#FBF7EC; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.18); }
+  .seg button[aria-pressed="true"]{ background:#F8F6F3; color:var(--ink); box-shadow:0 1px 3px rgba(0,0,0,0.18); }
   .chip{
     display:inline-flex; align-items:center; gap:5px; margin-top:10px;
     font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.06em; text-transform:uppercase;
     padding:2px 8px; border-radius:99px;
   }
   .chip::before{ content:""; width:7px; height:7px; border-radius:50%; background:currentColor; }
-  .chip.ios{ background:rgba(244,236,219,0.12); color:#E5DBF5; }
+  .chip.ios{ background:rgba(255,255,255,0.12); color:#E5DBF5; }
   .chip.and{ background:rgba(111,197,155,0.16); color:#8FD9B0; }
   .version[hidden]{ display:none; }
 

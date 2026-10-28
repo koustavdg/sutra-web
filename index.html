@@ -55,13 +55,13 @@
     --plum-top:#6A4A99;
     --plum-deep:#43285F;
     --grape:#7B54B8;
-    --paper:#F4ECDB;
-    --paper-dim:#ECE2CC;
+    --paper:#FFFFFF;
+    --paper-dim:#F8F6F3;
     --ink:#2B1B46;
     --ink-soft:#5B4A78;
-    --card:#FBF7EC;
-    --line:rgba(43,27,70,0.14);
-    --line-on-plum:rgba(244,236,219,0.18);
+    --card:#F8F6F3;
+    --line:#E8E3DC;
+    --line-on-plum:rgba(255,255,255,0.18);
     --radius:6px;
     --ios-soft:rgba(43,27,70,0.09);
     --and:#2F6B4F;
@@ -118,7 +118,7 @@
   /* ===== header ===== */
   header{
     position:sticky; top:0; z-index:40;
-    background:rgba(244,236,219,0.92);
+    background:rgba(255,255,255,0.92);
     backdrop-filter:blur(6px);
     border-bottom:1px solid var(--line);
   }
@@ -137,7 +137,7 @@
   }
   .hero::after{
     content:""; position:absolute; inset:auto 0 0 0; height:1px;
-    background:linear-gradient(90deg, transparent, rgba(244,236,219,0.4), transparent);
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   }
   .hero-grid{
     display:grid; grid-template-columns:1.05fr 0.95fr;
@@ -154,7 +154,7 @@
     font-family:'JetBrains Mono',monospace; font-size:12px;
     letter-spacing:0.14em; text-transform:uppercase; color:#C9B8E8; margin-bottom:16px;
   }
-  .hero h1{ font-size:clamp(42px,6vw,68px); line-height:1.02; color:#F8F2E3; }
+  .hero h1{ font-size:clamp(42px,6vw,68px); line-height:1.02; color:#FFFFFF; }
   .hero .tagline{
     font-family:'JetBrains Mono',monospace; font-size:12.5px;
     letter-spacing:0.12em; text-transform:uppercase; color:#C9B8E8; margin-top:20px;
@@ -212,7 +212,7 @@
   .phone.android .notch{ display:none; }
   .hero-right{ min-width:0; }
   .hero-tog{ display:flex; justify-content:flex-end; margin-bottom:22px; }
-  .hero-tog .seg{ background:rgba(244,236,219,0.12); border:1px solid rgba(244,236,219,0.4); }
+  .hero-tog .seg{ background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.4); }
   .hero-tog .seg button{ color:#DCD1EE; }
   .hero-tog .seg button[aria-pressed="true"]{ background:var(--paper); color:#2B1B46; box-shadow:none; }
   .stage .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
@@ -297,17 +297,17 @@
   .pro-wrap{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center; }
   .pro-wrap > *{ min-width:0; }
   .pro .eyebrow-dark{ color:#C9B8E8; }
-  .pro h2{ font-size:clamp(28px,4vw,40px); line-height:1.1; color:#F8F2E3; }
+  .pro h2{ font-size:clamp(28px,4vw,40px); line-height:1.1; color:#FFFFFF; }
   .pro-lede{ margin-top:12px; color:#DCD1EE; max-width:46ch; }
   .pro-points{ margin-top:18px; padding-left:18px; color:#DCD1EE; display:grid; gap:4px; }
-  .price{ background:rgba(244,236,219,0.1); border:1px solid rgba(244,236,219,0.22); border-radius:10px; padding:24px; }
+  .price{ background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.22); border-radius:10px; padding:24px; }
   .price .amt{ font:600 52px/1 'Spectral',serif; color:#fff; }
   .price .amt small{ font:400 14px 'Inter',system-ui,sans-serif; color:#DCD1EE; margin-left:6px; }
   .price .rows{ margin-top:18px; display:grid; gap:10px; }
   .price .r{
     display:flex; justify-content:space-between; gap:12px; align-items:center;
-    padding-top:10px; border-top:1px solid rgba(244,236,219,0.2);
-    font-size:14.5px; color:#F8F2E3; text-decoration:none;
+    padding-top:10px; border-top:1px solid rgba(255,255,255,0.2);
+    font-size:14.5px; color:#FFFFFF; text-decoration:none;
   }
   .price .r span:last-child{ font-family:'JetBrains Mono',monospace; font-size:13px; }
   .price a.r:hover span:last-child{ text-decoration:underline; text-underline-offset:3px; }
@@ -340,10 +340,10 @@
 
   /* ===== compare ===== */
   .compare{ background:var(--plum-deep); color:var(--paper); padding:88px 0; }
-  .compare .section-head h2{ color:#F8F2E3; }
+  .compare .section-head h2{ color:#FFFFFF; }
   .compare .eyebrow-dark{ color:#C9B8E8; }
   .compare-lede{ margin-top:10px; color:#DCD1EE; font-size:15.5px; }
-  .tbl-wrap{ overflow-x:auto; border:1px solid rgba(244,236,219,0.22); border-radius:var(--radius); background:rgba(244,236,219,0.07); }
+  .tbl-wrap{ overflow-x:auto; border:1px solid rgba(255,255,255,0.22); border-radius:var(--radius); background:rgba(255,255,255,0.07); }
   .compare table{ border-collapse:collapse; width:100%; min-width:560px; font-size:15px; }
   .compare th, .compare td{ padding:13px 18px; text-align:left; border-bottom:1px solid var(--line-on-plum); vertical-align:top; color:#E5DBF5; }
   .compare tr:last-child td, .compare tr:last-child th{ border-bottom:0; }
@@ -359,7 +359,7 @@
   }
   .compare thead th{
     font:500 12px 'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase;
-    color:#C9B8E8; background:rgba(244,236,219,0.1);
+    color:#C9B8E8; background:rgba(255,255,255,0.1);
   }
   .compare tbody th{ font-weight:600; width:48%; }
   .compare tbody th small{ display:block; font-weight:400; color:#B3A2D6; font-size:13.5px; margin-top:2px; }
@@ -367,7 +367,7 @@
   .compare .ck{ width:20px; height:20px; vertical-align:-4px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
   .compare td .n{ color:#B3A2D6; }
   .compare tr.group td{
-    background:rgba(244,236,219,0.06); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
+    background:rgba(255,255,255,0.06); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
     text-transform:uppercase; color:#B3A2D6; padding:8px 18px;
   }
 
@@ -763,7 +763,7 @@
       </ul>
     </div>
     <div class="price">
-      <div class="amt">USD ${{pro_price_usd}}<small>one-time purchase</small></div>
+      <div class="amt">${{pro_price_usd}}<small>one-time purchase</small></div>
       <div class="rows">
         <a class="r" href="{{ios_store}}"><span>iPhone &amp; iPad</span><span>App Store</span></a>
         <a class="r" href="{{android_store}}"><span>Android phones &amp; tablets</span><span>Google Play</span></a>
