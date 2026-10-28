@@ -23,8 +23,15 @@
   "url": "https://sutra-reader.com/",
   "applicationCategory": "BooksApplication",
   "publisher": { "@id": "https://sutra-reader.com/#organization" },
-  "operatingSystem": "iOS, Android",
-  "description": "Read DRM-free EPUB, PDF, CBZ and MOBI files with Sutra on iOS and Android, with self-hosted library connections and panel-by-panel reading."
+  "operatingSystem": ["iOS", "iPadOS", "Android"],
+  "image": "https://sutra-reader.com/assets/app-icon.png",
+  "downloadUrl": ["{{ios_store}}", "{{android_store}}"],
+  "description": "Read DRM-free EPUB, PDF, CBZ and MOBI files with Sutra on iOS and Android, with self-hosted library connections and panel-by-panel reading.",
+  "featureList": ["Read DRM-free EPUB and PDF files", "Connect supported Kavita, Komga, Calibre, WebDAV and OPDS libraries", "Panel Mode and right-to-left manga reading on supported content", "Full CBZ and DRM-free MOBI reading with Sutra Pro"],
+  "offers": [
+    { "@type": "Offer", "name": "Sutra free download", "price": "0.00", "priceCurrency": "USD", "description": "Free EPUB and PDF reading; supported Pro features require an in-app purchase." },
+    { "@type": "Offer", "name": "Sutra Pro in-app purchase", "price": "{{pro_price_usd}}", "priceCurrency": "USD", "description": "One-time purchase per platform; includes full CBZ and DRM-free MOBI reading and Komga access." }
+  ]
 }
 </script>
 <script type="application/ld+json">
@@ -686,7 +693,7 @@
     <div class="section-head">
       <span class="eyebrow-dark">Free vs Pro</span>
       <h2>Free to read. <em>Pro</em> to go further.</h2>
-      <p class="compare-lede">Features vary by platform and file format; the table identifies the supported tier. Pro is a one-time purchase through each platform's store. Check your store for local pricing.</p>
+      <p class="compare-lede">Features vary by platform and file format; the table identifies the supported tier. Pro is a one-time purchase through each platform's store. In the US, Sutra Pro is ${{pro_price_usd}} USD on the App Store and Google Play. Prices may vary by region; check your store for current local pricing.</p>
     </div>
     <div class="tbl-wrap">
       <table>

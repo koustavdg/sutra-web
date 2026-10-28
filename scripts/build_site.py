@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import html
 import json
+import re
 import shutil
 from datetime import date
 from pathlib import Path
@@ -84,6 +85,11 @@ def main() -> None:
         shutil.copy2(ROOT / relative, OUT / relative)
     product = json.loads((ROOT / "content/product.json").read_text(encoding="utf-8"))
     stores = product["stores"]
+    usd_pro = [offer for offer in product["pricing"]["numeric_offers"]
+               if offer.get("tier") == "pro" and offer.get("currency") == "USD"
+               and set(offer.get("platforms", [])) == {"ios", "android"}]
+    if len(usd_pro) != 1 or not re.fullmatch(r"\d+\.\d{2}", usd_pro[0].get("amount", "")):
+        raise ValueError("Expected one owner-verified USD Pro price for iOS and Android")
     global STORE_IOS, STORE_ANDROID
     STORE_IOS = stores["ios"]["url"]
     STORE_ANDROID = stores["android"]["url"]
@@ -91,6 +97,7 @@ def main() -> None:
         rendered = path.read_text(encoding="utf-8")
         rendered = rendered.replace("{{ios_store}}", esc(STORE_IOS))
         rendered = rendered.replace("{{android_store}}", esc(STORE_ANDROID))
+        rendered = rendered.replace("{{pro_price_usd}}", usd_pro[0]["amount"])
         path.write_text(rendered, encoding="utf-8")
     for relative in PUBLIC_ASSETS:
         source = ROOT / relative

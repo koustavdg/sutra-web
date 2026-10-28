@@ -93,8 +93,8 @@ def check(site: Path) -> None:
             errors.append(f"{path.name}: HTML parse error: {e}")
             continue
         parsed[path.name] = parser
-        if "{{ios_store}}" in path.read_text(encoding="utf-8") or "{{android_store}}" in path.read_text(encoding="utf-8"):
-            errors.append(f"{path.name}: unresolved store URL token")
+        if any(token in path.read_text(encoding="utf-8") for token in ("{{ios_store}}", "{{android_store}}", "{{pro_price_usd}}")):
+            errors.append(f"{path.name}: unresolved store or price token")
         if parser.title != 1:
             errors.append(f"{path.name}: expected one title")
         if not parser.title_text:
@@ -128,6 +128,20 @@ def check(site: Path) -> None:
     try:
         product = json.loads((ROOT / "content/product.json").read_text(encoding="utf-8"))
         claims = {item["id"]: item for item in product["capabilities"]}
+        price_entries = [item for item in product["pricing"]["numeric_offers"]
+                         if item.get("tier") == "pro" and item.get("currency") == "USD"]
+        if len(price_entries) != 1 or not all(price_entries[0].get(key) for key in ("verified_at", "verified_by", "review_owner")):
+            errors.append("USD Pro price must have an owner, verifier and verification date")
+        elif "index.html" in parsed:
+            expected_price = price_entries[0]["amount"]
+            home_source = (site / "index.html").read_text(encoding="utf-8")
+            app_nodes = [json.loads(raw) for raw in parsed["index.html"].jsonld
+                         if json.loads(raw).get("@type") == "SoftwareApplication"]
+            offers = app_nodes[0].get("offers", []) if len(app_nodes) == 1 else []
+            if not any(offer.get("name") == "Sutra Pro in-app purchase" and offer.get("price") == expected_price and offer.get("priceCurrency") == "USD" for offer in offers):
+                errors.append("Homepage schema must match the owner-verified USD Pro price")
+            if f"${expected_price} USD" not in home_source:
+                errors.append("Homepage must display the verified USD Pro price")
         for content_path in (ROOT / "content/landing").glob("*.json"):
             data = json.loads(content_path.read_text(encoding="utf-8"))
             if not data.get("claim_ids"):

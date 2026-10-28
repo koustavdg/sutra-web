@@ -9,6 +9,36 @@ const pages = [
   'calibre-reader.html',
 ];
 
+test('Help structured data matches its content and deep links', async ({ page }) => {
+  await page.goto('/help.html');
+  const graph = await page.locator('script[type="application/ld+json"]').evaluate(el => JSON.parse(el.textContent)['@graph']);
+  const normalize = text => text.replace(/\s+/g, ' ').trim();
+  const howTos = graph.filter(item => item['@type'] === 'HowTo');
+  expect(howTos).toHaveLength(2);
+  for (const howTo of howTos) {
+    for (const step of howTo.step) {
+      const url = new URL(step.url);
+      expect(url.origin + url.pathname).toBe('https://sutra-reader.com/help.html');
+      const target = page.locator(url.hash);
+      await expect(target).toHaveCount(1);
+      expect(normalize(await target.textContent())).toContain(normalize(step.text));
+    }
+  }
+  const faq = graph.find(item => item['@type'] === 'FAQPage');
+  expect(faq.mainEntity).toHaveLength(2);
+  for (const question of faq.mainEntity) {
+    const url = new URL(question.url);
+    expect(url.origin + url.pathname).toBe('https://sutra-reader.com/help.html');
+    const target = page.locator(url.hash);
+    await expect(target).toHaveCount(1);
+    expect(normalize(await target.locator('summary').textContent())).toBe(question.name);
+    const paragraphs = await target.locator('.help-answer p').allTextContents();
+    expect(normalize(paragraphs.join(' '))).toBe(normalize(question.acceptedAnswer.text));
+    await page.goto('/help.html' + url.hash);
+    await expect(page.locator(url.hash)).toHaveAttribute('open', '');
+  }
+});
+
 for (const width of [390, 1440]) {
   test.describe(`${width}px viewport`, () => {
     test.use({ viewport: { width, height: 900 } });

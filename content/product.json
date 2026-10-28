@@ -18,7 +18,17 @@
   },
   "pricing": {
     "evergreen_copy": "One-time Pro purchase; see your store for local pricing.",
-    "numeric_offers": []
+    "numeric_offers": [
+      {
+        "tier": "pro",
+        "amount": "6.99",
+        "currency": "USD",
+        "platforms": ["ios", "android"],
+        "verified_at": "2026-10-27",
+        "verified_by": "owner",
+        "review_owner": "Koustav"
+      }
+    ]
   },
   "observed_release_labels": {
     "ios": "2.4.1",
