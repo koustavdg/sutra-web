@@ -218,6 +218,16 @@
   .stage .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
   .stage .phone.back{ transform:translateY(26px) scale(.92); opacity:.88; }
   @media (max-width:560px){ .stage .phone.back{ display:none; } .stage .phone{ width:min(62vw,230px); } }
+  /* The sketch previews already include their own illustrated devices. */
+  .stage.sketch-preview .phone.front .notch{ display:none; }
+  .stage.sketch-preview .phone.front{
+    width:min(72vw, 270px); height:auto; aspect-ratio:auto;
+    border:4px solid #161616; border-radius:18px;
+    background:var(--paper); box-shadow:0 24px 55px -20px rgba(36,21,54,.35);
+  }
+  .stage.sketch-preview .phone video{
+    position:static; width:100%; height:auto; object-fit:contain; border-radius:0;
+  }
 
   /* ===== strip ===== */
   .strip{ background:var(--paper); padding:72px 0 88px; }
@@ -586,7 +596,7 @@
           <button type="button" data-plat="android" aria-pressed="false">Android</button>
         </div>
       </div>
-      <div class="phone-stage stage" id="hero-stage">
+      <div class="phone-stage stage sketch-preview" id="hero-stage">
         <div class="phone back">
           <div class="notch"></div>
           <img id="hero-back" src="assets/screenshots/hero.png" alt="Sutra library screen">
@@ -594,7 +604,7 @@
         <div class="phone front">
           <div class="notch"></div>
           <video id="hero-video" muted loop playsinline autoplay preload="auto" aria-label="Sutra app preview">
-            <source id="hero-video-src" src="assets/sutra-preview-ios.mp4" type="video/mp4">
+            <source id="hero-video-src" src="assets/sutra-preview-ios.mp4?v=sketch-20261029" type="video/mp4">
           </video>
         </div>
       </div>
@@ -1060,8 +1070,8 @@
 (function(){
   var PLAY_URL = '{{android_store}}';
   var MEDIA = {
-    ios: { front: 'assets/screenshots/hero.png', video: 'assets/sutra-preview-ios.mp4', back: 'assets/screenshots/hero.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
-    android: { front: 'assets/screenshots/android/hero-library.webp', video: 'assets/sutra-preview-android.mp4', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
+    ios: { front: 'assets/screenshots/hero.png', video: 'assets/sutra-preview-ios.mp4?v=sketch-20261029', back: 'assets/screenshots/hero.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
+    android: { front: 'assets/screenshots/android/hero-library.webp', video: 'assets/sutra-preview-android.mp4?v=sketch-20261029', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
   };
   var plat = null;
   function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
