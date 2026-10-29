@@ -18,7 +18,8 @@ PUBLIC_FILES = [
 PUBLIC_ASSETS = [
     "assets/app-icon.png", "assets/badge-appstore.svg", "assets/badge-googleplay.png",
     "assets/favicon.png", "assets/maple_leaf.png", "assets/sutra-preview-android.mp4",
-    "assets/sutra-preview-ios.mp4", "assets/screenshots/01-library.png",
+    "assets/sutra-preview-ios.mp4", "assets/sutra-preview-ios-poster.jpg",
+    "assets/sutra-preview-android-poster.jpg", "assets/screenshots/01-library.png",
     "assets/screenshots/02-connect-landing.jpg", "assets/screenshots/05-comics.mp4",
     "assets/screenshots/05-comics-muted.mp4", "assets/screenshots/05-comics-poster.jpg",
     "assets/screenshots/06-autoscroll.mp4", "assets/screenshots/07-pro.png",

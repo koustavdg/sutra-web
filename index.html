@@ -217,7 +217,11 @@
   .hero-tog .seg button[aria-pressed="true"]{ background:var(--paper); color:#2B1B46; box-shadow:none; }
   .stage .phone video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border-radius:inherit; }
   .stage .phone.back{ transform:translateY(26px) scale(.92); opacity:.88; }
-  @media (max-width:560px){ .stage .phone.back{ display:none; } .stage .phone{ width:min(62vw,230px); } }
+  @media (max-width:560px){
+    .stage{ gap:10px; align-items:center; }
+    .stage .phone.back{ display:block; width:min(39vw,180px); }
+    .stage .phone{ width:min(44vw,230px); }
+  }
   /* The sketch previews already include their own illustrated devices. */
   .stage.sketch-preview .phone.front .notch{ display:none; }
   .stage.sketch-preview .phone.front{
@@ -226,8 +230,9 @@
     background:var(--paper); box-shadow:0 24px 55px -20px rgba(36,21,54,.35);
   }
   .stage.sketch-preview .phone video{
-    position:static; width:100%; height:auto; object-fit:contain; border-radius:0;
+    position:static; width:100%; height:auto; aspect-ratio:886/1920; object-fit:contain; border-radius:0;
   }
+  @media (max-width:560px){ .stage.sketch-preview .phone.front{ width:min(44vw,200px); } }
 
   /* ===== strip ===== */
   .strip{ background:var(--paper); padding:72px 0 88px; }
@@ -603,7 +608,7 @@
         </div>
         <div class="phone front">
           <div class="notch"></div>
-          <video id="hero-video" muted loop playsinline autoplay preload="auto" aria-label="Sutra app preview">
+          <video id="hero-video" muted loop playsinline autoplay preload="auto" poster="assets/sutra-preview-ios-poster.jpg" width="886" height="1920" aria-label="Sutra app preview">
             <source id="hero-video-src" src="assets/sutra-preview-ios.mp4?v=sketch-20261029" type="video/mp4">
           </video>
         </div>
@@ -1070,8 +1075,8 @@
 (function(){
   var PLAY_URL = '{{android_store}}';
   var MEDIA = {
-    ios: { front: 'assets/screenshots/hero.png', video: 'assets/sutra-preview-ios.mp4?v=sketch-20261029', back: 'assets/screenshots/hero.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
-    android: { front: 'assets/screenshots/android/hero-library.webp', video: 'assets/sutra-preview-android.mp4?v=sketch-20261029', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
+    ios: { front: 'assets/screenshots/hero.png', video: 'assets/sutra-preview-ios.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-ios-poster.jpg', back: 'assets/screenshots/hero.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
+    android: { front: 'assets/screenshots/android/hero-library.webp', video: 'assets/sutra-preview-android.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-android-poster.jpg', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
   };
   var plat = null;
   function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
@@ -1079,12 +1084,13 @@
     var src = document.getElementById(id);
     if (!src || src.getAttribute('src') === url) return;
     src.src = url;
-    var v = src.parentNode; v.load(); v.play().catch(function(){});
+    var v = src.parentNode; v.load(); v.play().catch(function(){ v.controls = true; });
   }
   function applyPlatform(p){
     if (p === plat) return;
     plat = p;
     var m = MEDIA[p];
+    document.getElementById('hero-video').poster = m.poster;
     setVideo('hero-video-src', m.video);
     var back = document.querySelector('.stage .phone.back');
     back.hidden = !m.back;
@@ -1099,6 +1105,16 @@
     b.addEventListener('click', function(){ applyPlatform(b.dataset.plat); });
   });
   applyPlatform(document.documentElement.classList.contains('is-android') ? 'android' : 'ios', false);
+  var heroVideo = document.getElementById('hero-video');
+  function tryHeroPlayback(){
+    if (!heroVideo.paused) return;
+    heroVideo.play().catch(function(){ heroVideo.controls = true; });
+  }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(entries){
+      if (entries.some(function(entry){ return entry.isIntersecting; })) tryHeroPlayback();
+    }, { threshold: 0.1 }).observe(heroVideo);
+  } else { tryHeroPlayback(); }
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {

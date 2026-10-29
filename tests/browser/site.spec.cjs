@@ -9,6 +9,27 @@ const pages = [
   'calibre-reader.html',
 ];
 
+test('mobile homepage keeps both hero images visible and offers playback if autoplay is blocked', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.addInitScript(() => {
+    HTMLMediaElement.prototype.play = function () { return Promise.reject(new DOMException('Blocked', 'NotAllowedError')); };
+  });
+  await page.goto('/');
+  const video = page.locator('#hero-video');
+  await video.scrollIntoViewIfNeeded();
+  await expect(page.locator('#hero-back')).toBeVisible();
+  await expect(video).toBeVisible();
+  await expect(video).toHaveAttribute('controls', '');
+  await expect(video).toHaveAttribute('poster', /ios-poster/);
+  const bounds = await video.boundingBox();
+  expect(bounds.height / bounds.width).toBeCloseTo(1920 / 886, 1);
+  await page.locator('.hero-tog [data-plat="android"]').click();
+  await expect(page.locator('#hero-back')).toBeVisible();
+  await expect(video).toHaveAttribute('poster', /android-poster/);
+  await expect(video.locator('source')).toHaveAttribute('src', /sutra-preview-android/);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
+});
+
 test('Help structured data matches its content and deep links', async ({ page }) => {
   await page.goto('/help.html');
   const graph = await page.locator('script[type="application/ld+json"]').evaluate(el => JSON.parse(el.textContent)['@graph']);
