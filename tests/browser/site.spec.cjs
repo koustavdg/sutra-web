@@ -60,6 +60,22 @@ test('Help structured data matches its content and deep links', async ({ page })
   }
 });
 
+test('Help links to relevant guides and opens new answer deep links', async ({ page }) => {
+  await page.goto('/help.html');
+  for (const [id, href] of [['kavita', 'kavita-reader.html'], ['komga', 'komga-reader.html'],
+    ['calibre', 'calibre-reader.html'], ['calibre-web', 'calibre-reader.html'],
+    ['calibre-web-automated', 'calibre-reader.html'], ['opds', 'opds-reader.html'],
+    ['panel-mode', 'comic-panel-reader.html']]) {
+    await expect(page.locator(`#${id} a[href="${href}"]`)).toHaveCount(1);
+  }
+  for (const id of ['comic-streaming', 'offline-reading', 'remote-server', 'opds-progress-sync', 'pro-platforms']) {
+    await page.goto(`/help.html#${id}`);
+    await expect(page.locator(`details#${id}`)).toHaveAttribute('open', '');
+  }
+  await page.locator('#remote-server a[href="#server-connection"]').click();
+  await expect(page.locator('details#server-connection')).toHaveAttribute('open', '');
+});
+
 for (const width of [390, 1440]) {
   test.describe(`${width}px viewport`, () => {
     test.use({ viewport: { width, height: 900 } });
