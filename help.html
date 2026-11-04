@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Help and FAQ — Sutra</title>
-<meta name="description" content="Connect Sutra to your server and find answers about libraries, reading, catalogs, file formats, and troubleshooting.">
+<meta name="description" content="Connect Sutra to your server and find answers about iPhone Duo two-page reading, libraries, catalogs, file formats, and troubleshooting.">
 <link rel="canonical" href="https://sutra-reader.com/help.html">
 <script type="application/ld+json">
 {
@@ -46,6 +46,36 @@
           "name": "Sutra can't reach my server.",
           "url": "https://sutra-reader.com/help.html#server-connection",
           "acceptedAnswer": {"@type": "Answer", "text": "Make sure your device is on the same network as the server (or connected via VPN / Tailscale for remote access), and double-check the address, port, and any username/password. Opening the same URL in Safari is a quick way to confirm the server is reachable. Using Tailscale? Enter your server's MagicDNS name (something like myserver.tailnet-name.ts.net) instead of its raw 100.x.x.x address. Sutra can only connect over plain HTTP using that hostname — the numeric Tailscale address needs HTTPS configured on your server to work. This is an iOS restriction (App Transport Security), not a Sutra setting — turning on Allow HTTP Connections in Settings → Network doesn't change it. Using Headscale, NetBird, ZeroTier, or another mesh VPN? Same rule: a hostname works over plain HTTP if the VPN gives you one (Headscale's MagicDNS, if you've set up your own base domain), but a raw IP from any of these needs HTTPS on your server."}
+        },
+        {
+          "@type": "Question",
+          "name": "Does Sutra support the iPhone Duo?",
+          "url": "https://sutra-reader.com/help.html#iphone-duo-support",
+          "acceptedAnswer": {"@type": "Answer", "text": "Yes. Sutra 2.5.0 for iOS is made for the iPhone Duo. Update Sutra from the App Store to get the Duo features; earlier versions don't include them."}
+        },
+        {
+          "@type": "Question",
+          "name": "How does two-page reading work on the iPhone Duo?",
+          "url": "https://sutra-reader.com/help.html#duo-two-page-reading",
+          "acceptedAnswer": {"@type": "Answer", "text": "Open a book across the inner display and Sutra shows it as a real two-page spread. The page curl follows your finger, and text stays clear of the hinge."}
+        },
+        {
+          "@type": "Question",
+          "name": "Which book formats show two pages on the iPhone Duo?",
+          "url": "https://sutra-reader.com/help.html#duo-formats",
+          "acceptedAnswer": {"@type": "Answer", "text": "EPUB, PDF, and comics all turn as facing pages on the inner display. Panel Mode reads comics panel by panel on the outer display, the flat inner display, or the folded Duo."}
+        },
+        {
+          "@type": "Question",
+          "name": "What happens when I fold or unfold my iPhone Duo while reading?",
+          "url": "https://sutra-reader.com/help.html#duo-fold",
+          "acceptedAnswer": {"@type": "Answer", "text": "Sutra adjusts as you change the Duo's posture. Fold it to the outer display and you get one clean page. The Library grid, reader controls, and layout also adjust as you flip the Duo to the seated pose, fold it halfway, or use Split View."}
+        },
+        {
+          "@type": "Question",
+          "name": "Does Sutra look different on iPhone or iPad?",
+          "url": "https://sutra-reader.com/help.html#duo-iphone-ipad",
+          "acceptedAnswer": {"@type": "Answer", "text": "No. On iPhone and iPad, Sutra looks exactly as it did before version 2.5.0."}
         }
       ]
     }
@@ -382,6 +412,17 @@
       </div>
       <details class="help-card" id="opds"><summary>Generic OPDS catalogs</summary><div class="help-answer"><p>Sutra can browse supported OPDS catalogs on iOS and Android. Feed formats, authentication, and file links vary by server. Generic OPDS access does not guarantee reading-progress sync or page streaming. EPUB and PDF reading are free; full CBZ and DRM-free MOBI require Sutra Pro. CBR and DRM-protected files are not supported.</p><div class="help-related"><a href="opds-reader.html">Read the OPDS reader guide →</a></div></div></details>
       <div class="help-tip"><strong>Tip:</strong> Sutra supports EPUB, PDF, DRM-free MOBI, and CBZ comic archives with different free/Pro limits. CBR isn't supported.</div>
+    </section>
+
+    <section class="help-section" id="iphone-duo">
+      <h2 class="help-section-head">iPhone Duo</h2>
+      <div class="help-list">
+        <details class="help-card" id="iphone-duo-support"><summary>Does Sutra support the iPhone Duo?</summary><div class="help-answer"><p>Yes. Sutra 2.5.0 for iOS is made for the iPhone Duo. Update Sutra from the App Store to get the Duo features; earlier versions don't include them.</p><div class="help-related"><a href="changelog.html">See the iOS 2.5.0 release notes →</a></div></div></details>
+        <details class="help-card" id="duo-two-page-reading"><summary>How does two-page reading work on the iPhone Duo?</summary><div class="help-answer"><p>Open a book across the inner display and Sutra shows it as a real two-page spread. The page curl follows your finger, and text stays clear of the hinge.</p></div></details>
+        <details class="help-card" id="duo-formats"><summary>Which book formats show two pages on the iPhone Duo?</summary><div class="help-answer"><p><strong>EPUB</strong>, <strong>PDF</strong>, and comics all turn as facing pages on the inner display. Panel Mode reads comics panel by panel on the outer display, the flat inner display, or the folded Duo.</p></div></details>
+        <details class="help-card" id="duo-fold"><summary>What happens when I fold or unfold my iPhone Duo while reading?</summary><div class="help-answer"><p>Sutra adjusts as you change the Duo's posture. Fold it to the outer display and you get one clean page. The Library grid, reader controls, and layout also adjust as you flip the Duo to the seated pose, fold it halfway, or use Split View.</p></div></details>
+        <details class="help-card" id="duo-iphone-ipad"><summary>Does Sutra look different on iPhone or iPad?</summary><div class="help-answer"><p>No. On iPhone and iPad, Sutra looks exactly as it did before version 2.5.0.</p></div></details>
+      </div>
     </section>
 
     <section class="help-section" id="getting-started">

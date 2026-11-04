@@ -46,7 +46,7 @@ test('Help structured data matches its content and deep links', async ({ page })
     }
   }
   const faq = graph.find(item => item['@type'] === 'FAQPage');
-  expect(faq.mainEntity).toHaveLength(2);
+  expect(faq.mainEntity).toHaveLength(7);
   for (const question of faq.mainEntity) {
     const url = new URL(question.url);
     expect(url.origin + url.pathname).toBe('https://sutra-reader.com/help.html');
