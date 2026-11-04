@@ -821,7 +821,7 @@
         </ul>
       </div>
     </div>
-    <div class="version-list" id="lane-ios">
+    <div class="version-list" id="lane-ios-post">
       <div class="version" data-top="Made for iPhone Duo|Every format, both screens|Follows the fold">
         <div><div class="version-num">2.5.0</div><span class="version-status">Nov 3, 2026</span></div>
         <ul>
@@ -830,6 +830,8 @@
           <li><strong>Follows the fold</strong> — The Library grid, reader controls and layout adjust as you flip the Duo to the seated pose, fold it halfway or work in Split View. iPhone and iPad look exactly as before.</li>
         </ul>
       </div>
+    </div>
+    <div class="version-list" id="lane-ios">
       <div class="version" data-top="Improved panel detection|Manga reading setting|Four new reader fonts">
         <div><div class="version-num">2.4.0</div><span class="version-status">Oct 15, 2026</span></div>
         <ul>
@@ -1141,17 +1143,18 @@
                top:(v.dataset.top||'').split('|'), items:[].map.call(v.querySelectorAll('li'), function(li){ return li.innerHTML; }) };
     }).reverse();
   }
-  var ios = read('lane-ios','ios'), and = read('lane-android','and'),
+  var ios = read('lane-ios','ios'), post = read('lane-ios-post','ios'), and = read('lane-android','and'),
       parity = read('lane-parity','merge','merge')[0], next = read('lane-next','next','next').reverse();
   var CW = 150, X0 = 90, YI = 250, YA = 342, H = 530;
   var xi = function(i){ return X0 + i*CW; };
   var mergeCol = ios.length, andStart = mergeCol - and.length;
-  var W = xi(mergeCol + next.length) + 140;
+  var nextCol = mergeCol + 1 + post.length;
+  var W = xi(nextCol + next.length) + 140;
   var track = document.getElementById('rm-track'); track.style.width = W + 'px';
-  var xm = xi(mergeCol), xa0 = xi(andStart) - 30;
+  var xm = xi(mergeCol), xa0 = xi(andStart) - 30, xs = xi(nextCol - 1);
   var svg = '<svg width="'+W+'" height="'+H+'" aria-hidden="true">'+
-    '<path d="M'+(xi(0)-30)+','+YI+' L'+xm+','+YI+'" stroke="#2B1B46"/>'+
-    '<path d="M'+xm+','+YI+' L'+(xi(mergeCol+next.length)+30)+','+YI+'" stroke="#7B54B8" stroke-dasharray="1 9"/>'+
+    '<path d="M'+(xi(0)-30)+','+YI+' L'+xs+','+YI+'" stroke="#2B1B46"/>'+
+    '<path d="M'+xs+','+YI+' L'+(xi(nextCol+next.length)+30)+','+YI+'" stroke="#7B54B8" stroke-dasharray="1 9"/>'+
     '<path d="M'+xa0+','+YA+' L'+xi(mergeCol-1)+','+YA+' C'+(xi(mergeCol-1)+CW*0.55)+','+YA+' '+(xm-CW*0.5)+','+YI+' '+xm+','+YI+'" stroke="#2F6B4F"/></svg>';
   var all = [], html = svg;
   function title(d){
@@ -1170,12 +1173,13 @@
   ios.forEach(function(d,i){ node(d, xi(i), YI, 'ios', false); });
   and.forEach(function(d,i){ node(d, xi(andStart+i), YA, 'and', true); });
   node(parity, xm, YI, 'merge', false);
-  next.forEach(function(d,i){ node(d, xi(mergeCol+1+i), YI, 'next', false); });
+  post.forEach(function(d,i){ node(d, xi(mergeCol+1+i), YI, 'ios', false); });
+  next.forEach(function(d,i){ node(d, xi(nextCol+i), YI, 'next', false); });
   html += '<span class="rm-lane-name" style="left:'+(xi(0)-30)+'px;top:'+(YI+26)+'px;color:#2B1B46">iOS</span>'+
           '<span class="rm-lane-name" style="left:'+xa0+'px;top:'+(YA-34)+'px;color:#2F6B4F">Android</span>';
   track.innerHTML = html;
 
-  var latest = all.indexOf(parity);
+  var latest = all.indexOf(post.length ? post[post.length-1] : parity);
   var detail = document.getElementById('rm-detail'), nodes = track.querySelectorAll('.rm-node'), cards = track.querySelectorAll('.rm-card');
   function chips(d){
     if (d.kind==='merge') return '<span class="chip ios"><i class="dot"></i>iOS</span><span class="chip and"><i class="dot"></i>Android</span>';
@@ -1202,7 +1206,7 @@
   });
 
   var vlist = document.getElementById('rm-vlist');
-  var shipped = ios.concat(and).sort(function(a,b){ return Date.parse(b.date) - Date.parse(a.date); });
+  var shipped = ios.concat(post, and).sort(function(a,b){ return Date.parse(b.date) - Date.parse(a.date); });
   var order = next.slice().reverse().concat([parity], shipped);
   vlist.innerHTML = order.map(function(d,k){
     var cls = d.kind==='merge' ? 'merge' : d.kind==='next' ? 'next' : d.plat;
