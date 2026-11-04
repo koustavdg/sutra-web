@@ -1207,8 +1207,9 @@
   });
 
   var vlist = document.getElementById('rm-vlist');
-  var shipped = ios.concat(post, and).sort(function(a,b){ return Date.parse(b.date) - Date.parse(a.date); });
-  var order = next.slice().reverse().concat([parity], shipped);
+  function startDate(s){ var m = s.match(/([A-Za-z]{3}) (\d{1,2})[^,]*, (\d{4})/); return m ? Date.parse(m[1]+' '+m[2]+', '+m[3]) : 0; }
+  var shipped = ios.concat(post, and, [parity]).sort(function(a,b){ return startDate(b.date) - startDate(a.date); });
+  var order = shipped.concat(next.slice().reverse());
   vlist.innerHTML = order.map(function(d,k){
     var cls = d.kind==='merge' ? 'merge' : d.kind==='next' ? 'next' : d.plat;
     return '<li class="rm-vitem '+cls+'"><button type="button" class="rm-vbtn" aria-expanded="false">'+
