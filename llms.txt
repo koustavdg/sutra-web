@@ -18,6 +18,7 @@ Free version includes full EPUB and PDF rendering, automatic series stacking, cu
 ## About and Product Information
 
 - [About Sutra](https://sutra-reader.com/about.html): Sutra's reading approach, supported content, and ways to get help or share feedback.
+- [iPhone Duo](https://sutra-reader.com/iphone-duo.html): Two-page spreads on the inner display, Panel Mode on every screen, and a layout that adapts as the Duo folds, in Sutra 2.5.0 for iOS.
 - [Sutra Homepage](https://sutra-reader.com/): Visual feature overview, cross-platform app store links, and pricing parameters.
 - [Help and FAQ](https://sutra-reader.com/help.html): Step-by-step local port configurations, remote connection diagnostics, and Tailscale/MagicDNS troubleshooting.
 - [Privacy Policy](https://sutra-reader.com/privacy.html): Comprehensive zero-data-collection telemetry and storage details.
