@@ -14,6 +14,7 @@ OUT = ROOT / "_site"
 PUBLIC_FILES = [
     "index.html", "help.html", "iphone-duo.html", "changelog.html", "feedback.html",
     "privacy.html", "drm-free.html", "about.html", "llms.txt", "llms-full.txt", "CNAME", "BingSiteAuth.xml",
+    "7967774caec5b198d5114f406735e218.txt",
 ]
 PUBLIC_ASSETS = [
     "assets/iphone-duo-two-page.png", "assets/iphone-duo-outer-display.png", "assets/iphone-duo-composite.png",

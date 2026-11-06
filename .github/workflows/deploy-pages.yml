@@ -39,6 +39,9 @@ jobs:
       - name: Verify quality gate catches a broken page
         run: python scripts/test_quality_gate.py
 
+      - name: Test IndexNow sitemap validation
+        run: python -m unittest discover -s tests -p 'test_submit_indexnow.py'
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -72,3 +75,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Notify IndexNow after deployment
+        run: python scripts/submit_indexnow.py
