@@ -16,6 +16,7 @@ PUBLIC_FILES = [
     "privacy.html", "drm-free.html", "about.html", "llms.txt", "llms-full.txt", "CNAME", "BingSiteAuth.xml",
 ]
 PUBLIC_ASSETS = [
+    "assets/iphone-duo-two-page.png", "assets/iphone-duo-outer-display.png", "assets/iphone-duo-composite.png",
     "assets/app-icon.png", "assets/badge-appstore.svg", "assets/badge-googleplay.png",
     "assets/favicon.png", "assets/maple_leaf.png", "assets/sutra-preview-android.mp4",
     "assets/sutra-preview-ios.mp4", "assets/sutra-preview-ios-poster.jpg",

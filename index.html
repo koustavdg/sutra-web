@@ -275,6 +275,15 @@
     font-weight:600; font-size:17px; transition:background .15s;
   }
   .newsletter-btn:hover{ background:#fff; }
+  .duo-promo{ background:var(--paper); border-bottom:1px solid var(--line); }
+  .duo-promo .newsletter-text{ flex:1 1 0; }
+  .duo-promo .eyebrow-dark{ color:var(--grape); }
+  .duo-promo h2{ color:var(--ink); }
+  .duo-promo p{ color:var(--ink-soft); }
+  .duo-promo .newsletter-btn{ background:var(--plum-deep); color:var(--paper); }
+  .duo-promo .newsletter-btn:hover{ background:var(--grape); }
+  .duo-promo-image{ flex:1 1 0; width:100%; max-width:530px; aspect-ratio:960/800; overflow:hidden; position:relative; border-radius:12px; }
+  .duo-promo-image img{ position:absolute; width:170.833%; max-width:none; height:auto; right:0; top:-3%; }
 
   /* ===== features ===== */
   .features{ background:var(--paper); padding:88px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
@@ -504,6 +513,7 @@
   /* ===== responsive ===== */
   @media (max-width: 880px){
     .newsletter-wrap{ flex-direction:column; align-items:flex-start; gap:28px; }
+    .duo-promo-image{ flex:none; }
     .hero-grid{ grid-template-columns:1fr; }
     .phone-stage{ margin-top:20px; }
     .strip-row{ grid-template-columns:repeat(2,1fr); }
@@ -675,6 +685,19 @@
         <a id="newsletter-fallback" class="newsletter-btn" href="https://newsletter.sutra-reader.com/subscribe" target="_blank" rel="noopener">Subscribe</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== iPhone Duo ===== -->
+<section class="newsletter duo-promo" id="iphone-duo">
+  <div class="wrap newsletter-wrap">
+    <div class="newsletter-text">
+      <span class="eyebrow-dark">Made for iPhone Duo</span>
+      <h2>Now available on the iPhone Duo</h2>
+      <p>Read across the inner display in a two-page spread, and keep reading as Sutra adapts to the way you fold. Available in Sutra 2.5.0 for iOS and later.</p>
+      <a class="newsletter-btn" href="iphone-duo.html">Explore Sutra on the Duo</a>
+    </div>
+    <div class="duo-promo-image"><img src="assets/iphone-duo-composite.png" width="1640" height="856" loading="lazy" alt="Illustrations of an unfolded iPhone Duo showing facing book pages and its outer display showing a comic"></div>
   </div>
 </section>
 

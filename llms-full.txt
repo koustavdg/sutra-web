@@ -78,6 +78,7 @@ These are selected historical highlights, not a claim of complete feature parity
 
 ### iOS 2.5.0 -- November 3, 2026
 
+- [Sutra on iPhone Duo](https://sutra-reader.com/iphone-duo.html): Screenshots, supported reading layouts, and answers about reading on the inner and outer displays. Duo features require Sutra for iOS 2.5.0 or later.
 - Made for iPhone Duo: open a book across the inner display for a two-page spread, with a page curl that follows the finger and text that stays clear of the hinge. Folding the Duo to the outer display shows one clean page.
 - EPUB, PDF and comics all turn facing pages on the inner display. Panel Mode reads comics panel by panel on the outer display, the flat inner display, or the folded Duo.
 - The Library grid, reader controls and layout adjust as the Duo moves to the seated pose, folds halfway or uses Split View. iPhone and iPad look exactly as before.

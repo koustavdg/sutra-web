@@ -12,7 +12,7 @@ Free version includes full EPUB and PDF rendering, automatic series stacking, cu
 - **Integrations:** Kavita, Komga (Pro), Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV (Synology NAS/Nextcloud), Grimmory, Booklore, BookOrbit, OPDShelf.
 - **Built-in Catalogs:** Project Gutenberg (75,000+ public domain volumes), Standard Ebooks (Typeset collection with Patrons Circle support).
 - **Core Features:** Guided Panel Mode (one panel at a time), right-to-left manga formatting, dynamic auto-scrolling, inline footnotes, E-ink display mode (Android).
-- **iPhone Duo (iOS 2.5.0+):** Two-page facing spreads on the inner display for EPUB, PDF and comics, a page curl that follows the finger, Panel Mode on the outer, inner and folded displays, and a layout that adjusts as the Duo folds. iPhone and iPad are unchanged.
+- **iPhone Duo (iOS 2.5.0+):** Two-page facing spreads on the inner display for EPUB, PDF and comics, a page curl that follows the finger, Panel Mode on the outer, inner and folded displays, and a layout that adjusts as the Duo folds. See the [iPhone Duo guide](https://sutra-reader.com/iphone-duo.html) for screenshots and details.
 - **Data & Syncing:** Reading progress and completion status sync natively to Kavita and Komga servers. iCloud supports cross-device synchronization on iOS; Android supports manual offline data exports for portability.
 
 ## About and Product Information
