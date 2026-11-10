@@ -6,6 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: read
   contents: read
   pages: write
   id-token: write
@@ -24,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -77,4 +80,6 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: Notify IndexNow after deployment
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: python scripts/submit_indexnow.py
