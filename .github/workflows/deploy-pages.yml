@@ -45,6 +45,9 @@ jobs:
       - name: Validate comparison publication and preview metadata
         run: python -m unittest discover -s tests -p 'test_comparison_pages.py'
 
+      - name: Validate static policies, product facts and publication metadata
+        run: python -m unittest discover -s tests -p 'test_publication_enhancements.py'
+
       - name: Test IndexNow sitemap validation
         run: python -m unittest discover -s tests -p 'test_submit_indexnow.py'
 

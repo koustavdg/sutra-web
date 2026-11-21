@@ -9,6 +9,8 @@ import shutil
 from datetime import date
 from pathlib import Path
 from comparison_pages import render_comparisons
+from product_facts import expand_facts
+from site_enhancements import enhance_page, privacy_panels, entitlement_rows
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -18,6 +20,9 @@ PUBLIC_FILES = [
     "7967774caec5b198d5114f406735e218.txt",
 ]
 PUBLIC_ASSETS = [
+    "assets/social-card.png", "assets/optimized/ios-hero.webp", "assets/optimized/ios-library.webp",
+    "assets/optimized/ios-pro.webp", "assets/optimized/iphone-duo.webp", "assets/optimized/ios-autoscroll.jpg",
+    "assets/optimized/android-autoscroll.jpg", "assets/optimized/android-comics.jpg",
     "assets/iphone-duo-two-page.png", "assets/iphone-duo-outer-display.png", "assets/iphone-duo-composite.png",
     "assets/app-icon.png", "assets/badge-appstore.svg", "assets/badge-googleplay.png",
     "assets/favicon.png", "assets/maple_leaf.png", "assets/sutra-preview-android.mp4",
@@ -115,7 +120,7 @@ def main() -> None:
     content_dir = ROOT / "content/landing"
     page_data = {}
     for path in sorted(content_dir.glob("*.json")):
-        data = json.loads(path.read_text(encoding="utf-8"))
+        data = json.loads(expand_facts(path.read_text(encoding="utf-8")))
         if data["slug"] != path.stem:
             raise ValueError(f"Landing slug must match filename: {path}")
         page_data[data["slug"]] = data
@@ -125,6 +130,15 @@ def main() -> None:
         (OUT / f'{data["slug"]}.html').write_text(render_page(data, template, page_data), encoding="utf-8")
 
     comparison_slugs = render_comparisons(OUT)
+
+    for path in OUT.glob('*.html'):
+        source = path.read_text(encoding='utf-8').replace('{{home_entitlements}}', entitlement_rows())
+        source = expand_facts(source)
+        source = source.replace('{{privacy_policies}}', privacy_panels())
+        path.write_text(enhance_page(source), encoding='utf-8')
+    for name in ('llms.txt', 'llms-full.txt'):
+        path = OUT / name
+        path.write_text(expand_facts(path.read_text()), encoding='utf-8')
 
     agents = ["*", "Googlebot", "Bingbot", "OAI-SearchBot", "GPTBot", "Claude-SearchBot", "ClaudeBot", "PerplexityBot"]
     robots = "\n\n".join(f"User-agent: {agent}\nAllow: /" for agent in agents)

@@ -1,0 +1,12 @@
+{
+  "PRIVACY.md": {
+    "source": "https://raw.githubusercontent.com/koustavdg/sutra-support/main/PRIVACY.md",
+    "sha256": "ed8d375c360795e9a96a5b4297da4b4ccb99c414d9d4279d29c81c25c4e6abc4",
+    "retrieved_on": "2026-11-21"
+  },
+  "PRIVACY-ANDROID.md": {
+    "source": "https://raw.githubusercontent.com/koustavdg/sutra-support/main/PRIVACY-ANDROID.md",
+    "sha256": "5c873788b05900b8262acc67e33a1950441dafa4151f40e9a7a7141341c4f276",
+    "retrieved_on": "2026-11-21"
+  }
+}

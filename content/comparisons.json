@@ -25,7 +25,7 @@
       ],
       "columns": ["What matters to you", "Sutra", "Readest", "Panels"],
       "rows": [
-        ["No required subscription", "Free EPUB/PDF; optional $6.99 US Pro per platform", "Free plan, optional subscriptions and one-time packs [R1]", "Free with subscription or major-version purchase options [P1]"],
+        ["No required subscription", "Free EPUB/PDF; optional ${{product.pro_price_usd}} US Pro per platform", "Free plan, optional subscriptions and one-time packs [R1]", "Free with subscription or major-version purchase options [P1]"],
         ["Published reading focus", "Text ebooks plus custom panel-by-panel comic reading", "Broad-format ebook reader [R4]", "Comic-focused, including guided navigation [P1]"],
         ["Mobile platforms", "iOS and Android", "iOS and Android, plus desktop/web [R1]", "iPhone, iPad and Mac [P1]"],
         ["Your own catalogs", "Named server integrations plus compatible OPDS; capabilities vary", "OPDS, Calibre plugin and documented OPDS-PSE streaming [R3]", "OPDS libraries [P1]"],
@@ -61,7 +61,7 @@
       ],
       "columns": ["Decision point", "Sutra", "Readest"],
       "rows": [
-        ["Free reading and paid options", "EPUB/PDF free; Pro $6.99 US once per platform", "Free plan; Plus $4.99/month and Pro $9.99/month; one-time customization pack $19.99 [R1]"],
+        ["Free reading and paid options", "EPUB/PDF free; Pro ${{product.pro_price_usd}} US once per platform", "Free plan; Plus $4.99/month and Pro $9.99/month; one-time customization pack $19.99 [R1]"],
         ["Buying across platforms", "Apple and Google purchases are separate", "Paid benefits follow the Readest account [R1]"],
         ["Where you read", "iPhone, iPad and Android", "Mobile, desktop and web [R1]"],
         ["Library access", "Supported server integrations, WebDAV and OPDS", "OPDS catalogs and Calibre plugin [R3]"],
@@ -101,7 +101,7 @@
       "rows": [
         ["Reading focus", "Text ebooks and comics together", "Comics, PDF and image EPUB; not text ebooks [P1]"],
         ["Platforms", "iPhone, iPad and Android", "iPhone, iPad and Mac [P1]"],
-        ["Paid options", "$6.99 US Pro once per platform", "$1.49/month, $14.99/year or $19.99 Panels 3 purchase [P1]"],
+        ["Paid options", "${{product.pro_price_usd}} US Pro once per platform", "$1.49/month, $14.99/year or $19.99 Panels 3 purchase [P1]"],
         ["Guided comics", "Custom panel detection; panel-by-panel reading", "Guided navigation advertised [P1]"],
         ["Personal servers", "Kavita/Komga and compatible OPDS; capabilities vary", "OPDS access including Kavita/Komga [P1]"],
         ["CBR", "Active development; planned Pro", "Supported [P1]"],

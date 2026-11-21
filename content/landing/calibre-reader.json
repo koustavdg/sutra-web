@@ -34,7 +34,7 @@
     {"q": "Should I enter a base URL or a full OPDS feed URL?", "a": "It depends on the server variant and configuration. Use the address and endpoint shown in that server's settings or the Sutra Help guide for that specific variant."},
     {"q": "Does Sutra sync reading progress back to Calibre?", "a": "Do not assume generic Calibre or OPDS access provides reading-progress synchronization. Server-specific integrations may differ."},
     {"q": "Can I use Calibre-Web-Automated behind a separate login portal?", "a": "The catalog must be reachable by Sutra. A separate authentication portal may block the OPDS request; configure a secure route that allows the OPDS endpoint rather than sharing credentials publicly."},
-    {"q": "Which formats and tiers are supported?", "a": "EPUB and PDF reading are free. Full CBZ and DRM-free MOBI reading require Sutra Pro. Only compatible file links exposed by the server can be opened."}
+    {"q": "Which formats and tiers are supported?", "a": "EPUB and PDF reading are free. {{product.pro_formats}} Only compatible file links exposed by the server can be opened."}
   ],
   "image": "assets/screenshots/02-connect-landing.jpg",
   "image_alt": "Sutra's add-library screen for connecting a Calibre-family server",

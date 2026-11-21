@@ -383,16 +383,16 @@
   }
   .compare thead th{
     font:500 12px 'JetBrains Mono',monospace; letter-spacing:0.1em; text-transform:uppercase;
-    color:#C9B8E8; background:rgba(255,255,255,0.1);
+    color:#FFFFFF; background:rgba(255,255,255,0.1);
   }
   .compare tbody th{ font-weight:600; width:48%; }
-  .compare tbody th small{ display:block; font-weight:400; color:#B3A2D6; font-size:13.5px; margin-top:2px; }
+  .compare tbody th small{ display:block; font-weight:400; color:#E5DBF5; font-size:13.5px; margin-top:2px; }
   .compare td .y{ color:#8FD9B0; font-weight:600; }
   .compare .ck{ width:20px; height:20px; vertical-align:-4px; fill:none; stroke:currentColor; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; }
-  .compare td .n{ color:#B3A2D6; }
+  .compare td .n{ color:#E5DBF5; }
   .compare tr.group td{
     background:rgba(255,255,255,0.06); font:500 11px 'JetBrains Mono',monospace; letter-spacing:0.12em;
-    text-transform:uppercase; color:#B3A2D6; padding:8px 18px;
+    text-transform:uppercase; color:#E5DBF5; padding:8px 18px;
   }
 
 
@@ -615,11 +615,11 @@
       <div class="phone-stage stage sketch-preview" id="hero-stage">
         <div class="phone back">
           <div class="notch"></div>
-          <img id="hero-back" src="assets/screenshots/hero.png" alt="Sutra library screen">
+          <img id="hero-back" src="assets/optimized/ios-hero.webp" width="600" height="1299" alt="Sutra library screen">
         </div>
         <div class="phone front">
           <div class="notch"></div>
-          <video id="hero-video" muted loop playsinline autoplay preload="auto" poster="assets/sutra-preview-ios-poster.jpg" width="886" height="1920" aria-label="Sutra app preview">
+          <video id="hero-video" controls muted loop playsinline preload="none" poster="assets/sutra-preview-ios-poster.jpg" width="886" height="1920" aria-label="Sutra app preview">
             <source id="hero-video-src" src="assets/sutra-preview-ios.mp4?v=sketch-20261029" type="video/mp4">
           </video>
         </div>
@@ -641,14 +641,14 @@
     <div class="strip-row">
       <div>
         <div class="phone"><div class="notch"></div>
-          <img id="shot-lib" src="assets/screenshots/01-library.png" alt="Library view"
+          <img id="shot-lib" src="assets/optimized/ios-library.webp" loading="lazy" alt="Library view"
                onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>01-library.png</span>'}))">
         </div>
         <div class="strip-cap">01 · library</div>
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <video autoplay muted loop playsinline aria-label="Panel-aware comic reading">
+          <video controls muted loop playsinline preload="none" poster="assets/screenshots/05-comics-poster.jpg" aria-label="Panel-aware comic reading">
             <source id="shot-comics" src="assets/screenshots/05-comics.mp4" type="video/mp4">
           </video>
         </div>
@@ -656,7 +656,7 @@
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <video autoplay muted loop playsinline aria-label="Auto-scroll reading">
+          <video controls muted loop playsinline preload="none" poster="assets/optimized/ios-autoscroll.jpg" aria-label="Auto-scroll reading">
             <source id="shot-scroll" src="assets/screenshots/06-autoscroll.mp4" type="video/mp4">
           </video>
         </div>
@@ -664,7 +664,7 @@
       </div>
       <div>
         <div class="phone"><div class="notch"></div>
-          <img id="shot-pro" src="assets/screenshots/07-pro.png" alt="Sutra Pro unlock screen"
+          <img id="shot-pro" src="assets/optimized/ios-pro.webp" loading="lazy" alt="Sutra Pro unlock screen"
                onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'placeholder',innerHTML:'<span>07-pro.png</span>'}))">
         </div>
         <div class="strip-cap">04 · Sutra Pro</div>
@@ -698,7 +698,7 @@
       <p>Read across the inner display in a two-page spread, and keep reading as Sutra adapts to the way you fold. Available in Sutra 2.5.0 for iOS and later.</p>
       <a class="newsletter-btn" href="iphone-duo.html">Explore Sutra on the Duo</a>
     </div>
-    <div class="duo-promo-image"><img src="assets/iphone-duo-composite.png" width="1640" height="856" loading="lazy" alt="Illustrations of an unfolded iPhone Duo showing facing book pages and its outer display showing a comic"></div>
+    <div class="duo-promo-image"><img src="assets/optimized/iphone-duo.webp" width="1100" height="575" loading="lazy" alt="Illustrations of an unfolded iPhone Duo showing facing book pages and its outer display showing a comic"></div>
   </div>
 </section>
 
@@ -738,25 +738,7 @@
       <table>
         <thead><tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Sutra Pro</th></tr></thead>
         <tbody>
-        <tr class="group"><td colspan="3">Reading</td></tr>
-        <tr><th scope="row">EPUB &amp; PDF<small>Themes, fonts, bookmarks, search</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Panel Mode &amp; right-to-left manga<small>Free for everyone</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">E-ink display mode<small>Free. Android only</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Highlights, notes &amp; dictionary</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Reading statistics</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">iPhone Duo support<small>iOS only. Two-page reading and fold-aware layout in Sutra 2.5.0 or later</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr class="group"><td colspan="3">Libraries &amp; sync</td></tr>
-        <tr><th scope="row">OPDS, Kavita, Calibre, WebDAV<small>Plus Project Gutenberg and Standard Ebooks</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Reading progress sync to your server<small>Kavita, plus Komga with Pro</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Library backup<small>iCloud on iOS, Export on Android</small></th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">No analytics or tracking</th><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr class="group"><td colspan="3">Sutra Pro</td></tr>
-        <tr><th scope="row">CBZ comics<small>A limited preview may be available; full reading requires Pro</small></th><td><span class="y">Preview</span></td><td><span class="y">Full</span></td></tr>
-        <tr><th scope="row">MOBI books<small>DRM-free. Sutra Pro only</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Stream CBZ from Komga and Kavita<small>Supported endpoints required; Komga also requires Page Streaming permission</small></th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr><th scope="row">Komga server connection</th><td><span class="n">—</span></td><td><span class="y" role="img" aria-label="Yes"><svg class="ck" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.6l3.2 3.2L13 4.8"/></svg></span></td></tr>
-        <tr class="group"><td colspan="3">Price</td></tr>
-        <tr><th scope="row">Cost<small>One-time, no subscription. Bought separately on each platform</small></th><td><span class="y">Free</span></td><td><span class="y">See store</span></td></tr>
+        {{home_entitlements}}
         </tbody>
       </table>
     </div>
@@ -1113,16 +1095,26 @@
 (function(){
   var PLAY_URL = '{{android_store}}';
   var MEDIA = {
-    ios: { front: 'assets/screenshots/hero.png', video: 'assets/sutra-preview-ios.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-ios-poster.jpg', back: 'assets/screenshots/hero.png', lib: 'assets/screenshots/01-library.png', pro: 'assets/screenshots/07-pro.png', comics: 'assets/screenshots/05-comics.mp4', scroll: 'assets/screenshots/06-autoscroll.mp4', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
-    android: { front: 'assets/screenshots/android/hero-library.webp', video: 'assets/sutra-preview-android.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-android-poster.jpg', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', scroll: 'assets/screenshots/android/06-autoscroll.mp4', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
+    ios: { video: 'assets/sutra-preview-ios.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-ios-poster.jpg', back: 'assets/optimized/ios-hero.webp', lib: 'assets/optimized/ios-library.webp', pro: 'assets/optimized/ios-pro.webp', comics: 'assets/screenshots/05-comics.mp4', comicsPoster: 'assets/screenshots/05-comics-poster.jpg', scroll: 'assets/screenshots/06-autoscroll.mp4', scrollPoster: 'assets/optimized/ios-autoscroll.jpg', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
+    android: { video: 'assets/sutra-preview-android.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-android-poster.jpg', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', comicsPoster: 'assets/optimized/android-comics.jpg', scroll: 'assets/screenshots/android/06-autoscroll.mp4', scrollPoster: 'assets/optimized/android-autoscroll.jpg', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
   };
   var plat = null;
+  var visibleVideos = new Set();
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function playVisible(video){
+    if (reducedMotion){ video.controls = true; return; }
+    if (!video.paused) return;
+    video.play().then(function(){ video.controls = false; }).catch(function(){ video.controls = true; });
+  }
   function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
-  function setVideo(id, url){
+  function setVideo(id, url, poster){
     var src = document.getElementById(id);
-    if (!src || src.getAttribute('src') === url) return;
+    if (!src) return;
+    if (poster) src.parentNode.poster = poster;
+    if (src.getAttribute('src') === url) return;
     src.src = url;
-    var v = src.parentNode; v.load(); v.play().catch(function(){ v.controls = true; });
+    var v = src.parentNode; v.pause(); v.load();
+    if (visibleVideos.has(v)) playVisible(v);
   }
   function applyPlatform(p){
     if (p === plat) return;
@@ -1134,7 +1126,7 @@
     back.hidden = !m.back;
     if (m.back) setImg('hero-back', m.back);
     setImg('shot-lib', m.lib); setImg('shot-pro', m.pro);
-    setVideo('shot-comics', m.comics); setVideo('shot-scroll', m.scroll);
+    setVideo('shot-comics', m.comics, m.comicsPoster); setVideo('shot-scroll', m.scroll, m.scrollPoster);
     document.getElementById('shots-cap').innerHTML = m.cap;
     document.querySelectorAll('.phone').forEach(function(ph){ ph.classList.toggle('android', p === 'android'); });
     document.querySelectorAll('[data-plat]').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.plat === p)); });
@@ -1143,16 +1135,20 @@
     b.addEventListener('click', function(){ applyPlatform(b.dataset.plat); });
   });
   applyPlatform(document.documentElement.classList.contains('is-android') ? 'android' : 'ios', false);
-  var heroVideo = document.getElementById('hero-video');
-  function tryHeroPlayback(){
-    if (!heroVideo.paused) return;
-    heroVideo.play().catch(function(){ heroVideo.controls = true; });
-  }
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function(entries){
-      if (entries.some(function(entry){ return entry.isIntersecting; })) tryHeroPlayback();
-    }, { threshold: 0.1 }).observe(heroVideo);
-  } else { tryHeroPlayback(); }
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){ visibleVideos.add(entry.target); playVisible(entry.target); }
+        else { visibleVideos.delete(entry.target); entry.target.pause(); }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('video').forEach(function(video){ observer.observe(video); });
+  } // Without IntersectionObserver, native controls remain available.
+  document.addEventListener('visibilitychange', function(){
+    document.querySelectorAll('video').forEach(function(video){
+      if (document.hidden) video.pause(); else if (visibleVideos.has(video)) playVisible(video);
+    });
+  });
   if (!PLAY_URL) return;
   document.querySelectorAll('a[data-play]').forEach(function(a){ a.href = PLAY_URL; });
   if (document.documentElement.classList.contains('is-android')) {

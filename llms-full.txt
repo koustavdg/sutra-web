@@ -10,7 +10,7 @@ This document summarizes the published Sutra site and changelog. For current set
 
 - EPUB and PDF reading are free.
 - Compatible ZIP comic archives are supported; this does not mean arbitrary ZIP contents can be opened as books.
-- Full CBZ and DRM-free MOBI reading require Sutra Pro. Limited previews may be available for CBZ and comic-shaped MOBI; preview availability and scope can vary. The iOS changelog documents a seven-page preview, but this should not be assumed for every file and platform.
+- {{product.pro_formats}} Limited previews may be available for CBZ and comic-shaped MOBI; preview availability and scope can vary. The iOS changelog documents a seven-page preview, but this should not be assumed for every file and platform.
 - CBR archives and DRM-protected files, including DRM-protected Kindle purchases, are not supported.
 - Sutra Pro is a one-time purchase through each platform's store. Apple and Google purchases are separate and do not transfer between stores. Check each store for current local pricing.
 

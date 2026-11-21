@@ -6,6 +6,14 @@
   "source_commit": "b92c7a7",
   "name": "Sutra",
   "website": "https://sutra-reader.com/",
+  "publication_facts": {
+    "pro_formats": "Full CBZ and DRM-free MOBI reading require Sutra Pro.",
+    "komga_access": "Komga access currently requires Sutra Pro.",
+    "cbr_status": "CBR/RAR support is in development and planned for Pro.",
+    "read_aloud_status": "Kokoro Read Aloud is in development for iOS and Android.",
+    "kosync_status": "KOSync is in development for reading progress only; it does not synchronize highlights or notes.",
+    "duo_release": "2.5.0"
+  },
   "stores": {
     "ios": {
       "url": "https://apps.apple.com/ca/app/sutra-ebook-comic-reader/id6780096864",
@@ -30,6 +38,110 @@
       }
     ]
   },
+  "home_entitlements": [
+    {
+      "group": "Reading"
+    },
+    {
+      "label": "EPUB & PDF",
+      "note": "Themes, fonts, bookmarks, search",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "Panel Mode & right-to-left manga",
+      "note": "Free for everyone",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "E-ink display mode",
+      "note": "Free. Android only",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "Highlights, notes & dictionary",
+      "note": "",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "Reading statistics",
+      "note": "",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "iPhone Duo support",
+      "note": "iOS only. Two-page reading and fold-aware layout in Sutra {{product.duo_release}} or later",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "group": "Libraries & sync"
+    },
+    {
+      "label": "OPDS, Kavita, Calibre, WebDAV",
+      "note": "Plus Project Gutenberg and Standard Ebooks",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "Reading progress sync to your server",
+      "note": "Kavita, plus Komga with Pro",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "Library backup",
+      "note": "iCloud on iOS, Export on Android",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "label": "No analytics or tracking",
+      "note": "",
+      "free": "Included",
+      "pro": "Included"
+    },
+    {
+      "group": "Sutra Pro"
+    },
+    {
+      "label": "CBZ comics",
+      "note": "A limited preview may be available; full reading requires Pro",
+      "free": "Preview",
+      "pro": "Full"
+    },
+    {
+      "label": "MOBI books",
+      "note": "DRM-free. Sutra Pro only",
+      "free": "Pro required",
+      "pro": "Included"
+    },
+    {
+      "label": "Stream CBZ from Komga and Kavita",
+      "note": "Supported endpoints required; Komga also requires Page Streaming permission",
+      "free": "Pro required",
+      "pro": "Included"
+    },
+    {
+      "label": "Komga server connection",
+      "note": "",
+      "free": "Pro required",
+      "pro": "Included"
+    },
+    {
+      "group": "Price"
+    },
+    {
+      "label": "Cost",
+      "note": "One-time, no subscription. Bought separately on each platform",
+      "free": "Free",
+      "pro": "${{product.pro_price_usd}} USD"
+    }
+  ],
   "observed_release_labels": {
     "ios": "2.4.1",
     "android": "1.3.0",

@@ -2,6 +2,10 @@
 import html
 import json
 from pathlib import Path
+try:
+    from .product_facts import expand_facts
+except ImportError:
+    from product_facts import expand_facts
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = 'https://sutra-reader.com'
@@ -9,7 +13,7 @@ HEADINGS = {'compare-readers': 'Compare Sutra, Readest and Panels', 'sutra-vs-re
 QUESTIONS = {
     'compare-readers': [
         ('Can I read ebooks and comics without a subscription?', 'Sutra has free EPUB and PDF reading and optional Pro features purchased once per platform. Full CBZ and DRM-free MOBI require Pro. Readest and Panels also offer ways to use their apps without a subscription; compare the specific features and limits.'),
-        ('Which personal libraries can Sutra connect to?', 'Sutra supports Kavita, Komga, Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV and compatible OPDS feeds. Catalog access does not guarantee page streaming or server progress sync. Current Komga access requires Pro.'),
+        ('Which personal libraries can Sutra connect to?', 'Sutra supports Kavita, Komga, Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV and compatible OPDS feeds. Catalog access does not guarantee page streaming or server progress sync. {{product.komga_access}}'),
         ('Are Kokoro Read Aloud and KOSync available in Sutra?', 'They are in development for iOS and Android. The pronunciation-pack workflow is also in development. KOSync covers progress, not highlights or notes. They are not counted as shipped advantages in this comparison.')],
     'sutra-vs-readest': [
         ('When is Sutra an alternative to Readest?', 'Consider Sutra if you want ebooks and panel-by-panel comics on iOS or Android, direct access to your personal libraries, no app analytics and a one-time Pro upgrade. Consider Readest if desktop or web reading and broader cloud synchronization are priorities.'),
@@ -18,16 +22,16 @@ QUESTIONS = {
     'sutra-vs-panels': [
         ('When is Sutra an alternative to Panels?', 'Consider Sutra when you want text ebooks and comics together, Android availability as well as iOS, and no app analytics. Panels may fit better if you need CBR today or an Apple-focused comic library with Mac reading.'),
         ('Is panel-by-panel comic reading exclusive to Sutra?', 'No. Sutra uses a custom panel detection engine, while Panels also advertises guided navigation. No head-to-head detection accuracy or rendering benchmark is claimed here.'),
-        ('Can Sutra open CBR files today?', 'CBR/RAR support is in development and planned for Pro. It should not be treated as an available reason to switch. Current comic support includes CBZ and compatible ZIP comic archives.')]
+        ('Can Sutra open CBR files today?', '{{product.cbr_status}} It should not be treated as an available reason to switch. Current comic support includes CBZ and compatible ZIP comic archives.')]
 }
 
 def esc(value):
     return html.escape(str(value), quote=True)
 
 def render_comparisons(out, preview=False):
-    content = json.loads((ROOT / 'content/comparisons.json').read_text())
+    content = json.loads(expand_facts((ROOT / 'content/comparisons.json').read_text()))
     product = json.loads((ROOT / 'content/product.json').read_text())
-    template = (ROOT / 'templates/comparison.html').read_text()
+    template = expand_facts((ROOT / 'templates/comparison.html').read_text())
     slugs = [page['slug'] for page in content['pages']]
     if set(slugs) != set(HEADINGS) or len(slugs) != len(set(slugs)):
         raise ValueError('Expected exactly the three approved comparison pages')
@@ -64,7 +68,7 @@ def render_comparisons(out, preview=False):
         if not preview:
             metadata += '<link rel="canonical" href="' + url + '"><meta property="og:url" content="' + url + '">'
             metadata += '<script type="application/ld+json">' + json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('<','\\u003c') + '</script>'
-        faq = ''.join('<details><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>' for q,a in QUESTIONS[slug])
+        faq = ''.join('<details><summary>' + esc(q) + '</summary><p>' + esc(expand_facts(a)) + '</p></details>' for q,a in QUESTIONS[slug])
         tokens = {**page,'search_heading':HEADINGS[slug],'benefits':benefits,'fit_summary':fit_summary,'heads':heads,'rows':rows,'sources':sources,'related':related,'faq':faq,'breadcrumbs':breadcrumbs,'metadata':metadata,
                   'robots':'noindex,nofollow' if preview else 'index,follow,max-image-preview:large',
                   'banner':'<div class="draft">Editorial preview &middot; Not published &middot; Sources reviewed ' + esc(content['reviewed']) + '</div>' if preview else '',
