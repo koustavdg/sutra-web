@@ -41,6 +41,7 @@ def render_comparisons(out, preview=False):
                 result = result.replace('[' + key + ']', '<a class="citation" href="#source-' + key + '">[' + key + ']</a>')
             return result
         benefits = ''.join('<article><h3>' + esc(title) + '</h3><p>' + cited(body) + '</p></article>' for title, body in page['benefits'])
+        fit_summary = ''.join('<article><h3>' + esc(title) + '</h3><p>' + cited(body) + '</p></article>' for title, body in page['fit_summary'])
         heads = ''.join('<th scope="col">' + esc(x) + '</th>' for x in page['columns'])
         rows = ''.join('<tr><th scope="row">' + esc(row[0]) + '</th>' + ''.join('<td>' + cited(cell) + '</td>' for cell in row[1:]) + '</tr>' for row in page['rows'])
         sources = ''.join('<li id="source-' + key + '"><strong>[' + key + ']</strong> <a href="' + esc(content['sources'][key][1]) + '">' + esc(content['sources'][key][0]) + '</a></li>' for key in page['sources'])
@@ -64,11 +65,11 @@ def render_comparisons(out, preview=False):
             metadata += '<link rel="canonical" href="' + url + '"><meta property="og:url" content="' + url + '">'
             metadata += '<script type="application/ld+json">' + json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('<','\\u003c') + '</script>'
         faq = ''.join('<details><summary>' + esc(q) + '</summary><p>' + esc(a) + '</p></details>' for q,a in QUESTIONS[slug])
-        tokens = {**page,'search_heading':HEADINGS[slug],'benefits':benefits,'heads':heads,'rows':rows,'sources':sources,'related':related,'faq':faq,'breadcrumbs':breadcrumbs,'metadata':metadata,
+        tokens = {**page,'search_heading':HEADINGS[slug],'benefits':benefits,'fit_summary':fit_summary,'heads':heads,'rows':rows,'sources':sources,'related':related,'faq':faq,'breadcrumbs':breadcrumbs,'metadata':metadata,
                   'robots':'noindex,nofollow' if preview else 'index,follow,max-image-preview:large',
                   'banner':'<div class="draft">Editorial preview &middot; Not published &middot; Sources reviewed ' + esc(content['reviewed']) + '</div>' if preview else '',
                   'reviewed':content['reviewed'],'ios_store':product['stores']['ios']['url'],'android_store':product['stores']['android']['url']}
-        raw = {'benefits','heads','rows','sources','related','faq','breadcrumbs','metadata','banner'}
+        raw = {'benefits','fit_summary','heads','rows','sources','related','faq','breadcrumbs','metadata','banner'}
         rendered = template
         for key,value in tokens.items():
             if isinstance(value,str):

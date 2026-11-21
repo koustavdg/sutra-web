@@ -60,6 +60,19 @@ class ComparisonPublicationTests(unittest.TestCase):
                 self.assertIn('download the complete book for offline reading', source)
                 self.assertIn('Komga requires Page Streaming permission', source)
 
+    def test_pages_lead_with_balanced_reader_fit(self):
+        out = self.render()
+        for slug in HEADINGS:
+            with self.subTest(slug=slug):
+                source = (out / f'{slug}.html').read_text()
+                self.assertIn('Which reader fits your needs?', source)
+                self.assertIn('Consider Sutra', source)
+                for competitor in (['Readest', 'Panels'] if slug == 'compare-readers'
+                                   else ['Readest' if slug == 'sutra-vs-readest' else 'Panels']):
+                    self.assertIn('Consider ' + competitor, source)
+                self.assertLess(source.index('id="reader-fit"'), source.index('<table>'))
+                self.assertIn('not an overall ranking', source)
+
     def test_hub_item_list_has_contiguous_positions_and_rendered_links(self):
         out = self.render()
         source = (out / 'compare-readers.html').read_text()

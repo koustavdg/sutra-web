@@ -9,7 +9,12 @@
       "description": "Choose a reader for your own books and comics. Compare Sutra, Readest and Panels on platforms, pricing, privacy and personal-library access.",
       "eyebrow": "Find your reader",
       "heading": "Your books. Your comics. Your choice.",
-      "intro": "Sutra brings your personal libraries, ebooks and guided comics together on iPhone, iPad and Android. No subscription is required. Here is how to decide whether it fits the way you read.",
+      "intro": "Which reader fits your needs? Compare Sutra, Readest and Panels around your collection, devices, privacy preferences and budget. There is no single best reader for every library.",
+      "fit_summary": [
+        ["Consider Sutra", "For mobile ebooks and guided comics together, direct personal-library connections, no app analytics and an optional one-time Pro upgrade."],
+        ["Consider Readest", "For reading across mobile, desktop and web, with cloud library and annotation synchronization. Free and paid options have different limits [R1]."],
+        ["Consider Panels", "For an Apple-focused comic library, including CBR support and Mac reading. Subscription and current-major-version purchase options are available [P1]."]
+      ],
       "lead_title": "A broad reader with a one-time Pro upgrade",
       "lead": "Read EPUB and PDF for free. Full CBZ comics and DRM-free MOBI unlock with Sutra Pro, a one-time purchase per platform. Supported ZIP comic archives fit the same comic-reading workflow; ZIP is not a promise to open arbitrary files. Your source library can stay on a personal server, and Sutra adds no analytics or tracking.",
       "benefits": [
@@ -41,7 +46,11 @@
       "description": "Compare Sutra and Readest for mobile books and comics, personal-library access, pricing, privacy and cross-device reading. See where each fits.",
       "eyebrow": "Sutra vs Readest",
       "heading": "When your books and comics belong together.",
-      "intro": "Sutra is a strong fit when you want personal-library connections, text ebooks and guided comics in one private mobile reader, with an optional one-time Pro purchase.",
+      "intro": "Choosing between Sutra and Readest? Start with where you read, how you access your library and which sync features you need. Both offer free reading and optional paid features; the right fit depends on your workflow.",
+      "fit_summary": [
+        ["Consider Sutra", "For ebooks and panel-by-panel comics on iOS and Android, supported personal servers, no app analytics and an optional one-time Pro purchase."],
+        ["Consider Readest", "For desktop and web reading alongside mobile, cloud annotation sync and Read Aloud available today. Features and limits depend on the plan [R1]."]
+      ],
       "lead_title": "Choose Sutra for a mobile library of books and comics",
       "lead": "Read an EPUB, open a PDF, then move through a comic panel by panel on your phone. Sutra combines these reading styles with direct access to supported personal libraries on iOS and Android. EPUB and PDF stay free; full CBZ and DRM-free MOBI require Pro. Supported ZIP comic archives use the comic workflow.",
       "benefits": [
@@ -63,7 +72,7 @@
       ],
       "table_note": "Readest does not require a subscription for ordinary reading. A one-time Readest pack does not include all subscription services. Prices and entitlements should be checked for your storefront and needs. Sources checked November 21, 2026.",
       "choose_title": "When Readest may fit you better",
-      "choose": "Readest is worth considering if you want desktop and browser reading, translation, or a cloud library with highlights and notes across platforms. Sutra's KOSync is still in development and covers progress rather than annotation sync. These are material differences today, not details to hide behind upcoming features.",
+      "choose": "Readest is worth considering if you want desktop and browser reading, translation, or a cloud library with highlights and notes across platforms. Sutra's KOSync is still in development and covers progress rather than annotation sync. Choose based on the features available today, rather than future plans.",
       "caveat": "Sutra does not currently support CBR or DRM-protected books. CBR/RAR support is in active development. Komga remains Pro until the planned free-access change ships. We have not run a hands-on comparison of both apps with the same library.",
       "proof_title": "See what guided comics look like in Sutra",
       "proof": "This Sutra demonstration shows panel-by-panel reading. For a personal-server setup, follow the Kavita, Komga or Calibre guide linked below.",
@@ -75,7 +84,11 @@
       "description": "Compare Sutra and Panels for books and comics, phone-friendly guided reading, personal libraries, privacy, platforms and one-time purchase options.",
       "eyebrow": "Sutra vs Panels",
       "heading": "For the books between your comics, too.",
-      "intro": "Choose Sutra when your personal collection mixes text ebooks, PDFs and comics, or when you want to read on Android as well as iPhone and iPad.",
+      "intro": "Choosing between Sutra and Panels? Compare a mixed ebook-and-comic library with a comic-focused Apple workflow. Your file formats and devices matter more than an overall winner.",
+      "fit_summary": [
+        ["Consider Sutra", "For text EPUB books, PDFs and guided comics in the same mobile app, Android as well as iOS, and no app analytics."],
+        ["Consider Panels", "For a comic-focused Apple library, CBR files available today and reading on a Mac as well as iPhone and iPad [P1]."]
+      ],
       "lead_title": "One mobile reader across reading styles",
       "lead": "Sutra combines reflowable EPUB books and DRM-free MOBI with PDFs and CBZ or supported ZIP comics. Its custom panel detection engine lets you navigate comics one panel at a time on your phone. EPUB/PDF are free, and full CBZ and MOBI reading use a one-time Pro upgrade.",
       "benefits": [
