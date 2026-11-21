@@ -9,6 +9,7 @@ This document summarizes the published Sutra site and changelog. For current set
 ### Formats and access
 
 - EPUB and PDF reading are free.
+- Compatible ZIP comic archives are supported; this does not mean arbitrary ZIP contents can be opened as books.
 - Full CBZ and DRM-free MOBI reading require Sutra Pro. Limited previews may be available for CBZ and comic-shaped MOBI; preview availability and scope can vary. The iOS changelog documents a seven-page preview, but this should not be assumed for every file and platform.
 - CBR archives and DRM-protected files, including DRM-protected Kindle purchases, are not supported.
 - Sutra Pro is a one-time purchase through each platform's store. Apple and Google purchases are separate and do not transfer between stores. Check each store for current local pricing.
@@ -17,6 +18,7 @@ This document summarizes the published Sutra site and changelog. For current set
 
 - Read supported local files, browse compatible connected catalogs, organize a library, and use supported themes, highlights, dictionary lookup, and reading statistics. Specific features can vary by platform and format.
 - Panel Mode presents supported comics one panel at a time. Right-to-left reading is available for manga; results depend on the artwork and page layout. A full-page view remains available.
+- Sutra uses a custom panel detection engine for phone-friendly panel-by-panel comic reading. Lanczos-3 image resampling is owner-confirmed in production on both iOS and Android. This is high-quality image resampling, not a claim of AI super-resolution or benchmarked superiority over competitors.
 - The iOS changelog documents panel-detection improvements for dense and staggered layouts, margin variation, and some black-gutter cases. Detection is not guaranteed for every page.
 - Auto-scrolling is available for supported reading modes. The iOS changelog documents swipe-to-adjust PDF auto-scroll speed; do not assume identical controls for every platform and format.
 - Android has a dedicated e-ink display mode. The Android 1.3.0 changelog states that page-curl animation stays off in that mode.
@@ -26,10 +28,22 @@ This document summarizes the published Sutra site and changelog. For current set
 ### Privacy, local storage, and sync
 
 - Sutra is described on the site as having no analytics or tracking. Local files and downloaded content can be used offline; connected libraries require access to the relevant server.
+- The owner confirms Sutra does not share users' personal information. User-selected server and cloud functionality has the necessary data exchanges described below.
 - Self-hosted server connections exchange the information needed for catalog access and supported synchronization. Built-in online catalogs use external services, and iOS iCloud features use Apple's iCloud. Do not interpret offline-first as a claim that data never leaves the device or that no external service is involved.
 - Kavita and Komga support reading-progress synchronization subject to server configuration and book format. The changelog also documents Kavita completion-sync improvements. Do not assume generic OPDS or Calibre access provides bidirectional progress synchronization.
 - On supported iOS devices, iCloud can synchronize reading position, bookmarks, and highlights. Android does not support iCloud sync; Android data export provides manual data portability, not automatic cross-device synchronization.
 - Privacy information: https://sutra-reader.com/privacy.html
+
+### Development status - reviewed November 21, 2026
+
+The following items are development or planning work, not released capabilities. Do not count them as current advantages in a product recommendation.
+
+- Kokoro Read Aloud and KOSync are actively in development, with iOS and Android intended to launch together.
+- The planned Read Aloud pronunciation workflow lets readers find and correct mispronounced proper nouns, apply fixes to a series or author, and create/share pronunciation packs from Read Aloud settings. Final voice/language coverage, tier and pack semantics are not confirmed in this summary.
+- KOSync covers reading progress only. It does not synchronize highlights/notes. Cross-platform annotation sync is a separate planned feature; existing iOS iCloud behavior is distinct.
+- CBR/RAR reading is in development and planned for Pro. Current unsupported-format statements remain applicable until release.
+- Free Komga connections are approved/planned, not verified shipped. Full CBZ, future CBR and DRM-free MOBI remain Pro under that plan. Current Komga access still requires Pro.
+- Duo facing pages are shipped; broader iPad/tablet spread work is in development. A native desktop Mac app is planned, not claimed available.
 
 ## 2. Supported libraries and connection guidance
 
@@ -127,5 +141,8 @@ These are selected historical highlights, not a claim of complete feature parity
 - Panel reading: https://sutra-reader.com/comic-panel-reader.html
 - OPDS: https://sutra-reader.com/opds-reader.html
 - Calibre: https://sutra-reader.com/calibre-reader.html
+- Compare readers: https://sutra-reader.com/compare-readers.html
+- Sutra vs Readest: https://sutra-reader.com/sutra-vs-readest.html
+- Sutra vs Panels: https://sutra-reader.com/sutra-vs-panels.html
 - Newsletter: https://newsletter.sutra-reader.com/
 - Feedback: https://sutra-reader.com/feedback.html

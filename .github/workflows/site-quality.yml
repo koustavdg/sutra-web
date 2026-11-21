@@ -28,6 +28,9 @@ jobs:
         run: python scripts/check_site.py --dir _site
       - name: Verify quality gate catches a broken page
         run: python scripts/test_quality_gate.py
+
+      - name: Validate comparison publication and preview metadata
+        run: python -m unittest discover -s tests -p 'test_comparison_pages.py'
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:

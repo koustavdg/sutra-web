@@ -1,0 +1,113 @@
+{
+  "reviewed": "2026-11-21",
+  "status": "Prepared for publication; pending owner review",
+  "internal_evidence_record": "docs/marketing/comparison-evidence/README.md",
+  "pages": [
+    {
+      "slug": "compare-readers",
+      "title": "Compare Sutra, Readest and Panels | Books, Comics and Personal Libraries",
+      "description": "Choose a reader for your own books and comics. Compare Sutra, Readest and Panels on platforms, pricing, privacy and personal-library access.",
+      "eyebrow": "Find your reader",
+      "heading": "Your books. Your comics. Your choice.",
+      "intro": "Sutra brings your personal libraries, ebooks and guided comics together on iPhone, iPad and Android. No subscription is required. Here is how to decide whether it fits the way you read.",
+      "lead_title": "A broad reader with a one-time Pro upgrade",
+      "lead": "Read EPUB and PDF for free. Full CBZ comics and DRM-free MOBI unlock with Sutra Pro, a one-time purchase per platform. Supported ZIP comic archives fit the same comic-reading workflow; ZIP is not a promise to open arbitrary files. Your source library can stay on a personal server, and Sutra adds no analytics or tracking.",
+      "benefits": [
+        ["Start large comics without the full download", "With Sutra Pro, stream comic pages on demand from supported Kavita and Komga servers without downloading the whole archive first. Individual pages still transfer and may be cached; download the complete book for offline reading. Komga requires Page Streaming permission."],
+        ["Connect the library you already have", "Kavita, Komga, Calibre Content Server, Calibre-Web, Calibre-Web-Automated and compatible OPDS catalogs. Grimmory and Booklore can be used where they expose a compatible, reachable OPDS feed."],
+        ["Read comics on a phone", "Sutra's custom panel detection engine lets you move through comics one panel at a time. Lanczos-3 image resampling is available on iOS and Android for crisp rendering."],
+        ["Keep your reading personal", "No app analytics or tracking, and Sutra does not share your personal information. A server or cloud service you choose receives the information needed for that connection or sync feature."]
+      ],
+      "columns": ["What matters to you", "Sutra", "Readest", "Panels"],
+      "rows": [
+        ["No required subscription", "Free EPUB/PDF; optional $6.99 US Pro per platform", "Free plan, optional subscriptions and one-time packs [R1]", "Free with subscription or major-version purchase options [P1]"],
+        ["Published reading focus", "Text ebooks plus custom panel-by-panel comic reading", "Broad-format ebook reader [R4]", "Comic-focused, including guided navigation [P1]"],
+        ["Mobile platforms", "iOS and Android", "iOS and Android, plus desktop/web [R1]", "iPhone, iPad and Mac [P1]"],
+        ["Your own catalogs", "Named server integrations plus compatible OPDS; capabilities vary", "OPDS, Calibre plugin and documented OPDS-PSE streaming [R3]", "OPDS libraries [P1]"],
+        ["App analytics", "None", "Optional aggregated telemetry, off by default on new installs [R2]", "May collect analytics data, per developer's disclosure [P1]"],
+        ["Important trade-off", "CBR not yet supported; no native desktop release claimed", "Useful when desktop/web and broader cloud sync matter [R1]", "Useful for an Apple-focused comic collection, including CBR [P1]"]
+      ],
+      "table_note": "This is a decision guide from Sutra's developer, based on published sources and owner-confirmed Sutra capabilities. It is not an independent review or a performance benchmark. A feature we have not verified is not a feature proved absent.",
+      "choose_title": "Choose around the way you actually read",
+      "choose": "Choose Sutra when your priorities are mobile books and comics, your own libraries, privacy and a one-time Pro purchase. Read the detailed comparisons if desktop reading, cloud synchronization or an Apple-only comic collection matters more to you.",
+      "caveat": "Current Komga connections still require Pro. Free Komga access is planned; full CBZ, future CBR and DRM-free MOBI remain Pro. General OPDS support means catalog access, not automatic streaming or server progress sync.",
+      "proof_title": "One panel at a time, on your phone",
+      "proof": "See Sutra's guided comic reader using the existing panel-reading demonstration. This shows Sutra's workflow; it is not a side-by-side accuracy test against another app.",
+      "sources": ["R1", "R2", "R3", "R4", "P1"]
+    },
+    {
+      "slug": "sutra-vs-readest",
+      "title": "Sutra vs Readest | Personal Libraries, Comics, Privacy and Price",
+      "description": "Compare Sutra and Readest for mobile books and comics, personal-library access, pricing, privacy and cross-device reading. See where each fits.",
+      "eyebrow": "Sutra vs Readest",
+      "heading": "When your books and comics belong together.",
+      "intro": "Sutra is a strong fit when you want personal-library connections, text ebooks and guided comics in one private mobile reader, with an optional one-time Pro purchase.",
+      "lead_title": "Choose Sutra for a mobile library of books and comics",
+      "lead": "Read an EPUB, open a PDF, then move through a comic panel by panel on your phone. Sutra combines these reading styles with direct access to supported personal libraries on iOS and Android. EPUB and PDF stay free; full CBZ and DRM-free MOBI require Pro. Supported ZIP comic archives use the comic workflow.",
+      "benefits": [
+        ["Start large comics without the full download", "With Sutra Pro, stream comic pages on demand from supported Kavita and Komga servers without downloading the whole archive first. Individual pages still transfer and may be cached; download the complete book for offline reading. Komga requires Page Streaming permission. Readest also documents streaming for compatible OPDS-PSE catalogs [R3]; streaming is not exclusive to Sutra."],
+        ["A comic reader built for small screens", "Sutra's custom panel detection lets you navigate comics one panel at a time. Lanczos-3 image resampling is available on both platforms. No comparative panel-detection or rendering benchmark is claimed."],
+        ["Connect your personal collection", "Use Kavita, Komga, Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV and compatible OPDS catalogs. A compatible OPDS feed from Grimmory or Booklore is catalog access; sync depends on separate capabilities."],
+        ["No app analytics", "Sutra adds no analytics or tracking and does not share personal information. Readest documents optional anonymous aggregated telemetry, off by default for new installs [R2]."]
+      ],
+      "columns": ["Decision point", "Sutra", "Readest"],
+      "rows": [
+        ["Free reading and paid options", "EPUB/PDF free; Pro $6.99 US once per platform", "Free plan; Plus $4.99/month and Pro $9.99/month; one-time customization pack $19.99 [R1]"],
+        ["Buying across platforms", "Apple and Google purchases are separate", "Paid benefits follow the Readest account [R1]"],
+        ["Where you read", "iPhone, iPad and Android", "Mobile, desktop and web [R1]"],
+        ["Library access", "Supported server integrations, WebDAV and OPDS", "OPDS catalogs and Calibre plugin [R3]"],
+        ["Comic page streaming", "Supported Kavita/Komga endpoints with Pro", "OPDS-PSE streaming documented; compatible catalog required [R3]"],
+        ["Sync", "iCloud on iOS; Android export; native Kavita/Komga progress", "Cloud library/progress/annotation sync and paid third-party cloud options [R1]"],
+        ["Read Aloud", "Kokoro is in development on both platforms", "Read Aloud already offered; benefits vary by plan [R1]"],
+        ["Pronunciation workflow", "Series/author fixes and shareable packs in development", "TTS-only replacement rules with selection, book or library scope [R2]"]
+      ],
+      "table_note": "Readest does not require a subscription for ordinary reading. A one-time Readest pack does not include all subscription services. Prices and entitlements should be checked for your storefront and needs. Sources checked November 21, 2026.",
+      "choose_title": "When Readest may fit you better",
+      "choose": "Readest is worth considering if you want desktop and browser reading, translation, or a cloud library with highlights and notes across platforms. Sutra's KOSync is still in development and covers progress rather than annotation sync. These are material differences today, not details to hide behind upcoming features.",
+      "caveat": "Sutra does not currently support CBR or DRM-protected books. CBR/RAR support is in active development. Komga remains Pro until the planned free-access change ships. We have not run a hands-on comparison of both apps with the same library.",
+      "proof_title": "See what guided comics look like in Sutra",
+      "proof": "This Sutra demonstration shows panel-by-panel reading. For a personal-server setup, follow the Kavita, Komga or Calibre guide linked below.",
+      "sources": ["R1", "R2", "R3", "R4"]
+    },
+    {
+      "slug": "sutra-vs-panels",
+      "title": "Sutra vs Panels | Ebooks, Guided Comics and Android Reading",
+      "description": "Compare Sutra and Panels for books and comics, phone-friendly guided reading, personal libraries, privacy, platforms and one-time purchase options.",
+      "eyebrow": "Sutra vs Panels",
+      "heading": "For the books between your comics, too.",
+      "intro": "Choose Sutra when your personal collection mixes text ebooks, PDFs and comics, or when you want to read on Android as well as iPhone and iPad.",
+      "lead_title": "One mobile reader across reading styles",
+      "lead": "Sutra combines reflowable EPUB books and DRM-free MOBI with PDFs and CBZ or supported ZIP comics. Its custom panel detection engine lets you navigate comics one panel at a time on your phone. EPUB/PDF are free, and full CBZ and MOBI reading use a one-time Pro upgrade.",
+      "benefits": [
+        ["Start large comics without the full download", "With Sutra Pro, stream comic pages on demand from supported Kavita and Komga servers without downloading the whole archive first. Individual pages still transfer and may be cached; download the complete book for offline reading. Komga requires Page Streaming permission. This describes Sutra's workflow, not an exclusive feature or a measured speed advantage over Panels."],
+        ["Take the same app across mobile platforms", "Sutra runs on iOS and Android. Pro purchases are separate for Apple and Google; using the same app does not imply that your entire library or annotations automatically sync across platforms."],
+        ["Keep a mixed personal library", "Connect Kavita, Komga, Calibre-family servers, WebDAV or compatible OPDS catalogs. Read novels and comics in the same app rather than choosing solely around comic formats."],
+        ["Private reading with crisp rendering", "Sutra has no app analytics or tracking and does not share personal information. Lanczos-3 rendering is shipped on both platforms. Duo facing-page reading is available; broader iPad and tablet spread work is in development."]
+      ],
+      "columns": ["Decision point", "Sutra", "Panels"],
+      "rows": [
+        ["Reading focus", "Text ebooks and comics together", "Comics, PDF and image EPUB; not text ebooks [P1]"],
+        ["Platforms", "iPhone, iPad and Android", "iPhone, iPad and Mac [P1]"],
+        ["Paid options", "$6.99 US Pro once per platform", "$1.49/month, $14.99/year or $19.99 Panels 3 purchase [P1]"],
+        ["Guided comics", "Custom panel detection; panel-by-panel reading", "Guided navigation advertised [P1]"],
+        ["Personal servers", "Kavita/Komga and compatible OPDS; capabilities vary", "OPDS access including Kavita/Komga [P1]"],
+        ["CBR", "Active development; planned Pro", "Supported [P1]"],
+        ["Privacy disclosure", "No app analytics or tracking", "May collect analytics; developer-reported [P1]"]
+      ],
+      "table_note": "Panels has a one-time purchase option as well as subscriptions. Its listing says the one-time purchase unlocks the current major version's features. App Store privacy disclosures are supplied by the developer, not independently verified by Apple. Checked November 21, 2026.",
+      "choose_title": "When Panels may fit you better",
+      "choose": "If your collection is mainly comics and you need CBR today or a Mac reader, Panels may fit better. Guided reading and OPDS are shared capabilities, not Sutra exclusives. This comparison explains product fit; we have not established that Sutra detects panels more accurately or renders pages better.",
+      "caveat": "Sutra's CBR, wider tablet spreads, Kokoro Read Aloud and KOSync are development work. They should not be counted as available reasons to switch today. Current Komga access is Pro; making the connection free is planned separately.",
+      "proof_title": "A small screen can still suit a big comic",
+      "proof": "Watch Sutra's existing panel-reading demonstration. Full CBZ reading requires Pro; compare the experience with your own authorized files and the devices you use.",
+      "sources": ["P1"]
+    }
+  ],
+  "sources": {
+    "R1": ["Readest pricing and paid benefits", "https://readest.com/pricing"],
+    "R2": ["Readest advanced settings: telemetry and TTS correction rules", "https://www.readest.com/docs/advanced"],
+    "R3": ["Readest library and OPDS documentation", "https://readest.com/docs/library"],
+    "R4": ["Readest project and supported platforms/formats", "https://github.com/readest/readest"],
+    "P1": ["Panels US App Store: features, prices and privacy disclosure", "https://apps.apple.com/us/app/panels-comic-reader/id1236567663"]
+  }
+}

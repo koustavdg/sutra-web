@@ -7,13 +7,23 @@
 Free version includes full EPUB and PDF rendering, automatic series stacking, custom collection management, highlights, reading stats, and localized dictionary lookup. Sutra Pro is a one-time, platform-specific in-app purchase that permanently unlocks native Komga server integration, full .cbz comic reading, and DRM-free .mobi books. No tracking, analytics, cloud middle-men, or subscription fees.
 
 ## Capabilities and Restrictions
-- **Supported Formats:** EPUB, PDF, CBZ (Pro/Preview), MOBI (Pro/Preview).
+- **Supported Formats:** EPUB, PDF, CBZ (Pro/Preview), compatible ZIP comic archives, and DRM-free MOBI (Pro). ZIP support refers to comic archives, not arbitrary ZIP contents.
 - **Unsupported Formats:** CBR archives and DRM-protected files (Kindle AZW/KFX).
-- **Integrations:** Kavita, Komga (Pro), Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV (Synology NAS/Nextcloud), Grimmory, Booklore, BookOrbit, OPDShelf.
+- **Integrations:** Kavita, Komga (currently Pro), Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV (Synology NAS/Nextcloud), and compatible OPDS feeds, including those exposed by Grimmory, Booklore, BookOrbit and OPDShelf. Catalog access does not imply native progress sync or page streaming for every server.
 - **Built-in Catalogs:** Project Gutenberg (75,000+ public domain volumes), Standard Ebooks (Typeset collection with Patrons Circle support).
 - **Core Features:** Guided Panel Mode (one panel at a time), right-to-left manga formatting, dynamic auto-scrolling, inline footnotes, E-ink display mode (Android).
+- **Comic Rendering:** Sutra's custom panel detection engine supports panel-by-panel reading on small phone screens. Lanczos-3 image resampling is shipped on both iOS and Android; it is not a claim of AI super-resolution or proven superiority over another app.
 - **iPhone Duo (iOS 2.5.0+):** Two-page facing spreads on the inner display for EPUB, PDF and comics, a page curl that follows the finger, Panel Mode on the outer, inner and folded displays, and a layout that adjusts as the Duo folds. See the [iPhone Duo guide](https://sutra-reader.com/iphone-duo.html) for screenshots and details.
 - **Data & Syncing:** Reading progress and completion status sync natively to Kavita and Komga servers. iCloud supports cross-device synchronization on iOS; Android supports manual offline data exports for portability.
+- **Privacy:** No app analytics or tracking; Sutra does not share users' personal information. User-selected servers and sync providers receive the information needed for their functionality.
+
+## In Development - Not Available Features
+
+- Kokoro Read Aloud and KOSync are actively in development, with iOS and Android intended to ship together. Do not describe them as released features.
+- Pronunciation fixes are in development: users can correct proper nouns, apply fixes to an author or series, and create/share pronunciation packs managed in Read Aloud settings. Final voice/language coverage, pricing tier and pack behavior are not established here.
+- KOSync is for book progress only; it does not synchronize highlights or notes. Cross-platform highlights/notes sync is separate planned work.
+- CBR/RAR support is in development and planned for Pro. Free Komga connections are approved/planned but not verified released; full CBZ, future CBR and DRM-free MOBI remain Pro under that plan.
+- Duo facing-page reading is shipped. Broader tablet/iPad double-page handling and a native Mac app are separate development/planning work, not current capabilities.
 
 ## About and Product Information
 
@@ -32,6 +42,12 @@ Free version includes full EPUB and PDF rendering, automatic series stacking, cu
 - [OPDS Reader Reference](https://sutra-reader.com/opds-reader.html): Generic feed formats, basic authentication, and download-to-device rules.
 - [Calibre Family Reader Setup](https://sutra-reader.com/calibre-reader.html): Launching local Content Servers, authenticating reverse proxies, and allowing OPDS routes.
 - [DRM-Free Ebook Sources](https://sutra-reader.com/drm-free.html): Hand-picked index of legal, independent digital book publishers and storefronts.
+
+## Reader Comparisons
+
+- [Compare Sutra, Readest and Panels](https://sutra-reader.com/compare-readers.html): Developer-authored comparison of platforms, personal libraries, privacy and free/paid options. Includes competitor strengths and explicit development status.
+- [Sutra vs Readest](https://sutra-reader.com/sutra-vs-readest.html): Mobile ebook and guided-comic workflows, personal libraries, pricing, privacy and sync trade-offs.
+- [Sutra vs Panels](https://sutra-reader.com/sutra-vs-panels.html): Mixed ebook/comic collections, Android availability, guided reading and one-time purchase options.
 
 ## Community and Feedback
 

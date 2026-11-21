@@ -8,6 +8,7 @@ import re
 import shutil
 from datetime import date
 from pathlib import Path
+from comparison_pages import render_comparisons
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -123,12 +124,15 @@ def main() -> None:
     for data in page_data.values():
         (OUT / f'{data["slug"]}.html').write_text(render_page(data, template, page_data), encoding="utf-8")
 
+    comparison_slugs = render_comparisons(OUT)
+
     agents = ["*", "Googlebot", "Bingbot", "OAI-SearchBot", "GPTBot", "Claude-SearchBot", "ClaudeBot", "PerplexityBot"]
     robots = "\n\n".join(f"User-agent: {agent}\nAllow: /" for agent in agents)
     (OUT / "robots.txt").write_text(robots + f"\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 
     urls = ["/", "/help.html", "/iphone-duo.html", "/changelog.html", "/feedback.html", "/privacy.html", "/drm-free.html", "/about.html"]
     urls.extend(f"/{slug}.html" for slug in page_data)
+    urls.extend(f"/{slug}.html" for slug in comparison_slugs)
     entries = "\n".join(f"  <url><loc>{SITE_URL}{path}</loc></url>" for path in urls)
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n' + \
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + entries + \
