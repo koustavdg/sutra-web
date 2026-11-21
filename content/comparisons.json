@@ -30,7 +30,7 @@
         ["Mobile platforms", "iOS and Android", "iOS and Android, plus desktop/web [R1]", "iPhone, iPad and Mac [P1]"],
         ["Your own catalogs", "Named server integrations plus compatible OPDS; capabilities vary", "OPDS, Calibre plugin and documented OPDS-PSE streaming [R3]", "OPDS libraries [P1]"],
         ["App analytics", "None", "Optional aggregated telemetry, off by default on new installs [R2]", "May collect analytics data, per developer's disclosure [P1]"],
-        ["Important trade-off", "CBR not yet supported; no native desktop release claimed", "Useful when desktop/web and broader cloud sync matter [R1]", "Useful for an Apple-focused comic collection, including CBR [P1]"]
+        ["Important trade-off", "CBR/RAR comics in development, not yet supported; no native desktop release claimed", "Useful when desktop/web and broader cloud sync matter [R1]", "Useful for an Apple-focused comic collection, including CBR [P1]"]
       ],
       "table_note": "This is a decision guide based on published sources and owner-confirmed Sutra capabilities. It is not an independent review or a performance benchmark. A feature we have not verified is not a feature proved absent.",
       "choose_title": "Choose around the way you actually read",
@@ -66,13 +66,13 @@
         ["Where you read", "iPhone, iPad and Android", "Mobile, desktop and web [R1]"],
         ["Library access", "Supported server integrations, WebDAV and OPDS", "OPDS catalogs and Calibre plugin [R3]"],
         ["Comic page streaming", "Supported Kavita/Komga endpoints with Pro", "OPDS-PSE streaming documented; compatible catalog required [R3]"],
-        ["Sync", "iCloud on iOS; Android export; native Kavita/Komga progress", "Cloud library/progress/annotation sync and paid third-party cloud options [R1]"],
+        ["Sync", "iCloud on iOS; Android export; native Kavita/Komga progress. Cross-platform progress, highlights and notes sync in development", "Cloud library/progress/annotation sync and paid third-party cloud options [R1]"],
         ["Read Aloud", "Kokoro is in development on both platforms", "Read Aloud already offered; benefits vary by plan [R1]"],
         ["Pronunciation workflow", "Series/author fixes and shareable packs in development", "TTS-only replacement rules with selection, book or library scope [R2]"]
       ],
       "table_note": "Readest does not require a subscription for ordinary reading. A one-time Readest pack does not include all subscription services. Prices and entitlements should be checked for your storefront and needs. Sources checked November 21, 2026.",
       "choose_title": "When Readest may fit you better",
-      "choose": "Readest is worth considering if you want desktop and browser reading, translation, or a cloud library with highlights and notes across platforms. Sutra's KOSync is still in development and covers progress rather than annotation sync. Choose based on the features available today, rather than future plans.",
+      "choose": "Readest is worth considering if you want desktop and browser reading, translation, or a cloud library with highlights and notes across platforms. Sutra is developing cross-platform highlights and notes sync alongside reading-progress sync through KOSync. These capabilities are not yet released. Choose based on the features available today, rather than future plans.",
       "caveat": "Sutra does not currently support CBR or DRM-protected books. CBR/RAR support is in active development. Komga remains Pro until the planned free-access change ships. We have not run a hands-on comparison of both apps with the same library.",
       "proof_title": "See what guided comics look like in Sutra",
       "proof": "This Sutra demonstration shows panel-by-panel reading. For a personal-server setup, follow the Kavita, Komga or Calibre guide linked below.",
@@ -104,7 +104,7 @@
         ["Paid options", "${{product.pro_price_usd}} US Pro once per platform", "$1.49/month, $14.99/year or $19.99 Panels 3 purchase [P1]"],
         ["Guided comics", "Custom panel detection; panel-by-panel reading", "Guided navigation advertised [P1]"],
         ["Personal servers", "Kavita/Komga and compatible OPDS; capabilities vary", "OPDS access including Kavita/Komga [P1]"],
-        ["CBR", "Active development; planned Pro", "Supported [P1]"],
+        ["CBR / RAR comics", "In development; planned Pro", "CBR supported [P1]"],
         ["Privacy disclosure", "No app analytics or tracking", "May collect analytics; developer-reported [P1]"]
       ],
       "table_note": "Panels has a one-time purchase option as well as subscriptions. Its listing says the one-time purchase unlocks the current major version's features. App Store privacy disclosures are supplied by the developer, not independently verified by Apple. Checked November 21, 2026.",

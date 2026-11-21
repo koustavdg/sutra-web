@@ -21,7 +21,7 @@ Free version includes full EPUB and PDF rendering, automatic series stacking, cu
 
 - Kokoro Read Aloud and KOSync are actively in development, with iOS and Android intended to ship together. Do not describe them as released features.
 - Pronunciation fixes are in development: users can correct proper nouns, apply fixes to an author or series, and create/share pronunciation packs managed in Read Aloud settings. Final voice/language coverage, pricing tier and pack behavior are not established here.
-- {{product.kosync_status}} Cross-platform highlights/notes sync is separate planned work.
+- {{product.sync_status}} This does not claim that the standard KOSync protocol transports annotations; existing iOS iCloud behavior is separate.
 - {{product.cbr_status}} Free Komga connections are approved/planned but not verified released; full CBZ, future CBR and DRM-free MOBI remain Pro under that plan.
 - Duo facing-page reading is shipped. Broader tablet/iPad double-page handling and a native Mac app are separate development/planning work, not current capabilities.
 

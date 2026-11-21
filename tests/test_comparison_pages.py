@@ -1,13 +1,40 @@
 import json
+import html
 import tempfile
 import unittest
 from pathlib import Path
 
 from scripts.check_site import Page
-from scripts.comparison_pages import BASE, HEADINGS, render_comparisons
+from scripts.comparison_pages import BASE, HEADINGS, render_comparisons, release_summary
 
 
 class ComparisonPublicationTests(unittest.TestCase):
+    def test_release_history_counts_platform_versions_not_upcoming_or_duplicates(self):
+        source = '''
+        <div class="version" data-p="ios"><div class="version-num">1.0</div><span class="version-status">Jul 7, 2026</span></div>
+        <div class="version" data-p="ios"><div class="version-num">1.1</div><span class="version-status">Jul 10, 2026</span></div>
+        <div class="version" data-p="android"><div class="version-num">1.0</div><span class="version-status">Oct 7, 2026</span></div>
+        <div class="version" data-p="ios"><div class="version-num">1.0</div><span class="version-status">Jul 7, 2026</span></div>
+        <div class="version" data-p="ios"><div class="version-num">Next</div><span class="version-status">Upcoming</span></div>
+        '''
+        summary = release_summary(source)
+        self.assertIn('3 dated platform releases: 2 for iOS and 1 for Android', summary)
+        self.assertIn('July 7, 2026 to October 7, 2026', summary)
+        with self.assertRaises(ValueError):
+            release_summary('<p>No release entries</p>')
+
+    def test_all_pages_explain_annotation_sync_and_rar_as_development_work(self):
+        out = self.render()
+        for slug in HEADINGS:
+            with self.subTest(slug=slug):
+                source = (out / f'{slug}.html').read_text()
+                self.assertIn('Reading-progress sync through KOSync and cross-platform highlights and notes sync are being developed together', source)
+                self.assertIn('CBR/RAR comic support is in development', source)
+                self.assertIn(html.escape(release_summary(), quote=True), source)
+                self.assertIn('Past updates do not guarantee a delivery date', source)
+                self.assertNotIn('KOSync covers progress, not highlights or notes', source)
+                self.assertNotIn('covers progress rather than annotation sync', source)
+
     def render(self, preview=False):
         temp = tempfile.TemporaryDirectory()
         self.addCleanup(temp.cleanup)

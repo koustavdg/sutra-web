@@ -2,6 +2,8 @@
 import html
 import json
 from pathlib import Path
+from html.parser import HTMLParser
+from datetime import datetime
 try:
     from .product_facts import expand_facts
 except ImportError:
@@ -14,11 +16,11 @@ QUESTIONS = {
     'compare-readers': [
         ('Can I read ebooks and comics without a subscription?', 'Sutra has free EPUB and PDF reading and optional Pro features purchased once per platform. Full CBZ and DRM-free MOBI require Pro. Readest and Panels also offer ways to use their apps without a subscription; compare the specific features and limits.'),
         ('Which personal libraries can Sutra connect to?', 'Sutra supports Kavita, Komga, Calibre Content Server, Calibre-Web, Calibre-Web-Automated, WebDAV and compatible OPDS feeds. Catalog access does not guarantee page streaming or server progress sync. {{product.komga_access}}'),
-        ('Are Kokoro Read Aloud and KOSync available in Sutra?', 'They are in development for iOS and Android. The pronunciation-pack workflow is also in development. KOSync covers progress, not highlights or notes. They are not counted as shipped advantages in this comparison.')],
+        ('Are Read Aloud and cross-platform sync available in Sutra?', 'Kokoro Read Aloud and pronunciation packs are in development. {{product.sync_status}} These are not counted as shipped advantages in this comparison.')],
     'sutra-vs-readest': [
         ('When is Sutra an alternative to Readest?', 'Consider Sutra if you want ebooks and panel-by-panel comics on iOS or Android, direct access to your personal libraries, no app analytics and a one-time Pro upgrade. Consider Readest if desktop or web reading and broader cloud synchronization are priorities.'),
         ('Does Readest require a subscription?', 'No. Readest has a free plan and optional one-time purchases as well as subscriptions. Compare the features you need rather than treating it as subscription-only.'),
-        ('Does Sutra synchronize highlights through KOSync?', 'No. Sutra KOSync is in development for reading progress only. Existing iOS iCloud behavior and planned cross-platform annotation sync are separate from KOSync.')],
+        ('Will Sutra sync progress, highlights and notes across platforms?', '{{product.sync_status}} This does not mean that the standard KOSync protocol transports annotations or that third-party reader annotation compatibility is confirmed. Existing iOS iCloud sync is separate and already available.')],
     'sutra-vs-panels': [
         ('When is Sutra an alternative to Panels?', 'Consider Sutra when you want text ebooks and comics together, Android availability as well as iOS, and no app analytics. Panels may fit better if you need CBR today or an Apple-focused comic library with Mac reading.'),
         ('Is panel-by-panel comic reading exclusive to Sutra?', 'No. Sutra uses a custom panel detection engine, while Panels also advertises guided navigation. No head-to-head detection accuracy or rendering benchmark is claimed here.'),
@@ -28,10 +30,66 @@ QUESTIONS = {
 def esc(value):
     return html.escape(str(value), quote=True)
 
+
+class ReleaseNotes(HTMLParser):
+    """Count dated platform/version entries, not commits or upcoming plans."""
+    def __init__(self):
+        super().__init__()
+        self.entries = []
+        self.platform = None
+        self.field = None
+        self.fields = {}
+
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        classes = attrs.get('class', '').split()
+        if tag == 'div' and 'version' in classes:
+            self.platform = attrs.get('data-p')
+            self.fields = {}
+        for field in ('version-num', 'version-status'):
+            if field in classes:
+                self.field = field
+                self.fields[field] = ''
+
+    def handle_data(self, text):
+        if self.field:
+            self.fields[self.field] += text
+
+    def handle_endtag(self, tag):
+        if self.field == 'version-num' and tag == 'div':
+            self.field = None
+        elif self.field == 'version-status' and tag == 'span':
+            self.field = None
+            if self.platform not in ('ios', 'android'):
+                return
+            try:
+                date = datetime.strptime(self.fields['version-status'].strip(), '%b %d, %Y').date()
+            except ValueError:
+                return  # Upcoming entries are not releases.
+            self.entries.append((self.platform, self.fields['version-num'].strip(), date))
+
+
+def release_summary(source=None):
+    parser = ReleaseNotes()
+    parser.feed(source if source is not None else (ROOT / 'changelog.html').read_text())
+    entries = set(parser.entries)
+    if not entries:
+        raise ValueError('No dated platform releases found in the published changelog')
+    dates = [date for _, _, date in entries]
+    def readable(date):
+        return f'{date:%B} {date.day}, {date.year}'
+    ios = sum(platform == 'ios' for platform, _, _ in entries)
+    android = sum(platform == 'android' for platform, _, _ in entries)
+    text = (f'From {readable(min(dates))} to {readable(max(dates))}, '
+            f"Sutra's published changelog records {len(entries)} dated platform releases: "
+            f'{ios} for iOS and {android} for Android, including the initial platform launches.')
+    return text
+
 def render_comparisons(out, preview=False):
     content = json.loads(expand_facts((ROOT / 'content/comparisons.json').read_text()))
     product = json.loads((ROOT / 'content/product.json').read_text())
     template = expand_facts((ROOT / 'templates/comparison.html').read_text())
+    cadence = release_summary()
     slugs = [page['slug'] for page in content['pages']]
     if set(slugs) != set(HEADINGS) or len(slugs) != len(set(slugs)):
         raise ValueError('Expected exactly the three approved comparison pages')
@@ -55,7 +113,7 @@ def render_comparisons(out, preview=False):
         if slug != 'compare-readers':
             crumbs.append({'@type':'ListItem','position':3,'name':HEADINGS[slug],'item':url})
         breadcrumbs = '<span aria-hidden="true"> / </span>'.join('<a href="' + ('/' if c['position']==1 else 'compare-readers.html') + '">' + esc(c['name']) + '</a>' if i<len(crumbs)-1 else '<span aria-current="page">' + esc(c['name']) + '</span>' for i,c in enumerate(crumbs))
-        webpage = {'@type':'WebPage','@id':url + '#webpage','url':url,'name':page['title'],'description':page['description'],'inLanguage':'en','dateModified':content['reviewed'],'publisher':{'@id':BASE + '/#organization'},'about':{'@id':BASE + '/#sutra-app'},'citation':[content['sources'][key][1] for key in page['sources']],'breadcrumb':{'@id':url + '#breadcrumb'}}
+        webpage = {'@type':'WebPage','@id':url + '#webpage','url':url,'name':page['title'],'description':page['description'],'inLanguage':'en','dateModified':content['reviewed'],'publisher':{'@id':BASE + '/#organization'},'about':{'@id':BASE + '/#sutra-app'},'citation':[content['sources'][key][1] for key in page['sources']] + [BASE + '/changelog.html'],'breadcrumb':{'@id':url + '#breadcrumb'}}
         graph = [webpage, {'@type':'BreadcrumbList','@id':url + '#breadcrumb','itemListElement':crumbs}]
         if slug == 'compare-readers':
             compared = [s for s in slugs if s != slug]
@@ -69,7 +127,7 @@ def render_comparisons(out, preview=False):
             metadata += '<link rel="canonical" href="' + url + '"><meta property="og:url" content="' + url + '">'
             metadata += '<script type="application/ld+json">' + json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('<','\\u003c') + '</script>'
         faq = ''.join('<details><summary>' + esc(q) + '</summary><p>' + esc(expand_facts(a)) + '</p></details>' for q,a in QUESTIONS[slug])
-        tokens = {**page,'search_heading':HEADINGS[slug],'benefits':benefits,'fit_summary':fit_summary,'heads':heads,'rows':rows,'sources':sources,'related':related,'faq':faq,'breadcrumbs':breadcrumbs,'metadata':metadata,
+        tokens = {**page,'release_cadence':cadence,'search_heading':HEADINGS[slug],'benefits':benefits,'fit_summary':fit_summary,'heads':heads,'rows':rows,'sources':sources,'related':related,'faq':faq,'breadcrumbs':breadcrumbs,'metadata':metadata,
                   'robots':'noindex,nofollow' if preview else 'index,follow,max-image-preview:large',
                   'banner':'<div class="draft">Editorial preview &middot; Not published &middot; Sources reviewed ' + esc(content['reviewed']) + '</div>' if preview else '',
                   'reviewed':content['reviewed'],'ios_store':product['stores']['ios']['url'],'android_store':product['stores']['android']['url']}

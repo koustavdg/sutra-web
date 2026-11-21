@@ -9,9 +9,9 @@
   "publication_facts": {
     "pro_formats": "Full CBZ and DRM-free MOBI reading require Sutra Pro.",
     "komga_access": "Komga access currently requires Sutra Pro.",
-    "cbr_status": "CBR/RAR support is in development and planned for Pro.",
+    "cbr_status": "CBR/RAR comic support is in development and planned for Pro.",
     "read_aloud_status": "Kokoro Read Aloud is in development for iOS and Android.",
-    "kosync_status": "KOSync is in development for reading progress only; it does not synchronize highlights or notes.",
+    "sync_status": "Reading-progress sync through KOSync and cross-platform highlights and notes sync are being developed together for iOS and Android. Annotation-sync provider and interoperability details will be documented at launch.",
     "duo_release": "2.5.0"
   },
   "stores": {

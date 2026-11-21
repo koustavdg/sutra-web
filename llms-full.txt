@@ -40,8 +40,8 @@ The following items are development or planning work, not released capabilities.
 
 - Kokoro Read Aloud and KOSync are actively in development, with iOS and Android intended to launch together.
 - The planned Read Aloud pronunciation workflow lets readers find and correct mispronounced proper nouns, apply fixes to a series or author, and create/share pronunciation packs from Read Aloud settings. Final voice/language coverage, tier and pack semantics are not confirmed in this summary.
-- KOSync covers reading progress only. It does not synchronize highlights/notes. Cross-platform annotation sync is a separate planned feature; existing iOS iCloud behavior is distinct.
-- CBR/RAR reading is in development and planned for Pro. Current unsupported-format statements remain applicable until release.
+- {{product.sync_status}} This is Sutra's planned sync workstream, not a claim that the standard KOSync protocol transports annotations. Existing iOS iCloud behavior is distinct.
+- {{product.cbr_status}} Current unsupported-format statements remain applicable until release.
 - Free Komga connections are approved/planned, not verified shipped. Full CBZ, future CBR and DRM-free MOBI remain Pro under that plan. Current Komga access still requires Pro.
 - Duo facing pages are shipped; broader iPad/tablet spread work is in development. A native desktop Mac app is planned, not claimed available.
 
