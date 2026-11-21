@@ -27,7 +27,7 @@
         ["App analytics", "None", "Optional aggregated telemetry, off by default on new installs [R2]", "May collect analytics data, per developer's disclosure [P1]"],
         ["Important trade-off", "CBR not yet supported; no native desktop release claimed", "Useful when desktop/web and broader cloud sync matter [R1]", "Useful for an Apple-focused comic collection, including CBR [P1]"]
       ],
-      "table_note": "This is a decision guide from Sutra's developer, based on published sources and owner-confirmed Sutra capabilities. It is not an independent review or a performance benchmark. A feature we have not verified is not a feature proved absent.",
+      "table_note": "This is a decision guide based on published sources and owner-confirmed Sutra capabilities. It is not an independent review or a performance benchmark. A feature we have not verified is not a feature proved absent.",
       "choose_title": "Choose around the way you actually read",
       "choose": "Choose Sutra when your priorities are mobile books and comics, your own libraries, privacy and a one-time Pro purchase. Read the detailed comparisons if desktop reading, cloud synchronization or an Apple-only comic collection matters more to you.",
       "caveat": "Current Komga connections still require Pro. Free Komga access is planned; full CBZ, future CBR and DRM-free MOBI remain Pro. General OPDS support means catalog access, not automatic streaming or server progress sync.",
