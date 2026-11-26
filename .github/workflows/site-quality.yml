@@ -2,7 +2,7 @@ name: Site quality
 
 on:
   push:
-    branches: [aeo]
+    branches: [aeo, main]
   pull_request:
     branches: [main]
   schedule:
@@ -42,7 +42,7 @@ jobs:
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Run mobile and desktop browser checks
-        run: npm run check:browser
+        run: npm run check:browser -- --project=chromium
       - name: Measure mobile Lighthouse medians
         run: |
           python3 -m http.server 4173 --bind 127.0.0.1 --directory _site &
@@ -50,3 +50,31 @@ jobs:
           trap 'kill "$server_pid"' EXIT
           export CHROME_PATH="$(node -e "process.stdout.write(require('@playwright/test').chromium.executablePath())")"
           node scripts/lighthouse-audit.cjs
+
+  cross-browser:
+    # WebKit media codecs differ by OS. macOS gives the closest Playwright
+    # approximation of Safari's native MP4 playback (not real iPhone testing).
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci --no-audit --no-fund
+      - run: npx playwright install chromium firefox webkit
+      - name: Verify desktop and mobile-size rendering and video playback
+        run: npm run check:cross-browser
+      - name: Upload browser report, screenshots and failure traces
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cross-browser-report
+          path: |
+            playwright-report/
+            test-results/
+            output/browser-preview/
+          retention-days: 14

@@ -1100,11 +1100,47 @@
   };
   var plat = null;
   var visibleVideos = new Set();
-  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var reducedMotion = motionPreference.matches;
+  var playAttempts = new WeakMap();
+  function prepareVideo(video){
+    // Set properties as well as markup before load()/play(); WebKit's autoplay
+    // decision uses the current media-element state, including after a swap.
+    video.defaultMuted = true;
+    video.muted = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+  }
+  function stopAutomaticPlayback(video){
+    video.autoplay = false;
+    video.pause();
+    playAttempts.delete(video);
+  }
   function playVisible(video){
-    if (reducedMotion){ video.controls = true; return; }
-    if (!video.paused) return;
-    video.play().then(function(){ video.controls = false; }).catch(function(){ video.controls = true; });
+    if (reducedMotion || document.hidden || !visibleVideos.has(video)){
+      video.controls = true;
+      return;
+    }
+    prepareVideo(video);
+    // Native autoplay provides a second start opportunity when media becomes
+    // ready. Only enable it for visible media, not for every offscreen demo.
+    video.autoplay = true;
+    video.preload = 'auto';
+    if (!video.paused || playAttempts.has(video)) return;
+    var attempt = {};
+    playAttempts.set(video, attempt);
+    video.play().then(function(){
+      if (playAttempts.get(video) !== attempt) return;
+      playAttempts.delete(video);
+      if (reducedMotion || document.hidden || !visibleVideos.has(video)) stopAutomaticPlayback(video);
+      else video.controls = false;
+    }).catch(function(){
+      // load() aborts earlier attempts during a platform swap. An old promise
+      // must not overwrite the controls/state of the new media source.
+      if (playAttempts.get(video) !== attempt) return;
+      playAttempts.delete(video);
+      video.controls = true;
+    });
   }
   function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
   function setVideo(id, url, poster){
@@ -1113,7 +1149,11 @@
     if (poster) src.parentNode.poster = poster;
     if (src.getAttribute('src') === url) return;
     src.src = url;
-    var v = src.parentNode; v.pause(); v.load();
+    var v = src.parentNode;
+    stopAutomaticPlayback(v);
+    prepareVideo(v);
+    v.controls = true;
+    v.load();
     if (visibleVideos.has(v)) playVisible(v);
   }
   function applyPlatform(p){
@@ -1134,19 +1174,31 @@
   document.querySelectorAll('[data-plat]').forEach(function(b){
     b.addEventListener('click', function(){ applyPlatform(b.dataset.plat); });
   });
+  document.querySelectorAll('video').forEach(function(video){
+    prepareVideo(video);
+    video.addEventListener('canplay', function(){ playVisible(video); });
+    video.addEventListener('error', function(){ video.controls = true; });
+  });
   applyPlatform(document.documentElement.classList.contains('is-android') ? 'android' : 'ios', false);
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function(entries){
       entries.forEach(function(entry){
-        if (entry.isIntersecting){ visibleVideos.add(entry.target); playVisible(entry.target); }
-        else { visibleVideos.delete(entry.target); entry.target.pause(); }
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.1){ visibleVideos.add(entry.target); playVisible(entry.target); }
+        else { visibleVideos.delete(entry.target); stopAutomaticPlayback(entry.target); }
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('video').forEach(function(video){ observer.observe(video); });
   } // Without IntersectionObserver, native controls remain available.
   document.addEventListener('visibilitychange', function(){
     document.querySelectorAll('video').forEach(function(video){
-      if (document.hidden) video.pause(); else if (visibleVideos.has(video)) playVisible(video);
+      if (document.hidden) stopAutomaticPlayback(video); else if (visibleVideos.has(video)) playVisible(video);
+    });
+  });
+  motionPreference.addEventListener('change', function(event){
+    reducedMotion = event.matches;
+    document.querySelectorAll('video').forEach(function(video){
+      if (reducedMotion){ stopAutomaticPlayback(video); video.controls = true; }
+      else if (visibleVideos.has(video)) playVisible(video);
     });
   });
   if (!PLAY_URL) return;

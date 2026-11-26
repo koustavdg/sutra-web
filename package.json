@@ -2,7 +2,8 @@
   "name": "sutra-web-quality",
   "private": true,
   "scripts": {
-    "check:browser": "playwright test"
+    "check:browser": "playwright test",
+    "check:cross-browser": "playwright test tests/browser/cross-browser.spec.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
