@@ -63,7 +63,9 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run mobile and desktop browser checks
-        run: npm run check:browser
+        # This runner installs Chromium only. Firefox/WebKit run in the
+        # macOS cross-browser job in site-quality.yml with all engines installed.
+        run: npm run check:browser -- --project=chromium
 
       - name: Measure mobile Lighthouse medians
         run: |

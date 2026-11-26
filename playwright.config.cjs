@@ -34,8 +34,8 @@ module.exports = defineConfig({
     command: `python3 scripts/build_site.py && python3 -m http.server ${port} --bind 127.0.0.1 --directory _site`,
     url: `http://127.0.0.1:${port}/`,
     reuseExistingServer: false,
-    timeout: 30_000,
-    stdout: 'ignore',
-    stderr: 'ignore',
+    timeout: 120_000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   },
 });
