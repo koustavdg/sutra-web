@@ -1,0 +1,4 @@
+measured_date,surface,cohort,matched_prompts,baseline_mentions,current_mentions,baseline_recommendations,current_recommendations,baseline_official_source_presence,current_official_source_presence,coverage
+2026-11-27,google-ai-overview,owner-personalized,14,0,2,0,2,0,2,14 of 14 baseline prompts
+2026-11-27,chatgpt-search,owner-unpersonalized,14,2,2,2,1,2,2,14 of 14 baseline prompts; T12 evidence retry documented
+2026-11-27,perplexity-search,owner-personalized,7,3,2,3,2,4,4,T04-T10 only; 7 of 11 signed-in baseline prompts; official-source values are observed minima
