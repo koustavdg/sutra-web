@@ -52,7 +52,7 @@ test('offscreen videos defer downloads, play when visible and pause when hidden'
   await page.locator('.strip [data-plat="android"]').scrollIntoViewIfNeeded();
   await page.locator('.strip [data-plat="android"]').click();
   await expect(page.locator('#shot-comics')).toHaveAttribute('src', /android/);
-  await expect(page.locator('#shot-scroll').locator('..')).toHaveAttribute('poster', /android-autoscroll/);
+  await expect(page.locator('#shot-scroll').locator('..')).toHaveAttribute('poster', /assets\/responsive\/android-scroll-\d+\.webp/);
 });
 
 test('reduced motion offers controls without autoplay', async ({page}) => {

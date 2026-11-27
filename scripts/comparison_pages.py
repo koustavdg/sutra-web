@@ -126,7 +126,9 @@ def render_comparisons(out, preview=False):
         if not preview:
             metadata += '<link rel="canonical" href="' + url + '"><meta property="og:url" content="' + url + '">'
             metadata += '<script type="application/ld+json">' + json.dumps({'@context':'https://schema.org','@graph':graph},ensure_ascii=False).replace('<','\\u003c') + '</script>'
-        faq = ''.join('<details><summary>' + esc(q) + '</summary><p>' + esc(expand_facts(a)) + '</p></details>' for q,a in QUESTIONS[slug])
+        questions = [*QUESTIONS[slug], ('Does Sutra offer two-page reading on tablets?',
+            '{{product.tablet_layout}} {{product.comic_spread_status}} Duo also has fold-aware layouts.')]
+        faq = ''.join('<details><summary>' + esc(q) + '</summary><p>' + esc(expand_facts(a)) + '</p></details>' for q,a in questions)
         tokens = {**page,'release_cadence':cadence,'search_heading':HEADINGS[slug],'benefits':benefits,'fit_summary':fit_summary,'heads':heads,'rows':rows,'sources':sources,'related':related,'faq':faq,'breadcrumbs':breadcrumbs,'metadata':metadata,
                   'robots':'noindex,nofollow' if preview else 'index,follow,max-image-preview:large',
                   'banner':'<div class="draft">Editorial preview &middot; Not published &middot; Sources reviewed ' + esc(content['reviewed']) + '</div>' if preview else '',

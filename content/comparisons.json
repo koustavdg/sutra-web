@@ -95,7 +95,7 @@
         ["Start large comics without the full download", "With Sutra Pro, stream comic pages on demand from supported Kavita and Komga servers without downloading the whole archive first. Individual pages still transfer and may be cached; download the complete book for offline reading. Komga requires Page Streaming permission. This describes Sutra's workflow, not an exclusive feature or a measured speed advantage over Panels."],
         ["Take the same app across mobile platforms", "Sutra runs on iOS and Android. Pro purchases are separate for Apple and Google; using the same app does not imply that your entire library or annotations automatically sync across platforms."],
         ["Keep a mixed personal library", "Connect Kavita, Komga, Calibre-family servers, WebDAV or compatible OPDS catalogs. Read novels and comics in the same app rather than choosing solely around comic formats."],
-        ["Private reading with crisp rendering", "Sutra has no app analytics or tracking and does not share personal information. Lanczos-3 rendering is shipped on both platforms. Duo facing-page reading is available; broader iPad and tablet spread work is in development."]
+        ["Private reading with crisp rendering", "Sutra has no app analytics or tracking and does not share personal information. Lanczos-3 rendering is shipped on both platforms. Duo facing-page reading is available. {{product.tablet_layout}} {{product.comic_spread_status}}"]
       ],
       "columns": ["Decision point", "Sutra", "Panels"],
       "rows": [
@@ -110,7 +110,7 @@
       "table_note": "Panels has a one-time purchase option as well as subscriptions. Its listing says the one-time purchase unlocks the current major version's features. App Store privacy disclosures are supplied by the developer, not independently verified by Apple. Checked November 21, 2026.",
       "choose_title": "When Panels may fit you better",
       "choose": "If your collection is mainly comics and you need CBR today or a Mac reader, Panels may fit better. Guided reading and OPDS are shared capabilities, not Sutra exclusives. This comparison explains product fit; we have not established that Sutra detects panels more accurately or renders pages better.",
-      "caveat": "Sutra's CBR, wider tablet spreads, Kokoro Read Aloud and KOSync are development work. They should not be counted as available reasons to switch today. Current Komga access is Pro; making the connection free is planned separately.",
+      "caveat": "Sutra's CBR, Kokoro Read Aloud and KOSync are development work, not available reasons to switch today. {{product.tablet_layout}} {{product.comic_spread_status}} Current Komga access is Pro; making the connection free is planned separately.",
       "proof_title": "A small screen can still suit a big comic",
       "proof": "Watch Sutra's existing panel-reading demonstration. Full CBZ reading requires Pro; compare the experience with your own authorized files and the devices you use.",
       "sources": ["P1"]

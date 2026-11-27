@@ -10,7 +10,7 @@ from datetime import date
 from pathlib import Path
 from comparison_pages import render_comparisons
 from product_facts import expand_facts
-from site_enhancements import enhance_page, privacy_panels, entitlement_rows
+from site_enhancements import enhance_page, privacy_panels, entitlement_rows, responsive_media
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "_site"
@@ -116,6 +116,10 @@ def main() -> None:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, destination)
 
+    # Generated derivatives and licensed fonts are explicitly public build assets.
+    for directory in ['responsive', 'fonts']:
+        shutil.copytree(ROOT / 'assets' / directory, OUT / 'assets' / directory)
+
     template = (ROOT / "templates/integration.html").read_text(encoding="utf-8")
     content_dir = ROOT / "content/landing"
     page_data = {}
@@ -133,6 +137,7 @@ def main() -> None:
 
     for path in OUT.glob('*.html'):
         source = path.read_text(encoding='utf-8').replace('{{home_entitlements}}', entitlement_rows())
+        source = source.replace('{{responsive_images}}', json.dumps(responsive_media()))
         source = expand_facts(source)
         source = source.replace('{{privacy_policies}}', privacy_panels())
         path.write_text(enhance_page(source), encoding='utf-8')

@@ -1,0 +1,160 @@
+{
+  "assets/app-icon.png": [
+    {
+      "width": 48,
+      "path": "assets/responsive/app-icon-48.webp"
+    },
+    {
+      "width": 96,
+      "path": "assets/responsive/app-icon-96.webp"
+    },
+    {
+      "width": 192,
+      "path": "assets/responsive/app-icon-192.webp"
+    }
+  ],
+  "assets/optimized/ios-hero.webp": [
+    {
+      "width": 240,
+      "path": "assets/responsive/ios-hero-240.webp"
+    },
+    {
+      "width": 480,
+      "path": "assets/responsive/ios-hero-480.webp"
+    },
+    {
+      "width": 600,
+      "path": "assets/responsive/ios-hero-600.webp"
+    }
+  ],
+  "assets/optimized/ios-library.webp": [
+    {
+      "width": 200,
+      "path": "assets/responsive/ios-library-200.webp"
+    },
+    {
+      "width": 400,
+      "path": "assets/responsive/ios-library-400.webp"
+    },
+    {
+      "width": 600,
+      "path": "assets/responsive/ios-library-600.webp"
+    }
+  ],
+  "assets/optimized/ios-pro.webp": [
+    {
+      "width": 200,
+      "path": "assets/responsive/ios-pro-200.webp"
+    },
+    {
+      "width": 400,
+      "path": "assets/responsive/ios-pro-400.webp"
+    },
+    {
+      "width": 600,
+      "path": "assets/responsive/ios-pro-600.webp"
+    }
+  ],
+  "assets/screenshots/android/hero-library.webp": [
+    {
+      "width": 200,
+      "path": "assets/responsive/android-library-200.webp"
+    },
+    {
+      "width": 400,
+      "path": "assets/responsive/android-library-400.webp"
+    },
+    {
+      "width": 600,
+      "path": "assets/responsive/android-library-600.webp"
+    }
+  ],
+  "assets/screenshots/android/07-pro.webp": [
+    {
+      "width": 200,
+      "path": "assets/responsive/android-pro-200.webp"
+    },
+    {
+      "width": 400,
+      "path": "assets/responsive/android-pro-400.webp"
+    },
+    {
+      "width": 600,
+      "path": "assets/responsive/android-pro-600.webp"
+    }
+  ],
+  "assets/optimized/iphone-duo.webp": [
+    {
+      "width": 480,
+      "path": "assets/responsive/duo-480.webp"
+    },
+    {
+      "width": 800,
+      "path": "assets/responsive/duo-800.webp"
+    },
+    {
+      "width": 1100,
+      "path": "assets/responsive/duo-1100.webp"
+    }
+  ],
+  "assets/sutra-preview-ios-poster.jpg": [
+    {
+      "width": 240,
+      "path": "assets/responsive/ios-poster-240.webp"
+    },
+    {
+      "width": 443,
+      "path": "assets/responsive/ios-poster-480.webp"
+    }
+  ],
+  "assets/sutra-preview-android-poster.jpg": [
+    {
+      "width": 240,
+      "path": "assets/responsive/android-poster-240.webp"
+    },
+    {
+      "width": 443,
+      "path": "assets/responsive/android-poster-480.webp"
+    }
+  ],
+  "assets/screenshots/05-comics-poster.jpg": [
+    {
+      "width": 240,
+      "path": "assets/responsive/comics-poster-240.webp"
+    },
+    {
+      "width": 480,
+      "path": "assets/responsive/comics-poster-480.webp"
+    }
+  ],
+  "assets/optimized/ios-autoscroll.jpg": [
+    {
+      "width": 240,
+      "path": "assets/responsive/ios-scroll-240.webp"
+    },
+    {
+      "width": 320,
+      "path": "assets/responsive/ios-scroll-480.webp"
+    }
+  ],
+  "assets/optimized/android-autoscroll.jpg": [
+    {
+      "width": 240,
+      "path": "assets/responsive/android-scroll-240.webp"
+    },
+    {
+      "width": 320,
+      "path": "assets/responsive/android-scroll-480.webp"
+    }
+  ],
+  "assets/optimized/android-comics.jpg": [
+    {
+      "width": 240,
+      "path": "assets/responsive/android-comics-240.webp"
+    },
+    {
+      "width": 320,
+      "path": "assets/responsive/android-comics-480.webp"
+    }
+  ]
+}

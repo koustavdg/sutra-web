@@ -10,6 +10,33 @@ ROOT = Path(__file__).resolve().parents[1]
 SOCIAL_IMAGE = 'https://sutra-reader.com/assets/social-card.png'
 
 
+def responsive_manifest():
+    return json.loads((ROOT / 'assets/responsive/manifest.json').read_text())
+
+
+def responsive_media():
+    return {source: {'src': variants[min(1, len(variants) - 1)]['path'],
+                     'srcset': ', '.join(f'{v["path"]} {v["width"]}w' for v in variants)}
+            for source, variants in responsive_manifest().items()}
+
+
+def local_fonts(source):
+    if 'fonts.googleapis.com' not in source:
+        return source
+    css = (ROOT / 'assets/fonts/fonts.css').read_text()
+    # Place the local faces and primary body-font preload where the external
+    # stylesheet was, before the page's large inline styles, not at head's end.
+    body_font = re.search(r"font-family: 'Inter';.*?url\(([^)]+)\)", css, re.S)[1]
+    replacement = (f'<link rel="preload" href="{body_font}" as="font" type="font/woff2" crossorigin>\n'
+                   f'<style data-local-fonts>\n{css}</style>\n')
+    source = re.sub(r'<link\b(?=[^>]*fonts\.googleapis\.com)(?=[^>]*rel="stylesheet")[^>]*>\s*',
+                    lambda match: replacement, source, count=1)
+    source = re.sub(r'<link\b[^>]*(?:fonts\.googleapis\.com|fonts\.gstatic\.com)[^>]*>\s*', '', source)
+    # Inline definitions avoid a render-blocking stylesheet request; only faces
+    # actually used by this page are fetched. Preserve existing families/weights.
+    return source
+
+
 def entitlement_rows():
     product = json.loads((ROOT / 'content/product.json').read_text())
     rows = []
@@ -102,10 +129,31 @@ class Images(HTMLParser):
         self.replacements = []
 
     def handle_starttag(self, tag, attrs):
+        if tag == 'video':
+            a = dict(attrs)
+            variants = responsive_manifest().get(a.get('poster', '').lstrip('/'))
+            if variants:
+                raw = self.get_starttag_text()
+                chosen = variants[-1]['path']
+                self.replacements.append((raw, re.sub(r'\bposter="[^"]*"', f'poster="{chosen}"', raw)))
+            return
         if tag != 'img':
             return
         a = dict(attrs)
         raw = self.get_starttag_text()
+        src = a.get('src', '').split('?')[0].lstrip('/')
+        variants = responsive_manifest().get(src)
+        if variants and 'srcset' not in a:
+            chosen = variants[min(1, len(variants) - 1)]['path']
+            sizes = ('88px' if a.get('alt') == 'Sutra app icon' else '40px') if src == 'assets/app-icon.png' else (
+                '(max-width: 650px) 100vw, 550px' if 'iphone-duo' in src else '(max-width: 650px) 44vw, 240px')
+            updated = re.sub(r'\bsrc="[^"]*"', f'src="{chosen}"', raw)
+            updated = re.sub(r'\s+(?:width|height)="[^"]*"', '', updated)
+            width, height = image_size(ROOT / chosen)
+            srcset = ', '.join(f'{v["path"]} {v["width"]}w' for v in variants)
+            updated = updated[:-1] + f' srcset="{srcset}" sizes="{sizes}" width="{width}" height="{height}">'
+            self.replacements.append((raw, updated))
+            return
         # Existing explicit dimensions describe the intended aspect ratio.
         if 'width' in a and 'height' in a:
             return
@@ -121,6 +169,11 @@ class Images(HTMLParser):
 
 
 def enhance_page(source):
+    source = local_fonts(source)
+    # Preserve the timeline's lane IDs for JavaScript, but put the newer iOS
+    # release ahead of the old shared release in the no-JavaScript reading order.
+    pattern = r'(<div class="version-list" id="lane-parity">.*?)(<div class="version-list" id="lane-ios-post">.*?)(?=<div class="version-list" id="lane-ios">)'
+    source = re.sub(pattern, lambda m: m[2] + m[1], source, flags=re.S)
     source = re.sub(r'href="(?:https://sutra-reader\.com/|/)?index\.html(#[^"]*)?"',
                     lambda m: 'href="/' + (m[1] or '') + '"', source)
     if '<main' not in source:

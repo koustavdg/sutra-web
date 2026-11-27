@@ -4,6 +4,8 @@
 
 This document summarizes the published Sutra site and changelog. For current setup instructions and release details, consult the links at the end. It is not a guarantee that every server, format, or feature behaves identically on both platforms.
 
+Current public releases: iOS {{product.ios_release}} and Android {{product.android_release}} (owner-confirmed November 26, 2026).
+
 ## 1. Product overview
 
 ### Formats and access
@@ -16,6 +18,7 @@ This document summarizes the published Sutra site and changelog. For current set
 
 ### Reading and library features
 
+- Duo facing pages are shipped. {{product.tablet_layout}} Tablet-layout status was confirmed by the owner on November 26, 2026.
 - Read supported local files, browse compatible connected catalogs, organize a library, and use supported themes, highlights, dictionary lookup, and reading statistics. Specific features can vary by platform and format.
 - Panel Mode presents supported comics one panel at a time. Right-to-left reading is available for manga; results depend on the artwork and page layout. A full-page view remains available.
 - Sutra uses a custom panel detection engine for phone-friendly panel-by-panel comic reading. Lanczos-3 image resampling is owner-confirmed in production on both iOS and Android. This is high-quality image resampling, not a claim of AI super-resolution or benchmarked superiority over competitors.
@@ -43,7 +46,7 @@ The following items are development or planning work, not released capabilities.
 - {{product.sync_status}} This is Sutra's planned sync workstream, not a claim that the standard KOSync protocol transports annotations. Existing iOS iCloud behavior is distinct.
 - {{product.cbr_status}} Current unsupported-format statements remain applicable until release.
 - Free Komga connections are approved/planned, not verified shipped. Full CBZ, future CBR and DRM-free MOBI remain Pro under that plan. Current Komga access still requires Pro.
-- Duo facing pages are shipped; broader iPad/tablet spread work is in development. A native desktop Mac app is planned, not claimed available.
+- {{product.comic_spread_status}} A native desktop Mac app is planned, not claimed available.
 
 ## 2. Supported libraries and connection guidance
 

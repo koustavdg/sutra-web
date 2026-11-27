@@ -714,7 +714,7 @@
       <div class="card"><span class="chip both">Both</span><h3>Gutenberg &amp; Standard Ebooks</h3><p>Project Gutenberg's 75,000+ public-domain classics and Standard Ebooks' typeset collection, no server required.</p></div>
       <div class="card"><span class="chip ios"><i class="dot"></i>iOS</span><h3>A library that sorts your way</h3><p>Sort by Recently Read, Title, Author, or Date Added. Books with no artwork get a clean title-and-author cover instead of a blank tile.</p></div>
       <div class="card"><span class="chip ios"><i class="dot"></i>iOS</span><h3>Series, Collections &amp; Favorites</h3><p>Series appear as grid tiles, and books from the same series stack with a count. Collections open in a consistent grid, and you can rename your own. Favorites is built in, always first, with its own heart-marked card.</p></div>
-      <div class="card"><span class="chip both">Both</span><h3>EPUB, PDF, CBZ &amp; MOBI</h3><p>Themes, fonts, bookmarks, and in-book search. Open files from your device's file manager or any share sheet, no server required. Landscape on iPad and Android tablets shows a two-panel facing-page spread, and iOS adds authentic page-curl turns.</p></div>
+      <div class="card"><span class="chip both">Both</span><h3>EPUB, PDF, CBZ &amp; MOBI</h3><p>Themes, fonts, bookmarks, and in-book search. Open files from your device's file manager or any share sheet, no server required. {{product.tablet_layout}} iOS also offers page-curl turns. {{product.comic_spread_status}}</p></div>
       <div class="card"><span class="chip both">Both</span><h3>Panel-aware comics &amp; manga</h3><p>Panel Mode and right-to-left manga reading are available on iOS and Android for supported content. Full CBZ reading requires Pro. CBZ page streaming is available on supported Kavita and Komga setups; Komga also requires the account's Page Streaming permission.</p></div>
       <div class="card"><span class="chip ios"><i class="dot"></i>iOS</span><h3>Auto-scrolling</h3><p>Set your pace and let the page flow. Swipe up or down to adjust speed on the fly, or tap to pause and resume. Perfect for hands-free reading.</p></div>
       <div class="card"><span class="chip and"><i class="dot"></i>Android</span><h3>Made for e-ink</h3><p>A dedicated e-ink display mode keeps reading crisp on e-ink screens.</p></div>
@@ -806,6 +806,7 @@
       <div>
         <span class="eyebrow-dark">Where it's headed</span>
         <h2>Built in the open, one version at a time.</h2>
+        <p id="current-releases">Current releases: iOS {{product.ios_release}} · Android {{product.android_release}}. <a href="changelog.html">Read the release notes →</a></p>
       </div>
     </div>
     <div class="rm-src" id="rm-src">
@@ -1094,6 +1095,7 @@
 <script>
 (function(){
   var PLAY_URL = '{{android_store}}';
+  var RESPONSIVE_IMAGES = {{responsive_images}};
   var MEDIA = {
     ios: { video: 'assets/sutra-preview-ios.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-ios-poster.jpg', back: 'assets/optimized/ios-hero.webp', lib: 'assets/optimized/ios-library.webp', pro: 'assets/optimized/ios-pro.webp', comics: 'assets/screenshots/05-comics.mp4', comicsPoster: 'assets/screenshots/05-comics-poster.jpg', scroll: 'assets/screenshots/06-autoscroll.mp4', scrollPoster: 'assets/optimized/ios-autoscroll.jpg', cap: '<span class="chip ios"><i class="dot"></i>iOS</span> iPhone and iPad' },
     android: { video: 'assets/sutra-preview-android.mp4?v=sketch-20261029', poster: 'assets/sutra-preview-android-poster.jpg', back: 'assets/screenshots/android/hero-library.webp', lib: 'assets/screenshots/android/hero-library.webp', pro: 'assets/screenshots/android/07-pro.webp', comics: 'assets/screenshots/android/05-comics.mp4', comicsPoster: 'assets/optimized/android-comics.jpg', scroll: 'assets/screenshots/android/06-autoscroll.mp4', scrollPoster: 'assets/optimized/android-autoscroll.jpg', cap: '<span class="chip and"><i class="dot"></i>Android</span> Phones, tablets, and e-ink display mode' }
@@ -1142,11 +1144,24 @@
       video.controls = true;
     });
   }
-  function setImg(id, url){ var el = document.getElementById(id); if (el && el.getAttribute('src') !== url) el.src = url; }
+  function setImg(id, url){
+    var el = document.getElementById(id), responsive = RESPONSIVE_IMAGES[url];
+    if (!el) return;
+    // Always replace srcset on a platform switch, not just src; otherwise the
+    // browser can continue showing an iOS image after Android is selected.
+    if (responsive) {
+      el.srcset = responsive.srcset;
+      el.src = responsive.src;
+    } else {
+      el.removeAttribute('srcset');
+      el.src = url;
+    }
+  }
+  function posterUrl(url){ return RESPONSIVE_IMAGES[url] ? RESPONSIVE_IMAGES[url].src : url; }
   function setVideo(id, url, poster){
     var src = document.getElementById(id);
     if (!src) return;
-    if (poster) src.parentNode.poster = poster;
+    if (poster) src.parentNode.poster = posterUrl(poster);
     if (src.getAttribute('src') === url) return;
     src.src = url;
     var v = src.parentNode;
@@ -1160,7 +1175,7 @@
     if (p === plat) return;
     plat = p;
     var m = MEDIA[p];
-    document.getElementById('hero-video').poster = m.poster;
+    document.getElementById('hero-video').poster = posterUrl(m.poster);
     setVideo('hero-video-src', m.video);
     var back = document.querySelector('.stage .phone.back');
     back.hidden = !m.back;

@@ -13,7 +13,9 @@ def product_values():
               and set(offer['platforms']) == {'ios', 'android'}]
     if len(offers) != 1:
         raise ValueError('Expected one shared, verified USD Pro price')
-    return {**product['publication_facts'], 'pro_price_usd': offers[0]['amount']}
+    return {**product['publication_facts'], 'pro_price_usd': offers[0]['amount'],
+            'ios_release': product['current_releases']['ios'],
+            'android_release': product['current_releases']['android']}
 
 
 def expand_facts(text):

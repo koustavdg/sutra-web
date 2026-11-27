@@ -12,7 +12,15 @@
     "cbr_status": "CBR/RAR comic support is in development and planned for Pro.",
     "read_aloud_status": "Kokoro Read Aloud is in development for iOS and Android.",
     "sync_status": "Reading-progress sync through KOSync and cross-platform highlights and notes sync are being developed together for iOS and Android. Annotation-sync provider and interoperability details will be documented at launch.",
-    "duo_release": "2.5.0"
+    "duo_release": "2.5.0",
+    "tablet_layout": "Two-page side-by-side layouts are available on iPad and Android tablets in landscape.",
+    "comic_spread_status": "Improved comic-spread detection and page pairing are in development; these enhancements are distinct from the two-page layouts already available."
+  },
+  "current_releases": {
+    "ios": "2.5.0",
+    "android": "1.3.0",
+    "verified_at": "2026-11-26",
+    "verified_by": "owner"
   },
   "stores": {
     "ios": {

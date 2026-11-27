@@ -2,6 +2,7 @@
   "name": "sutra-web-quality",
   "private": true,
   "scripts": {
+    "measure:performance": "node scripts/performance-loop.cjs",
     "check:browser": "playwright test",
     "check:cross-browser": "playwright test tests/browser/cross-browser.spec.cjs"
   },
