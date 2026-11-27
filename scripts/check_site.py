@@ -203,7 +203,7 @@ def check(site: Path) -> None:
         errors.append("robots.txt is missing")
     else:
         robots = robots_path.read_text(encoding="utf-8")
-        for agent in ("Googlebot", "Bingbot", "OAI-SearchBot", "GPTBot", "Claude-SearchBot", "ClaudeBot", "PerplexityBot"):
+        for agent in ("Googlebot", "Bingbot", "OAI-SearchBot", "GPTBot", "Claude-SearchBot", "ClaudeBot", "PerplexityBot", "Meta-WebIndexer", "facebookexternalhit"):
             if not re.search(rf"User-agent:\s*{re.escape(agent)}\s*\nAllow:\s*/", robots, re.I):
                 errors.append(f"robots.txt: {agent} must be explicitly allowed")
         if "https://sutra-reader.com/sitemap.xml" not in robots:

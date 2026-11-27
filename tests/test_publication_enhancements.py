@@ -12,6 +12,26 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicationEnhancementTests(unittest.TestCase):
+    def test_discovery_answers_include_purchase_and_streaming_limits(self):
+        panel = (ROOT / '_site/comic-panel-reader.html').read_text()
+        komga = (ROOT / '_site/komga-reader.html').read_text()
+        hub = (ROOT / '_site/compare-readers.html').read_text()
+        for source in (panel, hub):
+            self.assertIn('Can one app read regular EPUB ebooks and panel-by-panel CBZ comics?', source)
+            self.assertIn('regular text EPUB', source)
+            self.assertIn('one-time', source)
+            self.assertIn('Pro', source)
+        self.assertIn('Can I read a large Komga CBZ without downloading the whole file first?', komga)
+        self.assertIn('Page Streaming permission', komga)
+        self.assertIn('Individual pages still use data', komga)
+        self.assertIn('offline reading', komga)
+        self.assertIn('server is not identified', komga)
+
+    def test_search_and_social_crawlers_are_explicitly_allowed(self):
+        robots = (ROOT / '_site/robots.txt').read_text()
+        for agent in ('OAI-SearchBot', 'Meta-WebIndexer', 'facebookexternalhit'):
+            self.assertIn(f'User-agent: {agent}\nAllow: /', robots)
+
     def test_policy_snapshots_match_recorded_source_hashes(self):
         sources = json.loads((ROOT / 'content/policies/sources.json').read_text())
         for name, source in sources.items():

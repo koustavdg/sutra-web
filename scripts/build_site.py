@@ -145,7 +145,7 @@ def main() -> None:
         path = OUT / name
         path.write_text(expand_facts(path.read_text()), encoding='utf-8')
 
-    agents = ["*", "Googlebot", "Bingbot", "OAI-SearchBot", "GPTBot", "Claude-SearchBot", "ClaudeBot", "PerplexityBot"]
+    agents = ["*", "Googlebot", "Bingbot", "OAI-SearchBot", "GPTBot", "Claude-SearchBot", "ClaudeBot", "PerplexityBot", "Meta-WebIndexer", "facebookexternalhit"]
     robots = "\n\n".join(f"User-agent: {agent}\nAllow: /" for agent in agents)
     (OUT / "robots.txt").write_text(robots + f"\n\nSitemap: {SITE_URL}/sitemap.xml\n", encoding="utf-8")
 
