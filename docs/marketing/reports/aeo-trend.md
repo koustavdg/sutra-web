@@ -2,6 +2,8 @@
 
 ## Current measured comparison — November 27, 2026
 
+Later [Perplexity compact follow-up](perplexity-compact-2026-11-27.md): T14 and N02 completed after access resumed. Compact current recommendations: **4/5**; matching four-prompt baseline subset: **2/4 → 3/4**. Overall matched discovery coverage is now **36/56**. The full-set snapshot table/chart below has not been regenerated and retains its earlier 35/56 coverage.
+
 Supplemental [user-supplied Claude compact check](claude-user-supplied-2026-11-27.md): one recommendation in five discovery answers, plus one control without a false Sutra recommendation. Claude Pro, Sonnet, all six chats in Incognito, separate new chats and web search enabled are user-confirmed; exact model version remains unknown. Incognito differs from the memory-on baseline, so this starts a separate compact cohort and is not added to the browser-verified matched-cohort totals below.
 
 Fresh tests now provide **35/56 baseline-matched discovery answers**. Read the [current-state report](ai-visibility-current-2026-11-27.md) for prompt-level changes, access gaps and methodology; [download the metrics](ai-visibility-metrics-2026-11-27.csv).

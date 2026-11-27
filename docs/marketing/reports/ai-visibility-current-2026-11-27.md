@@ -4,6 +4,8 @@ Measured November 27, 2026, America/Toronto. Baseline: October 26–27, before t
 
 ## Result
 
+**Later Perplexity follow-up:** access resumed and the remaining compact questions completed. Sutra is recommended in **4/5 compact discovery answers**, and the free-CBZ control has no false Sutra recommendation. New matched discovery coverage is **36/56**. See the [compact follow-up](perplexity-compact-2026-11-27.md); full-set tables below preserve the earlier snapshot.
+
 **Supplemental Claude update:** the user supplied the compact six-query set: Sutra was explicitly recommended in **1/5 discovery answers**, with no false Sutra recommendation in the one control. The user confirmed Claude Pro, Sonnet, all six chats in Incognito, separate new chats and web search enabled; exact model version remains unknown. Read the [Claude compact check](claude-user-supplied-2026-11-27.md). These user-supplied results use a different personalization condition from the memory-on baseline, so they remain a separate cohort and do not increase the browser-verified 35/56 matched coverage.
 
 **Google AI Overview improved. ChatGPT's mention rate held steady, but explicit recommendations fell. Perplexity's measured subset declined in recommendations.** Coverage is incomplete, so there is no defensible new four-service aggregate to compare with the old 7/56 snapshot.
