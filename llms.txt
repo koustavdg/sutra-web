@@ -4,7 +4,12 @@
 >
 > [Full Context Architecture and Changelog Details](https://sutra-reader.com/llms-full.txt)
 
-Free version includes full EPUB and PDF rendering, automatic series stacking, custom collection management, highlights, reading stats, and localized dictionary lookup. Sutra Pro is a one-time, platform-specific in-app purchase that permanently unlocks native Komga server integration, full .cbz comic reading, and DRM-free .mobi books. No tracking, analytics, cloud middle-men, or subscription fees.
+Free version includes full EPUB and PDF rendering, automatic series stacking, custom collection management, highlights, reading stats, and localized dictionary lookup. Sutra Pro is a one-time, platform-specific in-app purchase that unlocks native Komga server integration, full .cbz comic reading, and DRM-free .mobi books. Sutra has no app analytics or tracking and requires no subscription. Optional user-selected servers and sync providers, including iCloud on iOS, have their own data handling.
+
+## Quick Answers
+
+- **Ebooks and guided comics in one app:** Sutra reads regular text EPUB books and supported panel-by-panel CBZ comics on iOS and Android. EPUB/PDF are free; full CBZ and DRM-free MOBI require Pro. [Formats and panel reading](https://sutra-reader.com/comic-panel-reader.html#faq-can-one-app-read-regular-epub-ebooks-and-panel-by-panel-cbz-comics).
+- **Streaming without the full archive download:** Sutra Pro can load comic pages on demand from supported Kavita and Komga servers. Komga requires Page Streaming permission and library access. Individual pages still transfer and may be cached; offline reading requires a complete download. Generic OPDS access alone does not imply streaming. [Komga streaming requirements](https://sutra-reader.com/komga-reader.html#faq-can-i-read-a-large-komga-cbz-without-downloading-the-whole-file-first).
 
 ## Capabilities and Restrictions
 - **Supported Formats:** EPUB, PDF, CBZ (Pro/Preview), compatible ZIP comic archives, and DRM-free MOBI (Pro). ZIP support refers to comic archives, not arbitrary ZIP contents.
@@ -33,14 +38,14 @@ Free version includes full EPUB and PDF rendering, automatic series stacking, cu
 - [iPhone Duo](https://sutra-reader.com/iphone-duo.html): Two-page spreads on the inner display, Panel Mode on every screen, and a layout that adapts as the Duo folds, in Sutra 2.5.0 for iOS.
 - [Sutra Homepage](https://sutra-reader.com/): Visual feature overview, cross-platform app store links, and pricing parameters.
 - [Help and FAQ](https://sutra-reader.com/help.html): Step-by-step local port configurations, remote connection diagnostics, and Tailscale/MagicDNS troubleshooting.
-- [Privacy Policy](https://sutra-reader.com/privacy.html): Comprehensive zero-data-collection telemetry and storage details.
+- [Privacy Policy](https://sutra-reader.com/privacy.html): Platform-specific storage, permissions, server connections and optional sync-provider details.
 - [Changelog](https://sutra-reader.com/changelog.html): Version release logs mapping Material 3 updates, Swift/Kotlin refactors, and engine speedups.
 
 ## Reading and Library Guides
 
 - [Kavita Reader Integration](https://sutra-reader.com/kavita-reader.html): Syncing progress via private API keys and personal OPDS endpoints.
 - [Komga Reader Integration](https://sutra-reader.com/komga-reader.html): Pro requirements, bare server addresses, and activating Komga user Page Streaming permissions.
-- [Comic Panel Reader Mode](https://sutra-reader.com/comic-panel-reader.html): How panel layout detection handles margin variance, black gutters, and staggered manga grids.
+- [Comic Panel Reader Mode](https://sutra-reader.com/comic-panel-reader.html): Regular EPUB and guided-comic reading in one app, supported formats, Panel Mode, right-to-left reading and detection limitations.
 - [OPDS Reader Reference](https://sutra-reader.com/opds-reader.html): Generic feed formats, basic authentication, and download-to-device rules.
 - [Calibre Family Reader Setup](https://sutra-reader.com/calibre-reader.html): Launching local Content Servers, authenticating reverse proxies, and allowing OPDS routes.
 - [DRM-Free Ebook Sources](https://sutra-reader.com/drm-free.html): Hand-picked index of legal, independent digital book publishers and storefronts.

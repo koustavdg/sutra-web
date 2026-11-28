@@ -60,8 +60,23 @@ def render_page(data: dict, template: str, all_pages: dict[str, dict]) -> str:
                   if data.get("transcript") else "")
     rows = "".join("<tr>" + "".join(f"<td>{esc(cell)}</td>" for cell in row) + "</tr>"
                    for row in data["compatibility"])
-    faq = "".join(f'<details><summary>{esc(item["q"])}</summary><p>{esc(item["a"])}</p></details>'
-                  for item in data["faq"])
+    faq_ids = ['faq-' + re.sub(r'[^a-z0-9]+', '-', item['q'].lower()).strip('-')
+               for item in data['faq']]
+    if len(set(faq_ids)) != len(faq_ids):
+        raise ValueError(f'Duplicate FAQ anchor in {slug}')
+    faq = "".join(f'<details id="{anchor}"><summary>{esc(item["q"])}</summary>'
+                  f'<p>{esc(item["a"])}</p><p><a href="#{anchor}">Link to this answer</a></p></details>'
+                  for item, anchor in zip(data['faq'], faq_ids))
+    url = f'{SITE_URL}/{slug}.html'
+    graph = {'@context': 'https://schema.org', '@graph': [
+        {'@type': 'WebPage', '@id': url + '#webpage', 'url': url,
+         'name': data['title'], 'description': data['description'], 'inLanguage': 'en',
+         'about': {'@id': SITE_URL + '/#sutra-app'},
+         'publisher': {'@id': SITE_URL + '/#organization'},
+         'breadcrumb': {'@id': url + '#breadcrumb'}},
+        {'@type': 'BreadcrumbList', '@id': url + '#breadcrumb', 'itemListElement': [
+            {'@type': 'ListItem', 'position': 1, 'name': 'Home', 'item': SITE_URL + '/'},
+            {'@type': 'ListItem', 'position': 2, 'name': data['link_name'], 'item': url}]}]}
     related = "".join(f'<li><a href="{esc(name)}.html">{esc(all_pages[name]["link_name"])}</a></li>'
                       for name in data["related"])
     substitutions = {
@@ -75,6 +90,7 @@ def render_page(data: dict, template: str, all_pages: dict[str, dict]) -> str:
         "image_alt": esc(data["image_alt"]), "related": related,
         "proof_intro": esc(data.get("proof_intro", "The screenshot shows Sutra's current library and connection flow. Follow the linked setup guide for details specific to your server and configuration.")),
         "transcript": transcript,
+        "page_schema": json.dumps(graph, ensure_ascii=False).replace('<', '\\u003c'),
         "ios_store": STORE_IOS, "android_store": STORE_ANDROID,
     }
     for key, value in substitutions.items():

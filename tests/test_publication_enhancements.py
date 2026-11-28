@@ -12,6 +12,42 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PublicationEnhancementTests(unittest.TestCase):
+    def test_guides_have_matching_page_identity_and_breadcrumbs(self):
+        for path in (ROOT / 'content/landing').glob('*.json'):
+            data = json.loads(path.read_text())
+            source = (ROOT / '_site' / (path.stem + '.html')).read_text()
+            blocks = re.findall(r'<script type="application/ld\+json">(.*?)</script>', source, re.S)
+            graph = next(json.loads(block)['@graph'] for block in blocks if 'BreadcrumbList' in block)
+            page = next(item for item in graph if item['@type'] == 'WebPage')
+            crumbs = next(item for item in graph if item['@type'] == 'BreadcrumbList')
+            self.assertEqual(page['name'], data['title'])
+            self.assertEqual(page['description'], data['description'])
+            self.assertEqual(page['url'], f'https://sutra-reader.com/{path.stem}.html')
+            self.assertEqual(crumbs['itemListElement'][-1]['item'], page['url'])
+            self.assertEqual(page['about']['@id'], 'https://sutra-reader.com/#sutra-app')
+            self.assertFalse(any(item['@type'] in ('AggregateRating', 'Review', 'FAQPage') for item in graph))
+
+    def test_guide_navigation_and_answer_links_have_unique_targets(self):
+        for path in (ROOT / 'content/landing').glob('*.json'):
+            source = (ROOT / '_site' / (path.stem + '.html')).read_text()
+            ids = re.findall(r'\bid="([^"]+)"', source)
+            self.assertEqual(len(ids), len(set(ids)), path.name)
+            for anchor in re.findall(r'href="#([^"]+)"', source):
+                self.assertIn(anchor, ids, path.name)
+            faq_ids = [anchor for anchor in ids if anchor.startswith('faq-')]
+            self.assertEqual(len(faq_ids), len(json.loads(path.read_text())['faq']))
+            self.assertIn('window.addEventListener(\'hashchange\', openLinkedAnswer)', source)
+            self.assertIn('prefers-reduced-motion:reduce', source)
+
+    def test_llm_quick_answer_links_resolve_to_published_anchors(self):
+        text = (ROOT / '_site/llms.txt').read_text()
+        links = re.findall(r'https://sutra-reader.com/([^\s)#]+)#([^\s)]+)', text)
+        self.assertGreaterEqual(len(links), 2)
+        for name, anchor in links:
+            self.assertIn(f'id="{anchor}"', (ROOT / '_site' / name).read_text())
+        self.assertNotIn('cloud middle-men', text)
+        self.assertIn('Optional user-selected servers and sync providers', text)
+
     def test_discovery_answers_include_purchase_and_streaming_limits(self):
         panel = (ROOT / '_site/comic-panel-reader.html').read_text()
         komga = (ROOT / '_site/komga-reader.html').read_text()
